@@ -1,0 +1,6 @@
+@EyeMezzexz_HostAddress = http://localhost:5072
+
+GET {{EyeMezzexz_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
