@@ -12,5 +12,7 @@ namespace EyeMezzexz.Data
 
         public DbSet<User> Users { get; set; }
         public DbSet<UploadedData> UploadedData { get; set; }
+        public DbSet<TaskModel> Tasks { get; set; }
+        public DbSet<TaskTimer> TaskTimers { get; set; }  // Add this line
     }
 }

@@ -27,7 +27,8 @@ namespace EyeMezzexz.Controllers
                 return Unauthorized(new { message = "Invalid username or password" });
             }
 
-            return Ok(new { message = "Login successful", username = user.Username });
+            return Ok(new { message = "Login successful", userId = user.Id, username = user.Username });
         }
+
     }
 }
