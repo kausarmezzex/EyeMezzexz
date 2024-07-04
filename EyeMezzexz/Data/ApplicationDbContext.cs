@@ -1,18 +1,28 @@
-﻿using Microsoft.EntityFrameworkCore;
-using EyeMezzexz.Models;
+﻿using EyeMezzexz.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace EyeMezzexz.Data
 {
     public class ApplicationDbContext : DbContext
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
-        : base(options)
+        public DbSet<User> Users { get; set; }
+        public DbSet<Staff> Staffs { get; set; }
+        public DbSet<UploadedData> UploadedData { get; set; }
+        public DbSet<TaskTimer> TaskTimers { get; set; }
+        public DbSet<TaskModel> Tasks { get; set; }
+
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
         }
 
-        public DbSet<User> Users { get; set; }
-        public DbSet<UploadedData> UploadedData { get; set; }
-        public DbSet<TaskModel> Tasks { get; set; }
-        public DbSet<TaskTimer> TaskTimers { get; set; }  // Add this line
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Staff>()
+                .HasOne(s => s.User)
+                .WithMany()
+                .HasForeignKey(s => s.UserId);
+
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }

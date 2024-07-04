@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EyeMezzexz.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240703072710_Add TaskTimer1")]
-    partial class AddTaskTimer1
+    [Migration("20240704072015_Add Staff Model Modify1")]
+    partial class AddStaffModelModify1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,30 @@ namespace EyeMezzexz.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("EyeMezzexz.Models.Staff", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("StaffInTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("StaffOutTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Staffs");
+                });
 
             modelBuilder.Entity("EyeMezzexz.Models.TaskModel", b =>
                 {
@@ -50,21 +74,12 @@ namespace EyeMezzexz.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("StaffInTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("StaffOutTime")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("TaskComment")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("TaskId")
                         .HasColumnType("int");
-
-                    b.Property<TimeSpan>("TotalWorkingTime")
-                        .HasColumnType("time");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");
@@ -131,6 +146,17 @@ namespace EyeMezzexz.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("EyeMezzexz.Models.Staff", b =>
+                {
+                    b.HasOne("EyeMezzexz.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("EyeMezzexz.Models.TaskTimer", b =>
