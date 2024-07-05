@@ -1,8 +1,8 @@
 ﻿using EyeMezzexz.Data;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using EyeMezzexz.Models;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace EyeMezzexz.Controllers
 {
@@ -20,9 +20,9 @@ namespace EyeMezzexz.Controllers
         [HttpPost("login")]
         public IActionResult Login([FromBody] LoginRequest model)
         {
-            var user = _context.Users.FirstOrDefault(u => u.Username == model.Username && u.Password == model.Password);
+            var user = _context.Users.FirstOrDefault(u => u.Username == model.Username);
 
-            if (user == null)
+            if (user == null || !BCrypt.Net.BCrypt.Verify(model.Password, user.Password))
             {
                 return Unauthorized(new { message = "Invalid username or password" });
             }
@@ -30,5 +30,11 @@ namespace EyeMezzexz.Controllers
             return Ok(new { message = "Login successful", userId = user.Id, username = user.Username });
         }
 
+        [HttpGet("usernames")]
+        public IActionResult GetUsernames()
+        {
+            var usernames = _context.Users.Select(u => u.Username).ToList();
+            return Ok(usernames);
+        }
     }
 }

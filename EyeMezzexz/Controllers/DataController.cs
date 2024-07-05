@@ -61,40 +61,48 @@ namespace EyeMezzexz.Controllers
         }
 
         [HttpPost("saveTaskTimer")]
-        public IActionResult SaveTaskTimer([FromBody] TaskTimerUploadRequest model)
+        public IActionResult SaveTaskTimer([FromBody] TaskTimer model)
         {
             if (model == null)
             {
                 return BadRequest("Model is null");
             }
 
-            var taskTimer = new TaskTimer
-            {
-                UserId = model.UserId,
-                TaskId = model.TaskId,  // Use TaskId from the model
-                TaskComment = model.TaskComment
-            };
-
-            _context.TaskTimers.Add(taskTimer);
+            _context.TaskTimers.Add(model);
             _context.SaveChanges();
-
-            return Ok(new { Message = "Task timer data uploaded successfully" });
+            if (model.Id == 0)
+            {
+                return StatusCode(500, "Failed to generate TaskTimer");
+            }
+            return Ok(new { Message = "Task timer data uploaded successfully", TaskTimeId = model.Id });
         }
 
         [HttpGet("getTaskTimers")]
         public IActionResult GetTaskTimers()
         {
-            var taskTimers = _context.TaskTimers.Select(t => new TaskTimerResponse
-            {
-                Id = t.Id,
-                UserId = t.UserId,
-                TaskId = t.TaskId,
-                TaskName = t.Task.Name,
-                TaskComment = t.TaskComment
-            }).ToList();
+            var today = DateTime.Today;
+
+            var taskTimers = _context.TaskTimers
+                .Include(t => t.Task) // Ensure Task navigation property is loaded
+                .Include(t => t.User) // Ensure User navigation property is loaded
+                .Where(t => t.TaskStartTime.Date == today && t.TaskEndTime == null) // Filter by current date and where TaskEndTime is null
+                .Select(t => new TaskTimerResponse
+                {
+                    Id = t.Id,
+                    UserId = t.UserId,
+                    UserName = t.User.Username, // Include user's name
+                    TaskId = t.TaskId,
+                    TaskName = t.Task.Name,
+                    TaskComment = t.TaskComment,
+                    TaskStartTime = t.TaskStartTime,
+                    TaskEndTime = t.TaskEndTime
+                })
+                .ToList();
 
             return Ok(taskTimers);
         }
+
+
 
         [HttpGet("getTasks")]
         public IActionResult GetTasks()
@@ -127,13 +135,10 @@ namespace EyeMezzexz.Controllers
 
             if (model.Id == 0)
             {
-                // Print error or handle the case where Id is not set
                 return StatusCode(500, "Failed to generate StaffId");
             }
             return Ok(new { message = "Staff data saved successfully", StaffId = model.Id });
         }
-
-
 
         [HttpPut("updateStaff")]
         public IActionResult UpdateStaff([FromBody] Staff model)
@@ -143,26 +148,22 @@ namespace EyeMezzexz.Controllers
                 return BadRequest("Model is null");
             }
 
-            // Retrieve the existing staff member
             var existingStaff = _context.Staffs.FirstOrDefault(s => s.Id == model.Id);
             if (existingStaff == null)
             {
                 return NotFound("Staff not found");
             }
 
-            // Check if the user exists
             var user = _context.Users.FirstOrDefault(u => u.Id == model.UserId);
             if (user == null)
             {
                 return NotFound("User not found");
             }
 
-            // Update properties
             existingStaff.StaffInTime = model.StaffInTime;
             existingStaff.StaffOutTime = model.StaffOutTime;
             existingStaff.UserId = model.UserId;
 
-            // Save changes
             try
             {
                 _context.SaveChanges();
@@ -172,14 +173,8 @@ namespace EyeMezzexz.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, $"An error occurred while updating the staff record: {ex.Message}");
             }
 
-            return Ok(new
-            {
-                Message = "Staff data updated successfully",
-                StaffId = existingStaff.Id
-            });
+            return Ok(new { Message = "Staff data updated successfully", StaffId = existingStaff.Id });
         }
-
-
 
         [HttpGet("getStaff")]
         public IActionResult GetStaff()
@@ -194,7 +189,7 @@ namespace EyeMezzexz.Controllers
             return Ok(staff);
         }
 
-        [HttpPost("updateTaskTimer")]
+        [HttpPut("updateTaskTimer")]
         public IActionResult UpdateTaskTimer([FromBody] UpdateTaskTimerRequest model)
         {
             if (model == null)
@@ -207,14 +202,14 @@ namespace EyeMezzexz.Controllers
             {
                 return NotFound("TaskTimer not found");
             }
-
-            // No calculation needed as TotalWorkingTime is removed
+            taskTimer.TaskEndTime = model.TaskEndTime;
 
             _context.TaskTimers.Update(taskTimer);
             _context.SaveChanges();
 
-            return Ok(new { Message = "Task timer updated successfully" });
+            return Ok(new { Message = "Task timer updated successfully", TaskTimeId = taskTimer.Id });
         }
+
     }
 
     public class UploadRequest
@@ -230,22 +225,33 @@ namespace EyeMezzexz.Controllers
     public class TaskTimerUploadRequest
     {
         public int UserId { get; set; }
-        public int TaskId { get; set; }  // Foreign key reference to TaskModel
+        public int TaskId { get; set; }
         public string TaskComment { get; set; }
+        public DateTime TaskStartTime { get; set; }
+        public DateTime? TaskEndTime { get; set; }
     }
 
     public class TaskTimerResponse
     {
         public int Id { get; set; }
         public int UserId { get; set; }
+        public string UserName { get; set; } // Add this property
         public int TaskId { get; set; }
-        public string TaskName { get; set; }  // Include Task name for better understanding
+        public string TaskName { get; set; }
         public string TaskComment { get; set; }
+        public DateTime TaskStartTime { get; set; }
+        public DateTime? TaskEndTime { get; set; }
     }
 
     public class UpdateTaskTimerRequest
     {
         public int Id { get; set; }
-        public DateTime StaffOutTime { get; set; }
+        public DateTime TaskEndTime { get; set; }
+    }
+
+    public class TaskModel
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
     }
 }

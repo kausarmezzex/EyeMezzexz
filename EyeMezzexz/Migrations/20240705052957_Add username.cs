@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace EyeMezzexz.Migrations
 {
     /// <inheritdoc />
-    public partial class AddStaffModelModify : Migration
+    public partial class Addusername : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

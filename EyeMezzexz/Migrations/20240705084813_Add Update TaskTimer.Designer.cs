@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EyeMezzexz.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240704071727_Add Staff Model Modify")]
-    partial class AddStaffModelModify
+    [Migration("20240705084813_Add Update TaskTimer")]
+    partial class AddUpdateTaskTimer
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -78,8 +78,14 @@ namespace EyeMezzexz.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime?>("TaskEndTime")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("TaskId")
                         .HasColumnType("int");
+
+                    b.Property<DateTime>("TaskStartTime")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");

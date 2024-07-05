@@ -5,7 +5,7 @@
 namespace EyeMezzexz.Migrations
 {
     /// <inheritdoc />
-    public partial class AddStaffModelModify1 : Migration
+    public partial class AddUpdateTaskTimer4 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

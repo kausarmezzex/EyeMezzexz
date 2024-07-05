@@ -31,7 +31,15 @@ var app = builder.Build();
 using (var scope = app.Services.CreateScope())
 {
     var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-    SeedDatabase(context);
+    try
+    {
+        SeedDatabase(context);
+    }
+    catch (Exception ex)
+    {
+        // Log the error
+        Console.WriteLine($"An error occurred while seeding the database: {ex.Message}");
+    }
 }
 
 // Configure the HTTP request pipeline.
@@ -53,46 +61,51 @@ app.Run();
 
 void SeedDatabase(ApplicationDbContext context)
 {
-    // Check if the user already exists
-    if (!context.Users.Any(u => u.Username == "testuser"))
+    try
     {
-        context.Users.Add(new User { Username = "testuser", Password = "password" });
-    }
-
-    // List of task names
-    var tasks = new List<string>
-    {
-        "Listing",
-        "Costing",
-        "New Product Work",
-        "Shipment",
-        "Live Stock",
-        "Clearance",
-        "Promotion",
-        "Amazon Emails",
-        "Ebay Email",
-        "DP Ordering",
-        "AST Ordering",
-        "Supplier Invoice",
-        "VAT Invoice Entry",
-        "Break",
-        "Other",
-        "Credit Note",
-        "Inventory Check",
-        "Lunch",
-        "Washroom",
-        "Out Of Stock",
-        "Meeting"
-    };
-
-    // Seed tasks if not already present
-    foreach (var taskName in tasks)
-    {
-        if (!context.Tasks.Any(t => t.Name == taskName))
+        if (!context.Users.Any(u => u.Username == "testuser"))
         {
-            context.Tasks.Add(new TaskModel { Name = taskName });
-        }
-    }
+            context.Users.AddRange(new List<User>
+            {
+                new User { Username = "testuser", Password = BCrypt.Net.BCrypt.HashPassword("password") },
+                new User { Username = "testuser1", Password = BCrypt.Net.BCrypt.HashPassword("password1") },
+                new User { Username = "testuser2", Password = BCrypt.Net.BCrypt.HashPassword("password2") },
+                new User { Username = "testuser3", Password = BCrypt.Net.BCrypt.HashPassword("password3") },
+                new User { Username = "testuser4", Password = BCrypt.Net.BCrypt.HashPassword("password4") }
+            });
 
-    context.SaveChanges();
+            context.SaveChanges();
+            Console.WriteLine("Users have been seeded to the database.");
+        }
+        else
+        {
+            Console.WriteLine("Users already exist in the database.");
+        }
+
+        // List of task names
+        var tasks = new List<string>
+        {
+            "Listing", "Costing", "New Product Work", "Shipment", "Live Stock",
+            "Clearance", "Promotion", "Amazon Emails", "Ebay Email", "DP Ordering",
+            "AST Ordering", "Supplier Invoice", "VAT Invoice Entry", "Break",
+            "Other", "Credit Note", "Inventory Check", "Lunch", "Washroom",
+            "Out Of Stock", "Meeting"
+        };
+
+        foreach (var taskName in tasks)
+        {
+            if (!context.Tasks.Any(t => t.Name == taskName))
+            {
+                context.Tasks.Add(new TaskModel { Name = taskName });
+            }
+        }
+
+        context.SaveChanges();
+        Console.WriteLine("Tasks have been seeded to the database.");
+    }
+    catch (Exception ex)
+    {
+        // Log the error
+        Console.WriteLine($"An error occurred while seeding the database: {ex.Message}");
+    }
 }

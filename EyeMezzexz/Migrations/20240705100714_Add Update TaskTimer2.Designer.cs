@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EyeMezzexz.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240704072015_Add Staff Model Modify1")]
-    partial class AddStaffModelModify1
+    [Migration("20240705100714_Add Update TaskTimer2")]
+    partial class AddUpdateTaskTimer2
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -78,8 +78,14 @@ namespace EyeMezzexz.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime?>("TaskEndTime")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("TaskId")
                         .HasColumnType("int");
+
+                    b.Property<DateTime>("TaskStartTime")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");
@@ -87,6 +93,8 @@ namespace EyeMezzexz.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("TaskId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("TaskTimers");
                 });
@@ -167,7 +175,15 @@ namespace EyeMezzexz.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("EyeMezzexz.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Task");
+
+                    b.Navigation("User");
                 });
 #pragma warning restore 612, 618
         }
