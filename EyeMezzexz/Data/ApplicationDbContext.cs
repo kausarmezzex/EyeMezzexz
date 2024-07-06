@@ -10,7 +10,7 @@ namespace EyeMezzexz.Data
         public DbSet<UploadedData> UploadedData { get; set; }
         public DbSet<TaskTimer> TaskTimers { get; set; }
         public DbSet<TaskModel> Tasks { get; set; }
-
+        public DbSet<Demo> demos { get; set; }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
         }
