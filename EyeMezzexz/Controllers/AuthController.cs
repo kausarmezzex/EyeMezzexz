@@ -38,21 +38,6 @@ namespace EyeMezzexz.Controllers
             return Ok(usernames);
         }
 
-        [HttpPost("decrypt")]
-        public IActionResult DecryptPassword([FromBody] DecryptRequest model)
-        {
-            try
-            {
-                var encrypt = new Encrypt("rgbIV"); // Use the actual passphrase and other parameters as required
-                var decryptedPassword = encrypt.DecryptData(model.CipherText);
-                return Ok(new { DecryptedPassword = decryptedPassword });
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new { message = "Decryption failed", error = ex.Message });
-            }
-        }
-
         [HttpPost("computesaltedhash")]
         public IActionResult ComputeSaltedHash1([FromBody] ComputeSaltedHashRequest model)
         {
@@ -64,6 +49,33 @@ namespace EyeMezzexz.Controllers
             catch (Exception ex)
             {
                 return BadRequest(new { message = "Salted hash computation failed", error = ex.Message });
+            }
+        }
+
+        [HttpPost("adddemo")]
+        public IActionResult AddDemo([FromBody] AddDemoRequest model)
+        {
+            try
+            {
+                /*// Generate a salt and hash the password
+                var salt = new Random().Next(1000, 9999); // Replace with a better random salt generator if needed*/
+                var hashedPassword = Encrypt.ComputeSaltedHash(model.Salt, model.Password);
+
+                var demo = new Demo
+                {
+                    Username = model.Username,
+                    Password = hashedPassword, // Store the hashed password
+                    Salt = model.Salt // Store the salt value
+                };
+
+                _context.demos.Add(demo);
+                _context.SaveChanges();
+
+                return Ok(new { message = "Demo data added successfully", userId = demo.Id });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = "Failed to add demo data", error = ex.Message });
             }
         }
 
@@ -99,9 +111,11 @@ namespace EyeMezzexz.Controllers
         }
     }
 
-    public class DecryptRequest
+    public class AddDemoRequest
     {
-        public string CipherText { get; set; }
+        public string Username { get; set; }
+        public string Password { get; set; }
+        public int Salt { get; set; }   
     }
 
     public class ComputeSaltedHashRequest
