@@ -59,12 +59,12 @@ namespace EyeMezzexz.Controllers
             {
                 /*// Generate a salt and hash the password
                 var salt = new Random().Next(1000, 9999); // Replace with a better random salt generator if needed*/
-                var hashedPassword = Encrypt.ComputeSaltedHash(model.Salt, model.Password);
+               // var hashedPassword = Encrypt.ComputeSaltedHash(model.Salt, model.Password);
 
                 var demo = new Demo
                 {
                     Username = model.Username,
-                    Password = hashedPassword, // Store the hashed password
+                    Password = model.Password, // Store the hashed password
                     Salt = model.Salt // Store the salt value
                 };
 
