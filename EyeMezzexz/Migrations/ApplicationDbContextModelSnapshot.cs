@@ -144,6 +144,12 @@ namespace EyeMezzexz.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("TaskName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("TaskTimerId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("Timestamp")
                         .HasColumnType("datetime2");
 
@@ -152,6 +158,8 @@ namespace EyeMezzexz.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("TaskTimerId");
 
                     b.ToTable("UploadedData");
                 });
@@ -205,6 +213,15 @@ namespace EyeMezzexz.Migrations
                     b.Navigation("Task");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("EyeMezzexz.Models.UploadedData", b =>
+                {
+                    b.HasOne("EyeMezzexz.Models.TaskTimer", "TaskTimer")
+                        .WithMany()
+                        .HasForeignKey("TaskTimerId");
+
+                    b.Navigation("TaskTimer");
                 });
 #pragma warning restore 612, 618
         }

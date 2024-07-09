@@ -1,0 +1,106 @@
+﻿@model IEnumerable<EyeMezzexz.Models.ScreenCaptureDataViewModel>
+
+@{
+    ViewData["Title"] = "Screen Capture Data";
+}
+
+<h1 class="mb-4 text-center">Screen Capture Data</h1>
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    @foreach (var item in Model)
+    {
+        <div class="col">
+            <div class="card">
+                <img src="@item.ImageUrl" class="card-img-top img-thumbnail" alt="Screenshot" data-bs-toggle="modal" data-bs-target="#imageModal" data-bs-username="@item.Username" data-bs-img="@item.ImageUrl" />
+                <div class="card-body">
+                    <h5 class="card-title">@item.Username</h5>
+                    <p class="card-text">
+                        <strong>Timestamp:</strong> @item.Timestamp<br />
+                        <strong>System Name:</strong> @item.SystemName<br />
+                        <strong>Task Name:</strong> @item.TaskName
+                    </p>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<!-- Image Modal -->
+<div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="imageModalLabel">Screenshot</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center position-relative">
+                <button type="button" class="btn btn-secondary position-absolute start-0 top-50 translate-middle-y" id="prevImage">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <img src="" alt="Full Screenshot" class="img-fluid" id="modalImage">
+                <button type="button" class="btn btn-secondary position-absolute end-0 top-50 translate-middle-y" id="nextImage">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        var imageModal = document.getElementById('imageModal');
+        var allImages = [];
+        var currentIndex = 0;
+
+        imageModal.addEventListener('show.bs.modal', function (event) {
+            var button = event.relatedTarget;
+            var username = button.getAttribute('data-bs-username');
+            var imageUrl = button.getAttribute('data-bs-img');
+            currentIndex = 0;
+
+            allImages = Array.from(document.querySelectorAll('img[data-bs-username="' + username + '"]')).map(img => img.getAttribute('data-bs-img'));
+
+            var modalImage = imageModal.querySelector('#modalImage');
+            modalImage.src = imageUrl;
+            currentIndex = allImages.indexOf(imageUrl);
+        });
+
+        document.getElementById('prevImage').addEventListener('click', function () {
+            if (allImages.length > 0) {
+                currentIndex = (currentIndex - 1 + allImages.length) % allImages.length;
+                document.getElementById('modalImage').src = allImages[currentIndex];
+            }
+        });
+
+        document.getElementById('nextImage').addEventListener('click', function () {
+            if (allImages.length > 0) {
+                currentIndex = (currentIndex + 1) % allImages.length;
+                document.getElementById('modalImage').src = allImages[currentIndex];
+            }
+        });
+    </script>
+}
+
+<style>
+    .modal-lg {
+        max-width: 90%;
+    }
+
+    .modal-body {
+        max-height: 80vh;
+        overflow-y: auto;
+    }
+
+    .position-absolute {
+        z-index: 2;
+    }
+
+    .btn-secondary {
+        background-color: rgba(0, 0, 0, 0.5);
+        border: none;
+    }
+
+        .btn-secondary i {
+            color: white;
+        }
+</style>

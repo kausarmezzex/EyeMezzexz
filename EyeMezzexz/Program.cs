@@ -1,5 +1,6 @@
 using EyeMezzexz.Data;
 using EyeMezzexz.Models;
+using EyeMezzexz.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,10 +9,12 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
+builder.Services.AddTransient<WebServiceClient>();
 // Configure DbContext with SQL Server database
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("E-CommDConnectionString")));
+builder.Services.AddDbContext<CustomerData>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("MezzexEye")));
 
 // Configure CORS
 builder.Services.AddCors(options =>
@@ -30,14 +33,17 @@ var app = builder.Build();
 // Seed the database
 using (var scope = app.Services.CreateScope())
 {
-    var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+    var services = scope.ServiceProvider;
+    var applicationDbContext = services.GetRequiredService<ApplicationDbContext>();
+    var customerDataContext = services.GetRequiredService<CustomerData>();
+
     try
     {
-        SeedDatabase(context);
+        SeedDatabase(applicationDbContext);
+        SeedDatabaseCus(customerDataContext);
     }
     catch (Exception ex)
     {
-        // Log the error
         Console.WriteLine($"An error occurred while seeding the database: {ex.Message}");
     }
 }
@@ -50,7 +56,6 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
 app.UseCors("AllowAll");
 
 app.UseAuthorization();
@@ -105,7 +110,37 @@ void SeedDatabase(ApplicationDbContext context)
     }
     catch (Exception ex)
     {
-        // Log the error
+        Console.WriteLine($"An error occurred while seeding the database: {ex.Message}");
+    }
+}
+
+void SeedDatabaseCus(CustomerData customerData)
+{
+    try
+    {
+        if (!customerData.Users.Any(u => u.Username == "testuser"))
+        {
+            customerData.Users.AddRange(new List<User>
+            {
+                new User { Username = "testuser", Password = BCrypt.Net.BCrypt.HashPassword("password") },
+                new User { Username = "testuser1", Password = BCrypt.Net.BCrypt.HashPassword("password1") },
+                new User { Username = "testuser2", Password = BCrypt.Net.BCrypt.HashPassword("password2") },
+                new User { Username = "testuser3", Password = BCrypt.Net.BCrypt.HashPassword("password3") },
+                new User { Username = "testuser4", Password = BCrypt.Net.BCrypt.HashPassword("password4") }
+            });
+
+            customerData.SaveChanges();
+            Console.WriteLine("Users have been seeded to the database.");
+        }
+        else
+        {
+            Console.WriteLine("Users already exist in the database.");
+        }
+        customerData.SaveChanges();
+        Console.WriteLine("Tasks have been seeded to the database.");
+    }
+    catch (Exception ex)
+    {
         Console.WriteLine($"An error occurred while seeding the database: {ex.Message}");
     }
 }

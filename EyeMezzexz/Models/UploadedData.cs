@@ -9,6 +9,8 @@
         public DateTime Timestamp { get; set; }
         public string Username { get; set; } // Added to store user details
         public string SystemName { get; set; } // Add SystemName property
-
+        public string? TaskName { get; set; } // Add TaskName property
+        public int? TaskTimerId { get; set; } // Foreign key reference to TaskTimer
+        public TaskTimer? TaskTimer { get; set; } // Navigation property
     }
 }

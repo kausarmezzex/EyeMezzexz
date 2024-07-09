@@ -27,6 +27,15 @@ namespace EyeMezzexz.Controllers
                 return BadRequest("Model is null");
             }
 
+            var taskTimer = _context.TaskTimers
+                .Include(t => t.Task)
+                .FirstOrDefault(t => t.Id == model.TaskTimerId);
+
+            if (taskTimer == null)
+            {
+                return NotFound("TaskTimer not found");
+            }
+
             var uploadedData = new UploadedData
             {
                 ImageUrl = model.ImageUrl,
@@ -34,7 +43,9 @@ namespace EyeMezzexz.Controllers
                 ActivityLog = model.ActivityLog,
                 Timestamp = model.Timestamp,
                 Username = model.Username,
-                SystemName = model.SystemName
+                SystemName = model.SystemName,
+                TaskName = taskTimer.Task.Name, // Assign TaskName from TaskTimer
+                TaskTimerId = model.TaskTimerId // Assign TaskTimerId
             };
 
             _context.UploadedData.Add(uploadedData);
@@ -53,8 +64,9 @@ namespace EyeMezzexz.Controllers
                 ActivityLog = d.ActivityLog,
                 Timestamp = d.Timestamp,
                 Username = d.Username,
-                id = d.Id,
-                SystemName = d.SystemName
+                Id = d.Id,
+                SystemName = d.SystemName,
+                TaskName = d.TaskName // Include TaskName in the response
             }).ToList();
 
             return Ok(data);
@@ -83,14 +95,14 @@ namespace EyeMezzexz.Controllers
             var today = DateTime.Today;
 
             var taskTimers = _context.TaskTimers
-                .Include(t => t.Task) // Ensure Task navigation property is loaded
-                .Include(t => t.User) // Ensure User navigation property is loaded
-                .Where(t => t.TaskStartTime.Date == today && t.TaskEndTime == null) // Filter by current date and where TaskEndTime is null
+                .Include(t => t.Task)
+                .Include(t => t.User)
+                .Where(t => t.TaskStartTime.Date == today && t.TaskEndTime == null)
                 .Select(t => new TaskTimerResponse
                 {
                     Id = t.Id,
                     UserId = t.UserId,
-                    UserName = t.User.Username, // Include user's name
+                    UserName = t.User.Username,
                     TaskId = t.TaskId,
                     TaskName = t.Task.Name,
                     TaskComment = t.TaskComment,
@@ -102,7 +114,30 @@ namespace EyeMezzexz.Controllers
             return Ok(taskTimers);
         }
 
+        [HttpGet("getUserCompletedTasks")]
+        public IActionResult GetUserCompletedTasks(int userId)
+        {
+            var today = DateTime.Today;
 
+            var completedTaskTimers = _context.TaskTimers
+                .Include(t => t.Task)
+                .Include(t => t.User)
+                .Where(t => t.UserId == userId && t.TaskStartTime.Date == today && t.TaskEndTime != null)
+                .Select(t => new TaskTimerResponse
+                {
+                    Id = t.Id,
+                    UserId = t.UserId,
+                    UserName = t.User.Username,
+                    TaskId = t.TaskId,
+                    TaskName = t.Task.Name,
+                    TaskComment = t.TaskComment,
+                    TaskStartTime = t.TaskStartTime,
+                    TaskEndTime = t.TaskEndTime
+                })
+                .ToList();
+
+            return Ok(completedTaskTimers);
+        }
 
         [HttpGet("getTasks")]
         public IActionResult GetTasks()
@@ -209,7 +244,6 @@ namespace EyeMezzexz.Controllers
 
             return Ok(new { Message = "Task timer updated successfully", TaskTimeId = taskTimer.Id });
         }
-
     }
 
     public class UploadRequest
@@ -220,6 +254,7 @@ namespace EyeMezzexz.Controllers
         public string Username { get; set; }
         public string SystemName { get; set; }
         public DateTime Timestamp { get; set; }
+        public int? TaskTimerId { get; set; } // Add TaskTimerId to UploadRequest
     }
 
     public class TaskTimerUploadRequest
@@ -235,7 +270,7 @@ namespace EyeMezzexz.Controllers
     {
         public int Id { get; set; }
         public int UserId { get; set; }
-        public string UserName { get; set; } // Add this property
+        public string UserName { get; set; }
         public int TaskId { get; set; }
         public string TaskName { get; set; }
         public string TaskComment { get; set; }

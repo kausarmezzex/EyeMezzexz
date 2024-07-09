@@ -22,6 +22,11 @@ namespace EyeMezzexz.Data
                 .WithMany()
                 .HasForeignKey(s => s.UserId);
 
+            modelBuilder.Entity<UploadedData>()
+                .HasOne(ud => ud.TaskTimer)
+                .WithMany()
+                .HasForeignKey(ud => ud.TaskTimerId);
+
             base.OnModelCreating(modelBuilder);
         }
     }
