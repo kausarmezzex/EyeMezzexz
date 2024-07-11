@@ -1,4 +1,4 @@
-﻿using ServiceReference1;
+﻿using ServiceReference2;
 namespace EyeMezzexz.Services
 {
     public class WebServiceClient
@@ -13,6 +13,10 @@ namespace EyeMezzexz.Services
         public async Task<bool> CheckLoginDetailAsync(string email, string password)
         {
             return await _client.CheckLoginDetailAsync(email, password);
+        }
+        public async Task<GetLoginDetailResponseGetLoginDetailResult> GetLoginDetailAsync(string email, string password)
+        {
+            return await _client.GetLoginDetailAsync(email, password);
         }
     }
 }

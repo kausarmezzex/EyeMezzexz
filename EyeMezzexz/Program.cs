@@ -1,6 +1,8 @@
+using E_Commerce_Mezzex.Data;
 using EyeMezzexz.Data;
 using EyeMezzexz.Models;
 using EyeMezzexz.Services;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,6 +17,21 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("E-CommDConnectionString")));
 builder.Services.AddDbContext<CustomerData>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("MezzexEye")));
+
+
+builder.Services.AddDefaultIdentity<ApplicationUser>()
+    .AddRoles<ApplicationRole>()
+    .AddEntityFrameworkStores<ApplicationDbContext>()
+    .AddDefaultTokenProviders();
+
+
+// Add session services
+builder.Services.AddSession(options =>
+{
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+    options.IdleTimeout = TimeSpan.FromMinutes(60);
+});
 
 // Configure CORS
 builder.Services.AddCors(options =>
@@ -36,11 +53,20 @@ using (var scope = app.Services.CreateScope())
     var services = scope.ServiceProvider;
     var applicationDbContext = services.GetRequiredService<ApplicationDbContext>();
     var customerDataContext = services.GetRequiredService<CustomerData>();
+    var logger = services.GetRequiredService<ILogger<Program>>();
 
     try
     {
         SeedDatabase(applicationDbContext);
         SeedDatabaseCus(customerDataContext);
+        var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
+        var roleManager = services.GetRequiredService<RoleManager<ApplicationRole>>();
+        var context = services.GetRequiredService<ApplicationDbContext>();
+
+        // Initialize the seed data
+        logger.LogInformation("Seeding data...");
+        SeedData.Initialize(services, userManager).Wait();
+        logger.LogInformation("Seeding data completed.");
     }
     catch (Exception ex)
     {

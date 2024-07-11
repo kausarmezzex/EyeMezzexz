@@ -1,6 +1,11 @@
 ﻿using EyeMezzexz.Services;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Xml;
+using System.Xml.Serialization;
 
 namespace EyeMezzexz.Controllers
 {
@@ -23,23 +28,66 @@ namespace EyeMezzexz.Controllers
                 return BadRequest("Invalid login request.");
             }
 
-            bool isValid = await _webServiceClient.CheckLoginDetailAsync(loginRequest.Email, loginRequest.Password);
-            if (isValid)
+            var response = await _webServiceClient.GetLoginDetailAsync(loginRequest.Email, loginRequest.Password);
+
+            if (response == null || response.Any == null || response.Any.Length == 0)
             {
-                // Handle successful login
-                return Ok(new { Message = "Login successful." });
+                return NotFound("No login details found.");
             }
-            else
+
+            var loginDetails = DeserializeLoginDetails(response.Any);
+
+            if (loginDetails == null || loginDetails.Count == 0)
             {
-                // Handle login failure
-                return Unauthorized(new { Message = "Invalid email or password." });
+                return NotFound("No login details found.");
+            }
+
+            return Ok(loginDetails);
+        }
+
+        private List<LoginDetail> DeserializeLoginDetails(XmlElement[] xmlElements)
+        {
+            try
+            {
+                var serializer = new XmlSerializer(typeof(List<LoginDetail>), new XmlRootAttribute("LoginDetails"));
+
+                // Combine the XmlElement contents into a single XML string for deserialization
+                var combinedXml = string.Join("", xmlElements.Select(x => x.OuterXml));
+                using (var reader = new StringReader(combinedXml))
+                {
+                    return (List<LoginDetail>)serializer.Deserialize(reader);
+                }
+            }
+            catch
+            {
+                return null;
             }
         }
     }
-}
-public class LoginRequest1
-{
-    public string Email { get; set; }
-    public string Password { get; set; }
-}
 
+    public class LoginRequest1
+    {
+        public string Email { get; set; }
+        public string Password { get; set; }
+    }
+
+    public class LoginDetail
+    {
+        public string Email { get; set; }
+        public string Firstname { get; set; }
+        public string Lastname { get; set; }
+        // Add other necessary properties
+    }
+
+    public class GetLoginDetailResponseGetLoginDetailResult
+    {
+        private XmlElement[] anyField;
+
+        [XmlAnyElement(Namespace = "http://www.w3.org/2001/XMLSchema", Order = 0)]
+        public XmlElement[] Any
+        {
+            get { return anyField; }
+            set { anyField = value; }
+        }
+    }
+}

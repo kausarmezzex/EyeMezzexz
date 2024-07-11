@@ -7,14 +7,18 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ServiceReference1
+namespace ServiceReference2
 {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference1.BarcodeWebServiceSoap")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference2.BarcodeWebServiceSoap")]
     public interface BarcodeWebServiceSoap
     {
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveStaffIn", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        System.Threading.Tasks.Task<int> SaveStaffInAsync(string StaffEmailId, string ScanInTime, string CountryName);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveStaffOut", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -30,47 +34,47 @@ namespace ServiceReference1
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/getproductdetailsbycompany", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.getproductdetailsbycompanyResponseGetproductdetailsbycompanyResult> getproductdetailsbycompanyAsync(string Companyname);
+        System.Threading.Tasks.Task<ServiceReference2.getproductdetailsbycompanyResponseGetproductdetailsbycompanyResult> getproductdetailsbycompanyAsync(string Companyname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetSellinglevel", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetSellinglevelResponseGetSellinglevelResult> GetSellinglevelAsync(string MainProductId);
+        System.Threading.Tasks.Task<ServiceReference2.GetSellinglevelResponseGetSellinglevelResult> GetSellinglevelAsync(string MainProductId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/OrderRecievedScanByDetails", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.OrderRecievedScanByDetailsResponseOrderRecievedScanByDetailsResult> OrderRecievedScanByDetailsAsync(string ProductId);
+        System.Threading.Tasks.Task<ServiceReference2.OrderRecievedScanByDetailsResponseOrderRecievedScanByDetailsResult> OrderRecievedScanByDetailsAsync(string ProductId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetSameCustomerOrder", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetSameCustomerOrderResponseGetSameCustomerOrderResult> GetSameCustomerOrderAsync(string OrderNumber);
+        System.Threading.Tasks.Task<ServiceReference2.GetSameCustomerOrderResponseGetSameCustomerOrderResult> GetSameCustomerOrderAsync(string OrderNumber);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/LastScanInDetails", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.LastScanInDetailsResponseLastScanInDetailsResult> LastScanInDetailsAsync(string ProductId);
+        System.Threading.Tasks.Task<ServiceReference2.LastScanInDetailsResponseLastScanInDetailsResult> LastScanInDetailsAsync(string ProductId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SameDayScanInDetails", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.SameDayScanInDetailsResponseSameDayScanInDetailsResult> SameDayScanInDetailsAsync(string MainProductId);
+        System.Threading.Tasks.Task<ServiceReference2.SameDayScanInDetailsResponseSameDayScanInDetailsResult> SameDayScanInDetailsAsync(string MainProductId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Get_Amazon_Click_And_Collect_Order_ForPickedUP", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.Get_Amazon_Click_And_Collect_Order_ForPickedUPResponseGet_Amazon_Click_And_Collect_Order_ForPickedUPResult> Get_Amazon_Click_And_Collect_Order_ForPickedUPAsync();
+        System.Threading.Tasks.Task<ServiceReference2.Get_Amazon_Click_And_Collect_Order_ForPickedUPResponseGet_Amazon_Click_And_Collect_Order_ForPickedUPResult> Get_Amazon_Click_And_Collect_Order_ForPickedUPAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Get_Saved_Notification_Time", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.Get_Saved_Notification_TimeResponseGet_Saved_Notification_TimeResult> Get_Saved_Notification_TimeAsync(string msgtype);
+        System.Threading.Tasks.Task<ServiceReference2.Get_Saved_Notification_TimeResponseGet_Saved_Notification_TimeResult> Get_Saved_Notification_TimeAsync(string msgtype);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/mergepdf", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<string> mergepdfAsync(ServiceReference1.mergepdfDT dt, string mergedFileName);
+        System.Threading.Tasks.Task<string> mergepdfAsync(ServiceReference2.mergepdfDT dt, string mergedFileName);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ImportASTEbayOrders", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task ImportASTEbayOrdersAsync(ServiceReference1.ArrayOfXElement ds);
+        System.Threading.Tasks.Task ImportASTEbayOrdersAsync(ServiceReference2.ArrayOfXElement ds);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ImportAmazonForAST", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task ImportAmazonForASTAsync(ServiceReference1.ArrayOfXElement ds);
+        System.Threading.Tasks.Task ImportAmazonForASTAsync(ServiceReference2.ArrayOfXElement ds);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/createconsignment", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -84,25 +88,29 @@ namespace ServiceReference1
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<int> getlistofcreatedconsignmentastAsync();
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateAmazonClickAndCollectInventory", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        System.Threading.Tasks.Task<bool> UpdateAmazonClickAndCollectInventoryAsync(long VariantId, int Qty, string Reason, string EmailId);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/getACACInventory", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.getACACInventoryResponseGetACACInventoryResult> getACACInventoryAsync(string VariantId);
+        System.Threading.Tasks.Task<ServiceReference2.getACACInventoryResponseGetACACInventoryResult> getACACInventoryAsync(string VariantId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/getOrderRecievedReadyToPrintforcomputer", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.getOrderRecievedReadyToPrintforcomputerResponseGetOrderRecievedReadyToPrintforcomputerResult> getOrderRecievedReadyToPrintforcomputerAsync(string computername, string companyname);
+        System.Threading.Tasks.Task<ServiceReference2.getOrderRecievedReadyToPrintforcomputerResponseGetOrderRecievedReadyToPrintforcomputerResult> getOrderRecievedReadyToPrintforcomputerAsync(string computername, string companyname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/JKIOPUser", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.JKIOPUserResponseJKIOPUserResult> JKIOPUserAsync(string username, string password);
+        System.Threading.Tasks.Task<ServiceReference2.JKIOPUserResponseJKIOPUserResult> JKIOPUserAsync(string username, string password);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/JKIOPGetAccessForRole", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.JKIOPGetAccessForRoleResponseJKIOPGetAccessForRoleResult> JKIOPGetAccessForRoleAsync(long RoleId);
+        System.Threading.Tasks.Task<ServiceReference2.JKIOPGetAccessForRoleResponseJKIOPGetAccessForRoleResult> JKIOPGetAccessForRoleAsync(long RoleId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/JKIOPLoadAllUser", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.JKIOPLoadAllUserResponseJKIOPLoadAllUserResult> JKIOPLoadAllUserAsync();
+        System.Threading.Tasks.Task<ServiceReference2.JKIOPLoadAllUserResponseJKIOPLoadAllUserResult> JKIOPLoadAllUserAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveJKIOPUser", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -110,7 +118,7 @@ namespace ServiceReference1
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/JKIOPLoadAllStudent", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.JKIOPLoadAllStudentResponseJKIOPLoadAllStudentResult> JKIOPLoadAllStudentAsync();
+        System.Threading.Tasks.Task<ServiceReference2.JKIOPLoadAllStudentResponseJKIOPLoadAllStudentResult> JKIOPLoadAllStudentAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/DeleteUserMaster", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -118,23 +126,23 @@ namespace ServiceReference1
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetdAllStudentbysession", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetdAllStudentbysessionResponseGetdAllStudentbysessionResult> GetdAllStudentbysessionAsync(string session, string startdate, string enddate);
+        System.Threading.Tasks.Task<ServiceReference2.GetdAllStudentbysessionResponseGetdAllStudentbysessionResult> GetdAllStudentbysessionAsync(string session, string startdate, string enddate);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/DownloadUploadedfileById", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.DownloadUploadedfileByIdResponseDownloadUploadedfileByIdResult> DownloadUploadedfileByIdAsync(string FormType, string FormId);
+        System.Threading.Tasks.Task<ServiceReference2.DownloadUploadedfileByIdResponseDownloadUploadedfileByIdResult> DownloadUploadedfileByIdAsync(string FormType, string FormId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/DownloadUploadedfileBySupplier", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.DownloadUploadedfileBySupplierResponseDownloadUploadedfileBySupplierResult> DownloadUploadedfileBySupplierAsync(string FormType, string FormId);
+        System.Threading.Tasks.Task<ServiceReference2.DownloadUploadedfileBySupplierResponseDownloadUploadedfileBySupplierResult> DownloadUploadedfileBySupplierAsync(string FormType, string FormId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/JKIOPLoadStudentInfo", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.JKIOPLoadStudentInfoResponseJKIOPLoadStudentInfoResult> JKIOPLoadStudentInfoAsync(string StudentId);
+        System.Threading.Tasks.Task<ServiceReference2.JKIOPLoadStudentInfoResponseJKIOPLoadStudentInfoResult> JKIOPLoadStudentInfoAsync(string StudentId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/JKIOPLoadStudentPaymentInfo", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.JKIOPLoadStudentPaymentInfoResponseJKIOPLoadStudentPaymentInfoResult> JKIOPLoadStudentPaymentInfoAsync(string SPId);
+        System.Threading.Tasks.Task<ServiceReference2.JKIOPLoadStudentPaymentInfoResponseJKIOPLoadStudentPaymentInfoResult> JKIOPLoadStudentPaymentInfoAsync(string SPId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveJKIOPUserRoll", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -142,11 +150,11 @@ namespace ServiceReference1
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/JKIOPLoadROll", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.JKIOPLoadROllResponseJKIOPLoadROllResult> JKIOPLoadROllAsync();
+        System.Threading.Tasks.Task<ServiceReference2.JKIOPLoadROllResponseJKIOPLoadROllResult> JKIOPLoadROllAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/JKIOPUSERROll", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.JKIOPUSERROllResponseJKIOPUSERROllResult> JKIOPUSERROllAsync(long RoleId);
+        System.Threading.Tasks.Task<ServiceReference2.JKIOPUSERROllResponseJKIOPUSERROllResult> JKIOPUSERROllAsync(long RoleId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveJKIOPUserRollAccess", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -154,7 +162,7 @@ namespace ServiceReference1
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/JKIOPGetAllScreenForRole", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.JKIOPGetAllScreenForRoleResponseJKIOPGetAllScreenForRoleResult> JKIOPGetAllScreenForRoleAsync(long RoleId);
+        System.Threading.Tasks.Task<ServiceReference2.JKIOPGetAllScreenForRoleResponseJKIOPGetAllScreenForRoleResult> JKIOPGetAllScreenForRoleAsync(long RoleId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveJKIOPStudent", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -312,7 +320,7 @@ namespace ServiceReference1
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/JKIOPLoadPayment", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.JKIOPLoadPaymentResponseJKIOPLoadPaymentResult> JKIOPLoadPaymentAsync(string coursesession, string startdate, string enddate);
+        System.Threading.Tasks.Task<ServiceReference2.JKIOPLoadPaymentResponseJKIOPLoadPaymentResult> JKIOPLoadPaymentAsync(string coursesession, string startdate, string enddate);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/checkip", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -320,27 +328,27 @@ namespace ServiceReference1
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetRecievedamountHistory", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.ArrayOfXElement> GetRecievedamountHistoryAsync(string session);
+        System.Threading.Tasks.Task<ServiceReference2.ArrayOfXElement> GetRecievedamountHistoryAsync(string session);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetRecievedamountDetails", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.ArrayOfXElement> GetRecievedamountDetailsAsync(string session, string Name, string type);
+        System.Threading.Tasks.Task<ServiceReference2.ArrayOfXElement> GetRecievedamountDetailsAsync(string session, string Name, string type);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetstudentforInvoice", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetstudentforInvoiceResponseGetstudentforInvoiceResult> GetstudentforInvoiceAsync(string RollNumber);
+        System.Threading.Tasks.Task<ServiceReference2.GetstudentforInvoiceResponseGetstudentforInvoiceResult> GetstudentforInvoiceAsync(string RollNumber);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/JKIOPLoadPaymentDetailBySPId", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.JKIOPLoadPaymentDetailBySPIdResponseJKIOPLoadPaymentDetailBySPIdResult> JKIOPLoadPaymentDetailBySPIdAsync(string SPId);
+        System.Threading.Tasks.Task<ServiceReference2.JKIOPLoadPaymentDetailBySPIdResponseJKIOPLoadPaymentDetailBySPIdResult> JKIOPLoadPaymentDetailBySPIdAsync(string SPId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/JKIOPLoadPaymentBySPId", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.JKIOPLoadPaymentBySPIdResponseJKIOPLoadPaymentBySPIdResult> JKIOPLoadPaymentBySPIdAsync(string SPId);
+        System.Threading.Tasks.Task<ServiceReference2.JKIOPLoadPaymentBySPIdResponseJKIOPLoadPaymentBySPIdResult> JKIOPLoadPaymentBySPIdAsync(string SPId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/JKIOPLoadPaymentByPaymentId", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.JKIOPLoadPaymentByPaymentIdResponseJKIOPLoadPaymentByPaymentIdResult> JKIOPLoadPaymentByPaymentIdAsync(string PId);
+        System.Threading.Tasks.Task<ServiceReference2.JKIOPLoadPaymentByPaymentIdResponseJKIOPLoadPaymentByPaymentIdResult> JKIOPLoadPaymentByPaymentIdAsync(string PId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveSubmitstudentpaymenttobankhandover", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -376,11 +384,11 @@ namespace ServiceReference1
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetDocument", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetDocumentResponseGetDocumentResult> GetDocumentAsync(string DocumentId);
+        System.Threading.Tasks.Task<ServiceReference2.GetDocumentResponseGetDocumentResult> GetDocumentAsync(string DocumentId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetDocumentById", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetDocumentByIdResponseGetDocumentByIdResult> GetDocumentByIdAsync(string DocumentId);
+        System.Threading.Tasks.Task<ServiceReference2.GetDocumentByIdResponseGetDocumentByIdResult> GetDocumentByIdAsync(string DocumentId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/deleteDocumentById", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -392,19 +400,19 @@ namespace ServiceReference1
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/JKIOPLoadStaffExpense", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.JKIOPLoadStaffExpenseResponseJKIOPLoadStaffExpenseResult> JKIOPLoadStaffExpenseAsync();
+        System.Threading.Tasks.Task<ServiceReference2.JKIOPLoadStaffExpenseResponseJKIOPLoadStaffExpenseResult> JKIOPLoadStaffExpenseAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/JKIOPLoadStaffExpenseById", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.JKIOPLoadStaffExpenseByIdResponseJKIOPLoadStaffExpenseByIdResult> JKIOPLoadStaffExpenseByIdAsync(string EId);
+        System.Threading.Tasks.Task<ServiceReference2.JKIOPLoadStaffExpenseByIdResponseJKIOPLoadStaffExpenseByIdResult> JKIOPLoadStaffExpenseByIdAsync(string EId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/JKIOPLoadSupplierById", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.JKIOPLoadSupplierByIdResponseJKIOPLoadSupplierByIdResult> JKIOPLoadSupplierByIdAsync(string SId);
+        System.Threading.Tasks.Task<ServiceReference2.JKIOPLoadSupplierByIdResponseJKIOPLoadSupplierByIdResult> JKIOPLoadSupplierByIdAsync(string SId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/JKIOPLoadSupplier", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.JKIOPLoadSupplierResponseJKIOPLoadSupplierResult> JKIOPLoadSupplierAsync(string supplier, string startdate, string enddate);
+        System.Threading.Tasks.Task<ServiceReference2.JKIOPLoadSupplierResponseJKIOPLoadSupplierResult> JKIOPLoadSupplierAsync(string supplier, string startdate, string enddate);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveJKIOPSupplier", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -412,11 +420,11 @@ namespace ServiceReference1
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/JKIOPLoadstudentbysearch", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.JKIOPLoadstudentbysearchResponseJKIOPLoadstudentbysearchResult> JKIOPLoadstudentbysearchAsync(string RollNumber, string Firstname, string FatherName, string dob);
+        System.Threading.Tasks.Task<ServiceReference2.JKIOPLoadstudentbysearchResponseJKIOPLoadstudentbysearchResult> JKIOPLoadstudentbysearchAsync(string RollNumber, string Firstname, string FatherName, string dob);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/JKIOPStudentPaymentInfo", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.JKIOPStudentPaymentInfoResponseJKIOPStudentPaymentInfoResult> JKIOPStudentPaymentInfoAsync(string StudentId);
+        System.Threading.Tasks.Task<ServiceReference2.JKIOPStudentPaymentInfoResponseJKIOPStudentPaymentInfoResult> JKIOPStudentPaymentInfoAsync(string StudentId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveSupplierExpenseHistory", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -424,11 +432,11 @@ namespace ServiceReference1
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SupplierExpenseHistory", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.SupplierExpenseHistoryResponseSupplierExpenseHistoryResult> SupplierExpenseHistoryAsync(string EId);
+        System.Threading.Tasks.Task<ServiceReference2.SupplierExpenseHistoryResponseSupplierExpenseHistoryResult> SupplierExpenseHistoryAsync(string EId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SupplierExpenseHistoryBYHid", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.SupplierExpenseHistoryBYHidResponseSupplierExpenseHistoryBYHidResult> SupplierExpenseHistoryBYHidAsync(string HId);
+        System.Threading.Tasks.Task<ServiceReference2.SupplierExpenseHistoryBYHidResponseSupplierExpenseHistoryBYHidResult> SupplierExpenseHistoryBYHidAsync(string HId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveExternalLink", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -436,7 +444,7 @@ namespace ServiceReference1
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/LoadExternalLinkByFormIdAndType", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.LoadExternalLinkByFormIdAndTypeResponseLoadExternalLinkByFormIdAndTypeResult> LoadExternalLinkByFormIdAndTypeAsync(string FormType, string FormId);
+        System.Threading.Tasks.Task<ServiceReference2.LoadExternalLinkByFormIdAndTypeResponseLoadExternalLinkByFormIdAndTypeResult> LoadExternalLinkByFormIdAndTypeAsync(string FormType, string FormId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/DeleteExternalRecord", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -444,27 +452,27 @@ namespace ServiceReference1
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/LoadSupplierPaymentBySPId", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.LoadSupplierPaymentBySPIdResponseLoadSupplierPaymentBySPIdResult> LoadSupplierPaymentBySPIdAsync(string SPId);
+        System.Threading.Tasks.Task<ServiceReference2.LoadSupplierPaymentBySPIdResponseLoadSupplierPaymentBySPIdResult> LoadSupplierPaymentBySPIdAsync(string SPId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/JKIOPSupplierPaymentBySupplierId", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.JKIOPSupplierPaymentBySupplierIdResponseJKIOPSupplierPaymentBySupplierIdResult> JKIOPSupplierPaymentBySupplierIdAsync(string SupplierId);
+        System.Threading.Tasks.Task<ServiceReference2.JKIOPSupplierPaymentBySupplierIdResponseJKIOPSupplierPaymentBySupplierIdResult> JKIOPSupplierPaymentBySupplierIdAsync(string SupplierId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetStudentFine", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetStudentFineResponseGetStudentFineResult> GetStudentFineAsync(string CourseYear, string CourseSession, string fromdate, string todate);
+        System.Threading.Tasks.Task<ServiceReference2.GetStudentFineResponseGetStudentFineResult> GetStudentFineAsync(string CourseYear, string CourseSession, string fromdate, string todate);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/getstudentinfobyrollnumber", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.getstudentinfobyrollnumberResponseGetstudentinfobyrollnumberResult> getstudentinfobyrollnumberAsync(string RollNumber);
+        System.Threading.Tasks.Task<ServiceReference2.getstudentinfobyrollnumberResponseGetstudentinfobyrollnumberResult> getstudentinfobyrollnumberAsync(string RollNumber);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/getstudentfineinfobyFIneId", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.getstudentfineinfobyFIneIdResponseGetstudentfineinfobyFIneIdResult> getstudentfineinfobyFIneIdAsync(string FineId);
+        System.Threading.Tasks.Task<ServiceReference2.getstudentfineinfobyFIneIdResponseGetstudentfineinfobyFIneIdResult> getstudentfineinfobyFIneIdAsync(string FineId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/getstudentfineinfobyRollnumber", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.getstudentfineinfobyRollnumberResponseGetstudentfineinfobyRollnumberResult> getstudentfineinfobyRollnumberAsync(string RollNumber);
+        System.Threading.Tasks.Task<ServiceReference2.getstudentfineinfobyRollnumberResponseGetstudentfineinfobyRollnumberResult> getstudentfineinfobyRollnumberAsync(string RollNumber);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveFinepaymenttobankhandover", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -497,15 +505,15 @@ namespace ServiceReference1
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/getstudentRefundinfobyRollnumber", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.getstudentRefundinfobyRollnumberResponseGetstudentRefundinfobyRollnumberResult> getstudentRefundinfobyRollnumberAsync(string RollNumber);
+        System.Threading.Tasks.Task<ServiceReference2.getstudentRefundinfobyRollnumberResponseGetstudentRefundinfobyRollnumberResult> getstudentRefundinfobyRollnumberAsync(string RollNumber);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/getstudentRefundinfobyRefundId", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.getstudentRefundinfobyRefundIdResponseGetstudentRefundinfobyRefundIdResult> getstudentRefundinfobyRefundIdAsync(string RId);
+        System.Threading.Tasks.Task<ServiceReference2.getstudentRefundinfobyRefundIdResponseGetstudentRefundinfobyRefundIdResult> getstudentRefundinfobyRefundIdAsync(string RId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetStudentRefund", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetStudentRefundResponseGetStudentRefundResult> GetStudentRefundAsync(string CourseYear, string CourseSession, string fromdate, string todate);
+        System.Threading.Tasks.Task<ServiceReference2.GetStudentRefundResponseGetStudentRefundResult> GetStudentRefundAsync(string CourseYear, string CourseSession, string fromdate, string todate);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveProductexpirylistinventory", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -525,47 +533,47 @@ namespace ServiceReference1
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetOfficeLeaveDetails", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetOfficeLeaveDetailsResponseGetOfficeLeaveDetailsResult> GetOfficeLeaveDetailsAsync(string EmailId, System.DateTime StartDate, System.DateTime EndDate, string RequestStatus, string LeaveType);
+        System.Threading.Tasks.Task<ServiceReference2.GetOfficeLeaveDetailsResponseGetOfficeLeaveDetailsResult> GetOfficeLeaveDetailsAsync(string EmailId, System.DateTime StartDate, System.DateTime EndDate, string RequestStatus, string LeaveType);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetDailyScheduleWork", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.ArrayOfXElement> GetDailyScheduleWorkAsync(string StaffEmailId);
+        System.Threading.Tasks.Task<ServiceReference2.ArrayOfXElement> GetDailyScheduleWorkAsync(string StaffEmailId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetDailyScheduleWorks", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.ArrayOfXElement> GetDailyScheduleWorksAsync(string StaffEmailId, string TaskName, string CategoryId, string TeamName);
+        System.Threading.Tasks.Task<ServiceReference2.ArrayOfXElement> GetDailyScheduleWorksAsync(string StaffEmailId, string TaskName, string CategoryId, string TeamName);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetStaffRota", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetStaffRotaResponseGetStaffRotaResult> GetStaffRotaAsync(string EmailId, System.DateTime StartDate, System.DateTime EndDate);
+        System.Threading.Tasks.Task<ServiceReference2.GetStaffRotaResponseGetStaffRotaResult> GetStaffRotaAsync(string EmailId, System.DateTime StartDate, System.DateTime EndDate);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetTaskName", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetTaskNameResponseGetTaskNameResult> GetTaskNameAsync();
+        System.Threading.Tasks.Task<ServiceReference2.GetTaskNameResponseGetTaskNameResult> GetTaskNameAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetTaskNames", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetTaskNamesResponseGetTaskNamesResult> GetTaskNamesAsync(string countryname);
+        System.Threading.Tasks.Task<ServiceReference2.GetTaskNamesResponseGetTaskNamesResult> GetTaskNamesAsync(string countryname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetTeamName", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetTeamNameResponseGetTeamNameResult> GetTeamNameAsync();
+        System.Threading.Tasks.Task<ServiceReference2.GetTeamNameResponseGetTeamNameResult> GetTeamNameAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetStaffCountryWise", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetStaffCountryWiseResponseGetStaffCountryWiseResult> GetStaffCountryWiseAsync(string CountryName);
+        System.Threading.Tasks.Task<ServiceReference2.GetStaffCountryWiseResponseGetStaffCountryWiseResult> GetStaffCountryWiseAsync(string CountryName);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/CheckTaskRunningOnComputer", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.CheckTaskRunningOnComputerResponseCheckTaskRunningOnComputerResult> CheckTaskRunningOnComputerAsync(string EmailId, string ComputerName);
+        System.Threading.Tasks.Task<ServiceReference2.CheckTaskRunningOnComputerResponseCheckTaskRunningOnComputerResult> CheckTaskRunningOnComputerAsync(string EmailId, string ComputerName);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetTasks", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetTasksResponseGetTasksResult> GetTasksAsync(string CountryName);
+        System.Threading.Tasks.Task<ServiceReference2.GetTasksResponseGetTasksResult> GetTasksAsync(string CountryName);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetStaffInOut", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetStaffInOutResponseGetStaffInOutResult> GetStaffInOutAsync(string EmailId);
+        System.Threading.Tasks.Task<ServiceReference2.GetStaffInOutResponseGetStaffInOutResult> GetStaffInOutAsync(string EmailId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveTasksTimer", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -575,45 +583,45 @@ namespace ServiceReference1
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<int> UpdateTasksTimerAsync(int STId, string EndTime);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveStaffIn", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/updateStatusAfterAutoTransferForcefully", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<int> SaveStaffInAsync(string StaffEmailId, string ScanInTime, string CountryName);
+        System.Threading.Tasks.Task<string> updateStatusAfterAutoTransferForcefullyAsync(int productid, string companyname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/checkproductcategoryforcomputer", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.checkproductcategoryforcomputerResponseCheckproductcategoryforcomputerResult> checkproductcategoryforcomputerAsync(string productid, string computername);
+        System.Threading.Tasks.Task<ServiceReference2.checkproductcategoryforcomputerResponseCheckproductcategoryforcomputerResult> checkproductcategoryforcomputerAsync(string productid, string computername);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Getcategoryforcomputer", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetcategoryforcomputerResponseGetcategoryforcomputerResult> GetcategoryforcomputerAsync(string computername);
+        System.Threading.Tasks.Task<ServiceReference2.GetcategoryforcomputerResponseGetcategoryforcomputerResult> GetcategoryforcomputerAsync(string computername);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Getunshippedorderforcomputer", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetunshippedorderforcomputerResponseGetunshippedorderforcomputerResult> GetunshippedorderforcomputerAsync(string computername, string companyname);
+        System.Threading.Tasks.Task<ServiceReference2.GetunshippedorderforcomputerResponseGetunshippedorderforcomputerResult> GetunshippedorderforcomputerAsync(string computername, string companyname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/checkproductcategoryforcomputerbyordernumber", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.checkproductcategoryforcomputerbyordernumberResponseCheckproductcategoryforcomputerbyordernumberResult> checkproductcategoryforcomputerbyordernumberAsync(string ordernumber, string computername);
+        System.Threading.Tasks.Task<ServiceReference2.checkproductcategoryforcomputerbyordernumberResponseCheckproductcategoryforcomputerbyordernumberResult> checkproductcategoryforcomputerbyordernumberAsync(string ordernumber, string computername);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/gettodayshippedordercategoryforcomputer", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.gettodayshippedordercategoryforcomputerResponseGettodayshippedordercategoryforcomputerResult> gettodayshippedordercategoryforcomputerAsync(string computername, string companyname);
+        System.Threading.Tasks.Task<ServiceReference2.gettodayshippedordercategoryforcomputerResponseGettodayshippedordercategoryforcomputerResult> gettodayshippedordercategoryforcomputerAsync(string computername, string companyname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Getunshippedorderbycompany", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetunshippedorderbycompanyResponseGetunshippedorderbycompanyResult> GetunshippedorderbycompanyAsync(string companyname);
+        System.Threading.Tasks.Task<ServiceReference2.GetunshippedorderbycompanyResponseGetunshippedorderbycompanyResult> GetunshippedorderbycompanyAsync(string companyname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetToadyshippedorderbycompany", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetToadyshippedorderbycompanyResponseGetToadyshippedorderbycompanyResult> GetToadyshippedorderbycompanyAsync(string companyname);
+        System.Threading.Tasks.Task<ServiceReference2.GetToadyshippedorderbycompanyResponseGetToadyshippedorderbycompanyResult> GetToadyshippedorderbycompanyAsync(string companyname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Getlateshipment", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetlateshipmentResponseGetlateshipmentResult> GetlateshipmentAsync();
+        System.Threading.Tasks.Task<ServiceReference2.GetlateshipmentResponseGetlateshipmentResult> GetlateshipmentAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Getstaffbycomputer", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetstaffbycomputerResponseGetstaffbycomputerResult> GetstaffbycomputerAsync(string computername);
+        System.Threading.Tasks.Task<ServiceReference2.GetstaffbycomputerResponseGetstaffbycomputerResult> GetstaffbycomputerAsync(string computername);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Saveloginlog", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -625,27 +633,27 @@ namespace ServiceReference1
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetShipUnshipLateshipOrder", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetShipUnshipLateshipOrderResponseGetShipUnshipLateshipOrderResult> GetShipUnshipLateshipOrderAsync();
+        System.Threading.Tasks.Task<ServiceReference2.GetShipUnshipLateshipOrderResponseGetShipUnshipLateshipOrderResult> GetShipUnshipLateshipOrderAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/getunshippedorderbyComputerName", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.getunshippedorderbyComputerNameResponseGetunshippedorderbyComputerNameResult> getunshippedorderbyComputerNameAsync(string computername);
+        System.Threading.Tasks.Task<ServiceReference2.getunshippedorderbyComputerNameResponseGetunshippedorderbyComputerNameResult> getunshippedorderbyComputerNameAsync(string computername);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/getunshipandtodayshiporderforcomputer", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.getunshipandtodayshiporderforcomputerResponseGetunshipandtodayshiporderforcomputerResult> getunshipandtodayshiporderforcomputerAsync(string computername);
+        System.Threading.Tasks.Task<ServiceReference2.getunshipandtodayshiporderforcomputerResponseGetunshipandtodayshiporderforcomputerResult> getunshipandtodayshiporderforcomputerAsync(string computername);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/getComputerbypackingToday", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.getComputerbypackingTodayResponseGetComputerbypackingTodayResult> getComputerbypackingTodayAsync(string computername);
+        System.Threading.Tasks.Task<ServiceReference2.getComputerbypackingTodayResponseGetComputerbypackingTodayResult> getComputerbypackingTodayAsync(string computername);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/getlateshipmentbycategoryforcomputer", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.getlateshipmentbycategoryforcomputerResponseGetlateshipmentbycategoryforcomputerResult> getlateshipmentbycategoryforcomputerAsync(string computername, string companyname);
+        System.Threading.Tasks.Task<ServiceReference2.getlateshipmentbycategoryforcomputerResponseGetlateshipmentbycategoryforcomputerResult> getlateshipmentbycategoryforcomputerAsync(string computername, string companyname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/getstaffbypackingToday", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.getstaffbypackingTodayResponseGetstaffbypackingTodayResult> getstaffbypackingTodayAsync();
+        System.Threading.Tasks.Task<ServiceReference2.getstaffbypackingTodayResponseGetstaffbypackingTodayResult> getstaffbypackingTodayAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IsUPS", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -653,11 +661,11 @@ namespace ServiceReference1
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetComputerName", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetComputerNameResponseGetComputerNameResult> GetComputerNameAsync();
+        System.Threading.Tasks.Task<ServiceReference2.GetComputerNameResponseGetComputerNameResult> GetComputerNameAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetCurrentComputerByStaff", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetCurrentComputerByStaffResponseGetCurrentComputerByStaffResult> GetCurrentComputerByStaffAsync(string EmailId);
+        System.Threading.Tasks.Task<ServiceReference2.GetCurrentComputerByStaffResponseGetCurrentComputerByStaffResult> GetCurrentComputerByStaffAsync(string EmailId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/AutoTransferInventory", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -665,19 +673,19 @@ namespace ServiceReference1
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/getworkreport", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.getworkreportResponseGetworkreportResult> getworkreportAsync(string companyname, string computername, string username, string shift, string startdate, string enddate);
+        System.Threading.Tasks.Task<ServiceReference2.getworkreportResponseGetworkreportResult> getworkreportAsync(string companyname, string computername, string username, string shift, string startdate, string enddate);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/getworkreportUpdated", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.getworkreportUpdatedResponseGetworkreportUpdatedResult> getworkreportUpdatedAsync(string companyname, string computername, string username, string shift, string startdate, string enddate, string RecordType);
+        System.Threading.Tasks.Task<ServiceReference2.getworkreportUpdatedResponseGetworkreportUpdatedResult> getworkreportUpdatedAsync(string companyname, string computername, string username, string shift, string startdate, string enddate, string RecordType);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetOrderAccountwise", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetOrderAccountwiseResponseGetOrderAccountwiseResult> GetOrderAccountwiseAsync(string companyname, string computername, string startdate, string enddate, string category, string ordertype);
+        System.Threading.Tasks.Task<ServiceReference2.GetOrderAccountwiseResponseGetOrderAccountwiseResult> GetOrderAccountwiseAsync(string companyname, string computername, string startdate, string enddate, string category, string ordertype);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetOrderAccountwiseupdated", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetOrderAccountwiseupdatedResponseGetOrderAccountwiseupdatedResult> GetOrderAccountwiseupdatedAsync(string companyname, string computername, string startdate, string enddate, string category, string ordertype, string shift);
+        System.Threading.Tasks.Task<ServiceReference2.GetOrderAccountwiseupdatedResponseGetOrderAccountwiseupdatedResult> GetOrderAccountwiseupdatedAsync(string companyname, string computername, string startdate, string enddate, string category, string ordertype, string shift);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/CheckAllowcategory", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -742,23 +750,23 @@ namespace ServiceReference1
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetAllCategorybycomputerwise", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetAllCategorybycomputerwiseResponseGetAllCategorybycomputerwiseResult> GetAllCategorybycomputerwiseAsync(string computername);
+        System.Threading.Tasks.Task<ServiceReference2.GetAllCategorybycomputerwiseResponseGetAllCategorybycomputerwiseResult> GetAllCategorybycomputerwiseAsync(string computername);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetAllunshippedOrder", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetAllunshippedOrderResponseGetAllunshippedOrderResult> GetAllunshippedOrderAsync();
+        System.Threading.Tasks.Task<ServiceReference2.GetAllunshippedOrderResponseGetAllunshippedOrderResult> GetAllunshippedOrderAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetAllOutOfStockOrder", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetAllOutOfStockOrderResponseGetAllOutOfStockOrderResult> GetAllOutOfStockOrderAsync(string companyname, string computername, string category, string shift);
+        System.Threading.Tasks.Task<ServiceReference2.GetAllOutOfStockOrderResponseGetAllOutOfStockOrderResult> GetAllOutOfStockOrderAsync(string companyname, string computername, string category, string shift);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetAllOrderStatusQty", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetAllOrderStatusQtyResponseGetAllOrderStatusQtyResult> GetAllOrderStatusQtyAsync(string companyname, string computername, string category, string shift);
+        System.Threading.Tasks.Task<ServiceReference2.GetAllOrderStatusQtyResponseGetAllOrderStatusQtyResult> GetAllOrderStatusQtyAsync(string companyname, string computername, string category, string shift);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetComputerNameByShift", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetComputerNameByShiftResponseGetComputerNameByShiftResult> GetComputerNameByShiftAsync(string shift);
+        System.Threading.Tasks.Task<ServiceReference2.GetComputerNameByShiftResponseGetComputerNameByShiftResult> GetComputerNameByShiftAsync(string shift);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/InventoryRecord", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -801,11 +809,11 @@ namespace ServiceReference1
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetLoginPermission", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetLoginPermissionResponseGetLoginPermissionResult> GetLoginPermissionAsync(string companyname, string emailid, string compautername);
+        System.Threading.Tasks.Task<ServiceReference2.GetLoginPermissionResponseGetLoginPermissionResult> GetLoginPermissionAsync(string companyname, string emailid, string compautername);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetAccessForRole", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetAccessForRoleResponseGetAccessForRoleResult> GetAccessForRoleAsync(string emailid);
+        System.Threading.Tasks.Task<ServiceReference2.GetAccessForRoleResponseGetAccessForRoleResult> GetAccessForRoleAsync(string emailid);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveProductdeliveryOnTransferInventory", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -942,7 +950,7 @@ namespace ServiceReference1
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetIssueMainCategory_User_OrderIssue_AccountName_InventoryCoun" +
             "t", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.ArrayOfXElement> GetIssueMainCategory_User_OrderIssue_AccountName_InventoryCountAsync(string companyname, int Ordernumber, string issuestatus, int productid);
+        System.Threading.Tasks.Task<ServiceReference2.ArrayOfXElement> GetIssueMainCategory_User_OrderIssue_AccountName_InventoryCountAsync(string companyname, int Ordernumber, string issuestatus, int productid);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateInventoryByPscanoutProcedure", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -983,11 +991,11 @@ namespace ServiceReference1
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Getorderdetailsonpscanout", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.ArrayOfXElement> GetorderdetailsonpscanoutAsync(string ordernumber);
+        System.Threading.Tasks.Task<ServiceReference2.ArrayOfXElement> GetorderdetailsonpscanoutAsync(string ordernumber);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetorderPrintlabel", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetorderPrintlabelResponseGetorderPrintlabelResult> GetorderPrintlabelAsync(
+        System.Threading.Tasks.Task<ServiceReference2.GetorderPrintlabelResponseGetorderPrintlabelResult> GetorderPrintlabelAsync(
                     string ordernumber, 
                     int printqty, 
                     string orderstatus, 
@@ -1009,24 +1017,24 @@ namespace ServiceReference1
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetAutodownloadLabelOrder", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetAutodownloadLabelOrderResponseGetAutodownloadLabelOrderResult> GetAutodownloadLabelOrderAsync();
+        System.Threading.Tasks.Task<ServiceReference2.GetAutodownloadLabelOrderResponseGetAutodownloadLabelOrderResult> GetAutodownloadLabelOrderAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetPostageTypeandCourierwithordernumberwithDateRange", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.ArrayOfXElement> GetPostageTypeandCourierwithordernumberwithDateRangeAsync(string ComputerName, System.DateTime dtstartdate, System.DateTime dtenddate);
+        System.Threading.Tasks.Task<ServiceReference2.ArrayOfXElement> GetPostageTypeandCourierwithordernumberwithDateRangeAsync(string ComputerName, System.DateTime dtstartdate, System.DateTime dtenddate);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetPostageTypeandCourierwithordernumberwithDateRangeandOrderty" +
             "pe", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.ArrayOfXElement> GetPostageTypeandCourierwithordernumberwithDateRangeandOrdertypeAsync(string OrderType, System.DateTime dtstartdate, System.DateTime dtenddate, string ComputerName);
+        System.Threading.Tasks.Task<ServiceReference2.ArrayOfXElement> GetPostageTypeandCourierwithordernumberwithDateRangeandOrdertypeAsync(string OrderType, System.DateTime dtstartdate, System.DateTime dtenddate, string ComputerName);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetPostageTypeandCourierwithordernumber", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.ArrayOfXElement> GetPostageTypeandCourierwithordernumberAsync();
+        System.Threading.Tasks.Task<ServiceReference2.ArrayOfXElement> GetPostageTypeandCourierwithordernumberAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Getcouriernamewithtype", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.ArrayOfXElement> GetcouriernamewithtypeAsync(string country);
+        System.Threading.Tasks.Task<ServiceReference2.ArrayOfXElement> GetcouriernamewithtypeAsync(string country);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdatePrintDate", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -1042,39 +1050,39 @@ namespace ServiceReference1
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/getproduct", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.getproductResponseGetproductResult> getproductAsync(string companyname);
+        System.Threading.Tasks.Task<ServiceReference2.getproductResponseGetproductResult> getproductAsync(string companyname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetProductById", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetProductByIdResponseGetProductByIdResult> GetProductByIdAsync(int productid);
+        System.Threading.Tasks.Task<ServiceReference2.GetProductByIdResponseGetProductByIdResult> GetProductByIdAsync(int productid);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetAllBrand", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetAllBrandResponseGetAllBrandResult> GetAllBrandAsync();
+        System.Threading.Tasks.Task<ServiceReference2.GetAllBrandResponseGetAllBrandResult> GetAllBrandAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetTaxClass", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetTaxClassResponseGetTaxClassResult> GetTaxClassAsync();
+        System.Threading.Tasks.Task<ServiceReference2.GetTaxClassResponseGetTaxClassResult> GetTaxClassAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetUserWithroll", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetUserWithrollResponseGetUserWithrollResult> GetUserWithrollAsync();
+        System.Threading.Tasks.Task<ServiceReference2.GetUserWithrollResponseGetUserWithrollResult> GetUserWithrollAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetUserroll", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetUserrollResponseGetUserrollResult> GetUserrollAsync();
+        System.Threading.Tasks.Task<ServiceReference2.GetUserrollResponseGetUserrollResult> GetUserrollAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetAllScreenForRole", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetAllScreenForRoleResponseGetAllScreenForRoleResult> GetAllScreenForRoleAsync(long RoleId);
+        System.Threading.Tasks.Task<ServiceReference2.GetAllScreenForRoleResponseGetAllScreenForRoleResult> GetAllScreenForRoleAsync(long RoleId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetuserByRoleId", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetuserByRoleIdResponseGetuserByRoleIdResult> GetuserByRoleIdAsync(long RoleId);
+        System.Threading.Tasks.Task<ServiceReference2.GetuserByRoleIdResponseGetuserByRoleIdResult> GetuserByRoleIdAsync(long RoleId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/LoadCreditnoteForPaperWork", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.LoadCreditnoteForPaperWorkResponseLoadCreditnoteForPaperWorkResult> LoadCreditnoteForPaperWorkAsync(string companyname);
+        System.Threading.Tasks.Task<ServiceReference2.LoadCreditnoteForPaperWorkResponseLoadCreditnoteForPaperWorkResult> LoadCreditnoteForPaperWorkAsync(string companyname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdatePaperWorkForCreditNote", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -1090,7 +1098,7 @@ namespace ServiceReference1
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetCreditNoteWithoutDoc", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetCreditNoteWithoutDocResponseGetCreditNoteWithoutDocResult> GetCreditNoteWithoutDocAsync(string companyname, string sku, string barcode, string pipcode, string InvoiceNumber);
+        System.Threading.Tasks.Task<ServiceReference2.GetCreditNoteWithoutDocResponseGetCreditNoteWithoutDocResult> GetCreditNoteWithoutDocAsync(string companyname, string sku, string barcode, string pipcode, string InvoiceNumber);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateCreditNote", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -1110,7 +1118,7 @@ namespace ServiceReference1
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/LoadQuantityAdjustmentOpenCase", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.LoadQuantityAdjustmentOpenCaseResponseLoadQuantityAdjustmentOpenCaseResult> LoadQuantityAdjustmentOpenCaseAsync(string Barcode, string Reason);
+        System.Threading.Tasks.Task<ServiceReference2.LoadQuantityAdjustmentOpenCaseResponseLoadQuantityAdjustmentOpenCaseResult> LoadQuantityAdjustmentOpenCaseAsync(string Barcode, string Reason);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Updateqtyadjustment", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -1146,19 +1154,19 @@ namespace ServiceReference1
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetListOfPrintOrderError", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetListOfPrintOrderErrorResponseGetListOfPrintOrderErrorResult> GetListOfPrintOrderErrorAsync(string OrderList);
+        System.Threading.Tasks.Task<ServiceReference2.GetListOfPrintOrderErrorResponseGetListOfPrintOrderErrorResult> GetListOfPrintOrderErrorAsync(string OrderList);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetDefaultVarient", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetDefaultVarientResponseGetDefaultVarientResult> GetDefaultVarientAsync(string ProductId);
+        System.Threading.Tasks.Task<ServiceReference2.GetDefaultVarientResponseGetDefaultVarientResult> GetDefaultVarientAsync(string ProductId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateProductInventory", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<bool> UpdateProductInventoryAsync(long ProductId, int Qty, string InventoryType, string Reason, string EmailId, int AddQty, string AddInventoryType);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateAmazonClickAndCollectInventory", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateInventoryQuantityByVarientSFPcompany", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<bool> UpdateAmazonClickAndCollectInventoryAsync(long VariantId, int Qty, string Reason, string EmailId);
+        System.Threading.Tasks.Task<string> UpdateInventoryQuantityByVarientSFPcompanyAsync(string VarientId, string mquantity, string quantity, string company);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateSFPInventoryByVarient", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -1215,11 +1223,11 @@ namespace ServiceReference1
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Getclearenceorder", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetclearenceorderResponseGetclearenceorderResult> GetclearenceorderAsync(string variantid, string companyname, string channel);
+        System.Threading.Tasks.Task<ServiceReference2.GetclearenceorderResponseGetclearenceorderResult> GetclearenceorderAsync(string variantid, string companyname, string channel);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Getsellingchannel", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetsellingchannelResponseGetsellingchannelResult> GetsellingchannelAsync(string OrderNumber, string companyname);
+        System.Threading.Tasks.Task<ServiceReference2.GetsellingchannelResponseGetsellingchannelResult> GetsellingchannelAsync(string OrderNumber, string companyname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateFbaInventoryInCostingSheet", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -1227,23 +1235,23 @@ namespace ServiceReference1
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Getpostagetype", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetpostagetypeResponseGetpostagetypeResult> GetpostagetypeAsync(string variantid, string companyname);
+        System.Threading.Tasks.Task<ServiceReference2.GetpostagetypeResponseGetpostagetypeResult> GetpostagetypeAsync(string variantid, string companyname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Getpostage", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetpostageResponseGetpostageResult> GetpostageAsync(string AccountName, string companyname);
+        System.Threading.Tasks.Task<ServiceReference2.GetpostageResponseGetpostageResult> GetpostageAsync(string AccountName, string companyname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetExpiryproductdatebycompany", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetExpiryproductdatebycompanyResponseGetExpiryproductdatebycompanyResult> GetExpiryproductdatebycompanyAsync(int ordernumber, string exptype, string companyname);
+        System.Threading.Tasks.Task<ServiceReference2.GetExpiryproductdatebycompanyResponseGetExpiryproductdatebycompanyResult> GetExpiryproductdatebycompanyAsync(int ordernumber, string exptype, string companyname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetExpirydatebycompanyname", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetExpirydatebycompanynameResponseGetExpirydatebycompanynameResult> GetExpirydatebycompanynameAsync(string sku, string companyname);
+        System.Threading.Tasks.Task<ServiceReference2.GetExpirydatebycompanynameResponseGetExpirydatebycompanynameResult> GetExpirydatebycompanynameAsync(string sku, string companyname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetExpirydate", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetExpirydateResponseGetExpirydateResult> GetExpirydateAsync(string sku, string companyname);
+        System.Threading.Tasks.Task<ServiceReference2.GetExpirydateResponseGetExpirydateResult> GetExpirydateAsync(string sku, string companyname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateExpiryInventoryUpdated", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -1259,31 +1267,31 @@ namespace ServiceReference1
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetExpirydatefromexpiryroom", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetExpirydatefromexpiryroomResponseGetExpirydatefromexpiryroomResult> GetExpirydatefromexpiryroomAsync(string sku, string companyname);
+        System.Threading.Tasks.Task<ServiceReference2.GetExpirydatefromexpiryroomResponseGetExpirydatefromexpiryroomResult> GetExpirydatefromexpiryroomAsync(string sku, string companyname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetExpirymessagebycompanyname", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetExpirymessagebycompanynameResponseGetExpirymessagebycompanynameResult> GetExpirymessagebycompanynameAsync(string sku, string companyname);
+        System.Threading.Tasks.Task<ServiceReference2.GetExpirymessagebycompanynameResponseGetExpirymessagebycompanynameResult> GetExpirymessagebycompanynameAsync(string sku, string companyname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetExpirymsg", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetExpirymsgResponseGetExpirymsgResult> GetExpirymsgAsync(string sku, string companyname);
+        System.Threading.Tasks.Task<ServiceReference2.GetExpirymsgResponseGetExpirymsgResult> GetExpirymsgAsync(string sku, string companyname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetProductDetailbycompany", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetProductDetailbycompanyResponseGetProductDetailbycompanyResult> GetProductDetailbycompanyAsync(string strCode, string strType, string companyname);
+        System.Threading.Tasks.Task<ServiceReference2.GetProductDetailbycompanyResponseGetProductDetailbycompanyResult> GetProductDetailbycompanyAsync(string strCode, string strType, string companyname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetScanInProduct", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetScanInProductResponseGetScanInProductResult> GetScanInProductAsync(string strCode, string strType, string companyname);
+        System.Threading.Tasks.Task<ServiceReference2.GetScanInProductResponseGetScanInProductResult> GetScanInProductAsync(string strCode, string strType, string companyname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetProductDetails", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetProductDetailsResponseGetProductDetailsResult> GetProductDetailsAsync(string strCode, string strType, string companyname);
+        System.Threading.Tasks.Task<ServiceReference2.GetProductDetailsResponseGetProductDetailsResult> GetProductDetailsAsync(string strCode, string strType, string companyname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetProductRackLabel", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetProductRackLabelResponseGetProductRackLabelResult> GetProductRackLabelAsync(string strCode, string strType, string companyname);
+        System.Threading.Tasks.Task<ServiceReference2.GetProductRackLabelResponseGetProductRackLabelResult> GetProductRackLabelAsync(string strCode, string strType, string companyname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateOrderReturndStatus", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -1291,35 +1299,35 @@ namespace ServiceReference1
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/getcostingbyorder", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.getcostingbyorderResponseGetcostingbyorderResult> getcostingbyorderAsync(int ordernumber);
+        System.Threading.Tasks.Task<ServiceReference2.getcostingbyorderResponseGetcostingbyorderResult> getcostingbyorderAsync(int ordernumber);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetPalletNumber", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetPalletNumberResponseGetPalletNumberResult> GetPalletNumberAsync();
+        System.Threading.Tasks.Task<ServiceReference2.GetPalletNumberResponseGetPalletNumberResult> GetPalletNumberAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetPallet", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetPalletResponseGetPalletResult> GetPalletAsync(int MainProductId, int PalletNumber);
+        System.Threading.Tasks.Task<ServiceReference2.GetPalletResponseGetPalletResult> GetPalletAsync(int MainProductId, int PalletNumber);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetUser", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetUserResponseGetUserResult> GetUserAsync();
+        System.Threading.Tasks.Task<ServiceReference2.GetUserResponseGetUserResult> GetUserAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetcollectionnoofItem", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetcollectionnoofItemResponseGetcollectionnoofItemResult> GetcollectionnoofItemAsync(string CategoryId);
+        System.Threading.Tasks.Task<ServiceReference2.GetcollectionnoofItemResponseGetcollectionnoofItemResult> GetcollectionnoofItemAsync(string CategoryId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetShelfingnoofItem", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetShelfingnoofItemResponseGetShelfingnoofItemResult> GetShelfingnoofItemAsync(string CategoryId);
+        System.Threading.Tasks.Task<ServiceReference2.GetShelfingnoofItemResponseGetShelfingnoofItemResult> GetShelfingnoofItemAsync(string CategoryId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/WareHouseStaff", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.WareHouseStaffResponseWareHouseStaffResult> WareHouseStaffAsync();
+        System.Threading.Tasks.Task<ServiceReference2.WareHouseStaffResponseWareHouseStaffResult> WareHouseStaffAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetTaskTimer", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetTaskTimerResponseGetTaskTimerResult> GetTaskTimerAsync(string CountryName);
+        System.Threading.Tasks.Task<ServiceReference2.GetTaskTimerResponseGetTaskTimerResult> GetTaskTimerAsync(string CountryName);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveTaskTimer", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -1335,7 +1343,7 @@ namespace ServiceReference1
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/checknondeliveredorder", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.checknondeliveredorderResponseChecknondeliveredorderResult> checknondeliveredorderAsync(int ordernumber);
+        System.Threading.Tasks.Task<ServiceReference2.checknondeliveredorderResponseChecknondeliveredorderResult> checknondeliveredorderAsync(int ordernumber);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Saveordercomment", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -1347,7 +1355,7 @@ namespace ServiceReference1
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/LoadOrderIssues", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.LoadOrderIssuesResponseLoadOrderIssuesResult> LoadOrderIssuesAsync(int OrderId, string Resendstatus);
+        System.Threading.Tasks.Task<ServiceReference2.LoadOrderIssuesResponseLoadOrderIssuesResult> LoadOrderIssuesAsync(int OrderId, string Resendstatus);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateOrderIssues", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -1383,7 +1391,7 @@ namespace ServiceReference1
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/getMainProductId", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.getMainProductIdResponseGetMainProductIdResult> getMainProductIdAsync(int productid);
+        System.Threading.Tasks.Task<ServiceReference2.getMainProductIdResponseGetMainProductIdResult> getMainProductIdAsync(int productid);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateProductWeight", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -1414,7 +1422,7 @@ namespace ServiceReference1
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/getproductvariantbypacksize", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.getproductvariantbypacksizeResponseGetproductvariantbypacksizeResult> getproductvariantbypacksizeAsync(int productid, int packsize);
+        System.Threading.Tasks.Task<ServiceReference2.getproductvariantbypacksizeResponseGetproductvariantbypacksizeResult> getproductvariantbypacksizeAsync(int productid, int packsize);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveInvoicesName", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -1426,11 +1434,11 @@ namespace ServiceReference1
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/getFileType", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.getFileTypeResponseGetFileTypeResult> getFileTypeAsync();
+        System.Threading.Tasks.Task<ServiceReference2.getFileTypeResponseGetFileTypeResult> getFileTypeAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetpostagebyVID", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetpostagebyVIDResponseGetpostagebyVIDResult> GetpostagebyVIDAsync(string variantid, string companyname, string accountname, string couriertype);
+        System.Threading.Tasks.Task<ServiceReference2.GetpostagebyVIDResponseGetpostagebyVIDResult> GetpostagebyVIDAsync(string variantid, string companyname, string accountname, string couriertype);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/updatepostage", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -1438,11 +1446,11 @@ namespace ServiceReference1
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetpostagebyAccount", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetpostagebyAccountResponseGetpostagebyAccountResult> GetpostagebyAccountAsync(string companyname, string accountname, string couriertype);
+        System.Threading.Tasks.Task<ServiceReference2.GetpostagebyAccountResponseGetpostagebyAccountResult> GetpostagebyAccountAsync(string companyname, string accountname, string couriertype);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/updatecostingbypostagechange", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.updatecostingbypostagechangeResponseUpdatecostingbypostagechangeResult> updatecostingbypostagechangeAsync(string postage, string accname, string companyname, string variantid, string sku);
+        System.Threading.Tasks.Task<ServiceReference2.updatecostingbypostagechangeResponseUpdatecostingbypostagechangeResult> updatecostingbypostagechangeAsync(string postage, string accname, string companyname, string variantid, string sku);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveUploadFile", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -1450,7 +1458,7 @@ namespace ServiceReference1
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetInventoryCountDetails", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetInventoryCountDetailsResponseGetInventoryCountDetailsResult> GetInventoryCountDetailsAsync(string productid);
+        System.Threading.Tasks.Task<ServiceReference2.GetInventoryCountDetailsResponseGetInventoryCountDetailsResult> GetInventoryCountDetailsAsync(string productid);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateWareHouseProductLocation", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -1458,11 +1466,11 @@ namespace ServiceReference1
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetIssueReason", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetIssueReasonResponseGetIssueReasonResult> GetIssueReasonAsync();
+        System.Threading.Tasks.Task<ServiceReference2.GetIssueReasonResponseGetIssueReasonResult> GetIssueReasonAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetIssueSubReason", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetIssueSubReasonResponseGetIssueSubReasonResult> GetIssueSubReasonAsync(string parentid);
+        System.Threading.Tasks.Task<ServiceReference2.GetIssueSubReasonResponseGetIssueSubReasonResult> GetIssueSubReasonAsync(string parentid);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateScaninOnInventoryCount", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -1474,7 +1482,7 @@ namespace ServiceReference1
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetOrderDetails", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetOrderDetailsResponseGetOrderDetailsResult> GetOrderDetailsAsync(string orderId);
+        System.Threading.Tasks.Task<ServiceReference2.GetOrderDetailsResponseGetOrderDetailsResult> GetOrderDetailsAsync(string orderId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateProductCategory", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -1482,15 +1490,15 @@ namespace ServiceReference1
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetAllCategorywithReadtytoprintorder", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetAllCategorywithReadtytoprintorderResponseGetAllCategorywithReadtytoprintorderResult> GetAllCategorywithReadtytoprintorderAsync(string OrderType, System.DateTime StartDate, System.DateTime EndDate, string ComputerName);
+        System.Threading.Tasks.Task<ServiceReference2.GetAllCategorywithReadtytoprintorderResponseGetAllCategorywithReadtytoprintorderResult> GetAllCategorywithReadtytoprintorderAsync(string OrderType, System.DateTime StartDate, System.DateTime EndDate, string ComputerName);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetAllCategory", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetAllCategoryResponseGetAllCategoryResult> GetAllCategoryAsync();
+        System.Threading.Tasks.Task<ServiceReference2.GetAllCategoryResponseGetAllCategoryResult> GetAllCategoryAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetCategory", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetCategoryResponseGetCategoryResult> GetCategoryAsync();
+        System.Threading.Tasks.Task<ServiceReference2.GetCategoryResponseGetCategoryResult> GetCategoryAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveOrderPackingWeight", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -1512,17 +1520,17 @@ namespace ServiceReference1
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> AutoTransferMainInventoryAsync(int productid, int Quantity, string companyname, string email);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/updateStatusAfterAutoTransferForcefully", ReplyAction="*")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<string> updateStatusAfterAutoTransferForcefullyAsync(int productid, string companyname);
-        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetShoppingCartWithZeroPid", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetShoppingCartWithZeroPidResponseGetShoppingCartWithZeroPidResult> GetShoppingCartWithZeroPidAsync(int OrderId);
+        System.Threading.Tasks.Task<ServiceReference2.GetShoppingCartWithZeroPidResponseGetShoppingCartWithZeroPidResult> GetShoppingCartWithZeroPidAsync(int OrderId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/CheckLoginDetail", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<bool> CheckLoginDetailAsync(string EMailField, string PasswordField);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetLoginDetail", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        System.Threading.Tasks.Task<ServiceReference2.GetLoginDetailResponseGetLoginDetailResult> GetLoginDetailAsync(string EMailField, string PasswordField);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IsHazardProduct", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -1530,27 +1538,27 @@ namespace ServiceReference1
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetScanInData", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetScanInDataResponseGetScanInDataResult> GetScanInDataAsync(long scaninid);
+        System.Threading.Tasks.Task<ServiceReference2.GetScanInDataResponseGetScanInDataResult> GetScanInDataAsync(long scaninid);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetProductDeliveryData", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetProductDeliveryDataResponseGetProductDeliveryDataResult> GetProductDeliveryDataAsync(long Deliveryid);
+        System.Threading.Tasks.Task<ServiceReference2.GetProductDeliveryDataResponseGetProductDeliveryDataResult> GetProductDeliveryDataAsync(long Deliveryid);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetInventoryId", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetInventoryIdResponseGetInventoryIdResult> GetInventoryIdAsync(long VariantId);
+        System.Threading.Tasks.Task<ServiceReference2.GetInventoryIdResponseGetInventoryIdResult> GetInventoryIdAsync(long VariantId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/FillGridAgainstSkuwithcompany", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.FillGridAgainstSkuwithcompanyResponseFillGridAgainstSkuwithcompanyResult> FillGridAgainstSkuwithcompanyAsync(string sku, string companyname);
+        System.Threading.Tasks.Task<ServiceReference2.FillGridAgainstSkuwithcompanyResponseFillGridAgainstSkuwithcompanyResult> FillGridAgainstSkuwithcompanyAsync(string sku, string companyname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/FillGridAgainstBarcodewithcompany", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.FillGridAgainstBarcodewithcompanyResponseFillGridAgainstBarcodewithcompanyResult> FillGridAgainstBarcodewithcompanyAsync(string Barcode, string companyname);
+        System.Threading.Tasks.Task<ServiceReference2.FillGridAgainstBarcodewithcompanyResponseFillGridAgainstBarcodewithcompanyResult> FillGridAgainstBarcodewithcompanyAsync(string Barcode, string companyname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetFBAOrdering", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetFBAOrderingResponseGetFBAOrderingResult> GetFBAOrderingAsync(string Barcode, string companyname);
+        System.Threading.Tasks.Task<ServiceReference2.GetFBAOrderingResponseGetFBAOrderingResult> GetFBAOrderingAsync(string Barcode, string companyname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/checkexistmessage", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -1562,31 +1570,31 @@ namespace ServiceReference1
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetCompanybycountry", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetCompanybycountryResponseGetCompanybycountryResult> GetCompanybycountryAsync(string country);
+        System.Threading.Tasks.Task<ServiceReference2.GetCompanybycountryResponseGetCompanybycountryResult> GetCompanybycountryAsync(string country);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetSupplier", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetSupplierResponseGetSupplierResult> GetSupplierAsync();
+        System.Threading.Tasks.Task<ServiceReference2.GetSupplierResponseGetSupplierResult> GetSupplierAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetCompany", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetCompanyResponseGetCompanyResult> GetCompanyAsync();
+        System.Threading.Tasks.Task<ServiceReference2.GetCompanyResponseGetCompanyResult> GetCompanyAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetAccountName", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetAccountNameResponseGetAccountNameResult> GetAccountNameAsync();
+        System.Threading.Tasks.Task<ServiceReference2.GetAccountNameResponseGetAccountNameResult> GetAccountNameAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetManualInvoice", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetManualInvoiceResponseGetManualInvoiceResult> GetManualInvoiceAsync(string InvoiceNumber, string SKU);
+        System.Threading.Tasks.Task<ServiceReference2.GetManualInvoiceResponseGetManualInvoiceResult> GetManualInvoiceAsync(string InvoiceNumber, string SKU);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetOrderType", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetOrderTypeResponseGetOrderTypeResult> GetOrderTypeAsync(string InvoiceNumber);
+        System.Threading.Tasks.Task<ServiceReference2.GetOrderTypeResponseGetOrderTypeResult> GetOrderTypeAsync(string InvoiceNumber);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveCapture", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.SaveCaptureResponse> SaveCaptureAsync(ServiceReference1.SaveCaptureRequest request);
+        System.Threading.Tasks.Task<ServiceReference2.SaveCaptureResponse> SaveCaptureAsync(ServiceReference2.SaveCaptureRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveCaptureLog", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -1594,15 +1602,15 @@ namespace ServiceReference1
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetInvoicePrint", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetInvoicePrintResponseGetInvoicePrintResult> GetInvoicePrintAsync(string strType, string OrderNumber);
+        System.Threading.Tasks.Task<ServiceReference2.GetInvoicePrintResponseGetInvoicePrintResult> GetInvoicePrintAsync(string strType, string OrderNumber);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetAllPerformaInvoice", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetAllPerformaInvoiceResponseGetAllPerformaInvoiceResult> GetAllPerformaInvoiceAsync(System.DateTime dtfrom, System.DateTime dtend, string OrderNumber, string Country, string ProductName, string SKU, string ShippingFirstName, string CreatedBy, string CompanyName);
+        System.Threading.Tasks.Task<ServiceReference2.GetAllPerformaInvoiceResponseGetAllPerformaInvoiceResult> GetAllPerformaInvoiceAsync(System.DateTime dtfrom, System.DateTime dtend, string OrderNumber, string Country, string ProductName, string SKU, string ShippingFirstName, string CreatedBy, string CompanyName);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetAllManualInvoice", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetAllManualInvoiceResponseGetAllManualInvoiceResult> GetAllManualInvoiceAsync(System.DateTime dtfrom, System.DateTime dtend, string OrderNumber, string Country, string ProductName, string SKU, string ShippingFirstName, string CreatedBy, string CompanyName);
+        System.Threading.Tasks.Task<ServiceReference2.GetAllManualInvoiceResponseGetAllManualInvoiceResult> GetAllManualInvoiceAsync(System.DateTime dtfrom, System.DateTime dtend, string OrderNumber, string Country, string ProductName, string SKU, string ShippingFirstName, string CreatedBy, string CompanyName);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SavePerchaseExpance", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -1647,7 +1655,7 @@ namespace ServiceReference1
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ImportOrder", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<string> ImportOrderAsync(ServiceReference1.ImportOrderDtorderlist dtorderlist, string SalesChannel, string TotalAmount, string shippingcost, string InvoiceDate, string ShippingAddressName, string ShippingAddressAddressLine1, string ShippingAddressAddressLine2, string city, string country, string zipcode, string EmailId, string Phonenumber);
+        System.Threading.Tasks.Task<string> ImportOrderAsync(ServiceReference2.ImportOrderDtorderlist dtorderlist, string SalesChannel, string TotalAmount, string shippingcost, string InvoiceDate, string ShippingAddressName, string ShippingAddressAddressLine1, string ShippingAddressAddressLine2, string city, string country, string zipcode, string EmailId, string Phonenumber);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveManulInvoice", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -1685,7 +1693,7 @@ namespace ServiceReference1
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetCompanyDetails", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetCompanyDetailsResponseGetCompanyDetailsResult> GetCompanyDetailsAsync(string companyname);
+        System.Threading.Tasks.Task<ServiceReference2.GetCompanyDetailsResponseGetCompanyDetailsResult> GetCompanyDetailsAsync(string companyname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/DeleteManualInvoice", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -1701,7 +1709,7 @@ namespace ServiceReference1
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/getcourierservice", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.getcourierserviceResponseGetcourierserviceResult> getcourierserviceAsync(string countryname);
+        System.Threading.Tasks.Task<ServiceReference2.getcourierserviceResponseGetcourierserviceResult> getcourierserviceAsync(string countryname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Saveshipmentdetails", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -1725,23 +1733,23 @@ namespace ServiceReference1
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetPendingOrderDetailsbycompany", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.ArrayOfXElement> GetPendingOrderDetailsbycompanyAsync(string productid, string companyname);
+        System.Threading.Tasks.Task<ServiceReference2.ArrayOfXElement> GetPendingOrderDetailsbycompanyAsync(string productid, string companyname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetPendingOrderDetails", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.ArrayOfXElement> GetPendingOrderDetailsAsync(string Barcode, string companyname);
+        System.Threading.Tasks.Task<ServiceReference2.ArrayOfXElement> GetPendingOrderDetailsAsync(string Barcode, string companyname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetDefaultVarientDetails", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetDefaultVarientDetailsResponseGetDefaultVarientDetailsResult> GetDefaultVarientDetailsAsync(string ProductId, string companyname);
+        System.Threading.Tasks.Task<ServiceReference2.GetDefaultVarientDetailsResponseGetDefaultVarientDetailsResult> GetDefaultVarientDetailsAsync(string ProductId, string companyname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetDefaultVarientDetail", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetDefaultVarientDetailResponseGetDefaultVarientDetailResult> GetDefaultVarientDetailAsync(string ProductId);
+        System.Threading.Tasks.Task<ServiceReference2.GetDefaultVarientDetailResponseGetDefaultVarientDetailResult> GetDefaultVarientDetailAsync(string ProductId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetDefaultVarientDetailsupdated", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetDefaultVarientDetailsupdatedResponseGetDefaultVarientDetailsupdatedResult> GetDefaultVarientDetailsupdatedAsync(string ProductId);
+        System.Threading.Tasks.Task<ServiceReference2.GetDefaultVarientDetailsupdatedResponseGetDefaultVarientDetailsupdatedResult> GetDefaultVarientDetailsupdatedAsync(string ProductId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/TransferfromMaintoSFPInventory", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -1841,15 +1849,15 @@ namespace ServiceReference1
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/getinventorybycompany", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.getinventorybycompanyResponseGetinventorybycompanyResult> getinventorybycompanyAsync(string productid, string companyname);
+        System.Threading.Tasks.Task<ServiceReference2.getinventorybycompanyResponseGetinventorybycompanyResult> getinventorybycompanyAsync(string productid, string companyname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/getinventory", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.getinventoryResponseGetinventoryResult> getinventoryAsync(string productid);
+        System.Threading.Tasks.Task<ServiceReference2.getinventoryResponseGetinventoryResult> getinventoryAsync(string productid);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetExpirydatewithskubarcodebycompany", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetExpirydatewithskubarcodebycompanyResponseGetExpirydatewithskubarcodebycompanyResult> GetExpirydatewithskubarcodebycompanyAsync(string sku, string barcode, string companyname);
+        System.Threading.Tasks.Task<ServiceReference2.GetExpirydatewithskubarcodebycompanyResponseGetExpirydatewithskubarcodebycompanyResult> GetExpirydatewithskubarcodebycompanyAsync(string sku, string barcode, string companyname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Updateexpirybybarcode", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -1861,7 +1869,7 @@ namespace ServiceReference1
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetExpirydatewithskubarcodeWithoutexpiryroomdate", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetExpirydatewithskubarcodeWithoutexpiryroomdateResponseGetExpirydatewithskubarcodeWithoutexpiryroomdateResult> GetExpirydatewithskubarcodeWithoutexpiryroomdateAsync(string sku, string barcode, string companyname);
+        System.Threading.Tasks.Task<ServiceReference2.GetExpirydatewithskubarcodeWithoutexpiryroomdateResponseGetExpirydatewithskubarcodeWithoutexpiryroomdateResult> GetExpirydatewithskubarcodeWithoutexpiryroomdateAsync(string sku, string barcode, string companyname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/checkexpiryqtybycompany", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -1910,10 +1918,6 @@ namespace ServiceReference1
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateFBAInventoryByVarient", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<string> UpdateFBAInventoryByVarientAsync(string VarientId, string mquantity, string quantity, string company);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateInventoryQuantityByVarientSFPcompany", ReplyAction="*")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<string> UpdateInventoryQuantityByVarientSFPcompanyAsync(string VarientId, string mquantity, string quantity, string company);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/HelloWorld", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -1981,11 +1985,11 @@ namespace ServiceReference1
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetProductDetail", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetProductDetailResponseGetProductDetailResult> GetProductDetailAsync(string barcode);
+        System.Threading.Tasks.Task<ServiceReference2.GetProductDetailResponseGetProductDetailResult> GetProductDetailAsync(string barcode);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetOrder", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetOrderResponseGetOrderResult> GetOrderAsync(int orderId);
+        System.Threading.Tasks.Task<ServiceReference2.GetOrderResponseGetOrderResult> GetOrderAsync(int orderId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IsPausedOrder", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -1997,11 +2001,11 @@ namespace ServiceReference1
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetCustomer", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetCustomerResponseGetCustomerResult> GetCustomerAsync(int CustomerId);
+        System.Threading.Tasks.Task<ServiceReference2.GetCustomerResponseGetCustomerResult> GetCustomerAsync(int CustomerId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetBarCodeByVId", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetBarCodeByVIdResponseGetBarCodeByVIdResult> GetBarCodeByVIdAsync(string SKUSuffix, int VariantId);
+        System.Threading.Tasks.Task<ServiceReference2.GetBarCodeByVIdResponseGetBarCodeByVIdResult> GetBarCodeByVIdAsync(string SKUSuffix, int VariantId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Getcompanyorder", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -2013,15 +2017,15 @@ namespace ServiceReference1
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetVariantByPIdnSKu", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetVariantByPIdnSKuResponseGetVariantByPIdnSKuResult> GetVariantByPIdnSKuAsync(string SKUSuffix, int ProductId);
+        System.Threading.Tasks.Task<ServiceReference2.GetVariantByPIdnSKuResponseGetVariantByPIdnSKuResult> GetVariantByPIdnSKuAsync(string SKUSuffix, int ProductId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetBarCodeByPIdwithcompany", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetBarCodeByPIdwithcompanyResponseGetBarCodeByPIdwithcompanyResult> GetBarCodeByPIdwithcompanyAsync(string SKU, int ProductId, string companyname);
+        System.Threading.Tasks.Task<ServiceReference2.GetBarCodeByPIdwithcompanyResponseGetBarCodeByPIdwithcompanyResult> GetBarCodeByPIdwithcompanyAsync(string SKU, int ProductId, string companyname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/getwarehouseanouncement", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.ArrayOfXElement> getwarehouseanouncementAsync(string email);
+        System.Threading.Tasks.Task<ServiceReference2.ArrayOfXElement> getwarehouseanouncementAsync(string email);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Updateexpirybybarcodemsg", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -2055,15 +2059,15 @@ namespace ServiceReference1
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetBarCodeByPIdsku", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetBarCodeByPIdskuResponseGetBarCodeByPIdskuResult> GetBarCodeByPIdskuAsync(string SKU, int ProductId, string companyname);
+        System.Threading.Tasks.Task<ServiceReference2.GetBarCodeByPIdskuResponseGetBarCodeByPIdskuResult> GetBarCodeByPIdskuAsync(string SKU, int ProductId, string companyname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetSKUByOrder", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetSKUByOrderResponseGetSKUByOrderResult> GetSKUByOrderAsync(int OrderNumber, int VariantId);
+        System.Threading.Tasks.Task<ServiceReference2.GetSKUByOrderResponseGetSKUByOrderResult> GetSKUByOrderAsync(int OrderNumber, int VariantId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetProduct", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetProductResponseGetProductResult> GetProductAsync(int ProductId);
+        System.Threading.Tasks.Task<ServiceReference2.GetProductResponseGetProductResult> GetProductAsync(int ProductId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetPopup", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -2079,27 +2083,27 @@ namespace ServiceReference1
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetDamageExpirydate", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetDamageExpirydateResponseGetDamageExpirydateResult> GetDamageExpirydateAsync(string sku, string barcode, string inventoryfor);
+        System.Threading.Tasks.Task<ServiceReference2.GetDamageExpirydateResponseGetDamageExpirydateResult> GetDamageExpirydateAsync(string sku, string barcode, string inventoryfor);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetDamageExpirydt", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetDamageExpirydtResponseGetDamageExpirydtResult> GetDamageExpirydtAsync(string sku, string barcode, string companyname);
+        System.Threading.Tasks.Task<ServiceReference2.GetDamageExpirydtResponseGetDamageExpirydtResult> GetDamageExpirydtAsync(string sku, string barcode, string companyname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetDamageExpiry", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetDamageExpiryResponseGetDamageExpiryResult> GetDamageExpiryAsync(string sku, string inventoryfor);
+        System.Threading.Tasks.Task<ServiceReference2.GetDamageExpiryResponseGetDamageExpiryResult> GetDamageExpiryAsync(string sku, string inventoryfor);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetDamageExpirymsg", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetDamageExpirymsgResponseGetDamageExpirymsgResult> GetDamageExpirymsgAsync(string sku, string Companyname);
+        System.Threading.Tasks.Task<ServiceReference2.GetDamageExpirymsgResponseGetDamageExpirymsgResult> GetDamageExpirymsgAsync(string sku, string Companyname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetShoppingCart", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetShoppingCartResponseGetShoppingCartResult> GetShoppingCartAsync(int OrderId);
+        System.Threading.Tasks.Task<ServiceReference2.GetShoppingCartResponseGetShoppingCartResult> GetShoppingCartAsync(int OrderId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetShoppingCartMultiple", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetShoppingCartMultipleResponseGetShoppingCartMultipleResult> GetShoppingCartMultipleAsync(int OrderId);
+        System.Threading.Tasks.Task<ServiceReference2.GetShoppingCartMultipleResponseGetShoppingCartMultipleResult> GetShoppingCartMultipleAsync(int OrderId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateMultipleShopingCart", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -2107,7 +2111,7 @@ namespace ServiceReference1
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetShoppingCartupdate", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetShoppingCartupdateResponseGetShoppingCartupdateResult> GetShoppingCartupdateAsync(int OrderId);
+        System.Threading.Tasks.Task<ServiceReference2.GetShoppingCartupdateResponseGetShoppingCartupdateResult> GetShoppingCartupdateAsync(int OrderId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateProductScanIn", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -2194,7 +2198,7 @@ namespace ServiceReference1
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/getDeliveryexpiry", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.getDeliveryexpiryResponseGetDeliveryexpiryResult> getDeliveryexpiryAsync(long DeliveryId);
+        System.Threading.Tasks.Task<ServiceReference2.getDeliveryexpiryResponseGetDeliveryexpiryResult> getDeliveryexpiryAsync(long DeliveryId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveProductDeliverynew", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -2254,7 +2258,7 @@ namespace ServiceReference1
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetOrderQuentity", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetOrderQuentityResponseGetOrderQuentityResult> GetOrderQuentityAsync(int OrderNumber);
+        System.Threading.Tasks.Task<ServiceReference2.GetOrderQuentityResponseGetOrderQuentityResult> GetOrderQuentityAsync(int OrderNumber);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Ispromotionstartwithsupplier", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -2274,7 +2278,7 @@ namespace ServiceReference1
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetTrackedOrder", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.GetTrackedOrderResponseGetTrackedOrderResult> GetTrackedOrderAsync(string ordernumber);
+        System.Threading.Tasks.Task<ServiceReference2.GetTrackedOrderResponseGetTrackedOrderResult> GetTrackedOrderAsync(string ordernumber);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/saveproductdeliverywithexpiryoutbymultipledate", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -2314,11 +2318,11 @@ namespace ServiceReference1
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/getinventoryall", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.getinventoryallResponseGetinventoryallResult> getinventoryallAsync(string productid, string countryname);
+        System.Threading.Tasks.Task<ServiceReference2.getinventoryallResponseGetinventoryallResult> getinventoryallAsync(string productid, string countryname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/getBankHolidays", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference1.getBankHolidaysResponseGetBankHolidaysResult> getBankHolidaysAsync();
+        System.Threading.Tasks.Task<ServiceReference2.getBankHolidaysResponseGetBankHolidaysResult> getBankHolidaysAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveAsShipped", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -7849,6 +7853,46 @@ namespace ServiceReference1
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
+    public partial class GetLoginDetailResponseGetLoginDetailResult
+    {
+        
+        private System.Xml.XmlElement[] anyField;
+        
+        private System.Xml.XmlElement any1Field;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAnyElementAttribute(Namespace="http://www.w3.org/2001/XMLSchema", Order=0)]
+        public System.Xml.XmlElement[] Any
+        {
+            get
+            {
+                return this.anyField;
+            }
+            set
+            {
+                this.anyField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAnyElementAttribute(Namespace="urn:schemas-microsoft-com:xml-diffgram-v1", Order=1)]
+        public System.Xml.XmlElement Any1
+        {
+            get
+            {
+                return this.any1Field;
+            }
+            set
+            {
+                this.any1Field = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
     public partial class GetScanInDataResponseGetScanInDataResult
     {
         
@@ -9743,13 +9787,13 @@ namespace ServiceReference1
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    public interface BarcodeWebServiceSoapChannel : ServiceReference1.BarcodeWebServiceSoap, System.ServiceModel.IClientChannel
+    public interface BarcodeWebServiceSoapChannel : ServiceReference2.BarcodeWebServiceSoap, System.ServiceModel.IClientChannel
     {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    public partial class BarcodeWebServiceSoapClient : System.ServiceModel.ClientBase<ServiceReference1.BarcodeWebServiceSoap>, ServiceReference1.BarcodeWebServiceSoap
+    public partial class BarcodeWebServiceSoapClient : System.ServiceModel.ClientBase<ServiceReference2.BarcodeWebServiceSoap>, ServiceReference2.BarcodeWebServiceSoap
     {
         
         /// <summary>
@@ -9785,6 +9829,11 @@ namespace ServiceReference1
         {
         }
         
+        public System.Threading.Tasks.Task<int> SaveStaffInAsync(string StaffEmailId, string ScanInTime, string CountryName)
+        {
+            return base.Channel.SaveStaffInAsync(StaffEmailId, ScanInTime, CountryName);
+        }
+        
         public System.Threading.Tasks.Task<int> SaveStaffOutAsync(string StaffEmailId, string ScanOutTime)
         {
             return base.Channel.SaveStaffOutAsync(StaffEmailId, ScanOutTime);
@@ -9800,57 +9849,57 @@ namespace ServiceReference1
             return base.Channel.SaveStaffScanOutAsync(StaffEmailId);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.getproductdetailsbycompanyResponseGetproductdetailsbycompanyResult> getproductdetailsbycompanyAsync(string Companyname)
+        public System.Threading.Tasks.Task<ServiceReference2.getproductdetailsbycompanyResponseGetproductdetailsbycompanyResult> getproductdetailsbycompanyAsync(string Companyname)
         {
             return base.Channel.getproductdetailsbycompanyAsync(Companyname);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetSellinglevelResponseGetSellinglevelResult> GetSellinglevelAsync(string MainProductId)
+        public System.Threading.Tasks.Task<ServiceReference2.GetSellinglevelResponseGetSellinglevelResult> GetSellinglevelAsync(string MainProductId)
         {
             return base.Channel.GetSellinglevelAsync(MainProductId);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.OrderRecievedScanByDetailsResponseOrderRecievedScanByDetailsResult> OrderRecievedScanByDetailsAsync(string ProductId)
+        public System.Threading.Tasks.Task<ServiceReference2.OrderRecievedScanByDetailsResponseOrderRecievedScanByDetailsResult> OrderRecievedScanByDetailsAsync(string ProductId)
         {
             return base.Channel.OrderRecievedScanByDetailsAsync(ProductId);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetSameCustomerOrderResponseGetSameCustomerOrderResult> GetSameCustomerOrderAsync(string OrderNumber)
+        public System.Threading.Tasks.Task<ServiceReference2.GetSameCustomerOrderResponseGetSameCustomerOrderResult> GetSameCustomerOrderAsync(string OrderNumber)
         {
             return base.Channel.GetSameCustomerOrderAsync(OrderNumber);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.LastScanInDetailsResponseLastScanInDetailsResult> LastScanInDetailsAsync(string ProductId)
+        public System.Threading.Tasks.Task<ServiceReference2.LastScanInDetailsResponseLastScanInDetailsResult> LastScanInDetailsAsync(string ProductId)
         {
             return base.Channel.LastScanInDetailsAsync(ProductId);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.SameDayScanInDetailsResponseSameDayScanInDetailsResult> SameDayScanInDetailsAsync(string MainProductId)
+        public System.Threading.Tasks.Task<ServiceReference2.SameDayScanInDetailsResponseSameDayScanInDetailsResult> SameDayScanInDetailsAsync(string MainProductId)
         {
             return base.Channel.SameDayScanInDetailsAsync(MainProductId);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.Get_Amazon_Click_And_Collect_Order_ForPickedUPResponseGet_Amazon_Click_And_Collect_Order_ForPickedUPResult> Get_Amazon_Click_And_Collect_Order_ForPickedUPAsync()
+        public System.Threading.Tasks.Task<ServiceReference2.Get_Amazon_Click_And_Collect_Order_ForPickedUPResponseGet_Amazon_Click_And_Collect_Order_ForPickedUPResult> Get_Amazon_Click_And_Collect_Order_ForPickedUPAsync()
         {
             return base.Channel.Get_Amazon_Click_And_Collect_Order_ForPickedUPAsync();
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.Get_Saved_Notification_TimeResponseGet_Saved_Notification_TimeResult> Get_Saved_Notification_TimeAsync(string msgtype)
+        public System.Threading.Tasks.Task<ServiceReference2.Get_Saved_Notification_TimeResponseGet_Saved_Notification_TimeResult> Get_Saved_Notification_TimeAsync(string msgtype)
         {
             return base.Channel.Get_Saved_Notification_TimeAsync(msgtype);
         }
         
-        public System.Threading.Tasks.Task<string> mergepdfAsync(ServiceReference1.mergepdfDT dt, string mergedFileName)
+        public System.Threading.Tasks.Task<string> mergepdfAsync(ServiceReference2.mergepdfDT dt, string mergedFileName)
         {
             return base.Channel.mergepdfAsync(dt, mergedFileName);
         }
         
-        public System.Threading.Tasks.Task ImportASTEbayOrdersAsync(ServiceReference1.ArrayOfXElement ds)
+        public System.Threading.Tasks.Task ImportASTEbayOrdersAsync(ServiceReference2.ArrayOfXElement ds)
         {
             return base.Channel.ImportASTEbayOrdersAsync(ds);
         }
         
-        public System.Threading.Tasks.Task ImportAmazonForASTAsync(ServiceReference1.ArrayOfXElement ds)
+        public System.Threading.Tasks.Task ImportAmazonForASTAsync(ServiceReference2.ArrayOfXElement ds)
         {
             return base.Channel.ImportAmazonForASTAsync(ds);
         }
@@ -9870,27 +9919,32 @@ namespace ServiceReference1
             return base.Channel.getlistofcreatedconsignmentastAsync();
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.getACACInventoryResponseGetACACInventoryResult> getACACInventoryAsync(string VariantId)
+        public System.Threading.Tasks.Task<bool> UpdateAmazonClickAndCollectInventoryAsync(long VariantId, int Qty, string Reason, string EmailId)
+        {
+            return base.Channel.UpdateAmazonClickAndCollectInventoryAsync(VariantId, Qty, Reason, EmailId);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference2.getACACInventoryResponseGetACACInventoryResult> getACACInventoryAsync(string VariantId)
         {
             return base.Channel.getACACInventoryAsync(VariantId);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.getOrderRecievedReadyToPrintforcomputerResponseGetOrderRecievedReadyToPrintforcomputerResult> getOrderRecievedReadyToPrintforcomputerAsync(string computername, string companyname)
+        public System.Threading.Tasks.Task<ServiceReference2.getOrderRecievedReadyToPrintforcomputerResponseGetOrderRecievedReadyToPrintforcomputerResult> getOrderRecievedReadyToPrintforcomputerAsync(string computername, string companyname)
         {
             return base.Channel.getOrderRecievedReadyToPrintforcomputerAsync(computername, companyname);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.JKIOPUserResponseJKIOPUserResult> JKIOPUserAsync(string username, string password)
+        public System.Threading.Tasks.Task<ServiceReference2.JKIOPUserResponseJKIOPUserResult> JKIOPUserAsync(string username, string password)
         {
             return base.Channel.JKIOPUserAsync(username, password);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.JKIOPGetAccessForRoleResponseJKIOPGetAccessForRoleResult> JKIOPGetAccessForRoleAsync(long RoleId)
+        public System.Threading.Tasks.Task<ServiceReference2.JKIOPGetAccessForRoleResponseJKIOPGetAccessForRoleResult> JKIOPGetAccessForRoleAsync(long RoleId)
         {
             return base.Channel.JKIOPGetAccessForRoleAsync(RoleId);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.JKIOPLoadAllUserResponseJKIOPLoadAllUserResult> JKIOPLoadAllUserAsync()
+        public System.Threading.Tasks.Task<ServiceReference2.JKIOPLoadAllUserResponseJKIOPLoadAllUserResult> JKIOPLoadAllUserAsync()
         {
             return base.Channel.JKIOPLoadAllUserAsync();
         }
@@ -9900,7 +9954,7 @@ namespace ServiceReference1
             return base.Channel.SaveJKIOPUserAsync(UserId, RoleId, UserName, UserPassword, IsActive);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.JKIOPLoadAllStudentResponseJKIOPLoadAllStudentResult> JKIOPLoadAllStudentAsync()
+        public System.Threading.Tasks.Task<ServiceReference2.JKIOPLoadAllStudentResponseJKIOPLoadAllStudentResult> JKIOPLoadAllStudentAsync()
         {
             return base.Channel.JKIOPLoadAllStudentAsync();
         }
@@ -9910,27 +9964,27 @@ namespace ServiceReference1
             return base.Channel.DeleteUserMasterAsync(UserId);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetdAllStudentbysessionResponseGetdAllStudentbysessionResult> GetdAllStudentbysessionAsync(string session, string startdate, string enddate)
+        public System.Threading.Tasks.Task<ServiceReference2.GetdAllStudentbysessionResponseGetdAllStudentbysessionResult> GetdAllStudentbysessionAsync(string session, string startdate, string enddate)
         {
             return base.Channel.GetdAllStudentbysessionAsync(session, startdate, enddate);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.DownloadUploadedfileByIdResponseDownloadUploadedfileByIdResult> DownloadUploadedfileByIdAsync(string FormType, string FormId)
+        public System.Threading.Tasks.Task<ServiceReference2.DownloadUploadedfileByIdResponseDownloadUploadedfileByIdResult> DownloadUploadedfileByIdAsync(string FormType, string FormId)
         {
             return base.Channel.DownloadUploadedfileByIdAsync(FormType, FormId);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.DownloadUploadedfileBySupplierResponseDownloadUploadedfileBySupplierResult> DownloadUploadedfileBySupplierAsync(string FormType, string FormId)
+        public System.Threading.Tasks.Task<ServiceReference2.DownloadUploadedfileBySupplierResponseDownloadUploadedfileBySupplierResult> DownloadUploadedfileBySupplierAsync(string FormType, string FormId)
         {
             return base.Channel.DownloadUploadedfileBySupplierAsync(FormType, FormId);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.JKIOPLoadStudentInfoResponseJKIOPLoadStudentInfoResult> JKIOPLoadStudentInfoAsync(string StudentId)
+        public System.Threading.Tasks.Task<ServiceReference2.JKIOPLoadStudentInfoResponseJKIOPLoadStudentInfoResult> JKIOPLoadStudentInfoAsync(string StudentId)
         {
             return base.Channel.JKIOPLoadStudentInfoAsync(StudentId);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.JKIOPLoadStudentPaymentInfoResponseJKIOPLoadStudentPaymentInfoResult> JKIOPLoadStudentPaymentInfoAsync(string SPId)
+        public System.Threading.Tasks.Task<ServiceReference2.JKIOPLoadStudentPaymentInfoResponseJKIOPLoadStudentPaymentInfoResult> JKIOPLoadStudentPaymentInfoAsync(string SPId)
         {
             return base.Channel.JKIOPLoadStudentPaymentInfoAsync(SPId);
         }
@@ -9940,12 +9994,12 @@ namespace ServiceReference1
             return base.Channel.SaveJKIOPUserRollAsync(RoleName, RoleId);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.JKIOPLoadROllResponseJKIOPLoadROllResult> JKIOPLoadROllAsync()
+        public System.Threading.Tasks.Task<ServiceReference2.JKIOPLoadROllResponseJKIOPLoadROllResult> JKIOPLoadROllAsync()
         {
             return base.Channel.JKIOPLoadROllAsync();
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.JKIOPUSERROllResponseJKIOPUSERROllResult> JKIOPUSERROllAsync(long RoleId)
+        public System.Threading.Tasks.Task<ServiceReference2.JKIOPUSERROllResponseJKIOPUSERROllResult> JKIOPUSERROllAsync(long RoleId)
         {
             return base.Channel.JKIOPUSERROllAsync(RoleId);
         }
@@ -9955,7 +10009,7 @@ namespace ServiceReference1
             return base.Channel.SaveJKIOPUserRollAccessAsync(DeleteAccess, ScreenId, ViewAccess, EditAccess, RoleAccessId, RoleId, LockEditAccess);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.JKIOPGetAllScreenForRoleResponseJKIOPGetAllScreenForRoleResult> JKIOPGetAllScreenForRoleAsync(long RoleId)
+        public System.Threading.Tasks.Task<ServiceReference2.JKIOPGetAllScreenForRoleResponseJKIOPGetAllScreenForRoleResult> JKIOPGetAllScreenForRoleAsync(long RoleId)
         {
             return base.Channel.JKIOPGetAllScreenForRoleAsync(RoleId);
         }
@@ -10118,7 +10172,7 @@ namespace ServiceReference1
             return base.Channel.SaveStudentInfoAsync(StudentId, RolleNumber, FName, LName, DOB, MobileNumber, AlternateNumber, Gender, EmailId, FatherName, FatherMobileNumber, MotherName, Address, City, State, Pincode, StudentImage, CourseName, TotalFees, PaymentMode, NoOfEMI, FirstAmount, FirstDate, SecondAmount, SecondDate, ThirdAmount, ThirdDate, FourthAmount, FourthDate, username, CourseYear, SessionYear, Cashamount, bankamount, IsDiscontinue, IsSCStudent, LedgerNumber);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.JKIOPLoadPaymentResponseJKIOPLoadPaymentResult> JKIOPLoadPaymentAsync(string coursesession, string startdate, string enddate)
+        public System.Threading.Tasks.Task<ServiceReference2.JKIOPLoadPaymentResponseJKIOPLoadPaymentResult> JKIOPLoadPaymentAsync(string coursesession, string startdate, string enddate)
         {
             return base.Channel.JKIOPLoadPaymentAsync(coursesession, startdate, enddate);
         }
@@ -10128,32 +10182,32 @@ namespace ServiceReference1
             return base.Channel.checkipAsync(ip);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.ArrayOfXElement> GetRecievedamountHistoryAsync(string session)
+        public System.Threading.Tasks.Task<ServiceReference2.ArrayOfXElement> GetRecievedamountHistoryAsync(string session)
         {
             return base.Channel.GetRecievedamountHistoryAsync(session);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.ArrayOfXElement> GetRecievedamountDetailsAsync(string session, string Name, string type)
+        public System.Threading.Tasks.Task<ServiceReference2.ArrayOfXElement> GetRecievedamountDetailsAsync(string session, string Name, string type)
         {
             return base.Channel.GetRecievedamountDetailsAsync(session, Name, type);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetstudentforInvoiceResponseGetstudentforInvoiceResult> GetstudentforInvoiceAsync(string RollNumber)
+        public System.Threading.Tasks.Task<ServiceReference2.GetstudentforInvoiceResponseGetstudentforInvoiceResult> GetstudentforInvoiceAsync(string RollNumber)
         {
             return base.Channel.GetstudentforInvoiceAsync(RollNumber);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.JKIOPLoadPaymentDetailBySPIdResponseJKIOPLoadPaymentDetailBySPIdResult> JKIOPLoadPaymentDetailBySPIdAsync(string SPId)
+        public System.Threading.Tasks.Task<ServiceReference2.JKIOPLoadPaymentDetailBySPIdResponseJKIOPLoadPaymentDetailBySPIdResult> JKIOPLoadPaymentDetailBySPIdAsync(string SPId)
         {
             return base.Channel.JKIOPLoadPaymentDetailBySPIdAsync(SPId);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.JKIOPLoadPaymentBySPIdResponseJKIOPLoadPaymentBySPIdResult> JKIOPLoadPaymentBySPIdAsync(string SPId)
+        public System.Threading.Tasks.Task<ServiceReference2.JKIOPLoadPaymentBySPIdResponseJKIOPLoadPaymentBySPIdResult> JKIOPLoadPaymentBySPIdAsync(string SPId)
         {
             return base.Channel.JKIOPLoadPaymentBySPIdAsync(SPId);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.JKIOPLoadPaymentByPaymentIdResponseJKIOPLoadPaymentByPaymentIdResult> JKIOPLoadPaymentByPaymentIdAsync(string PId)
+        public System.Threading.Tasks.Task<ServiceReference2.JKIOPLoadPaymentByPaymentIdResponseJKIOPLoadPaymentByPaymentIdResult> JKIOPLoadPaymentByPaymentIdAsync(string PId)
         {
             return base.Channel.JKIOPLoadPaymentByPaymentIdAsync(PId);
         }
@@ -10198,12 +10252,12 @@ namespace ServiceReference1
             return base.Channel.SaveDocumentsAsync(DId, Title, username);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetDocumentResponseGetDocumentResult> GetDocumentAsync(string DocumentId)
+        public System.Threading.Tasks.Task<ServiceReference2.GetDocumentResponseGetDocumentResult> GetDocumentAsync(string DocumentId)
         {
             return base.Channel.GetDocumentAsync(DocumentId);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetDocumentByIdResponseGetDocumentByIdResult> GetDocumentByIdAsync(string DocumentId)
+        public System.Threading.Tasks.Task<ServiceReference2.GetDocumentByIdResponseGetDocumentByIdResult> GetDocumentByIdAsync(string DocumentId)
         {
             return base.Channel.GetDocumentByIdAsync(DocumentId);
         }
@@ -10218,22 +10272,22 @@ namespace ServiceReference1
             return base.Channel.SaveSupplierPaymentHistoryAsync(SPId, supplierid, ExpenseReason, ExpenseAmount, IsApproved, ApproveBy, ExpenseImage, username, paymentmode, transactionId, PaymentDate);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.JKIOPLoadStaffExpenseResponseJKIOPLoadStaffExpenseResult> JKIOPLoadStaffExpenseAsync()
+        public System.Threading.Tasks.Task<ServiceReference2.JKIOPLoadStaffExpenseResponseJKIOPLoadStaffExpenseResult> JKIOPLoadStaffExpenseAsync()
         {
             return base.Channel.JKIOPLoadStaffExpenseAsync();
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.JKIOPLoadStaffExpenseByIdResponseJKIOPLoadStaffExpenseByIdResult> JKIOPLoadStaffExpenseByIdAsync(string EId)
+        public System.Threading.Tasks.Task<ServiceReference2.JKIOPLoadStaffExpenseByIdResponseJKIOPLoadStaffExpenseByIdResult> JKIOPLoadStaffExpenseByIdAsync(string EId)
         {
             return base.Channel.JKIOPLoadStaffExpenseByIdAsync(EId);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.JKIOPLoadSupplierByIdResponseJKIOPLoadSupplierByIdResult> JKIOPLoadSupplierByIdAsync(string SId)
+        public System.Threading.Tasks.Task<ServiceReference2.JKIOPLoadSupplierByIdResponseJKIOPLoadSupplierByIdResult> JKIOPLoadSupplierByIdAsync(string SId)
         {
             return base.Channel.JKIOPLoadSupplierByIdAsync(SId);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.JKIOPLoadSupplierResponseJKIOPLoadSupplierResult> JKIOPLoadSupplierAsync(string supplier, string startdate, string enddate)
+        public System.Threading.Tasks.Task<ServiceReference2.JKIOPLoadSupplierResponseJKIOPLoadSupplierResult> JKIOPLoadSupplierAsync(string supplier, string startdate, string enddate)
         {
             return base.Channel.JKIOPLoadSupplierAsync(supplier, startdate, enddate);
         }
@@ -10243,12 +10297,12 @@ namespace ServiceReference1
             return base.Channel.SaveJKIOPSupplierAsync(SId, Name, Email, PhoneNo, Address, Comment, BankName, AccountNo, IFSCCode, username, amount);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.JKIOPLoadstudentbysearchResponseJKIOPLoadstudentbysearchResult> JKIOPLoadstudentbysearchAsync(string RollNumber, string Firstname, string FatherName, string dob)
+        public System.Threading.Tasks.Task<ServiceReference2.JKIOPLoadstudentbysearchResponseJKIOPLoadstudentbysearchResult> JKIOPLoadstudentbysearchAsync(string RollNumber, string Firstname, string FatherName, string dob)
         {
             return base.Channel.JKIOPLoadstudentbysearchAsync(RollNumber, Firstname, FatherName, dob);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.JKIOPStudentPaymentInfoResponseJKIOPStudentPaymentInfoResult> JKIOPStudentPaymentInfoAsync(string StudentId)
+        public System.Threading.Tasks.Task<ServiceReference2.JKIOPStudentPaymentInfoResponseJKIOPStudentPaymentInfoResult> JKIOPStudentPaymentInfoAsync(string StudentId)
         {
             return base.Channel.JKIOPStudentPaymentInfoAsync(StudentId);
         }
@@ -10258,12 +10312,12 @@ namespace ServiceReference1
             return base.Channel.SaveSupplierExpenseHistoryAsync(HId, EId, PaymentMode, Transactionnumber, Amount, PaidDate, IsApproved, ApprovedBy, ImageName, username);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.SupplierExpenseHistoryResponseSupplierExpenseHistoryResult> SupplierExpenseHistoryAsync(string EId)
+        public System.Threading.Tasks.Task<ServiceReference2.SupplierExpenseHistoryResponseSupplierExpenseHistoryResult> SupplierExpenseHistoryAsync(string EId)
         {
             return base.Channel.SupplierExpenseHistoryAsync(EId);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.SupplierExpenseHistoryBYHidResponseSupplierExpenseHistoryBYHidResult> SupplierExpenseHistoryBYHidAsync(string HId)
+        public System.Threading.Tasks.Task<ServiceReference2.SupplierExpenseHistoryBYHidResponseSupplierExpenseHistoryBYHidResult> SupplierExpenseHistoryBYHidAsync(string HId)
         {
             return base.Channel.SupplierExpenseHistoryBYHidAsync(HId);
         }
@@ -10273,7 +10327,7 @@ namespace ServiceReference1
             return base.Channel.SaveExternalLinkAsync(FormType, FormId, LastUpdate, LinkDescription, LinkFile, LinkFileType, Path, isDrawing, username);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.LoadExternalLinkByFormIdAndTypeResponseLoadExternalLinkByFormIdAndTypeResult> LoadExternalLinkByFormIdAndTypeAsync(string FormType, string FormId)
+        public System.Threading.Tasks.Task<ServiceReference2.LoadExternalLinkByFormIdAndTypeResponseLoadExternalLinkByFormIdAndTypeResult> LoadExternalLinkByFormIdAndTypeAsync(string FormType, string FormId)
         {
             return base.Channel.LoadExternalLinkByFormIdAndTypeAsync(FormType, FormId);
         }
@@ -10283,32 +10337,32 @@ namespace ServiceReference1
             return base.Channel.DeleteExternalRecordAsync(ExernalId);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.LoadSupplierPaymentBySPIdResponseLoadSupplierPaymentBySPIdResult> LoadSupplierPaymentBySPIdAsync(string SPId)
+        public System.Threading.Tasks.Task<ServiceReference2.LoadSupplierPaymentBySPIdResponseLoadSupplierPaymentBySPIdResult> LoadSupplierPaymentBySPIdAsync(string SPId)
         {
             return base.Channel.LoadSupplierPaymentBySPIdAsync(SPId);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.JKIOPSupplierPaymentBySupplierIdResponseJKIOPSupplierPaymentBySupplierIdResult> JKIOPSupplierPaymentBySupplierIdAsync(string SupplierId)
+        public System.Threading.Tasks.Task<ServiceReference2.JKIOPSupplierPaymentBySupplierIdResponseJKIOPSupplierPaymentBySupplierIdResult> JKIOPSupplierPaymentBySupplierIdAsync(string SupplierId)
         {
             return base.Channel.JKIOPSupplierPaymentBySupplierIdAsync(SupplierId);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetStudentFineResponseGetStudentFineResult> GetStudentFineAsync(string CourseYear, string CourseSession, string fromdate, string todate)
+        public System.Threading.Tasks.Task<ServiceReference2.GetStudentFineResponseGetStudentFineResult> GetStudentFineAsync(string CourseYear, string CourseSession, string fromdate, string todate)
         {
             return base.Channel.GetStudentFineAsync(CourseYear, CourseSession, fromdate, todate);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.getstudentinfobyrollnumberResponseGetstudentinfobyrollnumberResult> getstudentinfobyrollnumberAsync(string RollNumber)
+        public System.Threading.Tasks.Task<ServiceReference2.getstudentinfobyrollnumberResponseGetstudentinfobyrollnumberResult> getstudentinfobyrollnumberAsync(string RollNumber)
         {
             return base.Channel.getstudentinfobyrollnumberAsync(RollNumber);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.getstudentfineinfobyFIneIdResponseGetstudentfineinfobyFIneIdResult> getstudentfineinfobyFIneIdAsync(string FineId)
+        public System.Threading.Tasks.Task<ServiceReference2.getstudentfineinfobyFIneIdResponseGetstudentfineinfobyFIneIdResult> getstudentfineinfobyFIneIdAsync(string FineId)
         {
             return base.Channel.getstudentfineinfobyFIneIdAsync(FineId);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.getstudentfineinfobyRollnumberResponseGetstudentfineinfobyRollnumberResult> getstudentfineinfobyRollnumberAsync(string RollNumber)
+        public System.Threading.Tasks.Task<ServiceReference2.getstudentfineinfobyRollnumberResponseGetstudentfineinfobyRollnumberResult> getstudentfineinfobyRollnumberAsync(string RollNumber)
         {
             return base.Channel.getstudentfineinfobyRollnumberAsync(RollNumber);
         }
@@ -10345,17 +10399,17 @@ namespace ServiceReference1
             return base.Channel.SaveRefundPaymentInfoAsync(RId, PaymentMode, Amount, BankTransactionNumber, RefundDate, username, RollNumber, Comment, Session, courseyear, approveby, BankName);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.getstudentRefundinfobyRollnumberResponseGetstudentRefundinfobyRollnumberResult> getstudentRefundinfobyRollnumberAsync(string RollNumber)
+        public System.Threading.Tasks.Task<ServiceReference2.getstudentRefundinfobyRollnumberResponseGetstudentRefundinfobyRollnumberResult> getstudentRefundinfobyRollnumberAsync(string RollNumber)
         {
             return base.Channel.getstudentRefundinfobyRollnumberAsync(RollNumber);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.getstudentRefundinfobyRefundIdResponseGetstudentRefundinfobyRefundIdResult> getstudentRefundinfobyRefundIdAsync(string RId)
+        public System.Threading.Tasks.Task<ServiceReference2.getstudentRefundinfobyRefundIdResponseGetstudentRefundinfobyRefundIdResult> getstudentRefundinfobyRefundIdAsync(string RId)
         {
             return base.Channel.getstudentRefundinfobyRefundIdAsync(RId);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetStudentRefundResponseGetStudentRefundResult> GetStudentRefundAsync(string CourseYear, string CourseSession, string fromdate, string todate)
+        public System.Threading.Tasks.Task<ServiceReference2.GetStudentRefundResponseGetStudentRefundResult> GetStudentRefundAsync(string CourseYear, string CourseSession, string fromdate, string todate)
         {
             return base.Channel.GetStudentRefundAsync(CourseYear, CourseSession, fromdate, todate);
         }
@@ -10380,57 +10434,57 @@ namespace ServiceReference1
             return base.Channel.DeleteOfficeLeaveRequestAsync(Id);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetOfficeLeaveDetailsResponseGetOfficeLeaveDetailsResult> GetOfficeLeaveDetailsAsync(string EmailId, System.DateTime StartDate, System.DateTime EndDate, string RequestStatus, string LeaveType)
+        public System.Threading.Tasks.Task<ServiceReference2.GetOfficeLeaveDetailsResponseGetOfficeLeaveDetailsResult> GetOfficeLeaveDetailsAsync(string EmailId, System.DateTime StartDate, System.DateTime EndDate, string RequestStatus, string LeaveType)
         {
             return base.Channel.GetOfficeLeaveDetailsAsync(EmailId, StartDate, EndDate, RequestStatus, LeaveType);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.ArrayOfXElement> GetDailyScheduleWorkAsync(string StaffEmailId)
+        public System.Threading.Tasks.Task<ServiceReference2.ArrayOfXElement> GetDailyScheduleWorkAsync(string StaffEmailId)
         {
             return base.Channel.GetDailyScheduleWorkAsync(StaffEmailId);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.ArrayOfXElement> GetDailyScheduleWorksAsync(string StaffEmailId, string TaskName, string CategoryId, string TeamName)
+        public System.Threading.Tasks.Task<ServiceReference2.ArrayOfXElement> GetDailyScheduleWorksAsync(string StaffEmailId, string TaskName, string CategoryId, string TeamName)
         {
             return base.Channel.GetDailyScheduleWorksAsync(StaffEmailId, TaskName, CategoryId, TeamName);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetStaffRotaResponseGetStaffRotaResult> GetStaffRotaAsync(string EmailId, System.DateTime StartDate, System.DateTime EndDate)
+        public System.Threading.Tasks.Task<ServiceReference2.GetStaffRotaResponseGetStaffRotaResult> GetStaffRotaAsync(string EmailId, System.DateTime StartDate, System.DateTime EndDate)
         {
             return base.Channel.GetStaffRotaAsync(EmailId, StartDate, EndDate);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetTaskNameResponseGetTaskNameResult> GetTaskNameAsync()
+        public System.Threading.Tasks.Task<ServiceReference2.GetTaskNameResponseGetTaskNameResult> GetTaskNameAsync()
         {
             return base.Channel.GetTaskNameAsync();
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetTaskNamesResponseGetTaskNamesResult> GetTaskNamesAsync(string countryname)
+        public System.Threading.Tasks.Task<ServiceReference2.GetTaskNamesResponseGetTaskNamesResult> GetTaskNamesAsync(string countryname)
         {
             return base.Channel.GetTaskNamesAsync(countryname);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetTeamNameResponseGetTeamNameResult> GetTeamNameAsync()
+        public System.Threading.Tasks.Task<ServiceReference2.GetTeamNameResponseGetTeamNameResult> GetTeamNameAsync()
         {
             return base.Channel.GetTeamNameAsync();
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetStaffCountryWiseResponseGetStaffCountryWiseResult> GetStaffCountryWiseAsync(string CountryName)
+        public System.Threading.Tasks.Task<ServiceReference2.GetStaffCountryWiseResponseGetStaffCountryWiseResult> GetStaffCountryWiseAsync(string CountryName)
         {
             return base.Channel.GetStaffCountryWiseAsync(CountryName);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.CheckTaskRunningOnComputerResponseCheckTaskRunningOnComputerResult> CheckTaskRunningOnComputerAsync(string EmailId, string ComputerName)
+        public System.Threading.Tasks.Task<ServiceReference2.CheckTaskRunningOnComputerResponseCheckTaskRunningOnComputerResult> CheckTaskRunningOnComputerAsync(string EmailId, string ComputerName)
         {
             return base.Channel.CheckTaskRunningOnComputerAsync(EmailId, ComputerName);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetTasksResponseGetTasksResult> GetTasksAsync(string CountryName)
+        public System.Threading.Tasks.Task<ServiceReference2.GetTasksResponseGetTasksResult> GetTasksAsync(string CountryName)
         {
             return base.Channel.GetTasksAsync(CountryName);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetStaffInOutResponseGetStaffInOutResult> GetStaffInOutAsync(string EmailId)
+        public System.Threading.Tasks.Task<ServiceReference2.GetStaffInOutResponseGetStaffInOutResult> GetStaffInOutAsync(string EmailId)
         {
             return base.Channel.GetStaffInOutAsync(EmailId);
         }
@@ -10445,52 +10499,52 @@ namespace ServiceReference1
             return base.Channel.UpdateTasksTimerAsync(STId, EndTime);
         }
         
-        public System.Threading.Tasks.Task<int> SaveStaffInAsync(string StaffEmailId, string ScanInTime, string CountryName)
+        public System.Threading.Tasks.Task<string> updateStatusAfterAutoTransferForcefullyAsync(int productid, string companyname)
         {
-            return base.Channel.SaveStaffInAsync(StaffEmailId, ScanInTime, CountryName);
+            return base.Channel.updateStatusAfterAutoTransferForcefullyAsync(productid, companyname);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.checkproductcategoryforcomputerResponseCheckproductcategoryforcomputerResult> checkproductcategoryforcomputerAsync(string productid, string computername)
+        public System.Threading.Tasks.Task<ServiceReference2.checkproductcategoryforcomputerResponseCheckproductcategoryforcomputerResult> checkproductcategoryforcomputerAsync(string productid, string computername)
         {
             return base.Channel.checkproductcategoryforcomputerAsync(productid, computername);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetcategoryforcomputerResponseGetcategoryforcomputerResult> GetcategoryforcomputerAsync(string computername)
+        public System.Threading.Tasks.Task<ServiceReference2.GetcategoryforcomputerResponseGetcategoryforcomputerResult> GetcategoryforcomputerAsync(string computername)
         {
             return base.Channel.GetcategoryforcomputerAsync(computername);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetunshippedorderforcomputerResponseGetunshippedorderforcomputerResult> GetunshippedorderforcomputerAsync(string computername, string companyname)
+        public System.Threading.Tasks.Task<ServiceReference2.GetunshippedorderforcomputerResponseGetunshippedorderforcomputerResult> GetunshippedorderforcomputerAsync(string computername, string companyname)
         {
             return base.Channel.GetunshippedorderforcomputerAsync(computername, companyname);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.checkproductcategoryforcomputerbyordernumberResponseCheckproductcategoryforcomputerbyordernumberResult> checkproductcategoryforcomputerbyordernumberAsync(string ordernumber, string computername)
+        public System.Threading.Tasks.Task<ServiceReference2.checkproductcategoryforcomputerbyordernumberResponseCheckproductcategoryforcomputerbyordernumberResult> checkproductcategoryforcomputerbyordernumberAsync(string ordernumber, string computername)
         {
             return base.Channel.checkproductcategoryforcomputerbyordernumberAsync(ordernumber, computername);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.gettodayshippedordercategoryforcomputerResponseGettodayshippedordercategoryforcomputerResult> gettodayshippedordercategoryforcomputerAsync(string computername, string companyname)
+        public System.Threading.Tasks.Task<ServiceReference2.gettodayshippedordercategoryforcomputerResponseGettodayshippedordercategoryforcomputerResult> gettodayshippedordercategoryforcomputerAsync(string computername, string companyname)
         {
             return base.Channel.gettodayshippedordercategoryforcomputerAsync(computername, companyname);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetunshippedorderbycompanyResponseGetunshippedorderbycompanyResult> GetunshippedorderbycompanyAsync(string companyname)
+        public System.Threading.Tasks.Task<ServiceReference2.GetunshippedorderbycompanyResponseGetunshippedorderbycompanyResult> GetunshippedorderbycompanyAsync(string companyname)
         {
             return base.Channel.GetunshippedorderbycompanyAsync(companyname);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetToadyshippedorderbycompanyResponseGetToadyshippedorderbycompanyResult> GetToadyshippedorderbycompanyAsync(string companyname)
+        public System.Threading.Tasks.Task<ServiceReference2.GetToadyshippedorderbycompanyResponseGetToadyshippedorderbycompanyResult> GetToadyshippedorderbycompanyAsync(string companyname)
         {
             return base.Channel.GetToadyshippedorderbycompanyAsync(companyname);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetlateshipmentResponseGetlateshipmentResult> GetlateshipmentAsync()
+        public System.Threading.Tasks.Task<ServiceReference2.GetlateshipmentResponseGetlateshipmentResult> GetlateshipmentAsync()
         {
             return base.Channel.GetlateshipmentAsync();
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetstaffbycomputerResponseGetstaffbycomputerResult> GetstaffbycomputerAsync(string computername)
+        public System.Threading.Tasks.Task<ServiceReference2.GetstaffbycomputerResponseGetstaffbycomputerResult> GetstaffbycomputerAsync(string computername)
         {
             return base.Channel.GetstaffbycomputerAsync(computername);
         }
@@ -10505,32 +10559,32 @@ namespace ServiceReference1
             return base.Channel.SavelogouttimeAsync(userId, logoutreason, logintype);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetShipUnshipLateshipOrderResponseGetShipUnshipLateshipOrderResult> GetShipUnshipLateshipOrderAsync()
+        public System.Threading.Tasks.Task<ServiceReference2.GetShipUnshipLateshipOrderResponseGetShipUnshipLateshipOrderResult> GetShipUnshipLateshipOrderAsync()
         {
             return base.Channel.GetShipUnshipLateshipOrderAsync();
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.getunshippedorderbyComputerNameResponseGetunshippedorderbyComputerNameResult> getunshippedorderbyComputerNameAsync(string computername)
+        public System.Threading.Tasks.Task<ServiceReference2.getunshippedorderbyComputerNameResponseGetunshippedorderbyComputerNameResult> getunshippedorderbyComputerNameAsync(string computername)
         {
             return base.Channel.getunshippedorderbyComputerNameAsync(computername);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.getunshipandtodayshiporderforcomputerResponseGetunshipandtodayshiporderforcomputerResult> getunshipandtodayshiporderforcomputerAsync(string computername)
+        public System.Threading.Tasks.Task<ServiceReference2.getunshipandtodayshiporderforcomputerResponseGetunshipandtodayshiporderforcomputerResult> getunshipandtodayshiporderforcomputerAsync(string computername)
         {
             return base.Channel.getunshipandtodayshiporderforcomputerAsync(computername);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.getComputerbypackingTodayResponseGetComputerbypackingTodayResult> getComputerbypackingTodayAsync(string computername)
+        public System.Threading.Tasks.Task<ServiceReference2.getComputerbypackingTodayResponseGetComputerbypackingTodayResult> getComputerbypackingTodayAsync(string computername)
         {
             return base.Channel.getComputerbypackingTodayAsync(computername);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.getlateshipmentbycategoryforcomputerResponseGetlateshipmentbycategoryforcomputerResult> getlateshipmentbycategoryforcomputerAsync(string computername, string companyname)
+        public System.Threading.Tasks.Task<ServiceReference2.getlateshipmentbycategoryforcomputerResponseGetlateshipmentbycategoryforcomputerResult> getlateshipmentbycategoryforcomputerAsync(string computername, string companyname)
         {
             return base.Channel.getlateshipmentbycategoryforcomputerAsync(computername, companyname);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.getstaffbypackingTodayResponseGetstaffbypackingTodayResult> getstaffbypackingTodayAsync()
+        public System.Threading.Tasks.Task<ServiceReference2.getstaffbypackingTodayResponseGetstaffbypackingTodayResult> getstaffbypackingTodayAsync()
         {
             return base.Channel.getstaffbypackingTodayAsync();
         }
@@ -10540,12 +10594,12 @@ namespace ServiceReference1
             return base.Channel.IsUPSAsync(ordernumber);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetComputerNameResponseGetComputerNameResult> GetComputerNameAsync()
+        public System.Threading.Tasks.Task<ServiceReference2.GetComputerNameResponseGetComputerNameResult> GetComputerNameAsync()
         {
             return base.Channel.GetComputerNameAsync();
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetCurrentComputerByStaffResponseGetCurrentComputerByStaffResult> GetCurrentComputerByStaffAsync(string EmailId)
+        public System.Threading.Tasks.Task<ServiceReference2.GetCurrentComputerByStaffResponseGetCurrentComputerByStaffResult> GetCurrentComputerByStaffAsync(string EmailId)
         {
             return base.Channel.GetCurrentComputerByStaffAsync(EmailId);
         }
@@ -10555,22 +10609,22 @@ namespace ServiceReference1
             return base.Channel.AutoTransferInventoryAsync(Productid, email, companyname);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.getworkreportResponseGetworkreportResult> getworkreportAsync(string companyname, string computername, string username, string shift, string startdate, string enddate)
+        public System.Threading.Tasks.Task<ServiceReference2.getworkreportResponseGetworkreportResult> getworkreportAsync(string companyname, string computername, string username, string shift, string startdate, string enddate)
         {
             return base.Channel.getworkreportAsync(companyname, computername, username, shift, startdate, enddate);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.getworkreportUpdatedResponseGetworkreportUpdatedResult> getworkreportUpdatedAsync(string companyname, string computername, string username, string shift, string startdate, string enddate, string RecordType)
+        public System.Threading.Tasks.Task<ServiceReference2.getworkreportUpdatedResponseGetworkreportUpdatedResult> getworkreportUpdatedAsync(string companyname, string computername, string username, string shift, string startdate, string enddate, string RecordType)
         {
             return base.Channel.getworkreportUpdatedAsync(companyname, computername, username, shift, startdate, enddate, RecordType);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetOrderAccountwiseResponseGetOrderAccountwiseResult> GetOrderAccountwiseAsync(string companyname, string computername, string startdate, string enddate, string category, string ordertype)
+        public System.Threading.Tasks.Task<ServiceReference2.GetOrderAccountwiseResponseGetOrderAccountwiseResult> GetOrderAccountwiseAsync(string companyname, string computername, string startdate, string enddate, string category, string ordertype)
         {
             return base.Channel.GetOrderAccountwiseAsync(companyname, computername, startdate, enddate, category, ordertype);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetOrderAccountwiseupdatedResponseGetOrderAccountwiseupdatedResult> GetOrderAccountwiseupdatedAsync(string companyname, string computername, string startdate, string enddate, string category, string ordertype, string shift)
+        public System.Threading.Tasks.Task<ServiceReference2.GetOrderAccountwiseupdatedResponseGetOrderAccountwiseupdatedResult> GetOrderAccountwiseupdatedAsync(string companyname, string computername, string startdate, string enddate, string category, string ordertype, string shift)
         {
             return base.Channel.GetOrderAccountwiseupdatedAsync(companyname, computername, startdate, enddate, category, ordertype, shift);
         }
@@ -10640,27 +10694,27 @@ namespace ServiceReference1
             return base.Channel.SaveProductDeliverynewUpdatedAsync(OrderNumber, ProductId, VariantId, DeliveredQuantity, DeliveredSKU, DeliveredBarcode, Email, InvoiceNo, InvoiceDate, SupplierId, reson, dockedno, val, qty, creditStock, ValueExcVat, ValueIncVat, ManualOrderNo, CreditNoteNo, Inventoryfor, CompanyName, computername);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetAllCategorybycomputerwiseResponseGetAllCategorybycomputerwiseResult> GetAllCategorybycomputerwiseAsync(string computername)
+        public System.Threading.Tasks.Task<ServiceReference2.GetAllCategorybycomputerwiseResponseGetAllCategorybycomputerwiseResult> GetAllCategorybycomputerwiseAsync(string computername)
         {
             return base.Channel.GetAllCategorybycomputerwiseAsync(computername);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetAllunshippedOrderResponseGetAllunshippedOrderResult> GetAllunshippedOrderAsync()
+        public System.Threading.Tasks.Task<ServiceReference2.GetAllunshippedOrderResponseGetAllunshippedOrderResult> GetAllunshippedOrderAsync()
         {
             return base.Channel.GetAllunshippedOrderAsync();
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetAllOutOfStockOrderResponseGetAllOutOfStockOrderResult> GetAllOutOfStockOrderAsync(string companyname, string computername, string category, string shift)
+        public System.Threading.Tasks.Task<ServiceReference2.GetAllOutOfStockOrderResponseGetAllOutOfStockOrderResult> GetAllOutOfStockOrderAsync(string companyname, string computername, string category, string shift)
         {
             return base.Channel.GetAllOutOfStockOrderAsync(companyname, computername, category, shift);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetAllOrderStatusQtyResponseGetAllOrderStatusQtyResult> GetAllOrderStatusQtyAsync(string companyname, string computername, string category, string shift)
+        public System.Threading.Tasks.Task<ServiceReference2.GetAllOrderStatusQtyResponseGetAllOrderStatusQtyResult> GetAllOrderStatusQtyAsync(string companyname, string computername, string category, string shift)
         {
             return base.Channel.GetAllOrderStatusQtyAsync(companyname, computername, category, shift);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetComputerNameByShiftResponseGetComputerNameByShiftResult> GetComputerNameByShiftAsync(string shift)
+        public System.Threading.Tasks.Task<ServiceReference2.GetComputerNameByShiftResponseGetComputerNameByShiftResult> GetComputerNameByShiftAsync(string shift)
         {
             return base.Channel.GetComputerNameByShiftAsync(shift);
         }
@@ -10706,12 +10760,12 @@ namespace ServiceReference1
             return base.Channel.SaveProductScanInNewUpdatedAsync(ProductId, VariantId, ScanInQuantity, ScanInSKU, ScanInBarcode, Email, InvoiceNo, InvoiceDate, SupplierId, reson, dockedno, val, qty, creditStock, creditnote, OrderRecievePrice, OrderSystemId, Exppirydate, inventorytype, Expirymessage, CompanyName, comment, DeliveryNoteNo, inventory, MainProductId, sfpinventory, fbainventory, expinventory, sbsinventory, TransferOtherCompany, ManufactureDate);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetLoginPermissionResponseGetLoginPermissionResult> GetLoginPermissionAsync(string companyname, string emailid, string compautername)
+        public System.Threading.Tasks.Task<ServiceReference2.GetLoginPermissionResponseGetLoginPermissionResult> GetLoginPermissionAsync(string companyname, string emailid, string compautername)
         {
             return base.Channel.GetLoginPermissionAsync(companyname, emailid, compautername);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetAccessForRoleResponseGetAccessForRoleResult> GetAccessForRoleAsync(string emailid)
+        public System.Threading.Tasks.Task<ServiceReference2.GetAccessForRoleResponseGetAccessForRoleResult> GetAccessForRoleAsync(string emailid)
         {
             return base.Channel.GetAccessForRoleAsync(emailid);
         }
@@ -10852,7 +10906,7 @@ namespace ServiceReference1
             return base.Channel.SaveProductDeliverynewUpdatedNEWAsync(OrderNumber, ProductId, VariantId, DeliveredQuantity, DeliveredSKU, DeliveredBarcode, Email, InvoiceNo, InvoiceDate, SupplierId, reson, dockedno, val, qty, creditStock, ValueExcVat, ValueIncVat, ManualOrderNo, CreditNoteNo, Inventoryfor, CompanyName, computername, inventory, promoinventory, sfpinventory, fbainventory, expiryinventory, sbsinventory);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.ArrayOfXElement> GetIssueMainCategory_User_OrderIssue_AccountName_InventoryCountAsync(string companyname, int Ordernumber, string issuestatus, int productid)
+        public System.Threading.Tasks.Task<ServiceReference2.ArrayOfXElement> GetIssueMainCategory_User_OrderIssue_AccountName_InventoryCountAsync(string companyname, int Ordernumber, string issuestatus, int productid)
         {
             return base.Channel.GetIssueMainCategory_User_OrderIssue_AccountName_InventoryCountAsync(companyname, Ordernumber, issuestatus, productid);
         }
@@ -10896,12 +10950,12 @@ namespace ServiceReference1
             return base.Channel.UpdateMarkAsShippedOrderAsync(ordernumber, trackingnumber, shippingmethod, password, couriername, shippedon, OrderStatus, createdby, parcelweight, parcelcharge, companyrepresentative);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.ArrayOfXElement> GetorderdetailsonpscanoutAsync(string ordernumber)
+        public System.Threading.Tasks.Task<ServiceReference2.ArrayOfXElement> GetorderdetailsonpscanoutAsync(string ordernumber)
         {
             return base.Channel.GetorderdetailsonpscanoutAsync(ordernumber);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetorderPrintlabelResponseGetorderPrintlabelResult> GetorderPrintlabelAsync(
+        public System.Threading.Tasks.Task<ServiceReference2.GetorderPrintlabelResponseGetorderPrintlabelResult> GetorderPrintlabelAsync(
                     string ordernumber, 
                     int printqty, 
                     string orderstatus, 
@@ -10924,27 +10978,27 @@ namespace ServiceReference1
             return base.Channel.GetorderPrintlabelAsync(ordernumber, printqty, orderstatus, companyname, ordertype, startdate, enddate, category, countrytype, couriertype, couriername, postagename, Other, Email, NoChange, printdate, Shipmethod, AccountName);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetAutodownloadLabelOrderResponseGetAutodownloadLabelOrderResult> GetAutodownloadLabelOrderAsync()
+        public System.Threading.Tasks.Task<ServiceReference2.GetAutodownloadLabelOrderResponseGetAutodownloadLabelOrderResult> GetAutodownloadLabelOrderAsync()
         {
             return base.Channel.GetAutodownloadLabelOrderAsync();
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.ArrayOfXElement> GetPostageTypeandCourierwithordernumberwithDateRangeAsync(string ComputerName, System.DateTime dtstartdate, System.DateTime dtenddate)
+        public System.Threading.Tasks.Task<ServiceReference2.ArrayOfXElement> GetPostageTypeandCourierwithordernumberwithDateRangeAsync(string ComputerName, System.DateTime dtstartdate, System.DateTime dtenddate)
         {
             return base.Channel.GetPostageTypeandCourierwithordernumberwithDateRangeAsync(ComputerName, dtstartdate, dtenddate);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.ArrayOfXElement> GetPostageTypeandCourierwithordernumberwithDateRangeandOrdertypeAsync(string OrderType, System.DateTime dtstartdate, System.DateTime dtenddate, string ComputerName)
+        public System.Threading.Tasks.Task<ServiceReference2.ArrayOfXElement> GetPostageTypeandCourierwithordernumberwithDateRangeandOrdertypeAsync(string OrderType, System.DateTime dtstartdate, System.DateTime dtenddate, string ComputerName)
         {
             return base.Channel.GetPostageTypeandCourierwithordernumberwithDateRangeandOrdertypeAsync(OrderType, dtstartdate, dtenddate, ComputerName);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.ArrayOfXElement> GetPostageTypeandCourierwithordernumberAsync()
+        public System.Threading.Tasks.Task<ServiceReference2.ArrayOfXElement> GetPostageTypeandCourierwithordernumberAsync()
         {
             return base.Channel.GetPostageTypeandCourierwithordernumberAsync();
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.ArrayOfXElement> GetcouriernamewithtypeAsync(string country)
+        public System.Threading.Tasks.Task<ServiceReference2.ArrayOfXElement> GetcouriernamewithtypeAsync(string country)
         {
             return base.Channel.GetcouriernamewithtypeAsync(country);
         }
@@ -10964,47 +11018,47 @@ namespace ServiceReference1
             return base.Channel.saveScanProductAsync(SKU, Barcode, OrderSystemId, Ordertype, CompanyName, ProductId, Qty, EmailId, InvoiceNo, InvoiceDate, SupplierId, Expirydate, Expirymsg, DeliveryNoteNumber, ManufactureDate);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.getproductResponseGetproductResult> getproductAsync(string companyname)
+        public System.Threading.Tasks.Task<ServiceReference2.getproductResponseGetproductResult> getproductAsync(string companyname)
         {
             return base.Channel.getproductAsync(companyname);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetProductByIdResponseGetProductByIdResult> GetProductByIdAsync(int productid)
+        public System.Threading.Tasks.Task<ServiceReference2.GetProductByIdResponseGetProductByIdResult> GetProductByIdAsync(int productid)
         {
             return base.Channel.GetProductByIdAsync(productid);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetAllBrandResponseGetAllBrandResult> GetAllBrandAsync()
+        public System.Threading.Tasks.Task<ServiceReference2.GetAllBrandResponseGetAllBrandResult> GetAllBrandAsync()
         {
             return base.Channel.GetAllBrandAsync();
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetTaxClassResponseGetTaxClassResult> GetTaxClassAsync()
+        public System.Threading.Tasks.Task<ServiceReference2.GetTaxClassResponseGetTaxClassResult> GetTaxClassAsync()
         {
             return base.Channel.GetTaxClassAsync();
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetUserWithrollResponseGetUserWithrollResult> GetUserWithrollAsync()
+        public System.Threading.Tasks.Task<ServiceReference2.GetUserWithrollResponseGetUserWithrollResult> GetUserWithrollAsync()
         {
             return base.Channel.GetUserWithrollAsync();
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetUserrollResponseGetUserrollResult> GetUserrollAsync()
+        public System.Threading.Tasks.Task<ServiceReference2.GetUserrollResponseGetUserrollResult> GetUserrollAsync()
         {
             return base.Channel.GetUserrollAsync();
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetAllScreenForRoleResponseGetAllScreenForRoleResult> GetAllScreenForRoleAsync(long RoleId)
+        public System.Threading.Tasks.Task<ServiceReference2.GetAllScreenForRoleResponseGetAllScreenForRoleResult> GetAllScreenForRoleAsync(long RoleId)
         {
             return base.Channel.GetAllScreenForRoleAsync(RoleId);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetuserByRoleIdResponseGetuserByRoleIdResult> GetuserByRoleIdAsync(long RoleId)
+        public System.Threading.Tasks.Task<ServiceReference2.GetuserByRoleIdResponseGetuserByRoleIdResult> GetuserByRoleIdAsync(long RoleId)
         {
             return base.Channel.GetuserByRoleIdAsync(RoleId);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.LoadCreditnoteForPaperWorkResponseLoadCreditnoteForPaperWorkResult> LoadCreditnoteForPaperWorkAsync(string companyname)
+        public System.Threading.Tasks.Task<ServiceReference2.LoadCreditnoteForPaperWorkResponseLoadCreditnoteForPaperWorkResult> LoadCreditnoteForPaperWorkAsync(string companyname)
         {
             return base.Channel.LoadCreditnoteForPaperWorkAsync(companyname);
         }
@@ -11024,7 +11078,7 @@ namespace ServiceReference1
             return base.Channel.SaveQuantityAdjustmentRecordForCheckAsync(qty, InventoryType, sku, barcode, companyname, Expiry, email, Reason);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetCreditNoteWithoutDocResponseGetCreditNoteWithoutDocResult> GetCreditNoteWithoutDocAsync(string companyname, string sku, string barcode, string pipcode, string InvoiceNumber)
+        public System.Threading.Tasks.Task<ServiceReference2.GetCreditNoteWithoutDocResponseGetCreditNoteWithoutDocResult> GetCreditNoteWithoutDocAsync(string companyname, string sku, string barcode, string pipcode, string InvoiceNumber)
         {
             return base.Channel.GetCreditNoteWithoutDocAsync(companyname, sku, barcode, pipcode, InvoiceNumber);
         }
@@ -11049,7 +11103,7 @@ namespace ServiceReference1
             return base.Channel.TrackingNumberExistAsync(TrackingNumber);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.LoadQuantityAdjustmentOpenCaseResponseLoadQuantityAdjustmentOpenCaseResult> LoadQuantityAdjustmentOpenCaseAsync(string Barcode, string Reason)
+        public System.Threading.Tasks.Task<ServiceReference2.LoadQuantityAdjustmentOpenCaseResponseLoadQuantityAdjustmentOpenCaseResult> LoadQuantityAdjustmentOpenCaseAsync(string Barcode, string Reason)
         {
             return base.Channel.LoadQuantityAdjustmentOpenCaseAsync(Barcode, Reason);
         }
@@ -11094,12 +11148,12 @@ namespace ServiceReference1
             return base.Channel.UpdateExpiryRoomqtyupdatedAsync(productid, variantid, qty, companyname, expdate, email);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetListOfPrintOrderErrorResponseGetListOfPrintOrderErrorResult> GetListOfPrintOrderErrorAsync(string OrderList)
+        public System.Threading.Tasks.Task<ServiceReference2.GetListOfPrintOrderErrorResponseGetListOfPrintOrderErrorResult> GetListOfPrintOrderErrorAsync(string OrderList)
         {
             return base.Channel.GetListOfPrintOrderErrorAsync(OrderList);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetDefaultVarientResponseGetDefaultVarientResult> GetDefaultVarientAsync(string ProductId)
+        public System.Threading.Tasks.Task<ServiceReference2.GetDefaultVarientResponseGetDefaultVarientResult> GetDefaultVarientAsync(string ProductId)
         {
             return base.Channel.GetDefaultVarientAsync(ProductId);
         }
@@ -11109,9 +11163,9 @@ namespace ServiceReference1
             return base.Channel.UpdateProductInventoryAsync(ProductId, Qty, InventoryType, Reason, EmailId, AddQty, AddInventoryType);
         }
         
-        public System.Threading.Tasks.Task<bool> UpdateAmazonClickAndCollectInventoryAsync(long VariantId, int Qty, string Reason, string EmailId)
+        public System.Threading.Tasks.Task<string> UpdateInventoryQuantityByVarientSFPcompanyAsync(string VarientId, string mquantity, string quantity, string company)
         {
-            return base.Channel.UpdateAmazonClickAndCollectInventoryAsync(VariantId, Qty, Reason, EmailId);
+            return base.Channel.UpdateInventoryQuantityByVarientSFPcompanyAsync(VarientId, mquantity, quantity, company);
         }
         
         public System.Threading.Tasks.Task<string> UpdateSFPInventoryByVarientAsync(string VarientId, string mquantity, string quantity, string company)
@@ -11179,12 +11233,12 @@ namespace ServiceReference1
             return base.Channel.IsRoyalMailAsync(variantid);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetclearenceorderResponseGetclearenceorderResult> GetclearenceorderAsync(string variantid, string companyname, string channel)
+        public System.Threading.Tasks.Task<ServiceReference2.GetclearenceorderResponseGetclearenceorderResult> GetclearenceorderAsync(string variantid, string companyname, string channel)
         {
             return base.Channel.GetclearenceorderAsync(variantid, companyname, channel);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetsellingchannelResponseGetsellingchannelResult> GetsellingchannelAsync(string OrderNumber, string companyname)
+        public System.Threading.Tasks.Task<ServiceReference2.GetsellingchannelResponseGetsellingchannelResult> GetsellingchannelAsync(string OrderNumber, string companyname)
         {
             return base.Channel.GetsellingchannelAsync(OrderNumber, companyname);
         }
@@ -11194,27 +11248,27 @@ namespace ServiceReference1
             return base.Channel.UpdateFbaInventoryInCostingSheetAsync(VarientId, CostingType, quantity, companyname);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetpostagetypeResponseGetpostagetypeResult> GetpostagetypeAsync(string variantid, string companyname)
+        public System.Threading.Tasks.Task<ServiceReference2.GetpostagetypeResponseGetpostagetypeResult> GetpostagetypeAsync(string variantid, string companyname)
         {
             return base.Channel.GetpostagetypeAsync(variantid, companyname);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetpostageResponseGetpostageResult> GetpostageAsync(string AccountName, string companyname)
+        public System.Threading.Tasks.Task<ServiceReference2.GetpostageResponseGetpostageResult> GetpostageAsync(string AccountName, string companyname)
         {
             return base.Channel.GetpostageAsync(AccountName, companyname);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetExpiryproductdatebycompanyResponseGetExpiryproductdatebycompanyResult> GetExpiryproductdatebycompanyAsync(int ordernumber, string exptype, string companyname)
+        public System.Threading.Tasks.Task<ServiceReference2.GetExpiryproductdatebycompanyResponseGetExpiryproductdatebycompanyResult> GetExpiryproductdatebycompanyAsync(int ordernumber, string exptype, string companyname)
         {
             return base.Channel.GetExpiryproductdatebycompanyAsync(ordernumber, exptype, companyname);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetExpirydatebycompanynameResponseGetExpirydatebycompanynameResult> GetExpirydatebycompanynameAsync(string sku, string companyname)
+        public System.Threading.Tasks.Task<ServiceReference2.GetExpirydatebycompanynameResponseGetExpirydatebycompanynameResult> GetExpirydatebycompanynameAsync(string sku, string companyname)
         {
             return base.Channel.GetExpirydatebycompanynameAsync(sku, companyname);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetExpirydateResponseGetExpirydateResult> GetExpirydateAsync(string sku, string companyname)
+        public System.Threading.Tasks.Task<ServiceReference2.GetExpirydateResponseGetExpirydateResult> GetExpirydateAsync(string sku, string companyname)
         {
             return base.Channel.GetExpirydateAsync(sku, companyname);
         }
@@ -11234,37 +11288,37 @@ namespace ServiceReference1
             return base.Channel.TransferInventoryfromMainToExpiryUpdatedAsync(VarientId, mquantity, quantity, expdate, createdby);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetExpirydatefromexpiryroomResponseGetExpirydatefromexpiryroomResult> GetExpirydatefromexpiryroomAsync(string sku, string companyname)
+        public System.Threading.Tasks.Task<ServiceReference2.GetExpirydatefromexpiryroomResponseGetExpirydatefromexpiryroomResult> GetExpirydatefromexpiryroomAsync(string sku, string companyname)
         {
             return base.Channel.GetExpirydatefromexpiryroomAsync(sku, companyname);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetExpirymessagebycompanynameResponseGetExpirymessagebycompanynameResult> GetExpirymessagebycompanynameAsync(string sku, string companyname)
+        public System.Threading.Tasks.Task<ServiceReference2.GetExpirymessagebycompanynameResponseGetExpirymessagebycompanynameResult> GetExpirymessagebycompanynameAsync(string sku, string companyname)
         {
             return base.Channel.GetExpirymessagebycompanynameAsync(sku, companyname);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetExpirymsgResponseGetExpirymsgResult> GetExpirymsgAsync(string sku, string companyname)
+        public System.Threading.Tasks.Task<ServiceReference2.GetExpirymsgResponseGetExpirymsgResult> GetExpirymsgAsync(string sku, string companyname)
         {
             return base.Channel.GetExpirymsgAsync(sku, companyname);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetProductDetailbycompanyResponseGetProductDetailbycompanyResult> GetProductDetailbycompanyAsync(string strCode, string strType, string companyname)
+        public System.Threading.Tasks.Task<ServiceReference2.GetProductDetailbycompanyResponseGetProductDetailbycompanyResult> GetProductDetailbycompanyAsync(string strCode, string strType, string companyname)
         {
             return base.Channel.GetProductDetailbycompanyAsync(strCode, strType, companyname);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetScanInProductResponseGetScanInProductResult> GetScanInProductAsync(string strCode, string strType, string companyname)
+        public System.Threading.Tasks.Task<ServiceReference2.GetScanInProductResponseGetScanInProductResult> GetScanInProductAsync(string strCode, string strType, string companyname)
         {
             return base.Channel.GetScanInProductAsync(strCode, strType, companyname);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetProductDetailsResponseGetProductDetailsResult> GetProductDetailsAsync(string strCode, string strType, string companyname)
+        public System.Threading.Tasks.Task<ServiceReference2.GetProductDetailsResponseGetProductDetailsResult> GetProductDetailsAsync(string strCode, string strType, string companyname)
         {
             return base.Channel.GetProductDetailsAsync(strCode, strType, companyname);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetProductRackLabelResponseGetProductRackLabelResult> GetProductRackLabelAsync(string strCode, string strType, string companyname)
+        public System.Threading.Tasks.Task<ServiceReference2.GetProductRackLabelResponseGetProductRackLabelResult> GetProductRackLabelAsync(string strCode, string strType, string companyname)
         {
             return base.Channel.GetProductRackLabelAsync(strCode, strType, companyname);
         }
@@ -11274,42 +11328,42 @@ namespace ServiceReference1
             return base.Channel.UpdateOrderReturndStatusAsync(OrderNumber, ProductId, ReturnQty, OrderQty, createdby, companyname);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.getcostingbyorderResponseGetcostingbyorderResult> getcostingbyorderAsync(int ordernumber)
+        public System.Threading.Tasks.Task<ServiceReference2.getcostingbyorderResponseGetcostingbyorderResult> getcostingbyorderAsync(int ordernumber)
         {
             return base.Channel.getcostingbyorderAsync(ordernumber);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetPalletNumberResponseGetPalletNumberResult> GetPalletNumberAsync()
+        public System.Threading.Tasks.Task<ServiceReference2.GetPalletNumberResponseGetPalletNumberResult> GetPalletNumberAsync()
         {
             return base.Channel.GetPalletNumberAsync();
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetPalletResponseGetPalletResult> GetPalletAsync(int MainProductId, int PalletNumber)
+        public System.Threading.Tasks.Task<ServiceReference2.GetPalletResponseGetPalletResult> GetPalletAsync(int MainProductId, int PalletNumber)
         {
             return base.Channel.GetPalletAsync(MainProductId, PalletNumber);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetUserResponseGetUserResult> GetUserAsync()
+        public System.Threading.Tasks.Task<ServiceReference2.GetUserResponseGetUserResult> GetUserAsync()
         {
             return base.Channel.GetUserAsync();
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetcollectionnoofItemResponseGetcollectionnoofItemResult> GetcollectionnoofItemAsync(string CategoryId)
+        public System.Threading.Tasks.Task<ServiceReference2.GetcollectionnoofItemResponseGetcollectionnoofItemResult> GetcollectionnoofItemAsync(string CategoryId)
         {
             return base.Channel.GetcollectionnoofItemAsync(CategoryId);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetShelfingnoofItemResponseGetShelfingnoofItemResult> GetShelfingnoofItemAsync(string CategoryId)
+        public System.Threading.Tasks.Task<ServiceReference2.GetShelfingnoofItemResponseGetShelfingnoofItemResult> GetShelfingnoofItemAsync(string CategoryId)
         {
             return base.Channel.GetShelfingnoofItemAsync(CategoryId);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.WareHouseStaffResponseWareHouseStaffResult> WareHouseStaffAsync()
+        public System.Threading.Tasks.Task<ServiceReference2.WareHouseStaffResponseWareHouseStaffResult> WareHouseStaffAsync()
         {
             return base.Channel.WareHouseStaffAsync();
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetTaskTimerResponseGetTaskTimerResult> GetTaskTimerAsync(string CountryName)
+        public System.Threading.Tasks.Task<ServiceReference2.GetTaskTimerResponseGetTaskTimerResult> GetTaskTimerAsync(string CountryName)
         {
             return base.Channel.GetTaskTimerAsync(CountryName);
         }
@@ -11329,7 +11383,7 @@ namespace ServiceReference1
             return base.Channel.UpdateTaskTimerAsync(STId);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.checknondeliveredorderResponseChecknondeliveredorderResult> checknondeliveredorderAsync(int ordernumber)
+        public System.Threading.Tasks.Task<ServiceReference2.checknondeliveredorderResponseChecknondeliveredorderResult> checknondeliveredorderAsync(int ordernumber)
         {
             return base.Channel.checknondeliveredorderAsync(ordernumber);
         }
@@ -11344,7 +11398,7 @@ namespace ServiceReference1
             return base.Channel.SaveorderstatusAsync(Ordernumber, OrderStatus, Createdby, CompanyName);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.LoadOrderIssuesResponseLoadOrderIssuesResult> LoadOrderIssuesAsync(int OrderId, string Resendstatus)
+        public System.Threading.Tasks.Task<ServiceReference2.LoadOrderIssuesResponseLoadOrderIssuesResult> LoadOrderIssuesAsync(int OrderId, string Resendstatus)
         {
             return base.Channel.LoadOrderIssuesAsync(OrderId, Resendstatus);
         }
@@ -11389,7 +11443,7 @@ namespace ServiceReference1
             return base.Channel.UpdateProductHistoryAsync(productid, FieldName, FieldValue, OldValue, Email);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.getMainProductIdResponseGetMainProductIdResult> getMainProductIdAsync(int productid)
+        public System.Threading.Tasks.Task<ServiceReference2.getMainProductIdResponseGetMainProductIdResult> getMainProductIdAsync(int productid)
         {
             return base.Channel.getMainProductIdAsync(productid);
         }
@@ -11423,7 +11477,7 @@ namespace ServiceReference1
             return base.Channel.SaveCreditNoteAsync(ProductId, VariantId, SKU, Barcode, Email, InvoiceNo, InvoiceDate, SupplierId, reson, dockedno, val, qty, creditStock, Attachfilename, ValueIncVat, CreditNoteNo, CompanyName, comment, DeliveryId);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.getproductvariantbypacksizeResponseGetproductvariantbypacksizeResult> getproductvariantbypacksizeAsync(int productid, int packsize)
+        public System.Threading.Tasks.Task<ServiceReference2.getproductvariantbypacksizeResponseGetproductvariantbypacksizeResult> getproductvariantbypacksizeAsync(int productid, int packsize)
         {
             return base.Channel.getproductvariantbypacksizeAsync(productid, packsize);
         }
@@ -11438,12 +11492,12 @@ namespace ServiceReference1
             return base.Channel.SaveFileTypeAsync(FileType, createdby);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.getFileTypeResponseGetFileTypeResult> getFileTypeAsync()
+        public System.Threading.Tasks.Task<ServiceReference2.getFileTypeResponseGetFileTypeResult> getFileTypeAsync()
         {
             return base.Channel.getFileTypeAsync();
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetpostagebyVIDResponseGetpostagebyVIDResult> GetpostagebyVIDAsync(string variantid, string companyname, string accountname, string couriertype)
+        public System.Threading.Tasks.Task<ServiceReference2.GetpostagebyVIDResponseGetpostagebyVIDResult> GetpostagebyVIDAsync(string variantid, string companyname, string accountname, string couriertype)
         {
             return base.Channel.GetpostagebyVIDAsync(variantid, companyname, accountname, couriertype);
         }
@@ -11453,12 +11507,12 @@ namespace ServiceReference1
             return base.Channel.updatepostageAsync(variantid, accountname, postage);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetpostagebyAccountResponseGetpostagebyAccountResult> GetpostagebyAccountAsync(string companyname, string accountname, string couriertype)
+        public System.Threading.Tasks.Task<ServiceReference2.GetpostagebyAccountResponseGetpostagebyAccountResult> GetpostagebyAccountAsync(string companyname, string accountname, string couriertype)
         {
             return base.Channel.GetpostagebyAccountAsync(companyname, accountname, couriertype);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.updatecostingbypostagechangeResponseUpdatecostingbypostagechangeResult> updatecostingbypostagechangeAsync(string postage, string accname, string companyname, string variantid, string sku)
+        public System.Threading.Tasks.Task<ServiceReference2.updatecostingbypostagechangeResponseUpdatecostingbypostagechangeResult> updatecostingbypostagechangeAsync(string postage, string accname, string companyname, string variantid, string sku)
         {
             return base.Channel.updatecostingbypostagechangeAsync(postage, accname, companyname, variantid, sku);
         }
@@ -11468,7 +11522,7 @@ namespace ServiceReference1
             return base.Channel.SaveUploadFileAsync(FileType, comment, FileName, createdby, companyname);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetInventoryCountDetailsResponseGetInventoryCountDetailsResult> GetInventoryCountDetailsAsync(string productid)
+        public System.Threading.Tasks.Task<ServiceReference2.GetInventoryCountDetailsResponseGetInventoryCountDetailsResult> GetInventoryCountDetailsAsync(string productid)
         {
             return base.Channel.GetInventoryCountDetailsAsync(productid);
         }
@@ -11478,12 +11532,12 @@ namespace ServiceReference1
             return base.Channel.UpdateWareHouseProductLocationAsync(productid, IeleNo, RackNo, BoxNo);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetIssueReasonResponseGetIssueReasonResult> GetIssueReasonAsync()
+        public System.Threading.Tasks.Task<ServiceReference2.GetIssueReasonResponseGetIssueReasonResult> GetIssueReasonAsync()
         {
             return base.Channel.GetIssueReasonAsync();
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetIssueSubReasonResponseGetIssueSubReasonResult> GetIssueSubReasonAsync(string parentid)
+        public System.Threading.Tasks.Task<ServiceReference2.GetIssueSubReasonResponseGetIssueSubReasonResult> GetIssueSubReasonAsync(string parentid)
         {
             return base.Channel.GetIssueSubReasonAsync(parentid);
         }
@@ -11498,7 +11552,7 @@ namespace ServiceReference1
             return base.Channel.UpdateScaninRecordAsync(productid, MainProductId);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetOrderDetailsResponseGetOrderDetailsResult> GetOrderDetailsAsync(string orderId)
+        public System.Threading.Tasks.Task<ServiceReference2.GetOrderDetailsResponseGetOrderDetailsResult> GetOrderDetailsAsync(string orderId)
         {
             return base.Channel.GetOrderDetailsAsync(orderId);
         }
@@ -11508,17 +11562,17 @@ namespace ServiceReference1
             return base.Channel.UpdateProductCategoryAsync(productid, categoryid);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetAllCategorywithReadtytoprintorderResponseGetAllCategorywithReadtytoprintorderResult> GetAllCategorywithReadtytoprintorderAsync(string OrderType, System.DateTime StartDate, System.DateTime EndDate, string ComputerName)
+        public System.Threading.Tasks.Task<ServiceReference2.GetAllCategorywithReadtytoprintorderResponseGetAllCategorywithReadtytoprintorderResult> GetAllCategorywithReadtytoprintorderAsync(string OrderType, System.DateTime StartDate, System.DateTime EndDate, string ComputerName)
         {
             return base.Channel.GetAllCategorywithReadtytoprintorderAsync(OrderType, StartDate, EndDate, ComputerName);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetAllCategoryResponseGetAllCategoryResult> GetAllCategoryAsync()
+        public System.Threading.Tasks.Task<ServiceReference2.GetAllCategoryResponseGetAllCategoryResult> GetAllCategoryAsync()
         {
             return base.Channel.GetAllCategoryAsync();
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetCategoryResponseGetCategoryResult> GetCategoryAsync()
+        public System.Threading.Tasks.Task<ServiceReference2.GetCategoryResponseGetCategoryResult> GetCategoryAsync()
         {
             return base.Channel.GetCategoryAsync();
         }
@@ -11548,12 +11602,7 @@ namespace ServiceReference1
             return base.Channel.AutoTransferMainInventoryAsync(productid, Quantity, companyname, email);
         }
         
-        public System.Threading.Tasks.Task<string> updateStatusAfterAutoTransferForcefullyAsync(int productid, string companyname)
-        {
-            return base.Channel.updateStatusAfterAutoTransferForcefullyAsync(productid, companyname);
-        }
-        
-        public System.Threading.Tasks.Task<ServiceReference1.GetShoppingCartWithZeroPidResponseGetShoppingCartWithZeroPidResult> GetShoppingCartWithZeroPidAsync(int OrderId)
+        public System.Threading.Tasks.Task<ServiceReference2.GetShoppingCartWithZeroPidResponseGetShoppingCartWithZeroPidResult> GetShoppingCartWithZeroPidAsync(int OrderId)
         {
             return base.Channel.GetShoppingCartWithZeroPidAsync(OrderId);
         }
@@ -11563,37 +11612,42 @@ namespace ServiceReference1
             return base.Channel.CheckLoginDetailAsync(EMailField, PasswordField);
         }
         
+        public System.Threading.Tasks.Task<ServiceReference2.GetLoginDetailResponseGetLoginDetailResult> GetLoginDetailAsync(string EMailField, string PasswordField)
+        {
+            return base.Channel.GetLoginDetailAsync(EMailField, PasswordField);
+        }
+        
         public System.Threading.Tasks.Task<int> IsHazardProductAsync(int productid)
         {
             return base.Channel.IsHazardProductAsync(productid);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetScanInDataResponseGetScanInDataResult> GetScanInDataAsync(long scaninid)
+        public System.Threading.Tasks.Task<ServiceReference2.GetScanInDataResponseGetScanInDataResult> GetScanInDataAsync(long scaninid)
         {
             return base.Channel.GetScanInDataAsync(scaninid);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetProductDeliveryDataResponseGetProductDeliveryDataResult> GetProductDeliveryDataAsync(long Deliveryid)
+        public System.Threading.Tasks.Task<ServiceReference2.GetProductDeliveryDataResponseGetProductDeliveryDataResult> GetProductDeliveryDataAsync(long Deliveryid)
         {
             return base.Channel.GetProductDeliveryDataAsync(Deliveryid);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetInventoryIdResponseGetInventoryIdResult> GetInventoryIdAsync(long VariantId)
+        public System.Threading.Tasks.Task<ServiceReference2.GetInventoryIdResponseGetInventoryIdResult> GetInventoryIdAsync(long VariantId)
         {
             return base.Channel.GetInventoryIdAsync(VariantId);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.FillGridAgainstSkuwithcompanyResponseFillGridAgainstSkuwithcompanyResult> FillGridAgainstSkuwithcompanyAsync(string sku, string companyname)
+        public System.Threading.Tasks.Task<ServiceReference2.FillGridAgainstSkuwithcompanyResponseFillGridAgainstSkuwithcompanyResult> FillGridAgainstSkuwithcompanyAsync(string sku, string companyname)
         {
             return base.Channel.FillGridAgainstSkuwithcompanyAsync(sku, companyname);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.FillGridAgainstBarcodewithcompanyResponseFillGridAgainstBarcodewithcompanyResult> FillGridAgainstBarcodewithcompanyAsync(string Barcode, string companyname)
+        public System.Threading.Tasks.Task<ServiceReference2.FillGridAgainstBarcodewithcompanyResponseFillGridAgainstBarcodewithcompanyResult> FillGridAgainstBarcodewithcompanyAsync(string Barcode, string companyname)
         {
             return base.Channel.FillGridAgainstBarcodewithcompanyAsync(Barcode, companyname);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetFBAOrderingResponseGetFBAOrderingResult> GetFBAOrderingAsync(string Barcode, string companyname)
+        public System.Threading.Tasks.Task<ServiceReference2.GetFBAOrderingResponseGetFBAOrderingResult> GetFBAOrderingAsync(string Barcode, string companyname)
         {
             return base.Channel.GetFBAOrderingAsync(Barcode, companyname);
         }
@@ -11608,51 +11662,51 @@ namespace ServiceReference1
             return base.Channel.GetexistExpiryAsync(MainProductId);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetCompanybycountryResponseGetCompanybycountryResult> GetCompanybycountryAsync(string country)
+        public System.Threading.Tasks.Task<ServiceReference2.GetCompanybycountryResponseGetCompanybycountryResult> GetCompanybycountryAsync(string country)
         {
             return base.Channel.GetCompanybycountryAsync(country);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetSupplierResponseGetSupplierResult> GetSupplierAsync()
+        public System.Threading.Tasks.Task<ServiceReference2.GetSupplierResponseGetSupplierResult> GetSupplierAsync()
         {
             return base.Channel.GetSupplierAsync();
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetCompanyResponseGetCompanyResult> GetCompanyAsync()
+        public System.Threading.Tasks.Task<ServiceReference2.GetCompanyResponseGetCompanyResult> GetCompanyAsync()
         {
             return base.Channel.GetCompanyAsync();
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetAccountNameResponseGetAccountNameResult> GetAccountNameAsync()
+        public System.Threading.Tasks.Task<ServiceReference2.GetAccountNameResponseGetAccountNameResult> GetAccountNameAsync()
         {
             return base.Channel.GetAccountNameAsync();
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetManualInvoiceResponseGetManualInvoiceResult> GetManualInvoiceAsync(string InvoiceNumber, string SKU)
+        public System.Threading.Tasks.Task<ServiceReference2.GetManualInvoiceResponseGetManualInvoiceResult> GetManualInvoiceAsync(string InvoiceNumber, string SKU)
         {
             return base.Channel.GetManualInvoiceAsync(InvoiceNumber, SKU);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetOrderTypeResponseGetOrderTypeResult> GetOrderTypeAsync(string InvoiceNumber)
+        public System.Threading.Tasks.Task<ServiceReference2.GetOrderTypeResponseGetOrderTypeResult> GetOrderTypeAsync(string InvoiceNumber)
         {
             return base.Channel.GetOrderTypeAsync(InvoiceNumber);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<ServiceReference1.SaveCaptureResponse> ServiceReference1.BarcodeWebServiceSoap.SaveCaptureAsync(ServiceReference1.SaveCaptureRequest request)
+        System.Threading.Tasks.Task<ServiceReference2.SaveCaptureResponse> ServiceReference2.BarcodeWebServiceSoap.SaveCaptureAsync(ServiceReference2.SaveCaptureRequest request)
         {
             return base.Channel.SaveCaptureAsync(request);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.SaveCaptureResponse> SaveCaptureAsync(string Name, string ContentType, byte[] arr, string SystemIp, string CreatedOn)
+        public System.Threading.Tasks.Task<ServiceReference2.SaveCaptureResponse> SaveCaptureAsync(string Name, string ContentType, byte[] arr, string SystemIp, string CreatedOn)
         {
-            ServiceReference1.SaveCaptureRequest inValue = new ServiceReference1.SaveCaptureRequest();
+            ServiceReference2.SaveCaptureRequest inValue = new ServiceReference2.SaveCaptureRequest();
             inValue.Name = Name;
             inValue.ContentType = ContentType;
             inValue.arr = arr;
             inValue.SystemIp = SystemIp;
             inValue.CreatedOn = CreatedOn;
-            return ((ServiceReference1.BarcodeWebServiceSoap)(this)).SaveCaptureAsync(inValue);
+            return ((ServiceReference2.BarcodeWebServiceSoap)(this)).SaveCaptureAsync(inValue);
         }
         
         public System.Threading.Tasks.Task<int> SaveCaptureLogAsync(string Name, string ContentType, string Data, string SystemIp, string CreatedOn)
@@ -11660,17 +11714,17 @@ namespace ServiceReference1
             return base.Channel.SaveCaptureLogAsync(Name, ContentType, Data, SystemIp, CreatedOn);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetInvoicePrintResponseGetInvoicePrintResult> GetInvoicePrintAsync(string strType, string OrderNumber)
+        public System.Threading.Tasks.Task<ServiceReference2.GetInvoicePrintResponseGetInvoicePrintResult> GetInvoicePrintAsync(string strType, string OrderNumber)
         {
             return base.Channel.GetInvoicePrintAsync(strType, OrderNumber);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetAllPerformaInvoiceResponseGetAllPerformaInvoiceResult> GetAllPerformaInvoiceAsync(System.DateTime dtfrom, System.DateTime dtend, string OrderNumber, string Country, string ProductName, string SKU, string ShippingFirstName, string CreatedBy, string CompanyName)
+        public System.Threading.Tasks.Task<ServiceReference2.GetAllPerformaInvoiceResponseGetAllPerformaInvoiceResult> GetAllPerformaInvoiceAsync(System.DateTime dtfrom, System.DateTime dtend, string OrderNumber, string Country, string ProductName, string SKU, string ShippingFirstName, string CreatedBy, string CompanyName)
         {
             return base.Channel.GetAllPerformaInvoiceAsync(dtfrom, dtend, OrderNumber, Country, ProductName, SKU, ShippingFirstName, CreatedBy, CompanyName);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetAllManualInvoiceResponseGetAllManualInvoiceResult> GetAllManualInvoiceAsync(System.DateTime dtfrom, System.DateTime dtend, string OrderNumber, string Country, string ProductName, string SKU, string ShippingFirstName, string CreatedBy, string CompanyName)
+        public System.Threading.Tasks.Task<ServiceReference2.GetAllManualInvoiceResponseGetAllManualInvoiceResult> GetAllManualInvoiceAsync(System.DateTime dtfrom, System.DateTime dtend, string OrderNumber, string Country, string ProductName, string SKU, string ShippingFirstName, string CreatedBy, string CompanyName)
         {
             return base.Channel.GetAllManualInvoiceAsync(dtfrom, dtend, OrderNumber, Country, ProductName, SKU, ShippingFirstName, CreatedBy, CompanyName);
         }
@@ -11718,7 +11772,7 @@ namespace ServiceReference1
             return base.Channel.SavePerformaInvoiceAsync(InvoiceNumber, SalesOrderNumber, InvoiceType, InvoiceDate, PaymentStatus, AmountPaidTo, ShippingName, EmailId, PhoneNo, ShippingAddress1, ShippingAddress2, City, Country, Zipcode, CurrencyCode, ShippingPrice, CompanyName, ProductId, MainProductId, ProductName, SKU, Barcode, Qty, Vat, VatPercent, ProductPrice, SalePrice, Discount, Commission, WarehouseExpense, CreatedBy, TotalPriceWithVat, TotalVat);
         }
         
-        public System.Threading.Tasks.Task<string> ImportOrderAsync(ServiceReference1.ImportOrderDtorderlist dtorderlist, string SalesChannel, string TotalAmount, string shippingcost, string InvoiceDate, string ShippingAddressName, string ShippingAddressAddressLine1, string ShippingAddressAddressLine2, string city, string country, string zipcode, string EmailId, string Phonenumber)
+        public System.Threading.Tasks.Task<string> ImportOrderAsync(ServiceReference2.ImportOrderDtorderlist dtorderlist, string SalesChannel, string TotalAmount, string shippingcost, string InvoiceDate, string ShippingAddressName, string ShippingAddressAddressLine1, string ShippingAddressAddressLine2, string city, string country, string zipcode, string EmailId, string Phonenumber)
         {
             return base.Channel.ImportOrderAsync(dtorderlist, SalesChannel, TotalAmount, shippingcost, InvoiceDate, ShippingAddressName, ShippingAddressAddressLine1, ShippingAddressAddressLine2, city, country, zipcode, EmailId, Phonenumber);
         }
@@ -11759,7 +11813,7 @@ namespace ServiceReference1
             return base.Channel.UpdateDeliveredqtyManualInvoiceAsync(InvoiceNumber, SKU, Qty);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetCompanyDetailsResponseGetCompanyDetailsResult> GetCompanyDetailsAsync(string companyname)
+        public System.Threading.Tasks.Task<ServiceReference2.GetCompanyDetailsResponseGetCompanyDetailsResult> GetCompanyDetailsAsync(string companyname)
         {
             return base.Channel.GetCompanyDetailsAsync(companyname);
         }
@@ -11779,7 +11833,7 @@ namespace ServiceReference1
             return base.Channel.GetDuplicateOrderAsync(ordernumber);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.getcourierserviceResponseGetcourierserviceResult> getcourierserviceAsync(string countryname)
+        public System.Threading.Tasks.Task<ServiceReference2.getcourierserviceResponseGetcourierserviceResult> getcourierserviceAsync(string countryname)
         {
             return base.Channel.getcourierserviceAsync(countryname);
         }
@@ -11809,27 +11863,27 @@ namespace ServiceReference1
             return base.Channel.SaveDoActionAsync(byaction, action, pagename, oldval, companyname, sku, barcode, ordernumber, asinitemid);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.ArrayOfXElement> GetPendingOrderDetailsbycompanyAsync(string productid, string companyname)
+        public System.Threading.Tasks.Task<ServiceReference2.ArrayOfXElement> GetPendingOrderDetailsbycompanyAsync(string productid, string companyname)
         {
             return base.Channel.GetPendingOrderDetailsbycompanyAsync(productid, companyname);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.ArrayOfXElement> GetPendingOrderDetailsAsync(string Barcode, string companyname)
+        public System.Threading.Tasks.Task<ServiceReference2.ArrayOfXElement> GetPendingOrderDetailsAsync(string Barcode, string companyname)
         {
             return base.Channel.GetPendingOrderDetailsAsync(Barcode, companyname);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetDefaultVarientDetailsResponseGetDefaultVarientDetailsResult> GetDefaultVarientDetailsAsync(string ProductId, string companyname)
+        public System.Threading.Tasks.Task<ServiceReference2.GetDefaultVarientDetailsResponseGetDefaultVarientDetailsResult> GetDefaultVarientDetailsAsync(string ProductId, string companyname)
         {
             return base.Channel.GetDefaultVarientDetailsAsync(ProductId, companyname);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetDefaultVarientDetailResponseGetDefaultVarientDetailResult> GetDefaultVarientDetailAsync(string ProductId)
+        public System.Threading.Tasks.Task<ServiceReference2.GetDefaultVarientDetailResponseGetDefaultVarientDetailResult> GetDefaultVarientDetailAsync(string ProductId)
         {
             return base.Channel.GetDefaultVarientDetailAsync(ProductId);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetDefaultVarientDetailsupdatedResponseGetDefaultVarientDetailsupdatedResult> GetDefaultVarientDetailsupdatedAsync(string ProductId)
+        public System.Threading.Tasks.Task<ServiceReference2.GetDefaultVarientDetailsupdatedResponseGetDefaultVarientDetailsupdatedResult> GetDefaultVarientDetailsupdatedAsync(string ProductId)
         {
             return base.Channel.GetDefaultVarientDetailsupdatedAsync(ProductId);
         }
@@ -11954,17 +12008,17 @@ namespace ServiceReference1
             return base.Channel.UpdateProductQuantityforASTAsync(Inventory, ProductID, VariantID, isType, supplierid);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.getinventorybycompanyResponseGetinventorybycompanyResult> getinventorybycompanyAsync(string productid, string companyname)
+        public System.Threading.Tasks.Task<ServiceReference2.getinventorybycompanyResponseGetinventorybycompanyResult> getinventorybycompanyAsync(string productid, string companyname)
         {
             return base.Channel.getinventorybycompanyAsync(productid, companyname);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.getinventoryResponseGetinventoryResult> getinventoryAsync(string productid)
+        public System.Threading.Tasks.Task<ServiceReference2.getinventoryResponseGetinventoryResult> getinventoryAsync(string productid)
         {
             return base.Channel.getinventoryAsync(productid);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetExpirydatewithskubarcodebycompanyResponseGetExpirydatewithskubarcodebycompanyResult> GetExpirydatewithskubarcodebycompanyAsync(string sku, string barcode, string companyname)
+        public System.Threading.Tasks.Task<ServiceReference2.GetExpirydatewithskubarcodebycompanyResponseGetExpirydatewithskubarcodebycompanyResult> GetExpirydatewithskubarcodebycompanyAsync(string sku, string barcode, string companyname)
         {
             return base.Channel.GetExpirydatewithskubarcodebycompanyAsync(sku, barcode, companyname);
         }
@@ -11979,7 +12033,7 @@ namespace ServiceReference1
             return base.Channel.saveproductdeliverywithexpiryoutAsync(dttime, qty, deliveryid, companyname, barcode, sku, type);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetExpirydatewithskubarcodeWithoutexpiryroomdateResponseGetExpirydatewithskubarcodeWithoutexpiryroomdateResult> GetExpirydatewithskubarcodeWithoutexpiryroomdateAsync(string sku, string barcode, string companyname)
+        public System.Threading.Tasks.Task<ServiceReference2.GetExpirydatewithskubarcodeWithoutexpiryroomdateResponseGetExpirydatewithskubarcodeWithoutexpiryroomdateResult> GetExpirydatewithskubarcodeWithoutexpiryroomdateAsync(string sku, string barcode, string companyname)
         {
             return base.Channel.GetExpirydatewithskubarcodeWithoutexpiryroomdateAsync(sku, barcode, companyname);
         }
@@ -12042,11 +12096,6 @@ namespace ServiceReference1
         public System.Threading.Tasks.Task<string> UpdateFBAInventoryByVarientAsync(string VarientId, string mquantity, string quantity, string company)
         {
             return base.Channel.UpdateFBAInventoryByVarientAsync(VarientId, mquantity, quantity, company);
-        }
-        
-        public System.Threading.Tasks.Task<string> UpdateInventoryQuantityByVarientSFPcompanyAsync(string VarientId, string mquantity, string quantity, string company)
-        {
-            return base.Channel.UpdateInventoryQuantityByVarientSFPcompanyAsync(VarientId, mquantity, quantity, company);
         }
         
         public System.Threading.Tasks.Task<string> HelloWorldAsync()
@@ -12129,12 +12178,12 @@ namespace ServiceReference1
             return base.Channel.UpdateDeliveredQuantityAsync(DeliveredQuantity, OrderNumber, ShoppingCartRecID, CustomerID, ProductID, VariantID);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetProductDetailResponseGetProductDetailResult> GetProductDetailAsync(string barcode)
+        public System.Threading.Tasks.Task<ServiceReference2.GetProductDetailResponseGetProductDetailResult> GetProductDetailAsync(string barcode)
         {
             return base.Channel.GetProductDetailAsync(barcode);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetOrderResponseGetOrderResult> GetOrderAsync(int orderId)
+        public System.Threading.Tasks.Task<ServiceReference2.GetOrderResponseGetOrderResult> GetOrderAsync(int orderId)
         {
             return base.Channel.GetOrderAsync(orderId);
         }
@@ -12149,12 +12198,12 @@ namespace ServiceReference1
             return base.Channel.IsFORCE_VOIDEDAsync(orderId);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetCustomerResponseGetCustomerResult> GetCustomerAsync(int CustomerId)
+        public System.Threading.Tasks.Task<ServiceReference2.GetCustomerResponseGetCustomerResult> GetCustomerAsync(int CustomerId)
         {
             return base.Channel.GetCustomerAsync(CustomerId);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetBarCodeByVIdResponseGetBarCodeByVIdResult> GetBarCodeByVIdAsync(string SKUSuffix, int VariantId)
+        public System.Threading.Tasks.Task<ServiceReference2.GetBarCodeByVIdResponseGetBarCodeByVIdResult> GetBarCodeByVIdAsync(string SKUSuffix, int VariantId)
         {
             return base.Channel.GetBarCodeByVIdAsync(SKUSuffix, VariantId);
         }
@@ -12169,17 +12218,17 @@ namespace ServiceReference1
             return base.Channel.GetcompanynameAsync(OrderId);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetVariantByPIdnSKuResponseGetVariantByPIdnSKuResult> GetVariantByPIdnSKuAsync(string SKUSuffix, int ProductId)
+        public System.Threading.Tasks.Task<ServiceReference2.GetVariantByPIdnSKuResponseGetVariantByPIdnSKuResult> GetVariantByPIdnSKuAsync(string SKUSuffix, int ProductId)
         {
             return base.Channel.GetVariantByPIdnSKuAsync(SKUSuffix, ProductId);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetBarCodeByPIdwithcompanyResponseGetBarCodeByPIdwithcompanyResult> GetBarCodeByPIdwithcompanyAsync(string SKU, int ProductId, string companyname)
+        public System.Threading.Tasks.Task<ServiceReference2.GetBarCodeByPIdwithcompanyResponseGetBarCodeByPIdwithcompanyResult> GetBarCodeByPIdwithcompanyAsync(string SKU, int ProductId, string companyname)
         {
             return base.Channel.GetBarCodeByPIdwithcompanyAsync(SKU, ProductId, companyname);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.ArrayOfXElement> getwarehouseanouncementAsync(string email)
+        public System.Threading.Tasks.Task<ServiceReference2.ArrayOfXElement> getwarehouseanouncementAsync(string email)
         {
             return base.Channel.getwarehouseanouncementAsync(email);
         }
@@ -12216,17 +12265,17 @@ namespace ServiceReference1
             return base.Channel.SaveProductDeliveryAsync(OrderNumber, ProductId, VariantId, DeliveredQuantity, DeliveredSKU, DeliveredBarcode, Email, InvoiceNo, InvoiceDate, SupplierId, reson, dockedno, val, qty, creditStock, ValueExcVat, ValueIncVat, ManualOrderNo, CreditNoteNo, Inventoryfor, CompanyName, comment);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetBarCodeByPIdskuResponseGetBarCodeByPIdskuResult> GetBarCodeByPIdskuAsync(string SKU, int ProductId, string companyname)
+        public System.Threading.Tasks.Task<ServiceReference2.GetBarCodeByPIdskuResponseGetBarCodeByPIdskuResult> GetBarCodeByPIdskuAsync(string SKU, int ProductId, string companyname)
         {
             return base.Channel.GetBarCodeByPIdskuAsync(SKU, ProductId, companyname);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetSKUByOrderResponseGetSKUByOrderResult> GetSKUByOrderAsync(int OrderNumber, int VariantId)
+        public System.Threading.Tasks.Task<ServiceReference2.GetSKUByOrderResponseGetSKUByOrderResult> GetSKUByOrderAsync(int OrderNumber, int VariantId)
         {
             return base.Channel.GetSKUByOrderAsync(OrderNumber, VariantId);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetProductResponseGetProductResult> GetProductAsync(int ProductId)
+        public System.Threading.Tasks.Task<ServiceReference2.GetProductResponseGetProductResult> GetProductAsync(int ProductId)
         {
             return base.Channel.GetProductAsync(ProductId);
         }
@@ -12246,32 +12295,32 @@ namespace ServiceReference1
             return base.Channel.SaveProductINdamageroomAsync(ProductId, VariantId, damageqty, SKU, Barcode, Email, InvoiceNo, InvoiceDate, SupplierId, reson, val, Expmsg, expdate, Inventoryfor, CompanyName);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetDamageExpirydateResponseGetDamageExpirydateResult> GetDamageExpirydateAsync(string sku, string barcode, string inventoryfor)
+        public System.Threading.Tasks.Task<ServiceReference2.GetDamageExpirydateResponseGetDamageExpirydateResult> GetDamageExpirydateAsync(string sku, string barcode, string inventoryfor)
         {
             return base.Channel.GetDamageExpirydateAsync(sku, barcode, inventoryfor);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetDamageExpirydtResponseGetDamageExpirydtResult> GetDamageExpirydtAsync(string sku, string barcode, string companyname)
+        public System.Threading.Tasks.Task<ServiceReference2.GetDamageExpirydtResponseGetDamageExpirydtResult> GetDamageExpirydtAsync(string sku, string barcode, string companyname)
         {
             return base.Channel.GetDamageExpirydtAsync(sku, barcode, companyname);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetDamageExpiryResponseGetDamageExpiryResult> GetDamageExpiryAsync(string sku, string inventoryfor)
+        public System.Threading.Tasks.Task<ServiceReference2.GetDamageExpiryResponseGetDamageExpiryResult> GetDamageExpiryAsync(string sku, string inventoryfor)
         {
             return base.Channel.GetDamageExpiryAsync(sku, inventoryfor);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetDamageExpirymsgResponseGetDamageExpirymsgResult> GetDamageExpirymsgAsync(string sku, string Companyname)
+        public System.Threading.Tasks.Task<ServiceReference2.GetDamageExpirymsgResponseGetDamageExpirymsgResult> GetDamageExpirymsgAsync(string sku, string Companyname)
         {
             return base.Channel.GetDamageExpirymsgAsync(sku, Companyname);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetShoppingCartResponseGetShoppingCartResult> GetShoppingCartAsync(int OrderId)
+        public System.Threading.Tasks.Task<ServiceReference2.GetShoppingCartResponseGetShoppingCartResult> GetShoppingCartAsync(int OrderId)
         {
             return base.Channel.GetShoppingCartAsync(OrderId);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetShoppingCartMultipleResponseGetShoppingCartMultipleResult> GetShoppingCartMultipleAsync(int OrderId)
+        public System.Threading.Tasks.Task<ServiceReference2.GetShoppingCartMultipleResponseGetShoppingCartMultipleResult> GetShoppingCartMultipleAsync(int OrderId)
         {
             return base.Channel.GetShoppingCartMultipleAsync(OrderId);
         }
@@ -12281,7 +12330,7 @@ namespace ServiceReference1
             return base.Channel.UpdateMultipleShopingCartAsync(Ordernumber, productid, variantid, qty, deliverby, companyname);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetShoppingCartupdateResponseGetShoppingCartupdateResult> GetShoppingCartupdateAsync(int OrderId)
+        public System.Threading.Tasks.Task<ServiceReference2.GetShoppingCartupdateResponseGetShoppingCartupdateResult> GetShoppingCartupdateAsync(int OrderId)
         {
             return base.Channel.GetShoppingCartupdateAsync(OrderId);
         }
@@ -12380,7 +12429,7 @@ namespace ServiceReference1
             return base.Channel.UpdateProductDeliveryexpiryAsync(DeliveryId, DeliveredQty, expmsg, expdate);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.getDeliveryexpiryResponseGetDeliveryexpiryResult> getDeliveryexpiryAsync(long DeliveryId)
+        public System.Threading.Tasks.Task<ServiceReference2.getDeliveryexpiryResponseGetDeliveryexpiryResult> getDeliveryexpiryAsync(long DeliveryId)
         {
             return base.Channel.getDeliveryexpiryAsync(DeliveryId);
         }
@@ -12444,7 +12493,7 @@ namespace ServiceReference1
             return base.Channel.UpdateexpirymsgAsync(dateold, datenew, qty, sku);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetOrderQuentityResponseGetOrderQuentityResult> GetOrderQuentityAsync(int OrderNumber)
+        public System.Threading.Tasks.Task<ServiceReference2.GetOrderQuentityResponseGetOrderQuentityResult> GetOrderQuentityAsync(int OrderNumber)
         {
             return base.Channel.GetOrderQuentityAsync(OrderNumber);
         }
@@ -12469,7 +12518,7 @@ namespace ServiceReference1
             return base.Channel.checkexpiryqtybymultipledateAsync(expiry, expiry2, expiry3, barcode, companyname, sku);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetTrackedOrderResponseGetTrackedOrderResult> GetTrackedOrderAsync(string ordernumber)
+        public System.Threading.Tasks.Task<ServiceReference2.GetTrackedOrderResponseGetTrackedOrderResult> GetTrackedOrderAsync(string ordernumber)
         {
             return base.Channel.GetTrackedOrderAsync(ordernumber);
         }
@@ -12519,12 +12568,12 @@ namespace ServiceReference1
             return base.Channel.UpdateInventoryByVarientPscanoutSFPAsync(VarientId, mquantity, quantity, companyname);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.getinventoryallResponseGetinventoryallResult> getinventoryallAsync(string productid, string countryname)
+        public System.Threading.Tasks.Task<ServiceReference2.getinventoryallResponseGetinventoryallResult> getinventoryallAsync(string productid, string countryname)
         {
             return base.Channel.getinventoryallAsync(productid, countryname);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.getBankHolidaysResponseGetBankHolidaysResult> getBankHolidaysAsync()
+        public System.Threading.Tasks.Task<ServiceReference2.getBankHolidaysResponseGetBankHolidaysResult> getBankHolidaysAsync()
         {
             return base.Channel.getBankHolidaysAsync();
         }

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<EyeMezzexz.Models.ScreenCaptureDataViewModel>
+﻿@model MezzexEye.Models.PaginatedScreenCaptureDataViewModel
 
 @{
     ViewData["Title"] = "Screen Capture Data";
@@ -6,31 +6,47 @@
 
 <h1 class="mb-4 text-center">Screen Capture Data</h1>
 
-<div class="row row-cols-1 row-cols-md-3 g-4">
-    @foreach (var item in Model)
-    {
-        <div class="col">
-            <div class="card">
-                <img src="@item.ImageUrl" class="card-img-top img-thumbnail" alt="Screenshot" data-bs-toggle="modal" data-bs-target="#imageModal" data-bs-username="@item.Username" data-bs-img="@item.ImageUrl" />
-                <div class="card-body">
-                    <h5 class="card-title">@item.Username</h5>
-                    <p class="card-text">
-                        <strong>Timestamp:</strong> @item.Timestamp<br />
-                        <strong>System Name:</strong> @item.SystemName<br />
-                        <strong>Task Name:</strong> @item.TaskName
-                    </p>
-                </div>
-            </div>
+<div class="mb-4 text-center">
+    <form id="filterForm" method="get" class="d-flex justify-content-center align-items-center flex-wrap">
+        <div class="me-2 mt-3">
+            <label for="username" class="form-label me-2">Username:</label>
+            <select id="username" name="username" class="form-select">
+                <option value="">All</option>
+                @foreach (var user in ViewBag.Usernames as List<string>)
+                {
+                    <option value="@user">@user</option>
+                }
+            </select>
         </div>
-    }
+
+        <div class="me-2 mt-3">
+            <label for="date" class="form-label me-2">Date:</label>
+            <input type="date" id="date" name="date" class="form-control">
+        </div>
+
+        <div class="me-2 mt-5">
+            <button type="submit" class="btn btn-primary">Filter</button>
+        </div>
+    </form>
+</div>
+
+<div id="screenCaptureData">
+    @await Html.PartialAsync("_ScreenCaptureData", Model)
 </div>
 
 <!-- Image Modal -->
 <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="imageModalLabel">Screenshot</h5>
+            <div class="modal-header d-flex justify-content-between align-items-center">
+                <div class="d-flex align-items-center">
+                    <h5 class="modal-title me-3" id="imageModalLabel">Screenshot</h5>
+                    <div id="modalDetails" class="d-flex">
+                        <p class="me-3"><strong>User:</strong> <span id="modalUsername"></span></p>
+                        <p class="me-3"><strong>Created Time:</strong> <span id="modalTimestamp"></span></p>
+                        <p><strong>Task Name:</strong> <span id="modalTaskName"></span></p>
+                    </div>
+                </div>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body text-center position-relative">
@@ -46,44 +62,125 @@
     </div>
 </div>
 
-@section Scripts {
-    <script>
+<script>
+    document.getElementById('filterForm').addEventListener('submit', function (event) {
+        event.preventDefault();
+        loadPage(1);
+    });
+
+    function loadPage(page) {
+        const formData = new FormData(document.getElementById('filterForm'));
+        formData.append('page', page);
+        const queryString = new URLSearchParams(formData).toString();
+
+        fetch(`/DataForView/ViewScreenCaptureData?${queryString}`, {
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest'
+            }
+        })
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById('screenCaptureData').innerHTML = html;
+                attachPaginationEvents();
+                attachModalEvents();
+            })
+            .catch(error => console.error('Error:', error));
+    }
+
+    function attachPaginationEvents() {
+        document.querySelectorAll('.pagination a[data-page]').forEach(link => {
+            link.addEventListener('click', function (event) {
+                event.preventDefault();
+                const page = this.getAttribute('data-page');
+                loadPage(page);
+            });
+        });
+
+        document.getElementById('prevPage').addEventListener('click', function (event) {
+            event.preventDefault();
+            const currentPage = parseInt(document.querySelector('.pagination .active a').getAttribute('data-page'));
+            if (currentPage > 1) {
+                loadPage(currentPage - 1);
+            }
+        });
+
+        document.getElementById('nextPage').addEventListener('click', function (event) {
+            event.preventDefault();
+            const currentPage = parseInt(document.querySelector('.pagination .active a').getAttribute('data-page'));
+            const totalPages = @Model.TotalPages;
+            if (currentPage < totalPages) {
+                loadPage(currentPage + 1);
+            }
+        });
+    }
+
+    function attachModalEvents() {
         var imageModal = document.getElementById('imageModal');
         var allImages = [];
         var currentIndex = 0;
 
+        function updateModalDetails(imageUrl) {
+            var currentImageElement = document.querySelector('img[data-bs-img="' + imageUrl + '"]');
+            var username = currentImageElement.getAttribute('data-bs-username');
+            var timestamp = currentImageElement.getAttribute('data-bs-timestamp');
+            var taskName = currentImageElement.getAttribute('data-bs-taskname');
+
+            var modalUsername = document.getElementById('modalUsername');
+            var modalTimestamp = document.getElementById('modalTimestamp');
+            var modalTaskName = document.getElementById('modalTaskName');
+
+            modalUsername.textContent = username;
+            modalTimestamp.textContent = timestamp;
+            modalTaskName.textContent = taskName;
+        }
+
         imageModal.addEventListener('show.bs.modal', function (event) {
             var button = event.relatedTarget;
-            var username = button.getAttribute('data-bs-username');
             var imageUrl = button.getAttribute('data-bs-img');
             currentIndex = 0;
 
-            allImages = Array.from(document.querySelectorAll('img[data-bs-username="' + username + '"]')).map(img => img.getAttribute('data-bs-img'));
+            allImages = Array.from(document.querySelectorAll('img[data-bs-username="' + button.getAttribute('data-bs-username') + '"]')).map(img => img.getAttribute('data-bs-img'));
 
             var modalImage = imageModal.querySelector('#modalImage');
+
             modalImage.src = imageUrl;
             currentIndex = allImages.indexOf(imageUrl);
+
+            updateModalDetails(imageUrl);
         });
 
         document.getElementById('prevImage').addEventListener('click', function () {
             if (allImages.length > 0) {
                 currentIndex = (currentIndex - 1 + allImages.length) % allImages.length;
-                document.getElementById('modalImage').src = allImages[currentIndex];
+                var newImageUrl = allImages[currentIndex];
+                document.getElementById('modalImage').src = newImageUrl;
+                updateModalDetails(newImageUrl);
             }
         });
 
         document.getElementById('nextImage').addEventListener('click', function () {
             if (allImages.length > 0) {
                 currentIndex = (currentIndex + 1) % allImages.length;
-                document.getElementById('modalImage').src = allImages[currentIndex];
+                var newImageUrl = allImages[currentIndex];
+                document.getElementById('modalImage').src = newImageUrl;
+                updateModalDetails(newImageUrl);
             }
         });
-    </script>
-}
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        attachPaginationEvents();
+        attachModalEvents();
+    });
+</script>
 
 <style>
     .modal-lg {
         max-width: 90%;
+    }
+
+    #modalDetails p {
+        margin: 0;
     }
 
     .modal-body {
@@ -103,4 +200,26 @@
         .btn-secondary i {
             color: white;
         }
+
+    #filterForm label {
+        margin-bottom: 0;
+    }
+
+    #filterForm {
+        gap: 1rem; /* Adds space between the form elements */
+    }
+
+        #filterForm .form-label {
+            margin-bottom: 0.5rem;
+        }
+
+        #filterForm .form-select,
+        #filterForm .form-control,
+        #filterForm .btn {
+            margin-bottom: 0;
+        }
+
+    #modalDetails p {
+        margin: 0.5rem 0;
+    }
 </style>

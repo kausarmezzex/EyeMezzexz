@@ -1,0 +1,43 @@
+﻿@model MezzexEye.Models.PaginatedScreenCaptureDataViewModel
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    @foreach (var item in Model.ScreenCaptures)
+    {
+        <div class="col">
+            <div class="card">
+                <img src="@item.ImageUrl" class="card-img-top img-thumbnail" alt="Screenshot" data-bs-toggle="modal" data-bs-target="#imageModal" data-bs-username="@item.Username" data-bs-img="@item.ImageUrl" data-bs-timestamp="@item.Timestamp" data-bs-systemname="@item.SystemName" data-bs-taskname="@item.TaskName" />
+                <div class="card-body">
+                    <h5 class="card-title">@item.Username</h5>
+                    <p class="card-text">
+                        <strong>Created Time:</strong> @item.Timestamp<br />
+                        <strong>System Name:</strong> @item.SystemName<br />
+                        <strong>Task Name:</strong> @item.TaskName
+                    </p>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<div class="d-flex justify-content-center mt-4">
+    <nav>
+        <ul class="pagination">
+            <li class="page-item">
+                <a class="page-link" href="#" aria-label="Previous" id="prevPage">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            @for (int i = 1; i <= Model.TotalPages; i++)
+            {
+                <li class="page-item @(i == Model.CurrentPage ? "active" : "")">
+                    <a class="page-link" href="#" data-page="@i">@i</a>
+                </li>
+            }
+            <li class="page-item">
+                <a class="page-link" href="#" aria-label="Next" id="nextPage">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>
