@@ -7,165 +7,311 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ServiceReference2
+namespace ServiceReference1
 {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference2.BarcodeWebServiceSoap")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference1.BarcodeWebServiceSoap")]
     public interface BarcodeWebServiceSoap
     {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveStaffIn", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        int SaveStaffIn(string StaffEmailId, string ScanInTime, string CountryName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveStaffIn", ReplyAction="*")]
         System.Threading.Tasks.Task<int> SaveStaffInAsync(string StaffEmailId, string ScanInTime, string CountryName);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveStaffOut", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        int SaveStaffOut(string StaffEmailId, string ScanOutTime);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveStaffOut", ReplyAction="*")]
         System.Threading.Tasks.Task<int> SaveStaffOutAsync(string StaffEmailId, string ScanOutTime);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveStaffScanIn", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        int SaveStaffScanIn(string StaffEmailId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveStaffScanIn", ReplyAction="*")]
         System.Threading.Tasks.Task<int> SaveStaffScanInAsync(string StaffEmailId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveStaffScanOut", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        int SaveStaffScanOut(string StaffEmailId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveStaffScanOut", ReplyAction="*")]
         System.Threading.Tasks.Task<int> SaveStaffScanOutAsync(string StaffEmailId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/getproductdetailsbycompany", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.getproductdetailsbycompanyResponseGetproductdetailsbycompanyResult> getproductdetailsbycompanyAsync(string Companyname);
+        ServiceReference1.getproductdetailsbycompanyResponseGetproductdetailsbycompanyResult getproductdetailsbycompany(string Companyname);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/getproductdetailsbycompany", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.getproductdetailsbycompanyResponseGetproductdetailsbycompanyResult> getproductdetailsbycompanyAsync(string Companyname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetSellinglevel", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetSellinglevelResponseGetSellinglevelResult> GetSellinglevelAsync(string MainProductId);
+        ServiceReference1.GetSellinglevelResponseGetSellinglevelResult GetSellinglevel(string MainProductId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetSellinglevel", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetSellinglevelResponseGetSellinglevelResult> GetSellinglevelAsync(string MainProductId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/OrderRecievedScanByDetails", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.OrderRecievedScanByDetailsResponseOrderRecievedScanByDetailsResult> OrderRecievedScanByDetailsAsync(string ProductId);
+        ServiceReference1.OrderRecievedScanByDetailsResponseOrderRecievedScanByDetailsResult OrderRecievedScanByDetails(string ProductId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/OrderRecievedScanByDetails", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.OrderRecievedScanByDetailsResponseOrderRecievedScanByDetailsResult> OrderRecievedScanByDetailsAsync(string ProductId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetSameCustomerOrder", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetSameCustomerOrderResponseGetSameCustomerOrderResult> GetSameCustomerOrderAsync(string OrderNumber);
+        ServiceReference1.GetSameCustomerOrderResponseGetSameCustomerOrderResult GetSameCustomerOrder(string OrderNumber);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetSameCustomerOrder", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetSameCustomerOrderResponseGetSameCustomerOrderResult> GetSameCustomerOrderAsync(string OrderNumber);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/LastScanInDetails", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.LastScanInDetailsResponseLastScanInDetailsResult> LastScanInDetailsAsync(string ProductId);
+        ServiceReference1.LastScanInDetailsResponseLastScanInDetailsResult LastScanInDetails(string ProductId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/LastScanInDetails", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.LastScanInDetailsResponseLastScanInDetailsResult> LastScanInDetailsAsync(string ProductId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SameDayScanInDetails", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.SameDayScanInDetailsResponseSameDayScanInDetailsResult> SameDayScanInDetailsAsync(string MainProductId);
+        ServiceReference1.SameDayScanInDetailsResponseSameDayScanInDetailsResult SameDayScanInDetails(string MainProductId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SameDayScanInDetails", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.SameDayScanInDetailsResponseSameDayScanInDetailsResult> SameDayScanInDetailsAsync(string MainProductId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Get_Amazon_Click_And_Collect_Order_ForPickedUP", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.Get_Amazon_Click_And_Collect_Order_ForPickedUPResponseGet_Amazon_Click_And_Collect_Order_ForPickedUPResult> Get_Amazon_Click_And_Collect_Order_ForPickedUPAsync();
+        ServiceReference1.Get_Amazon_Click_And_Collect_Order_ForPickedUPResponseGet_Amazon_Click_And_Collect_Order_ForPickedUPResult Get_Amazon_Click_And_Collect_Order_ForPickedUP();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Get_Amazon_Click_And_Collect_Order_ForPickedUP", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.Get_Amazon_Click_And_Collect_Order_ForPickedUPResponseGet_Amazon_Click_And_Collect_Order_ForPickedUPResult> Get_Amazon_Click_And_Collect_Order_ForPickedUPAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Get_Saved_Notification_Time", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.Get_Saved_Notification_TimeResponseGet_Saved_Notification_TimeResult> Get_Saved_Notification_TimeAsync(string msgtype);
+        ServiceReference1.Get_Saved_Notification_TimeResponseGet_Saved_Notification_TimeResult Get_Saved_Notification_Time(string msgtype);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Get_Saved_Notification_Time", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.Get_Saved_Notification_TimeResponseGet_Saved_Notification_TimeResult> Get_Saved_Notification_TimeAsync(string msgtype);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/mergepdf", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<string> mergepdfAsync(ServiceReference2.mergepdfDT dt, string mergedFileName);
+        string mergepdf(ServiceReference1.mergepdfDT dt, string mergedFileName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/mergepdf", ReplyAction="*")]
+        System.Threading.Tasks.Task<string> mergepdfAsync(ServiceReference1.mergepdfDT dt, string mergedFileName);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ImportASTEbayOrders", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task ImportASTEbayOrdersAsync(ServiceReference2.ArrayOfXElement ds);
+        void ImportASTEbayOrders(ServiceReference1.ArrayOfXElement ds);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ImportASTEbayOrders", ReplyAction="*")]
+        System.Threading.Tasks.Task ImportASTEbayOrdersAsync(ServiceReference1.ArrayOfXElement ds);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ImportAmazonForAST", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task ImportAmazonForASTAsync(ServiceReference2.ArrayOfXElement ds);
+        void ImportAmazonForAST(ServiceReference1.ArrayOfXElement ds);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ImportAmazonForAST", ReplyAction="*")]
+        System.Threading.Tasks.Task ImportAmazonForASTAsync(ServiceReference1.ArrayOfXElement ds);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/createconsignment", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        int createconsignment();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/createconsignment", ReplyAction="*")]
         System.Threading.Tasks.Task<int> createconsignmentAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/getlistofcreatedconsignment", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        int getlistofcreatedconsignment();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/getlistofcreatedconsignment", ReplyAction="*")]
         System.Threading.Tasks.Task<int> getlistofcreatedconsignmentAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/getlistofcreatedconsignmentast", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        int getlistofcreatedconsignmentast();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/getlistofcreatedconsignmentast", ReplyAction="*")]
         System.Threading.Tasks.Task<int> getlistofcreatedconsignmentastAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateAmazonClickAndCollectInventory", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        bool UpdateAmazonClickAndCollectInventory(long VariantId, int Qty, string Reason, string EmailId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateAmazonClickAndCollectInventory", ReplyAction="*")]
         System.Threading.Tasks.Task<bool> UpdateAmazonClickAndCollectInventoryAsync(long VariantId, int Qty, string Reason, string EmailId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/getACACInventory", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.getACACInventoryResponseGetACACInventoryResult> getACACInventoryAsync(string VariantId);
+        ServiceReference1.getACACInventoryResponseGetACACInventoryResult getACACInventory(string VariantId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/getACACInventory", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.getACACInventoryResponseGetACACInventoryResult> getACACInventoryAsync(string VariantId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/getOrderRecievedReadyToPrintforcomputer", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.getOrderRecievedReadyToPrintforcomputerResponseGetOrderRecievedReadyToPrintforcomputerResult> getOrderRecievedReadyToPrintforcomputerAsync(string computername, string companyname);
+        ServiceReference1.getOrderRecievedReadyToPrintforcomputerResponseGetOrderRecievedReadyToPrintforcomputerResult getOrderRecievedReadyToPrintforcomputer(string computername, string companyname);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/getOrderRecievedReadyToPrintforcomputer", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.getOrderRecievedReadyToPrintforcomputerResponseGetOrderRecievedReadyToPrintforcomputerResult> getOrderRecievedReadyToPrintforcomputerAsync(string computername, string companyname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/JKIOPUser", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.JKIOPUserResponseJKIOPUserResult> JKIOPUserAsync(string username, string password);
+        ServiceReference1.JKIOPUserResponseJKIOPUserResult JKIOPUser(string username, string password);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/JKIOPUser", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.JKIOPUserResponseJKIOPUserResult> JKIOPUserAsync(string username, string password);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/JKIOPGetAccessForRole", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.JKIOPGetAccessForRoleResponseJKIOPGetAccessForRoleResult> JKIOPGetAccessForRoleAsync(long RoleId);
+        ServiceReference1.JKIOPGetAccessForRoleResponseJKIOPGetAccessForRoleResult JKIOPGetAccessForRole(long RoleId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/JKIOPGetAccessForRole", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.JKIOPGetAccessForRoleResponseJKIOPGetAccessForRoleResult> JKIOPGetAccessForRoleAsync(long RoleId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/JKIOPLoadAllUser", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.JKIOPLoadAllUserResponseJKIOPLoadAllUserResult> JKIOPLoadAllUserAsync();
+        ServiceReference1.JKIOPLoadAllUserResponseJKIOPLoadAllUserResult JKIOPLoadAllUser();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/JKIOPLoadAllUser", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.JKIOPLoadAllUserResponseJKIOPLoadAllUserResult> JKIOPLoadAllUserAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveJKIOPUser", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string SaveJKIOPUser(string UserId, string RoleId, string UserName, string UserPassword, bool IsActive);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveJKIOPUser", ReplyAction="*")]
         System.Threading.Tasks.Task<string> SaveJKIOPUserAsync(string UserId, string RoleId, string UserName, string UserPassword, bool IsActive);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/JKIOPLoadAllStudent", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.JKIOPLoadAllStudentResponseJKIOPLoadAllStudentResult> JKIOPLoadAllStudentAsync();
+        ServiceReference1.JKIOPLoadAllStudentResponseJKIOPLoadAllStudentResult JKIOPLoadAllStudent();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/JKIOPLoadAllStudent", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.JKIOPLoadAllStudentResponseJKIOPLoadAllStudentResult> JKIOPLoadAllStudentAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/DeleteUserMaster", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        int DeleteUserMaster(long UserId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/DeleteUserMaster", ReplyAction="*")]
         System.Threading.Tasks.Task<int> DeleteUserMasterAsync(long UserId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetdAllStudentbysession", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetdAllStudentbysessionResponseGetdAllStudentbysessionResult> GetdAllStudentbysessionAsync(string session, string startdate, string enddate);
+        ServiceReference1.GetdAllStudentbysessionResponseGetdAllStudentbysessionResult GetdAllStudentbysession(string session, string startdate, string enddate);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetdAllStudentbysession", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetdAllStudentbysessionResponseGetdAllStudentbysessionResult> GetdAllStudentbysessionAsync(string session, string startdate, string enddate);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/DownloadUploadedfileById", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.DownloadUploadedfileByIdResponseDownloadUploadedfileByIdResult> DownloadUploadedfileByIdAsync(string FormType, string FormId);
+        ServiceReference1.DownloadUploadedfileByIdResponseDownloadUploadedfileByIdResult DownloadUploadedfileById(string FormType, string FormId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/DownloadUploadedfileById", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.DownloadUploadedfileByIdResponseDownloadUploadedfileByIdResult> DownloadUploadedfileByIdAsync(string FormType, string FormId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/DownloadUploadedfileBySupplier", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.DownloadUploadedfileBySupplierResponseDownloadUploadedfileBySupplierResult> DownloadUploadedfileBySupplierAsync(string FormType, string FormId);
+        ServiceReference1.DownloadUploadedfileBySupplierResponseDownloadUploadedfileBySupplierResult DownloadUploadedfileBySupplier(string FormType, string FormId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/DownloadUploadedfileBySupplier", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.DownloadUploadedfileBySupplierResponseDownloadUploadedfileBySupplierResult> DownloadUploadedfileBySupplierAsync(string FormType, string FormId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/JKIOPLoadStudentInfo", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.JKIOPLoadStudentInfoResponseJKIOPLoadStudentInfoResult> JKIOPLoadStudentInfoAsync(string StudentId);
+        ServiceReference1.JKIOPLoadStudentInfoResponseJKIOPLoadStudentInfoResult JKIOPLoadStudentInfo(string StudentId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/JKIOPLoadStudentInfo", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.JKIOPLoadStudentInfoResponseJKIOPLoadStudentInfoResult> JKIOPLoadStudentInfoAsync(string StudentId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/JKIOPLoadStudentPaymentInfo", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.JKIOPLoadStudentPaymentInfoResponseJKIOPLoadStudentPaymentInfoResult> JKIOPLoadStudentPaymentInfoAsync(string SPId);
+        ServiceReference1.JKIOPLoadStudentPaymentInfoResponseJKIOPLoadStudentPaymentInfoResult JKIOPLoadStudentPaymentInfo(string SPId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/JKIOPLoadStudentPaymentInfo", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.JKIOPLoadStudentPaymentInfoResponseJKIOPLoadStudentPaymentInfoResult> JKIOPLoadStudentPaymentInfoAsync(string SPId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveJKIOPUserRoll", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string SaveJKIOPUserRoll(string RoleName, string RoleId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveJKIOPUserRoll", ReplyAction="*")]
         System.Threading.Tasks.Task<string> SaveJKIOPUserRollAsync(string RoleName, string RoleId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/JKIOPLoadROll", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.JKIOPLoadROllResponseJKIOPLoadROllResult> JKIOPLoadROllAsync();
+        ServiceReference1.JKIOPLoadROllResponseJKIOPLoadROllResult JKIOPLoadROll();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/JKIOPLoadROll", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.JKIOPLoadROllResponseJKIOPLoadROllResult> JKIOPLoadROllAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/JKIOPUSERROll", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.JKIOPUSERROllResponseJKIOPUSERROllResult> JKIOPUSERROllAsync(long RoleId);
+        ServiceReference1.JKIOPUSERROllResponseJKIOPUSERROllResult JKIOPUSERROll(long RoleId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/JKIOPUSERROll", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.JKIOPUSERROllResponseJKIOPUSERROllResult> JKIOPUSERROllAsync(long RoleId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveJKIOPUserRollAccess", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string SaveJKIOPUserRollAccess(bool DeleteAccess, string ScreenId, bool ViewAccess, bool EditAccess, string RoleAccessId, string RoleId, bool LockEditAccess);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveJKIOPUserRollAccess", ReplyAction="*")]
         System.Threading.Tasks.Task<string> SaveJKIOPUserRollAccessAsync(bool DeleteAccess, string ScreenId, bool ViewAccess, bool EditAccess, string RoleAccessId, string RoleId, bool LockEditAccess);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/JKIOPGetAllScreenForRole", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.JKIOPGetAllScreenForRoleResponseJKIOPGetAllScreenForRoleResult> JKIOPGetAllScreenForRoleAsync(long RoleId);
+        ServiceReference1.JKIOPGetAllScreenForRoleResponseJKIOPGetAllScreenForRoleResult JKIOPGetAllScreenForRole(long RoleId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/JKIOPGetAllScreenForRole", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.JKIOPGetAllScreenForRoleResponseJKIOPGetAllScreenForRoleResult> JKIOPGetAllScreenForRoleAsync(long RoleId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveJKIOPStudent", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string SaveJKIOPStudent(
+                    string StudentId, 
+                    string RolleNumber, 
+                    string FName, 
+                    string LName, 
+                    string DOB, 
+                    string MobileNumber, 
+                    string AlternateNumber, 
+                    string Gender, 
+                    string EmailId, 
+                    string FatherName, 
+                    string FatherMobileNumber, 
+                    string MotherName, 
+                    string Address, 
+                    string City, 
+                    string State, 
+                    string Pincode, 
+                    string StudentImage, 
+                    string CourseName, 
+                    string TotalFees, 
+                    string PaymentMode, 
+                    string NoOfEMI, 
+                    string FirstAmount, 
+                    string FirstDate, 
+                    string SecondAmount, 
+                    string SecondDate, 
+                    string ThirdAmount, 
+                    string ThirdDate, 
+                    string FourthAmount, 
+                    string FourthDate, 
+                    string username, 
+                    string CourseYear, 
+                    string SessionYear);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveJKIOPStudent", ReplyAction="*")]
         System.Threading.Tasks.Task<string> SaveJKIOPStudentAsync(
                     string StudentId, 
                     string RolleNumber, 
@@ -202,6 +348,43 @@ namespace ServiceReference2
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveStudent", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string SaveStudent(
+                    string StudentId, 
+                    string RolleNumber, 
+                    string FName, 
+                    string LName, 
+                    string DOB, 
+                    string MobileNumber, 
+                    string AlternateNumber, 
+                    string Gender, 
+                    string EmailId, 
+                    string FatherName, 
+                    string FatherMobileNumber, 
+                    string MotherName, 
+                    string Address, 
+                    string City, 
+                    string State, 
+                    string Pincode, 
+                    string StudentImage, 
+                    string CourseName, 
+                    string TotalFees, 
+                    string PaymentMode, 
+                    string NoOfEMI, 
+                    string FirstAmount, 
+                    string FirstDate, 
+                    string SecondAmount, 
+                    string SecondDate, 
+                    string ThirdAmount, 
+                    string ThirdDate, 
+                    string FourthAmount, 
+                    string FourthDate, 
+                    string username, 
+                    string CourseYear, 
+                    string SessionYear, 
+                    string Cashamount, 
+                    string bankamount);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveStudent", ReplyAction="*")]
         System.Threading.Tasks.Task<string> SaveStudentAsync(
                     string StudentId, 
                     string RolleNumber, 
@@ -240,6 +423,44 @@ namespace ServiceReference2
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveStudentDetails", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string SaveStudentDetails(
+                    string StudentId, 
+                    string RolleNumber, 
+                    string FName, 
+                    string LName, 
+                    string DOB, 
+                    string MobileNumber, 
+                    string AlternateNumber, 
+                    string Gender, 
+                    string EmailId, 
+                    string FatherName, 
+                    string FatherMobileNumber, 
+                    string MotherName, 
+                    string Address, 
+                    string City, 
+                    string State, 
+                    string Pincode, 
+                    string StudentImage, 
+                    string CourseName, 
+                    string TotalFees, 
+                    string PaymentMode, 
+                    string NoOfEMI, 
+                    string FirstAmount, 
+                    string FirstDate, 
+                    string SecondAmount, 
+                    string SecondDate, 
+                    string ThirdAmount, 
+                    string ThirdDate, 
+                    string FourthAmount, 
+                    string FourthDate, 
+                    string username, 
+                    string CourseYear, 
+                    string SessionYear, 
+                    string Cashamount, 
+                    string bankamount, 
+                    bool IsDiscontinue);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveStudentDetails", ReplyAction="*")]
         System.Threading.Tasks.Task<string> SaveStudentDetailsAsync(
                     string StudentId, 
                     string RolleNumber, 
@@ -279,6 +500,46 @@ namespace ServiceReference2
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveStudentInfo", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string SaveStudentInfo(
+                    string StudentId, 
+                    string RolleNumber, 
+                    string FName, 
+                    string LName, 
+                    string DOB, 
+                    string MobileNumber, 
+                    string AlternateNumber, 
+                    string Gender, 
+                    string EmailId, 
+                    string FatherName, 
+                    string FatherMobileNumber, 
+                    string MotherName, 
+                    string Address, 
+                    string City, 
+                    string State, 
+                    string Pincode, 
+                    string StudentImage, 
+                    string CourseName, 
+                    string TotalFees, 
+                    string PaymentMode, 
+                    string NoOfEMI, 
+                    string FirstAmount, 
+                    string FirstDate, 
+                    string SecondAmount, 
+                    string SecondDate, 
+                    string ThirdAmount, 
+                    string ThirdDate, 
+                    string FourthAmount, 
+                    string FourthDate, 
+                    string username, 
+                    string CourseYear, 
+                    string SessionYear, 
+                    string Cashamount, 
+                    string bankamount, 
+                    bool IsDiscontinue, 
+                    bool IsSCStudent, 
+                    string LedgerNumber);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveStudentInfo", ReplyAction="*")]
         System.Threading.Tasks.Task<string> SaveStudentInfoAsync(
                     string StudentId, 
                     string RolleNumber, 
@@ -320,166 +581,306 @@ namespace ServiceReference2
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/JKIOPLoadPayment", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.JKIOPLoadPaymentResponseJKIOPLoadPaymentResult> JKIOPLoadPaymentAsync(string coursesession, string startdate, string enddate);
+        ServiceReference1.JKIOPLoadPaymentResponseJKIOPLoadPaymentResult JKIOPLoadPayment(string coursesession, string startdate, string enddate);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/JKIOPLoadPayment", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.JKIOPLoadPaymentResponseJKIOPLoadPaymentResult> JKIOPLoadPaymentAsync(string coursesession, string startdate, string enddate);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/checkip", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        int checkip(string ip);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/checkip", ReplyAction="*")]
         System.Threading.Tasks.Task<int> checkipAsync(string ip);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetRecievedamountHistory", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.ArrayOfXElement> GetRecievedamountHistoryAsync(string session);
+        ServiceReference1.ArrayOfXElement GetRecievedamountHistory(string session);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetRecievedamountHistory", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.ArrayOfXElement> GetRecievedamountHistoryAsync(string session);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetRecievedamountDetails", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.ArrayOfXElement> GetRecievedamountDetailsAsync(string session, string Name, string type);
+        ServiceReference1.ArrayOfXElement GetRecievedamountDetails(string session, string Name, string type);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetRecievedamountDetails", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.ArrayOfXElement> GetRecievedamountDetailsAsync(string session, string Name, string type);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetstudentforInvoice", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetstudentforInvoiceResponseGetstudentforInvoiceResult> GetstudentforInvoiceAsync(string RollNumber);
+        ServiceReference1.GetstudentforInvoiceResponseGetstudentforInvoiceResult GetstudentforInvoice(string RollNumber);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetstudentforInvoice", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetstudentforInvoiceResponseGetstudentforInvoiceResult> GetstudentforInvoiceAsync(string RollNumber);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/JKIOPLoadPaymentDetailBySPId", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.JKIOPLoadPaymentDetailBySPIdResponseJKIOPLoadPaymentDetailBySPIdResult> JKIOPLoadPaymentDetailBySPIdAsync(string SPId);
+        ServiceReference1.JKIOPLoadPaymentDetailBySPIdResponseJKIOPLoadPaymentDetailBySPIdResult JKIOPLoadPaymentDetailBySPId(string SPId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/JKIOPLoadPaymentDetailBySPId", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.JKIOPLoadPaymentDetailBySPIdResponseJKIOPLoadPaymentDetailBySPIdResult> JKIOPLoadPaymentDetailBySPIdAsync(string SPId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/JKIOPLoadPaymentBySPId", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.JKIOPLoadPaymentBySPIdResponseJKIOPLoadPaymentBySPIdResult> JKIOPLoadPaymentBySPIdAsync(string SPId);
+        ServiceReference1.JKIOPLoadPaymentBySPIdResponseJKIOPLoadPaymentBySPIdResult JKIOPLoadPaymentBySPId(string SPId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/JKIOPLoadPaymentBySPId", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.JKIOPLoadPaymentBySPIdResponseJKIOPLoadPaymentBySPIdResult> JKIOPLoadPaymentBySPIdAsync(string SPId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/JKIOPLoadPaymentByPaymentId", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.JKIOPLoadPaymentByPaymentIdResponseJKIOPLoadPaymentByPaymentIdResult> JKIOPLoadPaymentByPaymentIdAsync(string PId);
+        ServiceReference1.JKIOPLoadPaymentByPaymentIdResponseJKIOPLoadPaymentByPaymentIdResult JKIOPLoadPaymentByPaymentId(string PId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/JKIOPLoadPaymentByPaymentId", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.JKIOPLoadPaymentByPaymentIdResponseJKIOPLoadPaymentByPaymentIdResult> JKIOPLoadPaymentByPaymentIdAsync(string PId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveSubmitstudentpaymenttobankhandover", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string SaveSubmitstudentpaymenttobankhandover(string PId, bool IsHandOver, string HandoverName, string SubmitDate, string username, string SubmitTransactionnumber, string comment, string Depositeamount);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveSubmitstudentpaymenttobankhandover", ReplyAction="*")]
         System.Threading.Tasks.Task<string> SaveSubmitstudentpaymenttobankhandoverAsync(string PId, bool IsHandOver, string HandoverName, string SubmitDate, string username, string SubmitTransactionnumber, string comment, string Depositeamount);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SavePaymentInfo", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string SavePaymentInfo(string PId, string PaymentMode, string Amount, string EMIAmount, string BankTransactionNumber, bool IsHandOver, string HandoverName, string ApproveBy, string SubmitDate, string username, string StudentId, string Recieveddate, string SubmitTransactionnumber, string StudentPaymentId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SavePaymentInfo", ReplyAction="*")]
         System.Threading.Tasks.Task<string> SavePaymentInfoAsync(string PId, string PaymentMode, string Amount, string EMIAmount, string BankTransactionNumber, bool IsHandOver, string HandoverName, string ApproveBy, string SubmitDate, string username, string StudentId, string Recieveddate, string SubmitTransactionnumber, string StudentPaymentId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/deletePaymentInfo", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string deletePaymentInfo(long PId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/deletePaymentInfo", ReplyAction="*")]
         System.Threading.Tasks.Task<string> deletePaymentInfoAsync(long PId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/deletestudentPaymentInfo", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string deletestudentPaymentInfo(long SPId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/deletestudentPaymentInfo", ReplyAction="*")]
         System.Threading.Tasks.Task<string> deletestudentPaymentInfoAsync(long SPId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/deletestudentInfo", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string deletestudentInfo(long SId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/deletestudentInfo", ReplyAction="*")]
         System.Threading.Tasks.Task<string> deletestudentInfoAsync(long SId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/deleteSupplierPaymentHistory", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string deleteSupplierPaymentHistory(long SPId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/deleteSupplierPaymentHistory", ReplyAction="*")]
         System.Threading.Tasks.Task<string> deleteSupplierPaymentHistoryAsync(long SPId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/deleteSupplier", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string deleteSupplier(long SupplierId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/deleteSupplier", ReplyAction="*")]
         System.Threading.Tasks.Task<string> deleteSupplierAsync(long SupplierId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveDocuments", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string SaveDocuments(string DId, string Title, string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveDocuments", ReplyAction="*")]
         System.Threading.Tasks.Task<string> SaveDocumentsAsync(string DId, string Title, string username);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetDocument", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetDocumentResponseGetDocumentResult> GetDocumentAsync(string DocumentId);
+        ServiceReference1.GetDocumentResponseGetDocumentResult GetDocument(string DocumentId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetDocument", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetDocumentResponseGetDocumentResult> GetDocumentAsync(string DocumentId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetDocumentById", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetDocumentByIdResponseGetDocumentByIdResult> GetDocumentByIdAsync(string DocumentId);
+        ServiceReference1.GetDocumentByIdResponseGetDocumentByIdResult GetDocumentById(string DocumentId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetDocumentById", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetDocumentByIdResponseGetDocumentByIdResult> GetDocumentByIdAsync(string DocumentId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/deleteDocumentById", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string deleteDocumentById(long DId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/deleteDocumentById", ReplyAction="*")]
         System.Threading.Tasks.Task<string> deleteDocumentByIdAsync(long DId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveSupplierPaymentHistory", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string SaveSupplierPaymentHistory(string SPId, string supplierid, string ExpenseReason, string ExpenseAmount, bool IsApproved, string ApproveBy, string ExpenseImage, string username, string paymentmode, string transactionId, string PaymentDate);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveSupplierPaymentHistory", ReplyAction="*")]
         System.Threading.Tasks.Task<string> SaveSupplierPaymentHistoryAsync(string SPId, string supplierid, string ExpenseReason, string ExpenseAmount, bool IsApproved, string ApproveBy, string ExpenseImage, string username, string paymentmode, string transactionId, string PaymentDate);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/JKIOPLoadStaffExpense", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.JKIOPLoadStaffExpenseResponseJKIOPLoadStaffExpenseResult> JKIOPLoadStaffExpenseAsync();
+        ServiceReference1.JKIOPLoadStaffExpenseResponseJKIOPLoadStaffExpenseResult JKIOPLoadStaffExpense();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/JKIOPLoadStaffExpense", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.JKIOPLoadStaffExpenseResponseJKIOPLoadStaffExpenseResult> JKIOPLoadStaffExpenseAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/JKIOPLoadStaffExpenseById", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.JKIOPLoadStaffExpenseByIdResponseJKIOPLoadStaffExpenseByIdResult> JKIOPLoadStaffExpenseByIdAsync(string EId);
+        ServiceReference1.JKIOPLoadStaffExpenseByIdResponseJKIOPLoadStaffExpenseByIdResult JKIOPLoadStaffExpenseById(string EId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/JKIOPLoadStaffExpenseById", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.JKIOPLoadStaffExpenseByIdResponseJKIOPLoadStaffExpenseByIdResult> JKIOPLoadStaffExpenseByIdAsync(string EId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/JKIOPLoadSupplierById", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.JKIOPLoadSupplierByIdResponseJKIOPLoadSupplierByIdResult> JKIOPLoadSupplierByIdAsync(string SId);
+        ServiceReference1.JKIOPLoadSupplierByIdResponseJKIOPLoadSupplierByIdResult JKIOPLoadSupplierById(string SId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/JKIOPLoadSupplierById", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.JKIOPLoadSupplierByIdResponseJKIOPLoadSupplierByIdResult> JKIOPLoadSupplierByIdAsync(string SId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/JKIOPLoadSupplier", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.JKIOPLoadSupplierResponseJKIOPLoadSupplierResult> JKIOPLoadSupplierAsync(string supplier, string startdate, string enddate);
+        ServiceReference1.JKIOPLoadSupplierResponseJKIOPLoadSupplierResult JKIOPLoadSupplier(string supplier, string startdate, string enddate);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/JKIOPLoadSupplier", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.JKIOPLoadSupplierResponseJKIOPLoadSupplierResult> JKIOPLoadSupplierAsync(string supplier, string startdate, string enddate);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveJKIOPSupplier", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string SaveJKIOPSupplier(string SId, string Name, string Email, string PhoneNo, string Address, string Comment, string BankName, string AccountNo, string IFSCCode, string username, string amount);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveJKIOPSupplier", ReplyAction="*")]
         System.Threading.Tasks.Task<string> SaveJKIOPSupplierAsync(string SId, string Name, string Email, string PhoneNo, string Address, string Comment, string BankName, string AccountNo, string IFSCCode, string username, string amount);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/JKIOPLoadstudentbysearch", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.JKIOPLoadstudentbysearchResponseJKIOPLoadstudentbysearchResult> JKIOPLoadstudentbysearchAsync(string RollNumber, string Firstname, string FatherName, string dob);
+        ServiceReference1.JKIOPLoadstudentbysearchResponseJKIOPLoadstudentbysearchResult JKIOPLoadstudentbysearch(string RollNumber, string Firstname, string FatherName, string dob);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/JKIOPLoadstudentbysearch", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.JKIOPLoadstudentbysearchResponseJKIOPLoadstudentbysearchResult> JKIOPLoadstudentbysearchAsync(string RollNumber, string Firstname, string FatherName, string dob);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/JKIOPStudentPaymentInfo", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.JKIOPStudentPaymentInfoResponseJKIOPStudentPaymentInfoResult> JKIOPStudentPaymentInfoAsync(string StudentId);
+        ServiceReference1.JKIOPStudentPaymentInfoResponseJKIOPStudentPaymentInfoResult JKIOPStudentPaymentInfo(string StudentId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/JKIOPStudentPaymentInfo", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.JKIOPStudentPaymentInfoResponseJKIOPStudentPaymentInfoResult> JKIOPStudentPaymentInfoAsync(string StudentId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveSupplierExpenseHistory", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string SaveSupplierExpenseHistory(string HId, string EId, string PaymentMode, string Transactionnumber, string Amount, string PaidDate, bool IsApproved, string ApprovedBy, string ImageName, string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveSupplierExpenseHistory", ReplyAction="*")]
         System.Threading.Tasks.Task<string> SaveSupplierExpenseHistoryAsync(string HId, string EId, string PaymentMode, string Transactionnumber, string Amount, string PaidDate, bool IsApproved, string ApprovedBy, string ImageName, string username);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SupplierExpenseHistory", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.SupplierExpenseHistoryResponseSupplierExpenseHistoryResult> SupplierExpenseHistoryAsync(string EId);
+        ServiceReference1.SupplierExpenseHistoryResponseSupplierExpenseHistoryResult SupplierExpenseHistory(string EId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SupplierExpenseHistory", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.SupplierExpenseHistoryResponseSupplierExpenseHistoryResult> SupplierExpenseHistoryAsync(string EId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SupplierExpenseHistoryBYHid", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.SupplierExpenseHistoryBYHidResponseSupplierExpenseHistoryBYHidResult> SupplierExpenseHistoryBYHidAsync(string HId);
+        ServiceReference1.SupplierExpenseHistoryBYHidResponseSupplierExpenseHistoryBYHidResult SupplierExpenseHistoryBYHid(string HId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SupplierExpenseHistoryBYHid", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.SupplierExpenseHistoryBYHidResponseSupplierExpenseHistoryBYHidResult> SupplierExpenseHistoryBYHidAsync(string HId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveExternalLink", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string SaveExternalLink(string FormType, string FormId, string LastUpdate, string LinkDescription, string LinkFile, string LinkFileType, string Path, string isDrawing, string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveExternalLink", ReplyAction="*")]
         System.Threading.Tasks.Task<string> SaveExternalLinkAsync(string FormType, string FormId, string LastUpdate, string LinkDescription, string LinkFile, string LinkFileType, string Path, string isDrawing, string username);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/LoadExternalLinkByFormIdAndType", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.LoadExternalLinkByFormIdAndTypeResponseLoadExternalLinkByFormIdAndTypeResult> LoadExternalLinkByFormIdAndTypeAsync(string FormType, string FormId);
+        ServiceReference1.LoadExternalLinkByFormIdAndTypeResponseLoadExternalLinkByFormIdAndTypeResult LoadExternalLinkByFormIdAndType(string FormType, string FormId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/LoadExternalLinkByFormIdAndType", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.LoadExternalLinkByFormIdAndTypeResponseLoadExternalLinkByFormIdAndTypeResult> LoadExternalLinkByFormIdAndTypeAsync(string FormType, string FormId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/DeleteExternalRecord", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string DeleteExternalRecord(string ExernalId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/DeleteExternalRecord", ReplyAction="*")]
         System.Threading.Tasks.Task<string> DeleteExternalRecordAsync(string ExernalId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/LoadSupplierPaymentBySPId", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.LoadSupplierPaymentBySPIdResponseLoadSupplierPaymentBySPIdResult> LoadSupplierPaymentBySPIdAsync(string SPId);
+        ServiceReference1.LoadSupplierPaymentBySPIdResponseLoadSupplierPaymentBySPIdResult LoadSupplierPaymentBySPId(string SPId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/LoadSupplierPaymentBySPId", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.LoadSupplierPaymentBySPIdResponseLoadSupplierPaymentBySPIdResult> LoadSupplierPaymentBySPIdAsync(string SPId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/JKIOPSupplierPaymentBySupplierId", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.JKIOPSupplierPaymentBySupplierIdResponseJKIOPSupplierPaymentBySupplierIdResult> JKIOPSupplierPaymentBySupplierIdAsync(string SupplierId);
+        ServiceReference1.JKIOPSupplierPaymentBySupplierIdResponseJKIOPSupplierPaymentBySupplierIdResult JKIOPSupplierPaymentBySupplierId(string SupplierId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/JKIOPSupplierPaymentBySupplierId", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.JKIOPSupplierPaymentBySupplierIdResponseJKIOPSupplierPaymentBySupplierIdResult> JKIOPSupplierPaymentBySupplierIdAsync(string SupplierId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetStudentFine", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetStudentFineResponseGetStudentFineResult> GetStudentFineAsync(string CourseYear, string CourseSession, string fromdate, string todate);
+        ServiceReference1.GetStudentFineResponseGetStudentFineResult GetStudentFine(string CourseYear, string CourseSession, string fromdate, string todate);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetStudentFine", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetStudentFineResponseGetStudentFineResult> GetStudentFineAsync(string CourseYear, string CourseSession, string fromdate, string todate);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/getstudentinfobyrollnumber", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.getstudentinfobyrollnumberResponseGetstudentinfobyrollnumberResult> getstudentinfobyrollnumberAsync(string RollNumber);
+        ServiceReference1.getstudentinfobyrollnumberResponseGetstudentinfobyrollnumberResult getstudentinfobyrollnumber(string RollNumber);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/getstudentinfobyrollnumber", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.getstudentinfobyrollnumberResponseGetstudentinfobyrollnumberResult> getstudentinfobyrollnumberAsync(string RollNumber);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/getstudentfineinfobyFIneId", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.getstudentfineinfobyFIneIdResponseGetstudentfineinfobyFIneIdResult> getstudentfineinfobyFIneIdAsync(string FineId);
+        ServiceReference1.getstudentfineinfobyFIneIdResponseGetstudentfineinfobyFIneIdResult getstudentfineinfobyFIneId(string FineId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/getstudentfineinfobyFIneId", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.getstudentfineinfobyFIneIdResponseGetstudentfineinfobyFIneIdResult> getstudentfineinfobyFIneIdAsync(string FineId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/getstudentfineinfobyRollnumber", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.getstudentfineinfobyRollnumberResponseGetstudentfineinfobyRollnumberResult> getstudentfineinfobyRollnumberAsync(string RollNumber);
+        ServiceReference1.getstudentfineinfobyRollnumberResponseGetstudentfineinfobyRollnumberResult getstudentfineinfobyRollnumber(string RollNumber);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/getstudentfineinfobyRollnumber", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.getstudentfineinfobyRollnumberResponseGetstudentfineinfobyRollnumberResult> getstudentfineinfobyRollnumberAsync(string RollNumber);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveFinepaymenttobankhandover", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string SaveFinepaymenttobankhandover(string FId, bool IsHandOver, string HandoverName, string SubmitDate, string username, string SubmitTransactionnumber, string comment, string Depositeamount);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveFinepaymenttobankhandover", ReplyAction="*")]
         System.Threading.Tasks.Task<string> SaveFinepaymenttobankhandoverAsync(string FId, bool IsHandOver, string HandoverName, string SubmitDate, string username, string SubmitTransactionnumber, string comment, string Depositeamount);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveFinePaymentInfo", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string SaveFinePaymentInfo(
+                    string FId, 
+                    string PaymentMode, 
+                    string Amount, 
+                    string PaidAmount, 
+                    string FineAmount, 
+                    string BankTransactionNumber, 
+                    bool IsHandOver, 
+                    string HandoverName, 
+                    string DepositeDate, 
+                    string username, 
+                    string RollNumber, 
+                    string Recieveddate, 
+                    string SubmitTransactionnumber, 
+                    string FineComment, 
+                    string DepositeComment, 
+                    string Session, 
+                    string courseyear);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveFinePaymentInfo", ReplyAction="*")]
         System.Threading.Tasks.Task<string> SaveFinePaymentInfoAsync(
                     string FId, 
                     string PaymentMode, 
@@ -501,202 +902,375 @@ namespace ServiceReference2
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveRefundPaymentInfo", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string SaveRefundPaymentInfo(string RId, string PaymentMode, string Amount, string BankTransactionNumber, string RefundDate, string username, string RollNumber, string Comment, string Session, string courseyear, string approveby, string BankName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveRefundPaymentInfo", ReplyAction="*")]
         System.Threading.Tasks.Task<string> SaveRefundPaymentInfoAsync(string RId, string PaymentMode, string Amount, string BankTransactionNumber, string RefundDate, string username, string RollNumber, string Comment, string Session, string courseyear, string approveby, string BankName);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/getstudentRefundinfobyRollnumber", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.getstudentRefundinfobyRollnumberResponseGetstudentRefundinfobyRollnumberResult> getstudentRefundinfobyRollnumberAsync(string RollNumber);
+        ServiceReference1.getstudentRefundinfobyRollnumberResponseGetstudentRefundinfobyRollnumberResult getstudentRefundinfobyRollnumber(string RollNumber);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/getstudentRefundinfobyRollnumber", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.getstudentRefundinfobyRollnumberResponseGetstudentRefundinfobyRollnumberResult> getstudentRefundinfobyRollnumberAsync(string RollNumber);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/getstudentRefundinfobyRefundId", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.getstudentRefundinfobyRefundIdResponseGetstudentRefundinfobyRefundIdResult> getstudentRefundinfobyRefundIdAsync(string RId);
+        ServiceReference1.getstudentRefundinfobyRefundIdResponseGetstudentRefundinfobyRefundIdResult getstudentRefundinfobyRefundId(string RId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/getstudentRefundinfobyRefundId", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.getstudentRefundinfobyRefundIdResponseGetstudentRefundinfobyRefundIdResult> getstudentRefundinfobyRefundIdAsync(string RId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetStudentRefund", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetStudentRefundResponseGetStudentRefundResult> GetStudentRefundAsync(string CourseYear, string CourseSession, string fromdate, string todate);
+        ServiceReference1.GetStudentRefundResponseGetStudentRefundResult GetStudentRefund(string CourseYear, string CourseSession, string fromdate, string todate);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetStudentRefund", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetStudentRefundResponseGetStudentRefundResult> GetStudentRefundAsync(string CourseYear, string CourseSession, string fromdate, string todate);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveProductexpirylistinventory", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        int SaveProductexpirylistinventory(string productid, int qty, string Expiry, string CompanyName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveProductexpirylistinventory", ReplyAction="*")]
         System.Threading.Tasks.Task<int> SaveProductexpirylistinventoryAsync(string productid, int qty, string Expiry, string CompanyName);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveCollegeLog", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        int SaveCollegeLog(string LogType, string LogDescription, string OldValue, string NewValue, string RollNumber, string CreatedBy);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveCollegeLog", ReplyAction="*")]
         System.Threading.Tasks.Task<int> SaveCollegeLogAsync(string LogType, string LogDescription, string OldValue, string NewValue, string RollNumber, string CreatedBy);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveOfficeLeaveRequest", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        int SaveOfficeLeaveRequest(string StaffEmailId, string LeaveType, System.DateTime LFromDate, System.DateTime LToDate, string FromTime, string ToTime, string Reason, string CreatedBy);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveOfficeLeaveRequest", ReplyAction="*")]
         System.Threading.Tasks.Task<int> SaveOfficeLeaveRequestAsync(string StaffEmailId, string LeaveType, System.DateTime LFromDate, System.DateTime LToDate, string FromTime, string ToTime, string Reason, string CreatedBy);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/DeleteOfficeLeaveRequest", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        int DeleteOfficeLeaveRequest(string Id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/DeleteOfficeLeaveRequest", ReplyAction="*")]
         System.Threading.Tasks.Task<int> DeleteOfficeLeaveRequestAsync(string Id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetOfficeLeaveDetails", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetOfficeLeaveDetailsResponseGetOfficeLeaveDetailsResult> GetOfficeLeaveDetailsAsync(string EmailId, System.DateTime StartDate, System.DateTime EndDate, string RequestStatus, string LeaveType);
+        ServiceReference1.GetOfficeLeaveDetailsResponseGetOfficeLeaveDetailsResult GetOfficeLeaveDetails(string EmailId, System.DateTime StartDate, System.DateTime EndDate, string RequestStatus, string LeaveType);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetOfficeLeaveDetails", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetOfficeLeaveDetailsResponseGetOfficeLeaveDetailsResult> GetOfficeLeaveDetailsAsync(string EmailId, System.DateTime StartDate, System.DateTime EndDate, string RequestStatus, string LeaveType);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetDailyScheduleWork", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.ArrayOfXElement> GetDailyScheduleWorkAsync(string StaffEmailId);
+        ServiceReference1.ArrayOfXElement GetDailyScheduleWork(string StaffEmailId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetDailyScheduleWork", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.ArrayOfXElement> GetDailyScheduleWorkAsync(string StaffEmailId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetDailyScheduleWorks", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.ArrayOfXElement> GetDailyScheduleWorksAsync(string StaffEmailId, string TaskName, string CategoryId, string TeamName);
+        ServiceReference1.ArrayOfXElement GetDailyScheduleWorks(string StaffEmailId, string TaskName, string CategoryId, string TeamName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetDailyScheduleWorks", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.ArrayOfXElement> GetDailyScheduleWorksAsync(string StaffEmailId, string TaskName, string CategoryId, string TeamName);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetStaffRota", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetStaffRotaResponseGetStaffRotaResult> GetStaffRotaAsync(string EmailId, System.DateTime StartDate, System.DateTime EndDate);
+        ServiceReference1.GetStaffRotaResponseGetStaffRotaResult GetStaffRota(string EmailId, System.DateTime StartDate, System.DateTime EndDate);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetStaffRota", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetStaffRotaResponseGetStaffRotaResult> GetStaffRotaAsync(string EmailId, System.DateTime StartDate, System.DateTime EndDate);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetTaskName", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetTaskNameResponseGetTaskNameResult> GetTaskNameAsync();
+        ServiceReference1.GetTaskNameResponseGetTaskNameResult GetTaskName();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetTaskName", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetTaskNameResponseGetTaskNameResult> GetTaskNameAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetTaskNames", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetTaskNamesResponseGetTaskNamesResult> GetTaskNamesAsync(string countryname);
+        ServiceReference1.GetTaskNamesResponseGetTaskNamesResult GetTaskNames(string countryname);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetTaskNames", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetTaskNamesResponseGetTaskNamesResult> GetTaskNamesAsync(string countryname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetTeamName", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetTeamNameResponseGetTeamNameResult> GetTeamNameAsync();
+        ServiceReference1.GetTeamNameResponseGetTeamNameResult GetTeamName();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetTeamName", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetTeamNameResponseGetTeamNameResult> GetTeamNameAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetStaffCountryWise", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetStaffCountryWiseResponseGetStaffCountryWiseResult> GetStaffCountryWiseAsync(string CountryName);
+        ServiceReference1.GetStaffCountryWiseResponseGetStaffCountryWiseResult GetStaffCountryWise(string CountryName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetStaffCountryWise", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetStaffCountryWiseResponseGetStaffCountryWiseResult> GetStaffCountryWiseAsync(string CountryName);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/CheckTaskRunningOnComputer", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.CheckTaskRunningOnComputerResponseCheckTaskRunningOnComputerResult> CheckTaskRunningOnComputerAsync(string EmailId, string ComputerName);
+        ServiceReference1.CheckTaskRunningOnComputerResponseCheckTaskRunningOnComputerResult CheckTaskRunningOnComputer(string EmailId, string ComputerName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/CheckTaskRunningOnComputer", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.CheckTaskRunningOnComputerResponseCheckTaskRunningOnComputerResult> CheckTaskRunningOnComputerAsync(string EmailId, string ComputerName);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetTasks", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetTasksResponseGetTasksResult> GetTasksAsync(string CountryName);
+        ServiceReference1.GetTasksResponseGetTasksResult GetTasks(string CountryName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetTasks", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetTasksResponseGetTasksResult> GetTasksAsync(string CountryName);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetStaffInOut", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetStaffInOutResponseGetStaffInOutResult> GetStaffInOutAsync(string EmailId);
+        ServiceReference1.GetStaffInOutResponseGetStaffInOutResult GetStaffInOut(string EmailId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetStaffInOut", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetStaffInOutResponseGetStaffInOutResult> GetStaffInOutAsync(string EmailId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveTasksTimer", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        int SaveTasksTimer(string EmailId, string TaskType, int CategoryId, string StartTime, string Comment, string ComputerName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveTasksTimer", ReplyAction="*")]
         System.Threading.Tasks.Task<int> SaveTasksTimerAsync(string EmailId, string TaskType, int CategoryId, string StartTime, string Comment, string ComputerName);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateTasksTimer", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        int UpdateTasksTimer(int STId, string EndTime);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateTasksTimer", ReplyAction="*")]
         System.Threading.Tasks.Task<int> UpdateTasksTimerAsync(int STId, string EndTime);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/updateStatusAfterAutoTransferForcefully", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string updateStatusAfterAutoTransferForcefully(int productid, string companyname);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/updateStatusAfterAutoTransferForcefully", ReplyAction="*")]
         System.Threading.Tasks.Task<string> updateStatusAfterAutoTransferForcefullyAsync(int productid, string companyname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/checkproductcategoryforcomputer", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.checkproductcategoryforcomputerResponseCheckproductcategoryforcomputerResult> checkproductcategoryforcomputerAsync(string productid, string computername);
+        ServiceReference1.checkproductcategoryforcomputerResponseCheckproductcategoryforcomputerResult checkproductcategoryforcomputer(string productid, string computername);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/checkproductcategoryforcomputer", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.checkproductcategoryforcomputerResponseCheckproductcategoryforcomputerResult> checkproductcategoryforcomputerAsync(string productid, string computername);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Getcategoryforcomputer", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetcategoryforcomputerResponseGetcategoryforcomputerResult> GetcategoryforcomputerAsync(string computername);
+        ServiceReference1.GetcategoryforcomputerResponseGetcategoryforcomputerResult Getcategoryforcomputer(string computername);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Getcategoryforcomputer", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetcategoryforcomputerResponseGetcategoryforcomputerResult> GetcategoryforcomputerAsync(string computername);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Getunshippedorderforcomputer", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetunshippedorderforcomputerResponseGetunshippedorderforcomputerResult> GetunshippedorderforcomputerAsync(string computername, string companyname);
+        ServiceReference1.GetunshippedorderforcomputerResponseGetunshippedorderforcomputerResult Getunshippedorderforcomputer(string computername, string companyname);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Getunshippedorderforcomputer", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetunshippedorderforcomputerResponseGetunshippedorderforcomputerResult> GetunshippedorderforcomputerAsync(string computername, string companyname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/checkproductcategoryforcomputerbyordernumber", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.checkproductcategoryforcomputerbyordernumberResponseCheckproductcategoryforcomputerbyordernumberResult> checkproductcategoryforcomputerbyordernumberAsync(string ordernumber, string computername);
+        ServiceReference1.checkproductcategoryforcomputerbyordernumberResponseCheckproductcategoryforcomputerbyordernumberResult checkproductcategoryforcomputerbyordernumber(string ordernumber, string computername);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/checkproductcategoryforcomputerbyordernumber", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.checkproductcategoryforcomputerbyordernumberResponseCheckproductcategoryforcomputerbyordernumberResult> checkproductcategoryforcomputerbyordernumberAsync(string ordernumber, string computername);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/gettodayshippedordercategoryforcomputer", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.gettodayshippedordercategoryforcomputerResponseGettodayshippedordercategoryforcomputerResult> gettodayshippedordercategoryforcomputerAsync(string computername, string companyname);
+        ServiceReference1.gettodayshippedordercategoryforcomputerResponseGettodayshippedordercategoryforcomputerResult gettodayshippedordercategoryforcomputer(string computername, string companyname);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/gettodayshippedordercategoryforcomputer", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.gettodayshippedordercategoryforcomputerResponseGettodayshippedordercategoryforcomputerResult> gettodayshippedordercategoryforcomputerAsync(string computername, string companyname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Getunshippedorderbycompany", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetunshippedorderbycompanyResponseGetunshippedorderbycompanyResult> GetunshippedorderbycompanyAsync(string companyname);
+        ServiceReference1.GetunshippedorderbycompanyResponseGetunshippedorderbycompanyResult Getunshippedorderbycompany(string companyname);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Getunshippedorderbycompany", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetunshippedorderbycompanyResponseGetunshippedorderbycompanyResult> GetunshippedorderbycompanyAsync(string companyname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetToadyshippedorderbycompany", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetToadyshippedorderbycompanyResponseGetToadyshippedorderbycompanyResult> GetToadyshippedorderbycompanyAsync(string companyname);
+        ServiceReference1.GetToadyshippedorderbycompanyResponseGetToadyshippedorderbycompanyResult GetToadyshippedorderbycompany(string companyname);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetToadyshippedorderbycompany", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetToadyshippedorderbycompanyResponseGetToadyshippedorderbycompanyResult> GetToadyshippedorderbycompanyAsync(string companyname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Getlateshipment", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetlateshipmentResponseGetlateshipmentResult> GetlateshipmentAsync();
+        ServiceReference1.GetlateshipmentResponseGetlateshipmentResult Getlateshipment();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Getlateshipment", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetlateshipmentResponseGetlateshipmentResult> GetlateshipmentAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Getstaffbycomputer", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetstaffbycomputerResponseGetstaffbycomputerResult> GetstaffbycomputerAsync(string computername);
+        ServiceReference1.GetstaffbycomputerResponseGetstaffbycomputerResult Getstaffbycomputer(string computername);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Getstaffbycomputer", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetstaffbycomputerResponseGetstaffbycomputerResult> GetstaffbycomputerAsync(string computername);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Saveloginlog", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string Saveloginlog(string userId, string computername, string ipaddress, string companyname, string computertype, string logintype);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Saveloginlog", ReplyAction="*")]
         System.Threading.Tasks.Task<string> SaveloginlogAsync(string userId, string computername, string ipaddress, string companyname, string computertype, string logintype);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Savelogouttime", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string Savelogouttime(string userId, string logoutreason, string logintype);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Savelogouttime", ReplyAction="*")]
         System.Threading.Tasks.Task<string> SavelogouttimeAsync(string userId, string logoutreason, string logintype);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetShipUnshipLateshipOrder", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetShipUnshipLateshipOrderResponseGetShipUnshipLateshipOrderResult> GetShipUnshipLateshipOrderAsync();
+        ServiceReference1.GetShipUnshipLateshipOrderResponseGetShipUnshipLateshipOrderResult GetShipUnshipLateshipOrder();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetShipUnshipLateshipOrder", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetShipUnshipLateshipOrderResponseGetShipUnshipLateshipOrderResult> GetShipUnshipLateshipOrderAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/getunshippedorderbyComputerName", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.getunshippedorderbyComputerNameResponseGetunshippedorderbyComputerNameResult> getunshippedorderbyComputerNameAsync(string computername);
+        ServiceReference1.getunshippedorderbyComputerNameResponseGetunshippedorderbyComputerNameResult getunshippedorderbyComputerName(string computername);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/getunshippedorderbyComputerName", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.getunshippedorderbyComputerNameResponseGetunshippedorderbyComputerNameResult> getunshippedorderbyComputerNameAsync(string computername);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/getunshipandtodayshiporderforcomputer", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.getunshipandtodayshiporderforcomputerResponseGetunshipandtodayshiporderforcomputerResult> getunshipandtodayshiporderforcomputerAsync(string computername);
+        ServiceReference1.getunshipandtodayshiporderforcomputerResponseGetunshipandtodayshiporderforcomputerResult getunshipandtodayshiporderforcomputer(string computername);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/getunshipandtodayshiporderforcomputer", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.getunshipandtodayshiporderforcomputerResponseGetunshipandtodayshiporderforcomputerResult> getunshipandtodayshiporderforcomputerAsync(string computername);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/getComputerbypackingToday", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.getComputerbypackingTodayResponseGetComputerbypackingTodayResult> getComputerbypackingTodayAsync(string computername);
+        ServiceReference1.getComputerbypackingTodayResponseGetComputerbypackingTodayResult getComputerbypackingToday(string computername);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/getComputerbypackingToday", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.getComputerbypackingTodayResponseGetComputerbypackingTodayResult> getComputerbypackingTodayAsync(string computername);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/getlateshipmentbycategoryforcomputer", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.getlateshipmentbycategoryforcomputerResponseGetlateshipmentbycategoryforcomputerResult> getlateshipmentbycategoryforcomputerAsync(string computername, string companyname);
+        ServiceReference1.getlateshipmentbycategoryforcomputerResponseGetlateshipmentbycategoryforcomputerResult getlateshipmentbycategoryforcomputer(string computername, string companyname);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/getlateshipmentbycategoryforcomputer", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.getlateshipmentbycategoryforcomputerResponseGetlateshipmentbycategoryforcomputerResult> getlateshipmentbycategoryforcomputerAsync(string computername, string companyname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/getstaffbypackingToday", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.getstaffbypackingTodayResponseGetstaffbypackingTodayResult> getstaffbypackingTodayAsync();
+        ServiceReference1.getstaffbypackingTodayResponseGetstaffbypackingTodayResult getstaffbypackingToday();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/getstaffbypackingToday", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.getstaffbypackingTodayResponseGetstaffbypackingTodayResult> getstaffbypackingTodayAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IsUPS", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        bool IsUPS(string ordernumber);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IsUPS", ReplyAction="*")]
         System.Threading.Tasks.Task<bool> IsUPSAsync(string ordernumber);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetComputerName", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetComputerNameResponseGetComputerNameResult> GetComputerNameAsync();
+        ServiceReference1.GetComputerNameResponseGetComputerNameResult GetComputerName();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetComputerName", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetComputerNameResponseGetComputerNameResult> GetComputerNameAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetCurrentComputerByStaff", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetCurrentComputerByStaffResponseGetCurrentComputerByStaffResult> GetCurrentComputerByStaffAsync(string EmailId);
+        ServiceReference1.GetCurrentComputerByStaffResponseGetCurrentComputerByStaffResult GetCurrentComputerByStaff(string EmailId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetCurrentComputerByStaff", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetCurrentComputerByStaffResponseGetCurrentComputerByStaffResult> GetCurrentComputerByStaffAsync(string EmailId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/AutoTransferInventory", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        bool AutoTransferInventory(long Productid, string email, string companyname);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/AutoTransferInventory", ReplyAction="*")]
         System.Threading.Tasks.Task<bool> AutoTransferInventoryAsync(long Productid, string email, string companyname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/getworkreport", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.getworkreportResponseGetworkreportResult> getworkreportAsync(string companyname, string computername, string username, string shift, string startdate, string enddate);
+        ServiceReference1.getworkreportResponseGetworkreportResult getworkreport(string companyname, string computername, string username, string shift, string startdate, string enddate);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/getworkreport", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.getworkreportResponseGetworkreportResult> getworkreportAsync(string companyname, string computername, string username, string shift, string startdate, string enddate);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/getworkreportUpdated", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.getworkreportUpdatedResponseGetworkreportUpdatedResult> getworkreportUpdatedAsync(string companyname, string computername, string username, string shift, string startdate, string enddate, string RecordType);
+        ServiceReference1.getworkreportUpdatedResponseGetworkreportUpdatedResult getworkreportUpdated(string companyname, string computername, string username, string shift, string startdate, string enddate, string RecordType);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/getworkreportUpdated", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.getworkreportUpdatedResponseGetworkreportUpdatedResult> getworkreportUpdatedAsync(string companyname, string computername, string username, string shift, string startdate, string enddate, string RecordType);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetOrderAccountwise", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetOrderAccountwiseResponseGetOrderAccountwiseResult> GetOrderAccountwiseAsync(string companyname, string computername, string startdate, string enddate, string category, string ordertype);
+        ServiceReference1.GetOrderAccountwiseResponseGetOrderAccountwiseResult GetOrderAccountwise(string companyname, string computername, string startdate, string enddate, string category, string ordertype);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetOrderAccountwise", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetOrderAccountwiseResponseGetOrderAccountwiseResult> GetOrderAccountwiseAsync(string companyname, string computername, string startdate, string enddate, string category, string ordertype);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetOrderAccountwiseupdated", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetOrderAccountwiseupdatedResponseGetOrderAccountwiseupdatedResult> GetOrderAccountwiseupdatedAsync(string companyname, string computername, string startdate, string enddate, string category, string ordertype, string shift);
+        ServiceReference1.GetOrderAccountwiseupdatedResponseGetOrderAccountwiseupdatedResult GetOrderAccountwiseupdated(string companyname, string computername, string startdate, string enddate, string category, string ordertype, string shift);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetOrderAccountwiseupdated", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetOrderAccountwiseupdatedResponseGetOrderAccountwiseupdatedResult> GetOrderAccountwiseupdatedAsync(string companyname, string computername, string startdate, string enddate, string category, string ordertype, string shift);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/CheckAllowcategory", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        bool CheckAllowcategory(string ComputerName, string ProductId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/CheckAllowcategory", ReplyAction="*")]
         System.Threading.Tasks.Task<bool> CheckAllowcategoryAsync(string ComputerName, string ProductId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/AllowAllcategory", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        bool AllowAllcategory(string ComputerName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/AllowAllcategory", ReplyAction="*")]
         System.Threading.Tasks.Task<bool> AllowAllcategoryAsync(string ComputerName);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveProductDeliveryUpdated", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        int SaveProductDeliveryUpdated(
+                    long OrderNumber, 
+                    long ProductId, 
+                    long VariantId, 
+                    int DeliveredQuantity, 
+                    string DeliveredSKU, 
+                    string DeliveredBarcode, 
+                    string Email, 
+                    string InvoiceNo, 
+                    System.DateTime InvoiceDate, 
+                    long SupplierId, 
+                    string reson, 
+                    long dockedno, 
+                    string val, 
+                    string qty, 
+                    decimal creditStock, 
+                    string ValueExcVat, 
+                    string ValueIncVat, 
+                    long ManualOrderNo, 
+                    long CreditNoteNo, 
+                    string Inventoryfor, 
+                    string CompanyName, 
+                    string comment, 
+                    string computername);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveProductDeliveryUpdated", ReplyAction="*")]
         System.Threading.Tasks.Task<int> SaveProductDeliveryUpdatedAsync(
                     long OrderNumber, 
                     long ProductId, 
@@ -724,6 +1298,31 @@ namespace ServiceReference2
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveProductDeliverynewUpdated", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        int SaveProductDeliverynewUpdated(
+                    long OrderNumber, 
+                    long ProductId, 
+                    long VariantId, 
+                    int DeliveredQuantity, 
+                    string DeliveredSKU, 
+                    string DeliveredBarcode, 
+                    string Email, 
+                    string InvoiceNo, 
+                    System.DateTime InvoiceDate, 
+                    long SupplierId, 
+                    string reson, 
+                    long dockedno, 
+                    string val, 
+                    string qty, 
+                    decimal creditStock, 
+                    string ValueExcVat, 
+                    string ValueIncVat, 
+                    long ManualOrderNo, 
+                    long CreditNoteNo, 
+                    string Inventoryfor, 
+                    string CompanyName, 
+                    string computername);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveProductDeliverynewUpdated", ReplyAction="*")]
         System.Threading.Tasks.Task<int> SaveProductDeliverynewUpdatedAsync(
                     long OrderNumber, 
                     long ProductId, 
@@ -750,30 +1349,82 @@ namespace ServiceReference2
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetAllCategorybycomputerwise", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetAllCategorybycomputerwiseResponseGetAllCategorybycomputerwiseResult> GetAllCategorybycomputerwiseAsync(string computername);
+        ServiceReference1.GetAllCategorybycomputerwiseResponseGetAllCategorybycomputerwiseResult GetAllCategorybycomputerwise(string computername);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetAllCategorybycomputerwise", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetAllCategorybycomputerwiseResponseGetAllCategorybycomputerwiseResult> GetAllCategorybycomputerwiseAsync(string computername);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetAllunshippedOrder", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetAllunshippedOrderResponseGetAllunshippedOrderResult> GetAllunshippedOrderAsync();
+        ServiceReference1.GetAllunshippedOrderResponseGetAllunshippedOrderResult GetAllunshippedOrder();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetAllunshippedOrder", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetAllunshippedOrderResponseGetAllunshippedOrderResult> GetAllunshippedOrderAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetAllOutOfStockOrder", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetAllOutOfStockOrderResponseGetAllOutOfStockOrderResult> GetAllOutOfStockOrderAsync(string companyname, string computername, string category, string shift);
+        ServiceReference1.GetAllOutOfStockOrderResponseGetAllOutOfStockOrderResult GetAllOutOfStockOrder(string companyname, string computername, string category, string shift);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetAllOutOfStockOrder", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetAllOutOfStockOrderResponseGetAllOutOfStockOrderResult> GetAllOutOfStockOrderAsync(string companyname, string computername, string category, string shift);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetAllOrderStatusQty", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetAllOrderStatusQtyResponseGetAllOrderStatusQtyResult> GetAllOrderStatusQtyAsync(string companyname, string computername, string category, string shift);
+        ServiceReference1.GetAllOrderStatusQtyResponseGetAllOrderStatusQtyResult GetAllOrderStatusQty(string companyname, string computername, string category, string shift);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetAllOrderStatusQty", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetAllOrderStatusQtyResponseGetAllOrderStatusQtyResult> GetAllOrderStatusQtyAsync(string companyname, string computername, string category, string shift);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetComputerNameByShift", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetComputerNameByShiftResponseGetComputerNameByShiftResult> GetComputerNameByShiftAsync(string shift);
+        ServiceReference1.GetComputerNameByShiftResponseGetComputerNameByShiftResult GetComputerNameByShift(string shift);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetComputerNameByShift", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetComputerNameByShiftResponseGetComputerNameByShiftResult> GetComputerNameByShiftAsync(string shift);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/InventoryRecord", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string InventoryRecord(string inventory, string MainProductId, string sfpinventory, string fbainventory, string expinventory, string sbsinventory, string ProductId, string sku, string barcode, string quantity, string reason, string companyname, string EmailId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/InventoryRecord", ReplyAction="*")]
         System.Threading.Tasks.Task<string> InventoryRecordAsync(string inventory, string MainProductId, string sfpinventory, string fbainventory, string expinventory, string sbsinventory, string ProductId, string sku, string barcode, string quantity, string reason, string companyname, string EmailId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveProductScanInNewUpdated", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        int SaveProductScanInNewUpdated(
+                    long ProductId, 
+                    long VariantId, 
+                    int ScanInQuantity, 
+                    string ScanInSKU, 
+                    string ScanInBarcode, 
+                    string Email, 
+                    string InvoiceNo, 
+                    System.DateTime InvoiceDate, 
+                    long SupplierId, 
+                    string reson, 
+                    long dockedno, 
+                    string val, 
+                    string qty, 
+                    decimal creditStock, 
+                    long creditnote, 
+                    decimal OrderRecievePrice, 
+                    long OrderSystemId, 
+                    System.DateTime Exppirydate, 
+                    string inventorytype, 
+                    string Expirymessage, 
+                    string CompanyName, 
+                    string comment, 
+                    string DeliveryNoteNo, 
+                    string inventory, 
+                    string MainProductId, 
+                    string sfpinventory, 
+                    string fbainventory, 
+                    string expinventory, 
+                    string sbsinventory, 
+                    string TransferOtherCompany, 
+                    System.DateTime ManufactureDate);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveProductScanInNewUpdated", ReplyAction="*")]
         System.Threading.Tasks.Task<int> SaveProductScanInNewUpdatedAsync(
                     long ProductId, 
                     long VariantId, 
@@ -809,14 +1460,52 @@ namespace ServiceReference2
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetLoginPermission", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetLoginPermissionResponseGetLoginPermissionResult> GetLoginPermissionAsync(string companyname, string emailid, string compautername);
+        ServiceReference1.GetLoginPermissionResponseGetLoginPermissionResult GetLoginPermission(string companyname, string emailid, string compautername);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetLoginPermission", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetLoginPermissionResponseGetLoginPermissionResult> GetLoginPermissionAsync(string companyname, string emailid, string compautername);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetAccessForRole", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetAccessForRoleResponseGetAccessForRoleResult> GetAccessForRoleAsync(string emailid);
+        ServiceReference1.GetAccessForRoleResponseGetAccessForRoleResult GetAccessForRole(string emailid);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetAccessForRole", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetAccessForRoleResponseGetAccessForRoleResult> GetAccessForRoleAsync(string emailid);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveProductdeliveryOnTransferInventory", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        int SaveProductdeliveryOnTransferInventory(
+                    long OrderNumber, 
+                    long ProductId, 
+                    long VariantId, 
+                    int DeliveredQuantity, 
+                    string DeliveredSKU, 
+                    string DeliveredBarcode, 
+                    string Email, 
+                    string InvoiceNo, 
+                    System.DateTime InvoiceDate, 
+                    long SupplierId, 
+                    string reson, 
+                    long dockedno, 
+                    string val, 
+                    string qty, 
+                    decimal creditStock, 
+                    string ValueExcVat, 
+                    string ValueIncVat, 
+                    long ManualOrderNo, 
+                    long CreditNoteNo, 
+                    string Inventoryfor, 
+                    string CompanyName, 
+                    string comment, 
+                    string computername, 
+                    string inventory, 
+                    string promoinventory, 
+                    string sfpinventory, 
+                    string fbainventory, 
+                    string expiryinventory, 
+                    string sbsinventory);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveProductdeliveryOnTransferInventory", ReplyAction="*")]
         System.Threading.Tasks.Task<int> SaveProductdeliveryOnTransferInventoryAsync(
                     long OrderNumber, 
                     long ProductId, 
@@ -850,6 +1539,39 @@ namespace ServiceReference2
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveProductScanInNew", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        int SaveProductScanInNew(
+                    long ProductId, 
+                    long VariantId, 
+                    int ScanInQuantity, 
+                    string ScanInSKU, 
+                    string ScanInBarcode, 
+                    string Email, 
+                    string InvoiceNo, 
+                    System.DateTime InvoiceDate, 
+                    long SupplierId, 
+                    string reson, 
+                    long dockedno, 
+                    string val, 
+                    string qty, 
+                    decimal creditStock, 
+                    long creditnote, 
+                    decimal OrderRecievePrice, 
+                    long OrderSystemId, 
+                    System.DateTime Exppirydate, 
+                    string inventorytype, 
+                    string Expirymessage, 
+                    string CompanyName, 
+                    string comment, 
+                    string DeliveryNoteNo, 
+                    string inventory, 
+                    string MainProductId, 
+                    string sfpinventory, 
+                    string fbainventory, 
+                    string expinventory, 
+                    string sbsinventory, 
+                    System.DateTime ManufactureDate);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveProductScanInNew", ReplyAction="*")]
         System.Threading.Tasks.Task<int> SaveProductScanInNewAsync(
                     long ProductId, 
                     long VariantId, 
@@ -884,6 +1606,38 @@ namespace ServiceReference2
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveProductDeliveryUpdatedNEW", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        int SaveProductDeliveryUpdatedNEW(
+                    long OrderNumber, 
+                    long ProductId, 
+                    long VariantId, 
+                    int DeliveredQuantity, 
+                    string DeliveredSKU, 
+                    string DeliveredBarcode, 
+                    string Email, 
+                    string InvoiceNo, 
+                    System.DateTime InvoiceDate, 
+                    long SupplierId, 
+                    string reson, 
+                    long dockedno, 
+                    string val, 
+                    string qty, 
+                    decimal creditStock, 
+                    string ValueExcVat, 
+                    string ValueIncVat, 
+                    long ManualOrderNo, 
+                    long CreditNoteNo, 
+                    string Inventoryfor, 
+                    string CompanyName, 
+                    string comment, 
+                    string computername, 
+                    string inventory, 
+                    string promoinventory, 
+                    string sfpinventory, 
+                    string fbainventory, 
+                    string expiryinventory, 
+                    string sbsinventory);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveProductDeliveryUpdatedNEW", ReplyAction="*")]
         System.Threading.Tasks.Task<int> SaveProductDeliveryUpdatedNEWAsync(
                     long OrderNumber, 
                     long ProductId, 
@@ -917,6 +1671,37 @@ namespace ServiceReference2
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveProductDeliverynewUpdatedNEW", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        int SaveProductDeliverynewUpdatedNEW(
+                    long OrderNumber, 
+                    long ProductId, 
+                    long VariantId, 
+                    int DeliveredQuantity, 
+                    string DeliveredSKU, 
+                    string DeliveredBarcode, 
+                    string Email, 
+                    string InvoiceNo, 
+                    System.DateTime InvoiceDate, 
+                    long SupplierId, 
+                    string reson, 
+                    long dockedno, 
+                    string val, 
+                    string qty, 
+                    decimal creditStock, 
+                    string ValueExcVat, 
+                    string ValueIncVat, 
+                    long ManualOrderNo, 
+                    long CreditNoteNo, 
+                    string Inventoryfor, 
+                    string CompanyName, 
+                    string computername, 
+                    string inventory, 
+                    string promoinventory, 
+                    string sfpinventory, 
+                    string fbainventory, 
+                    string expiryinventory, 
+                    string sbsinventory);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveProductDeliverynewUpdatedNEW", ReplyAction="*")]
         System.Threading.Tasks.Task<int> SaveProductDeliverynewUpdatedNEWAsync(
                     long OrderNumber, 
                     long ProductId, 
@@ -950,10 +1735,46 @@ namespace ServiceReference2
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetIssueMainCategory_User_OrderIssue_AccountName_InventoryCoun" +
             "t", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.ArrayOfXElement> GetIssueMainCategory_User_OrderIssue_AccountName_InventoryCountAsync(string companyname, int Ordernumber, string issuestatus, int productid);
+        ServiceReference1.ArrayOfXElement GetIssueMainCategory_User_OrderIssue_AccountName_InventoryCount(string companyname, int Ordernumber, string issuestatus, int productid);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetIssueMainCategory_User_OrderIssue_AccountName_InventoryCoun" +
+            "t", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.ArrayOfXElement> GetIssueMainCategory_User_OrderIssue_AccountName_InventoryCountAsync(string companyname, int Ordernumber, string issuestatus, int productid);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateInventoryByPscanoutProcedure", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string UpdateInventoryByPscanoutProcedure(
+                    string allowmultiple, 
+                    int Ordernumber, 
+                    int ProductId, 
+                    int VariantId, 
+                    int Outqty, 
+                    string EmailId, 
+                    string Companyname, 
+                    string CustomerId, 
+                    int MainInventory, 
+                    int Promoinventory, 
+                    int SFPInventory, 
+                    int FBAInventory, 
+                    int ExpiryInventory, 
+                    int SBSInventory, 
+                    string SKU, 
+                    string Barcode, 
+                    string Computername, 
+                    string Countryname, 
+                    System.DateTime Expirydate1, 
+                    System.DateTime Expirydate2, 
+                    System.DateTime Expirydate3, 
+                    string Expirymsg, 
+                    string IssueMainTitle, 
+                    string IssueSubtitle, 
+                    string Issuestatus, 
+                    string IsClaimed, 
+                    string Comment, 
+                    string AssignUser, 
+                    string IsStrdate);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateInventoryByPscanoutProcedure", ReplyAction="*")]
         System.Threading.Tasks.Task<string> UpdateInventoryByPscanoutProcedureAsync(
                     string allowmultiple, 
                     int Ordernumber, 
@@ -987,15 +1808,42 @@ namespace ServiceReference2
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateMarkAsShippedOrder", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string UpdateMarkAsShippedOrder(string ordernumber, string trackingnumber, string shippingmethod, string password, string couriername, System.DateTime shippedon, string OrderStatus, string createdby, string parcelweight, decimal parcelcharge, string companyrepresentative);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateMarkAsShippedOrder", ReplyAction="*")]
         System.Threading.Tasks.Task<string> UpdateMarkAsShippedOrderAsync(string ordernumber, string trackingnumber, string shippingmethod, string password, string couriername, System.DateTime shippedon, string OrderStatus, string createdby, string parcelweight, decimal parcelcharge, string companyrepresentative);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Getorderdetailsonpscanout", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.ArrayOfXElement> GetorderdetailsonpscanoutAsync(string ordernumber);
+        ServiceReference1.ArrayOfXElement Getorderdetailsonpscanout(string ordernumber);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Getorderdetailsonpscanout", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.ArrayOfXElement> GetorderdetailsonpscanoutAsync(string ordernumber);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetorderPrintlabel", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetorderPrintlabelResponseGetorderPrintlabelResult> GetorderPrintlabelAsync(
+        ServiceReference1.GetorderPrintlabelResponseGetorderPrintlabelResult GetorderPrintlabel(
+                    string ordernumber, 
+                    int printqty, 
+                    string orderstatus, 
+                    string companyname, 
+                    string ordertype, 
+                    System.DateTime startdate, 
+                    System.DateTime enddate, 
+                    string category, 
+                    string countrytype, 
+                    string couriertype, 
+                    string couriername, 
+                    string postagename, 
+                    string Other, 
+                    string Email, 
+                    string NoChange, 
+                    System.DateTime printdate, 
+                    string Shipmethod, 
+                    string AccountName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetorderPrintlabel", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetorderPrintlabelResponseGetorderPrintlabelResult> GetorderPrintlabelAsync(
                     string ordernumber, 
                     int printqty, 
                     string orderstatus, 
@@ -1017,388 +1865,697 @@ namespace ServiceReference2
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetAutodownloadLabelOrder", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetAutodownloadLabelOrderResponseGetAutodownloadLabelOrderResult> GetAutodownloadLabelOrderAsync();
+        ServiceReference1.GetAutodownloadLabelOrderResponseGetAutodownloadLabelOrderResult GetAutodownloadLabelOrder();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetAutodownloadLabelOrder", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetAutodownloadLabelOrderResponseGetAutodownloadLabelOrderResult> GetAutodownloadLabelOrderAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetPostageTypeandCourierwithordernumberwithDateRange", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.ArrayOfXElement> GetPostageTypeandCourierwithordernumberwithDateRangeAsync(string ComputerName, System.DateTime dtstartdate, System.DateTime dtenddate);
+        ServiceReference1.ArrayOfXElement GetPostageTypeandCourierwithordernumberwithDateRange(string ComputerName, System.DateTime dtstartdate, System.DateTime dtenddate);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetPostageTypeandCourierwithordernumberwithDateRange", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.ArrayOfXElement> GetPostageTypeandCourierwithordernumberwithDateRangeAsync(string ComputerName, System.DateTime dtstartdate, System.DateTime dtenddate);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetPostageTypeandCourierwithordernumberwithDateRangeandOrderty" +
             "pe", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.ArrayOfXElement> GetPostageTypeandCourierwithordernumberwithDateRangeandOrdertypeAsync(string OrderType, System.DateTime dtstartdate, System.DateTime dtenddate, string ComputerName);
+        ServiceReference1.ArrayOfXElement GetPostageTypeandCourierwithordernumberwithDateRangeandOrdertype(string OrderType, System.DateTime dtstartdate, System.DateTime dtenddate, string ComputerName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetPostageTypeandCourierwithordernumberwithDateRangeandOrderty" +
+            "pe", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.ArrayOfXElement> GetPostageTypeandCourierwithordernumberwithDateRangeandOrdertypeAsync(string OrderType, System.DateTime dtstartdate, System.DateTime dtenddate, string ComputerName);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetPostageTypeandCourierwithordernumber", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.ArrayOfXElement> GetPostageTypeandCourierwithordernumberAsync();
+        ServiceReference1.ArrayOfXElement GetPostageTypeandCourierwithordernumber();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetPostageTypeandCourierwithordernumber", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.ArrayOfXElement> GetPostageTypeandCourierwithordernumberAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Getcouriernamewithtype", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.ArrayOfXElement> GetcouriernamewithtypeAsync(string country);
+        ServiceReference1.ArrayOfXElement Getcouriernamewithtype(string country);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Getcouriernamewithtype", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.ArrayOfXElement> GetcouriernamewithtypeAsync(string country);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdatePrintDate", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string UpdatePrintDate(string ordernumber);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdatePrintDate", ReplyAction="*")]
         System.Threading.Tasks.Task<string> UpdatePrintDateAsync(string ordernumber);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateOrdertrackingwithgfs", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string UpdateOrdertrackingwithgfs(string ordernumber, string trackingid, string username, string companyname);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateOrdertrackingwithgfs", ReplyAction="*")]
         System.Threading.Tasks.Task<string> UpdateOrdertrackingwithgfsAsync(string ordernumber, string trackingid, string username, string companyname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/saveScanProduct", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        bool saveScanProduct(string SKU, string Barcode, int OrderSystemId, string Ordertype, string CompanyName, long ProductId, int Qty, string EmailId, string InvoiceNo, string InvoiceDate, int SupplierId, string Expirydate, string Expirymsg, string DeliveryNoteNumber, string ManufactureDate);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/saveScanProduct", ReplyAction="*")]
         System.Threading.Tasks.Task<bool> saveScanProductAsync(string SKU, string Barcode, int OrderSystemId, string Ordertype, string CompanyName, long ProductId, int Qty, string EmailId, string InvoiceNo, string InvoiceDate, int SupplierId, string Expirydate, string Expirymsg, string DeliveryNoteNumber, string ManufactureDate);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/getproduct", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.getproductResponseGetproductResult> getproductAsync(string companyname);
+        ServiceReference1.getproductResponseGetproductResult getproduct(string companyname);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/getproduct", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.getproductResponseGetproductResult> getproductAsync(string companyname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetProductById", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetProductByIdResponseGetProductByIdResult> GetProductByIdAsync(int productid);
+        ServiceReference1.GetProductByIdResponseGetProductByIdResult GetProductById(int productid);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetProductById", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetProductByIdResponseGetProductByIdResult> GetProductByIdAsync(int productid);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetAllBrand", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetAllBrandResponseGetAllBrandResult> GetAllBrandAsync();
+        ServiceReference1.GetAllBrandResponseGetAllBrandResult GetAllBrand();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetAllBrand", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetAllBrandResponseGetAllBrandResult> GetAllBrandAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetTaxClass", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetTaxClassResponseGetTaxClassResult> GetTaxClassAsync();
+        ServiceReference1.GetTaxClassResponseGetTaxClassResult GetTaxClass();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetTaxClass", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetTaxClassResponseGetTaxClassResult> GetTaxClassAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetUserWithroll", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetUserWithrollResponseGetUserWithrollResult> GetUserWithrollAsync();
+        ServiceReference1.GetUserWithrollResponseGetUserWithrollResult GetUserWithroll();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetUserWithroll", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetUserWithrollResponseGetUserWithrollResult> GetUserWithrollAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetUserroll", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetUserrollResponseGetUserrollResult> GetUserrollAsync();
+        ServiceReference1.GetUserrollResponseGetUserrollResult GetUserroll();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetUserroll", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetUserrollResponseGetUserrollResult> GetUserrollAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetAllScreenForRole", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetAllScreenForRoleResponseGetAllScreenForRoleResult> GetAllScreenForRoleAsync(long RoleId);
+        ServiceReference1.GetAllScreenForRoleResponseGetAllScreenForRoleResult GetAllScreenForRole(long RoleId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetAllScreenForRole", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetAllScreenForRoleResponseGetAllScreenForRoleResult> GetAllScreenForRoleAsync(long RoleId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetuserByRoleId", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetuserByRoleIdResponseGetuserByRoleIdResult> GetuserByRoleIdAsync(long RoleId);
+        ServiceReference1.GetuserByRoleIdResponseGetuserByRoleIdResult GetuserByRoleId(long RoleId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetuserByRoleId", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetuserByRoleIdResponseGetuserByRoleIdResult> GetuserByRoleIdAsync(long RoleId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/LoadCreditnoteForPaperWork", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.LoadCreditnoteForPaperWorkResponseLoadCreditnoteForPaperWorkResult> LoadCreditnoteForPaperWorkAsync(string companyname);
+        ServiceReference1.LoadCreditnoteForPaperWorkResponseLoadCreditnoteForPaperWorkResult LoadCreditnoteForPaperWork(string companyname);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/LoadCreditnoteForPaperWork", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.LoadCreditnoteForPaperWorkResponseLoadCreditnoteForPaperWorkResult> LoadCreditnoteForPaperWorkAsync(string companyname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdatePaperWorkForCreditNote", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string UpdatePaperWorkForCreditNote(string CreditId, string DockNo, string EmailId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdatePaperWorkForCreditNote", ReplyAction="*")]
         System.Threading.Tasks.Task<string> UpdatePaperWorkForCreditNoteAsync(string CreditId, string DockNo, string EmailId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetPagePermission", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        bool GetPagePermission(string PageName, string email);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetPagePermission", ReplyAction="*")]
         System.Threading.Tasks.Task<bool> GetPagePermissionAsync(string PageName, string email);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveQuantityAdjustmentRecordForCheck", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string SaveQuantityAdjustmentRecordForCheck(string qty, string InventoryType, string sku, string barcode, string companyname, string Expiry, string email, string Reason);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveQuantityAdjustmentRecordForCheck", ReplyAction="*")]
         System.Threading.Tasks.Task<string> SaveQuantityAdjustmentRecordForCheckAsync(string qty, string InventoryType, string sku, string barcode, string companyname, string Expiry, string email, string Reason);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetCreditNoteWithoutDoc", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetCreditNoteWithoutDocResponseGetCreditNoteWithoutDocResult> GetCreditNoteWithoutDocAsync(string companyname, string sku, string barcode, string pipcode, string InvoiceNumber);
+        ServiceReference1.GetCreditNoteWithoutDocResponseGetCreditNoteWithoutDocResult GetCreditNoteWithoutDoc(string companyname, string sku, string barcode, string pipcode, string InvoiceNumber);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetCreditNoteWithoutDoc", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetCreditNoteWithoutDocResponseGetCreditNoteWithoutDocResult> GetCreditNoteWithoutDocAsync(string companyname, string sku, string barcode, string pipcode, string InvoiceNumber);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateCreditNote", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string UpdateCreditNote(string CreditId, string Comment, string DocNumber, string Email);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateCreditNote", ReplyAction="*")]
         System.Threading.Tasks.Task<string> UpdateCreditNoteAsync(string CreditId, string Comment, string DocNumber, string Email);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/DataTableToJSONWithJavaScriptSerializer", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string DataTableToJSONWithJavaScriptSerializer(string Barcode);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/DataTableToJSONWithJavaScriptSerializer", ReplyAction="*")]
         System.Threading.Tasks.Task<string> DataTableToJSONWithJavaScriptSerializerAsync(string Barcode);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/OrderExist", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        bool OrderExist(string OrderNumber);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/OrderExist", ReplyAction="*")]
         System.Threading.Tasks.Task<bool> OrderExistAsync(string OrderNumber);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/TrackingNumberExist", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        bool TrackingNumberExist(string TrackingNumber);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/TrackingNumberExist", ReplyAction="*")]
         System.Threading.Tasks.Task<bool> TrackingNumberExistAsync(string TrackingNumber);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/LoadQuantityAdjustmentOpenCase", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.LoadQuantityAdjustmentOpenCaseResponseLoadQuantityAdjustmentOpenCaseResult> LoadQuantityAdjustmentOpenCaseAsync(string Barcode, string Reason);
+        ServiceReference1.LoadQuantityAdjustmentOpenCaseResponseLoadQuantityAdjustmentOpenCaseResult LoadQuantityAdjustmentOpenCase(string Barcode, string Reason);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/LoadQuantityAdjustmentOpenCase", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.LoadQuantityAdjustmentOpenCaseResponseLoadQuantityAdjustmentOpenCaseResult> LoadQuantityAdjustmentOpenCaseAsync(string Barcode, string Reason);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Updateqtyadjustment", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string Updateqtyadjustment(string AId, string qty, string EmailId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Updateqtyadjustment", ReplyAction="*")]
         System.Threading.Tasks.Task<string> UpdateqtyadjustmentAsync(string AId, string qty, string EmailId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateExpiryRoomInventory", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string UpdateExpiryRoomInventory(string ProductId, string quantity, string Companyname);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateExpiryRoomInventory", ReplyAction="*")]
         System.Threading.Tasks.Task<string> UpdateExpiryRoomInventoryAsync(string ProductId, string quantity, string Companyname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateDamageRoomInventory", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string UpdateDamageRoomInventory(string ProductId, string quantity, string Companyname);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateDamageRoomInventory", ReplyAction="*")]
         System.Threading.Tasks.Task<string> UpdateDamageRoomInventoryAsync(string ProductId, string quantity, string Companyname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/AddDamageRoomInventory", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string AddDamageRoomInventory(string ProductId, string quantity, string Companyname);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/AddDamageRoomInventory", ReplyAction="*")]
         System.Threading.Tasks.Task<string> AddDamageRoomInventoryAsync(string ProductId, string quantity, string Companyname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/AddExpiryRoomInventory", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string AddExpiryRoomInventory(string ProductId, string quantity, string Companyname);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/AddExpiryRoomInventory", ReplyAction="*")]
         System.Threading.Tasks.Task<string> AddExpiryRoomInventoryAsync(string ProductId, string quantity, string Companyname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveProductINExpiryroom", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        int SaveProductINExpiryroom(long ProductId, long VariantId, int damageqty, string SKU, string Barcode, string Email, string InvoiceNo, System.DateTime InvoiceDate, long SupplierId, string reson, decimal val, string Expmsg, string expdate, string Inventoryfor, string CompanyName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveProductINExpiryroom", ReplyAction="*")]
         System.Threading.Tasks.Task<int> SaveProductINExpiryroomAsync(long ProductId, long VariantId, int damageqty, string SKU, string Barcode, string Email, string InvoiceNo, System.DateTime InvoiceDate, long SupplierId, string reson, decimal val, string Expmsg, string expdate, string Inventoryfor, string CompanyName);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveExpiryRoomReplacementbycompany", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        int SaveExpiryRoomReplacementbycompany(long ProductId, long VariantId, int damageqty, string SKU, string Barcode, string Email, string InvoiceNo, System.DateTime InvoiceDate, long SupplierId, string reson, decimal val, string Expmsg, string CompanyName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveExpiryRoomReplacementbycompany", ReplyAction="*")]
         System.Threading.Tasks.Task<int> SaveExpiryRoomReplacementbycompanyAsync(long ProductId, long VariantId, int damageqty, string SKU, string Barcode, string Email, string InvoiceNo, System.DateTime InvoiceDate, long SupplierId, string reson, decimal val, string Expmsg, string CompanyName);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateExpiryRoomqtyupdated", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        int UpdateExpiryRoomqtyupdated(int productid, int variantid, int qty, string companyname, string expdate, string email);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateExpiryRoomqtyupdated", ReplyAction="*")]
         System.Threading.Tasks.Task<int> UpdateExpiryRoomqtyupdatedAsync(int productid, int variantid, int qty, string companyname, string expdate, string email);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetListOfPrintOrderError", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetListOfPrintOrderErrorResponseGetListOfPrintOrderErrorResult> GetListOfPrintOrderErrorAsync(string OrderList);
+        ServiceReference1.GetListOfPrintOrderErrorResponseGetListOfPrintOrderErrorResult GetListOfPrintOrderError(string OrderList);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetListOfPrintOrderError", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetListOfPrintOrderErrorResponseGetListOfPrintOrderErrorResult> GetListOfPrintOrderErrorAsync(string OrderList);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetDefaultVarient", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetDefaultVarientResponseGetDefaultVarientResult> GetDefaultVarientAsync(string ProductId);
+        ServiceReference1.GetDefaultVarientResponseGetDefaultVarientResult GetDefaultVarient(string ProductId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetDefaultVarient", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetDefaultVarientResponseGetDefaultVarientResult> GetDefaultVarientAsync(string ProductId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateProductInventory", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        bool UpdateProductInventory(long ProductId, int Qty, string InventoryType, string Reason, string EmailId, int AddQty, string AddInventoryType);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateProductInventory", ReplyAction="*")]
         System.Threading.Tasks.Task<bool> UpdateProductInventoryAsync(long ProductId, int Qty, string InventoryType, string Reason, string EmailId, int AddQty, string AddInventoryType);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateInventoryQuantityByVarientSFPcompany", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string UpdateInventoryQuantityByVarientSFPcompany(string VarientId, string mquantity, string quantity, string company);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateInventoryQuantityByVarientSFPcompany", ReplyAction="*")]
         System.Threading.Tasks.Task<string> UpdateInventoryQuantityByVarientSFPcompanyAsync(string VarientId, string mquantity, string quantity, string company);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateSFPInventoryByVarient", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string UpdateSFPInventoryByVarient(string VarientId, string mquantity, string quantity, string company);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateSFPInventoryByVarient", ReplyAction="*")]
         System.Threading.Tasks.Task<string> UpdateSFPInventoryByVarientAsync(string VarientId, string mquantity, string quantity, string company);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateInventoryQuantityByVarientcompany", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string UpdateInventoryQuantityByVarientcompany(string VarientId, string mquantity, string quantity, string companyname);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateInventoryQuantityByVarientcompany", ReplyAction="*")]
         System.Threading.Tasks.Task<string> UpdateInventoryQuantityByVarientcompanyAsync(string VarientId, string mquantity, string quantity, string companyname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateInventoryByVarient", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string UpdateInventoryByVarient(string VarientId, string mquantity, string quantity, string companyname);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateInventoryByVarient", ReplyAction="*")]
         System.Threading.Tasks.Task<string> UpdateInventoryByVarientAsync(string VarientId, string mquantity, string quantity, string companyname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveDamageReplacementbycompany", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        int SaveDamageReplacementbycompany(long ProductId, long VariantId, int damageqty, string SKU, string Barcode, string Email, string InvoiceNo, System.DateTime InvoiceDate, long SupplierId, string reson, decimal val, string Expmsg, string CompanyName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveDamageReplacementbycompany", ReplyAction="*")]
         System.Threading.Tasks.Task<int> SaveDamageReplacementbycompanyAsync(long ProductId, long VariantId, int damageqty, string SKU, string Barcode, string Email, string InvoiceNo, System.DateTime InvoiceDate, long SupplierId, string reson, decimal val, string Expmsg, string CompanyName);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateInventoryQuantityByVarientdamageroomcompany", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string UpdateInventoryQuantityByVarientdamageroomcompany(string VarientId, string mquantity, string quantity, string Companyname);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateInventoryQuantityByVarientdamageroomcompany", ReplyAction="*")]
         System.Threading.Tasks.Task<string> UpdateInventoryQuantityByVarientdamageroomcompanyAsync(string VarientId, string mquantity, string quantity, string Companyname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateInventoryByProduct", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string UpdateInventoryByProduct(string ProductId, string quantity, string companyname);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateInventoryByProduct", ReplyAction="*")]
         System.Threading.Tasks.Task<string> UpdateInventoryByProductAsync(string ProductId, string quantity, string companyname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateDamageInventoryByVarient", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string UpdateDamageInventoryByVarient(string VarientId, string mquantity, string quantity, string Companyname);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateDamageInventoryByVarient", ReplyAction="*")]
         System.Threading.Tasks.Task<string> UpdateDamageInventoryByVarientAsync(string VarientId, string mquantity, string quantity, string Companyname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/saveproductdeliverywithexpiryfromscanoutwithskubycompanyname", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        bool saveproductdeliverywithexpiryfromscanoutwithskubycompanyname(string dttime, int qty, int deliveryid, string companyname, string barcode, string sku);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/saveproductdeliverywithexpiryfromscanoutwithskubycompanyname", ReplyAction="*")]
         System.Threading.Tasks.Task<bool> saveproductdeliverywithexpiryfromscanoutwithskubycompanynameAsync(string dttime, int qty, int deliveryid, string companyname, string barcode, string sku);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/saveproductdeliverywithexpiryfromscanout", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        bool saveproductdeliverywithexpiryfromscanout(string dttime, int qty, int deliveryid, string companyname, string barcode, string sku);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/saveproductdeliverywithexpiryfromscanout", ReplyAction="*")]
         System.Threading.Tasks.Task<bool> saveproductdeliverywithexpiryfromscanoutAsync(string dttime, int qty, int deliveryid, string companyname, string barcode, string sku);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/saveproductdeliverywithexpiryexpirymessagewithskubycompanyname" +
             "", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        bool saveproductdeliverywithexpiryexpirymessagewithskubycompanyname(string expirymessage, int qty, int deliveryid, string companyname, string barcode, string sku);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/saveproductdeliverywithexpiryexpirymessagewithskubycompanyname" +
+            "", ReplyAction="*")]
         System.Threading.Tasks.Task<bool> saveproductdeliverywithexpiryexpirymessagewithskubycompanynameAsync(string expirymessage, int qty, int deliveryid, string companyname, string barcode, string sku);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/saveproductdeliverywithexpiryexpirymessage", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        bool saveproductdeliverywithexpiryexpirymessage(string expirymessage, int qty, int deliveryid, string companyname, string barcode, string sku);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/saveproductdeliverywithexpiryexpirymessage", ReplyAction="*")]
         System.Threading.Tasks.Task<bool> saveproductdeliverywithexpiryexpirymessageAsync(string expirymessage, int qty, int deliveryid, string companyname, string barcode, string sku);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetrestrictionValue", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string GetrestrictionValue(int ordernumber);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetrestrictionValue", ReplyAction="*")]
         System.Threading.Tasks.Task<string> GetrestrictionValueAsync(int ordernumber);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IsRoyalMail", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        bool IsRoyalMail(string variantid);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IsRoyalMail", ReplyAction="*")]
         System.Threading.Tasks.Task<bool> IsRoyalMailAsync(string variantid);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Getclearenceorder", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetclearenceorderResponseGetclearenceorderResult> GetclearenceorderAsync(string variantid, string companyname, string channel);
+        ServiceReference1.GetclearenceorderResponseGetclearenceorderResult Getclearenceorder(string variantid, string companyname, string channel);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Getclearenceorder", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetclearenceorderResponseGetclearenceorderResult> GetclearenceorderAsync(string variantid, string companyname, string channel);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Getsellingchannel", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetsellingchannelResponseGetsellingchannelResult> GetsellingchannelAsync(string OrderNumber, string companyname);
+        ServiceReference1.GetsellingchannelResponseGetsellingchannelResult Getsellingchannel(string OrderNumber, string companyname);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Getsellingchannel", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetsellingchannelResponseGetsellingchannelResult> GetsellingchannelAsync(string OrderNumber, string companyname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateFbaInventoryInCostingSheet", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string UpdateFbaInventoryInCostingSheet(string VarientId, string CostingType, int quantity, string companyname);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateFbaInventoryInCostingSheet", ReplyAction="*")]
         System.Threading.Tasks.Task<string> UpdateFbaInventoryInCostingSheetAsync(string VarientId, string CostingType, int quantity, string companyname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Getpostagetype", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetpostagetypeResponseGetpostagetypeResult> GetpostagetypeAsync(string variantid, string companyname);
+        ServiceReference1.GetpostagetypeResponseGetpostagetypeResult Getpostagetype(string variantid, string companyname);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Getpostagetype", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetpostagetypeResponseGetpostagetypeResult> GetpostagetypeAsync(string variantid, string companyname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Getpostage", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetpostageResponseGetpostageResult> GetpostageAsync(string AccountName, string companyname);
+        ServiceReference1.GetpostageResponseGetpostageResult Getpostage(string AccountName, string companyname);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Getpostage", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetpostageResponseGetpostageResult> GetpostageAsync(string AccountName, string companyname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetExpiryproductdatebycompany", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetExpiryproductdatebycompanyResponseGetExpiryproductdatebycompanyResult> GetExpiryproductdatebycompanyAsync(int ordernumber, string exptype, string companyname);
+        ServiceReference1.GetExpiryproductdatebycompanyResponseGetExpiryproductdatebycompanyResult GetExpiryproductdatebycompany(int ordernumber, string exptype, string companyname);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetExpiryproductdatebycompany", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetExpiryproductdatebycompanyResponseGetExpiryproductdatebycompanyResult> GetExpiryproductdatebycompanyAsync(int ordernumber, string exptype, string companyname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetExpirydatebycompanyname", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetExpirydatebycompanynameResponseGetExpirydatebycompanynameResult> GetExpirydatebycompanynameAsync(string sku, string companyname);
+        ServiceReference1.GetExpirydatebycompanynameResponseGetExpirydatebycompanynameResult GetExpirydatebycompanyname(string sku, string companyname);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetExpirydatebycompanyname", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetExpirydatebycompanynameResponseGetExpirydatebycompanynameResult> GetExpirydatebycompanynameAsync(string sku, string companyname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetExpirydate", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetExpirydateResponseGetExpirydateResult> GetExpirydateAsync(string sku, string companyname);
+        ServiceReference1.GetExpirydateResponseGetExpirydateResult GetExpirydate(string sku, string companyname);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetExpirydate", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetExpirydateResponseGetExpirydateResult> GetExpirydateAsync(string sku, string companyname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateExpiryInventoryUpdated", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string UpdateExpiryInventoryUpdated(string ProductId, string mquantity, string quantity, string expdate, string createdby);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateExpiryInventoryUpdated", ReplyAction="*")]
         System.Threading.Tasks.Task<string> UpdateExpiryInventoryUpdatedAsync(string ProductId, string mquantity, string quantity, string expdate, string createdby);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateOrderTransactionStateupdated", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        int UpdateOrderTransactionStateupdated(long OrderId, string userid);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateOrderTransactionStateupdated", ReplyAction="*")]
         System.Threading.Tasks.Task<int> UpdateOrderTransactionStateupdatedAsync(long OrderId, string userid);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/TransferInventoryfromMainToExpiryUpdated", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string TransferInventoryfromMainToExpiryUpdated(string VarientId, string mquantity, string quantity, System.DateTime expdate, string createdby);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/TransferInventoryfromMainToExpiryUpdated", ReplyAction="*")]
         System.Threading.Tasks.Task<string> TransferInventoryfromMainToExpiryUpdatedAsync(string VarientId, string mquantity, string quantity, System.DateTime expdate, string createdby);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetExpirydatefromexpiryroom", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetExpirydatefromexpiryroomResponseGetExpirydatefromexpiryroomResult> GetExpirydatefromexpiryroomAsync(string sku, string companyname);
+        ServiceReference1.GetExpirydatefromexpiryroomResponseGetExpirydatefromexpiryroomResult GetExpirydatefromexpiryroom(string sku, string companyname);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetExpirydatefromexpiryroom", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetExpirydatefromexpiryroomResponseGetExpirydatefromexpiryroomResult> GetExpirydatefromexpiryroomAsync(string sku, string companyname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetExpirymessagebycompanyname", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetExpirymessagebycompanynameResponseGetExpirymessagebycompanynameResult> GetExpirymessagebycompanynameAsync(string sku, string companyname);
+        ServiceReference1.GetExpirymessagebycompanynameResponseGetExpirymessagebycompanynameResult GetExpirymessagebycompanyname(string sku, string companyname);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetExpirymessagebycompanyname", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetExpirymessagebycompanynameResponseGetExpirymessagebycompanynameResult> GetExpirymessagebycompanynameAsync(string sku, string companyname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetExpirymsg", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetExpirymsgResponseGetExpirymsgResult> GetExpirymsgAsync(string sku, string companyname);
+        ServiceReference1.GetExpirymsgResponseGetExpirymsgResult GetExpirymsg(string sku, string companyname);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetExpirymsg", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetExpirymsgResponseGetExpirymsgResult> GetExpirymsgAsync(string sku, string companyname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetProductDetailbycompany", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetProductDetailbycompanyResponseGetProductDetailbycompanyResult> GetProductDetailbycompanyAsync(string strCode, string strType, string companyname);
+        ServiceReference1.GetProductDetailbycompanyResponseGetProductDetailbycompanyResult GetProductDetailbycompany(string strCode, string strType, string companyname);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetProductDetailbycompany", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetProductDetailbycompanyResponseGetProductDetailbycompanyResult> GetProductDetailbycompanyAsync(string strCode, string strType, string companyname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetScanInProduct", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetScanInProductResponseGetScanInProductResult> GetScanInProductAsync(string strCode, string strType, string companyname);
+        ServiceReference1.GetScanInProductResponseGetScanInProductResult GetScanInProduct(string strCode, string strType, string companyname);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetScanInProduct", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetScanInProductResponseGetScanInProductResult> GetScanInProductAsync(string strCode, string strType, string companyname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetProductDetails", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetProductDetailsResponseGetProductDetailsResult> GetProductDetailsAsync(string strCode, string strType, string companyname);
+        ServiceReference1.GetProductDetailsResponseGetProductDetailsResult GetProductDetails(string strCode, string strType, string companyname);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetProductDetails", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetProductDetailsResponseGetProductDetailsResult> GetProductDetailsAsync(string strCode, string strType, string companyname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetProductRackLabel", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetProductRackLabelResponseGetProductRackLabelResult> GetProductRackLabelAsync(string strCode, string strType, string companyname);
+        ServiceReference1.GetProductRackLabelResponseGetProductRackLabelResult GetProductRackLabel(string strCode, string strType, string companyname);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetProductRackLabel", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetProductRackLabelResponseGetProductRackLabelResult> GetProductRackLabelAsync(string strCode, string strType, string companyname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateOrderReturndStatus", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string UpdateOrderReturndStatus(string OrderNumber, string ProductId, int ReturnQty, int OrderQty, string createdby, string companyname);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateOrderReturndStatus", ReplyAction="*")]
         System.Threading.Tasks.Task<string> UpdateOrderReturndStatusAsync(string OrderNumber, string ProductId, int ReturnQty, int OrderQty, string createdby, string companyname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/getcostingbyorder", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.getcostingbyorderResponseGetcostingbyorderResult> getcostingbyorderAsync(int ordernumber);
+        ServiceReference1.getcostingbyorderResponseGetcostingbyorderResult getcostingbyorder(int ordernumber);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/getcostingbyorder", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.getcostingbyorderResponseGetcostingbyorderResult> getcostingbyorderAsync(int ordernumber);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetPalletNumber", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetPalletNumberResponseGetPalletNumberResult> GetPalletNumberAsync();
+        ServiceReference1.GetPalletNumberResponseGetPalletNumberResult GetPalletNumber();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetPalletNumber", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetPalletNumberResponseGetPalletNumberResult> GetPalletNumberAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetPallet", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetPalletResponseGetPalletResult> GetPalletAsync(int MainProductId, int PalletNumber);
+        ServiceReference1.GetPalletResponseGetPalletResult GetPallet(int MainProductId, int PalletNumber);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetPallet", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetPalletResponseGetPalletResult> GetPalletAsync(int MainProductId, int PalletNumber);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetUser", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetUserResponseGetUserResult> GetUserAsync();
+        ServiceReference1.GetUserResponseGetUserResult GetUser();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetUser", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetUserResponseGetUserResult> GetUserAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetcollectionnoofItem", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetcollectionnoofItemResponseGetcollectionnoofItemResult> GetcollectionnoofItemAsync(string CategoryId);
+        ServiceReference1.GetcollectionnoofItemResponseGetcollectionnoofItemResult GetcollectionnoofItem(string CategoryId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetcollectionnoofItem", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetcollectionnoofItemResponseGetcollectionnoofItemResult> GetcollectionnoofItemAsync(string CategoryId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetShelfingnoofItem", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetShelfingnoofItemResponseGetShelfingnoofItemResult> GetShelfingnoofItemAsync(string CategoryId);
+        ServiceReference1.GetShelfingnoofItemResponseGetShelfingnoofItemResult GetShelfingnoofItem(string CategoryId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetShelfingnoofItem", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetShelfingnoofItemResponseGetShelfingnoofItemResult> GetShelfingnoofItemAsync(string CategoryId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/WareHouseStaff", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.WareHouseStaffResponseWareHouseStaffResult> WareHouseStaffAsync();
+        ServiceReference1.WareHouseStaffResponseWareHouseStaffResult WareHouseStaff();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/WareHouseStaff", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.WareHouseStaffResponseWareHouseStaffResult> WareHouseStaffAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetTaskTimer", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetTaskTimerResponseGetTaskTimerResult> GetTaskTimerAsync(string CountryName);
+        ServiceReference1.GetTaskTimerResponseGetTaskTimerResult GetTaskTimer(string CountryName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetTaskTimer", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetTaskTimerResponseGetTaskTimerResult> GetTaskTimerAsync(string CountryName);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveTaskTimer", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        int SaveTaskTimer(string EmailId, string TaskType, int CategoryId, int ItemQty, string Comment, string ComputerName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveTaskTimer", ReplyAction="*")]
         System.Threading.Tasks.Task<int> SaveTaskTimerAsync(string EmailId, string TaskType, int CategoryId, int ItemQty, string Comment, string ComputerName);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveTaskTimers", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        int SaveTaskTimers(string EmailId, string TaskType, int CategoryId, int ItemQty, string Comment);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveTaskTimers", ReplyAction="*")]
         System.Threading.Tasks.Task<int> SaveTaskTimersAsync(string EmailId, string TaskType, int CategoryId, int ItemQty, string Comment);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateTaskTimer", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        int UpdateTaskTimer(int STId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateTaskTimer", ReplyAction="*")]
         System.Threading.Tasks.Task<int> UpdateTaskTimerAsync(int STId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/checknondeliveredorder", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.checknondeliveredorderResponseChecknondeliveredorderResult> checknondeliveredorderAsync(int ordernumber);
+        ServiceReference1.checknondeliveredorderResponseChecknondeliveredorderResult checknondeliveredorder(int ordernumber);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/checknondeliveredorder", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.checknondeliveredorderResponseChecknondeliveredorderResult> checknondeliveredorderAsync(int ordernumber);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Saveordercomment", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        int Saveordercomment(int Ordernumber, string Comment, string Createdby, string CompanyName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Saveordercomment", ReplyAction="*")]
         System.Threading.Tasks.Task<int> SaveordercommentAsync(int Ordernumber, string Comment, string Createdby, string CompanyName);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Saveorderstatus", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        int Saveorderstatus(int Ordernumber, string OrderStatus, string Createdby, string CompanyName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Saveorderstatus", ReplyAction="*")]
         System.Threading.Tasks.Task<int> SaveorderstatusAsync(int Ordernumber, string OrderStatus, string Createdby, string CompanyName);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/LoadOrderIssues", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.LoadOrderIssuesResponseLoadOrderIssuesResult> LoadOrderIssuesAsync(int OrderId, string Resendstatus);
+        ServiceReference1.LoadOrderIssuesResponseLoadOrderIssuesResult LoadOrderIssues(int OrderId, string Resendstatus);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/LoadOrderIssues", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.LoadOrderIssuesResponseLoadOrderIssuesResult> LoadOrderIssuesAsync(int OrderId, string Resendstatus);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateOrderIssues", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        bool UpdateOrderIssues(int orderno, string Title, string SubTitle, string status, string comment, string companyname, string createdby, string claim);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateOrderIssues", ReplyAction="*")]
         System.Threading.Tasks.Task<bool> UpdateOrderIssuesAsync(int orderno, string Title, string SubTitle, string status, string comment, string companyname, string createdby, string claim);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateOrderIssuesUpdated", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        bool UpdateOrderIssuesUpdated(int orderno, string Title, string SubTitle, string status, string comment, string companyname, string createdby, string claim, string asignto);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateOrderIssuesUpdated", ReplyAction="*")]
         System.Threading.Tasks.Task<bool> UpdateOrderIssuesUpdatedAsync(int orderno, string Title, string SubTitle, string status, string comment, string companyname, string createdby, string claim, string asignto);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/updateVariantpostage", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string updateVariantpostage(int variantid, string accountname, string postage, string Email);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/updateVariantpostage", ReplyAction="*")]
         System.Threading.Tasks.Task<string> updateVariantpostageAsync(int variantid, string accountname, string postage, string Email);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateProductVariantWeight", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string UpdateProductVariantWeight(int variantid, string productweight, string packingweight, string Email);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateProductVariantWeight", ReplyAction="*")]
         System.Threading.Tasks.Task<string> UpdateProductVariantWeightAsync(int variantid, string productweight, string packingweight, string Email);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateDimension", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string UpdateDimension(int VariantId, string Length, string Width, string Height);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateDimension", ReplyAction="*")]
         System.Threading.Tasks.Task<string> UpdateDimensionAsync(int VariantId, string Length, string Width, string Height);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateMainProductWeight", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string UpdateMainProductWeight(int ProductId, string productweight, string packingweight, string Email);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateMainProductWeight", ReplyAction="*")]
         System.Threading.Tasks.Task<string> UpdateMainProductWeightAsync(int ProductId, string productweight, string packingweight, string Email);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateCategory", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string UpdateCategory(int productid, string categoryid, string Email);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateCategory", ReplyAction="*")]
         System.Threading.Tasks.Task<string> UpdateCategoryAsync(int productid, string categoryid, string Email);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateProductHistory", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string UpdateProductHistory(int productid, string FieldName, string FieldValue, string OldValue, string Email);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateProductHistory", ReplyAction="*")]
         System.Threading.Tasks.Task<string> UpdateProductHistoryAsync(int productid, string FieldName, string FieldValue, string OldValue, string Email);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/getMainProductId", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.getMainProductIdResponseGetMainProductIdResult> getMainProductIdAsync(int productid);
+        ServiceReference1.getMainProductIdResponseGetMainProductIdResult getMainProductId(int productid);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/getMainProductId", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.getMainProductIdResponseGetMainProductIdResult> getMainProductIdAsync(int productid);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateProductWeight", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string UpdateProductWeight(int variantid, string productweight, string packingweight);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateProductWeight", ReplyAction="*")]
         System.Threading.Tasks.Task<string> UpdateProductWeightAsync(int variantid, string productweight, string packingweight);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveCreditNote", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        int SaveCreditNote(
+                    long ProductId, 
+                    long VariantId, 
+                    string SKU, 
+                    string Barcode, 
+                    string Email, 
+                    string InvoiceNo, 
+                    System.DateTime InvoiceDate, 
+                    long SupplierId, 
+                    string reson, 
+                    string dockedno, 
+                    string val, 
+                    string qty, 
+                    decimal creditStock, 
+                    string Attachfilename, 
+                    string ValueIncVat, 
+                    long CreditNoteNo, 
+                    string CompanyName, 
+                    string comment, 
+                    long DeliveryId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveCreditNote", ReplyAction="*")]
         System.Threading.Tasks.Task<int> SaveCreditNoteAsync(
                     long ProductId, 
                     long VariantId, 
@@ -1422,202 +2579,386 @@ namespace ServiceReference2
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/getproductvariantbypacksize", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.getproductvariantbypacksizeResponseGetproductvariantbypacksizeResult> getproductvariantbypacksizeAsync(int productid, int packsize);
+        ServiceReference1.getproductvariantbypacksizeResponseGetproductvariantbypacksizeResult getproductvariantbypacksize(int productid, int packsize);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/getproductvariantbypacksize", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.getproductvariantbypacksizeResponseGetproductvariantbypacksizeResult> getproductvariantbypacksizeAsync(int productid, int packsize);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveInvoicesName", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string SaveInvoicesName(string FileType, string FileName, string createdby, string companyname);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveInvoicesName", ReplyAction="*")]
         System.Threading.Tasks.Task<string> SaveInvoicesNameAsync(string FileType, string FileName, string createdby, string companyname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveFileType", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string SaveFileType(string FileType, string createdby);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveFileType", ReplyAction="*")]
         System.Threading.Tasks.Task<string> SaveFileTypeAsync(string FileType, string createdby);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/getFileType", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.getFileTypeResponseGetFileTypeResult> getFileTypeAsync();
+        ServiceReference1.getFileTypeResponseGetFileTypeResult getFileType();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/getFileType", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.getFileTypeResponseGetFileTypeResult> getFileTypeAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetpostagebyVID", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetpostagebyVIDResponseGetpostagebyVIDResult> GetpostagebyVIDAsync(string variantid, string companyname, string accountname, string couriertype);
+        ServiceReference1.GetpostagebyVIDResponseGetpostagebyVIDResult GetpostagebyVID(string variantid, string companyname, string accountname, string couriertype);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetpostagebyVID", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetpostagebyVIDResponseGetpostagebyVIDResult> GetpostagebyVIDAsync(string variantid, string companyname, string accountname, string couriertype);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/updatepostage", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string updatepostage(string variantid, string accountname, string postage);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/updatepostage", ReplyAction="*")]
         System.Threading.Tasks.Task<string> updatepostageAsync(string variantid, string accountname, string postage);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetpostagebyAccount", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetpostagebyAccountResponseGetpostagebyAccountResult> GetpostagebyAccountAsync(string companyname, string accountname, string couriertype);
+        ServiceReference1.GetpostagebyAccountResponseGetpostagebyAccountResult GetpostagebyAccount(string companyname, string accountname, string couriertype);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetpostagebyAccount", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetpostagebyAccountResponseGetpostagebyAccountResult> GetpostagebyAccountAsync(string companyname, string accountname, string couriertype);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/updatecostingbypostagechange", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.updatecostingbypostagechangeResponseUpdatecostingbypostagechangeResult> updatecostingbypostagechangeAsync(string postage, string accname, string companyname, string variantid, string sku);
+        ServiceReference1.updatecostingbypostagechangeResponseUpdatecostingbypostagechangeResult updatecostingbypostagechange(string postage, string accname, string companyname, string variantid, string sku);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/updatecostingbypostagechange", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.updatecostingbypostagechangeResponseUpdatecostingbypostagechangeResult> updatecostingbypostagechangeAsync(string postage, string accname, string companyname, string variantid, string sku);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveUploadFile", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string SaveUploadFile(string FileType, string comment, string FileName, string createdby, string companyname);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveUploadFile", ReplyAction="*")]
         System.Threading.Tasks.Task<string> SaveUploadFileAsync(string FileType, string comment, string FileName, string createdby, string companyname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetInventoryCountDetails", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetInventoryCountDetailsResponseGetInventoryCountDetailsResult> GetInventoryCountDetailsAsync(string productid);
+        ServiceReference1.GetInventoryCountDetailsResponseGetInventoryCountDetailsResult GetInventoryCountDetails(string productid);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetInventoryCountDetails", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetInventoryCountDetailsResponseGetInventoryCountDetailsResult> GetInventoryCountDetailsAsync(string productid);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateWareHouseProductLocation", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string UpdateWareHouseProductLocation(int productid, string IeleNo, string RackNo, string BoxNo);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateWareHouseProductLocation", ReplyAction="*")]
         System.Threading.Tasks.Task<string> UpdateWareHouseProductLocationAsync(int productid, string IeleNo, string RackNo, string BoxNo);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetIssueReason", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetIssueReasonResponseGetIssueReasonResult> GetIssueReasonAsync();
+        ServiceReference1.GetIssueReasonResponseGetIssueReasonResult GetIssueReason();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetIssueReason", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetIssueReasonResponseGetIssueReasonResult> GetIssueReasonAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetIssueSubReason", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetIssueSubReasonResponseGetIssueSubReasonResult> GetIssueSubReasonAsync(string parentid);
+        ServiceReference1.GetIssueSubReasonResponseGetIssueSubReasonResult GetIssueSubReason(string parentid);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetIssueSubReason", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetIssueSubReasonResponseGetIssueSubReasonResult> GetIssueSubReasonAsync(string parentid);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateScaninOnInventoryCount", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string UpdateScaninOnInventoryCount(string productid);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateScaninOnInventoryCount", ReplyAction="*")]
         System.Threading.Tasks.Task<string> UpdateScaninOnInventoryCountAsync(string productid);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateScaninRecord", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string UpdateScaninRecord(string productid, string MainProductId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateScaninRecord", ReplyAction="*")]
         System.Threading.Tasks.Task<string> UpdateScaninRecordAsync(string productid, string MainProductId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetOrderDetails", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetOrderDetailsResponseGetOrderDetailsResult> GetOrderDetailsAsync(string orderId);
+        ServiceReference1.GetOrderDetailsResponseGetOrderDetailsResult GetOrderDetails(string orderId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetOrderDetails", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetOrderDetailsResponseGetOrderDetailsResult> GetOrderDetailsAsync(string orderId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateProductCategory", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string UpdateProductCategory(int productid, string categoryid);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateProductCategory", ReplyAction="*")]
         System.Threading.Tasks.Task<string> UpdateProductCategoryAsync(int productid, string categoryid);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetAllCategorywithReadtytoprintorder", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetAllCategorywithReadtytoprintorderResponseGetAllCategorywithReadtytoprintorderResult> GetAllCategorywithReadtytoprintorderAsync(string OrderType, System.DateTime StartDate, System.DateTime EndDate, string ComputerName);
+        ServiceReference1.GetAllCategorywithReadtytoprintorderResponseGetAllCategorywithReadtytoprintorderResult GetAllCategorywithReadtytoprintorder(string OrderType, System.DateTime StartDate, System.DateTime EndDate, string ComputerName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetAllCategorywithReadtytoprintorder", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetAllCategorywithReadtytoprintorderResponseGetAllCategorywithReadtytoprintorderResult> GetAllCategorywithReadtytoprintorderAsync(string OrderType, System.DateTime StartDate, System.DateTime EndDate, string ComputerName);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetAllCategory", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetAllCategoryResponseGetAllCategoryResult> GetAllCategoryAsync();
+        ServiceReference1.GetAllCategoryResponseGetAllCategoryResult GetAllCategory();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetAllCategory", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetAllCategoryResponseGetAllCategoryResult> GetAllCategoryAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetCategory", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetCategoryResponseGetCategoryResult> GetCategoryAsync();
+        ServiceReference1.GetCategoryResponseGetCategoryResult GetCategory();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetCategory", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetCategoryResponseGetCategoryResult> GetCategoryAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveOrderPackingWeight", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        int SaveOrderPackingWeight(int OrderNumber, string PackingWeight, string CreatedBy, string companyname);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveOrderPackingWeight", ReplyAction="*")]
         System.Threading.Tasks.Task<int> SaveOrderPackingWeightAsync(int OrderNumber, string PackingWeight, string CreatedBy, string companyname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/updateproductInventorybyInventorycount", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        int updateproductInventorybyInventorycount(string ProductId, string VariantId, string sku, string barcode, string email, string InventoryType, string CompanyName, string ComputerName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/updateproductInventorybyInventorycount", ReplyAction="*")]
         System.Threading.Tasks.Task<int> updateproductInventorybyInventorycountAsync(string ProductId, string VariantId, string sku, string barcode, string email, string InventoryType, string CompanyName, string ComputerName);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/updatecostingbypostage", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        int updatecostingbypostage(string AccountName, string SKU, string CompanyName, int OrderNumber, int VariantId, decimal PostageCost, string EmailId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/updatecostingbypostage", ReplyAction="*")]
         System.Threading.Tasks.Task<int> updatecostingbypostageAsync(string AccountName, string SKU, string CompanyName, int OrderNumber, int VariantId, decimal PostageCost, string EmailId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveOrderPackingWeightWithpostalservice", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        int SaveOrderPackingWeightWithpostalservice(int OrderNumber, string PackingWeight, string postalservice, string CreatedBy, string companyname);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveOrderPackingWeightWithpostalservice", ReplyAction="*")]
         System.Threading.Tasks.Task<int> SaveOrderPackingWeightWithpostalserviceAsync(int OrderNumber, string PackingWeight, string postalservice, string CreatedBy, string companyname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/AutoTransferMainInventory", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string AutoTransferMainInventory(int productid, int Quantity, string companyname, string email);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/AutoTransferMainInventory", ReplyAction="*")]
         System.Threading.Tasks.Task<string> AutoTransferMainInventoryAsync(int productid, int Quantity, string companyname, string email);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetShoppingCartWithZeroPid", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetShoppingCartWithZeroPidResponseGetShoppingCartWithZeroPidResult> GetShoppingCartWithZeroPidAsync(int OrderId);
+        ServiceReference1.GetShoppingCartWithZeroPidResponseGetShoppingCartWithZeroPidResult GetShoppingCartWithZeroPid(int OrderId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetShoppingCartWithZeroPid", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetShoppingCartWithZeroPidResponseGetShoppingCartWithZeroPidResult> GetShoppingCartWithZeroPidAsync(int OrderId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/CheckLoginDetail", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        bool CheckLoginDetail(string EMailField, string PasswordField);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/CheckLoginDetail", ReplyAction="*")]
         System.Threading.Tasks.Task<bool> CheckLoginDetailAsync(string EMailField, string PasswordField);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetLoginDetail", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetLoginDetailResponseGetLoginDetailResult> GetLoginDetailAsync(string EMailField, string PasswordField);
+        string GetLoginDetail(string EMailField, string PasswordField);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetLoginDetail", ReplyAction="*")]
+        System.Threading.Tasks.Task<string> GetLoginDetailAsync(string EMailField, string PasswordField);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IsHazardProduct", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        int IsHazardProduct(int productid);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IsHazardProduct", ReplyAction="*")]
         System.Threading.Tasks.Task<int> IsHazardProductAsync(int productid);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetScanInData", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetScanInDataResponseGetScanInDataResult> GetScanInDataAsync(long scaninid);
+        ServiceReference1.GetScanInDataResponseGetScanInDataResult GetScanInData(long scaninid);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetScanInData", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetScanInDataResponseGetScanInDataResult> GetScanInDataAsync(long scaninid);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetProductDeliveryData", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetProductDeliveryDataResponseGetProductDeliveryDataResult> GetProductDeliveryDataAsync(long Deliveryid);
+        ServiceReference1.GetProductDeliveryDataResponseGetProductDeliveryDataResult GetProductDeliveryData(long Deliveryid);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetProductDeliveryData", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetProductDeliveryDataResponseGetProductDeliveryDataResult> GetProductDeliveryDataAsync(long Deliveryid);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetInventoryId", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetInventoryIdResponseGetInventoryIdResult> GetInventoryIdAsync(long VariantId);
+        ServiceReference1.GetInventoryIdResponseGetInventoryIdResult GetInventoryId(long VariantId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetInventoryId", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetInventoryIdResponseGetInventoryIdResult> GetInventoryIdAsync(long VariantId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/FillGridAgainstSkuwithcompany", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.FillGridAgainstSkuwithcompanyResponseFillGridAgainstSkuwithcompanyResult> FillGridAgainstSkuwithcompanyAsync(string sku, string companyname);
+        ServiceReference1.FillGridAgainstSkuwithcompanyResponseFillGridAgainstSkuwithcompanyResult FillGridAgainstSkuwithcompany(string sku, string companyname);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/FillGridAgainstSkuwithcompany", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.FillGridAgainstSkuwithcompanyResponseFillGridAgainstSkuwithcompanyResult> FillGridAgainstSkuwithcompanyAsync(string sku, string companyname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/FillGridAgainstBarcodewithcompany", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.FillGridAgainstBarcodewithcompanyResponseFillGridAgainstBarcodewithcompanyResult> FillGridAgainstBarcodewithcompanyAsync(string Barcode, string companyname);
+        ServiceReference1.FillGridAgainstBarcodewithcompanyResponseFillGridAgainstBarcodewithcompanyResult FillGridAgainstBarcodewithcompany(string Barcode, string companyname);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/FillGridAgainstBarcodewithcompany", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.FillGridAgainstBarcodewithcompanyResponseFillGridAgainstBarcodewithcompanyResult> FillGridAgainstBarcodewithcompanyAsync(string Barcode, string companyname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetFBAOrdering", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetFBAOrderingResponseGetFBAOrderingResult> GetFBAOrderingAsync(string Barcode, string companyname);
+        ServiceReference1.GetFBAOrderingResponseGetFBAOrderingResult GetFBAOrdering(string Barcode, string companyname);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetFBAOrdering", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetFBAOrderingResponseGetFBAOrderingResult> GetFBAOrderingAsync(string Barcode, string companyname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/checkexistmessage", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        bool checkexistmessage(string barcode);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/checkexistmessage", ReplyAction="*")]
         System.Threading.Tasks.Task<bool> checkexistmessageAsync(string barcode);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetexistExpiry", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string GetexistExpiry(string MainProductId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetexistExpiry", ReplyAction="*")]
         System.Threading.Tasks.Task<string> GetexistExpiryAsync(string MainProductId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetCompanybycountry", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetCompanybycountryResponseGetCompanybycountryResult> GetCompanybycountryAsync(string country);
+        ServiceReference1.GetCompanybycountryResponseGetCompanybycountryResult GetCompanybycountry(string country);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetCompanybycountry", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetCompanybycountryResponseGetCompanybycountryResult> GetCompanybycountryAsync(string country);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetSupplier", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetSupplierResponseGetSupplierResult> GetSupplierAsync();
+        ServiceReference1.GetSupplierResponseGetSupplierResult GetSupplier();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetSupplier", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetSupplierResponseGetSupplierResult> GetSupplierAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetCompany", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetCompanyResponseGetCompanyResult> GetCompanyAsync();
+        ServiceReference1.GetCompanyResponseGetCompanyResult GetCompany();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetCompany", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetCompanyResponseGetCompanyResult> GetCompanyAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetAccountName", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetAccountNameResponseGetAccountNameResult> GetAccountNameAsync();
+        ServiceReference1.GetAccountNameResponseGetAccountNameResult GetAccountName();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetAccountName", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetAccountNameResponseGetAccountNameResult> GetAccountNameAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetManualInvoice", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetManualInvoiceResponseGetManualInvoiceResult> GetManualInvoiceAsync(string InvoiceNumber, string SKU);
+        ServiceReference1.GetManualInvoiceResponseGetManualInvoiceResult GetManualInvoice(string InvoiceNumber, string SKU);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetManualInvoice", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetManualInvoiceResponseGetManualInvoiceResult> GetManualInvoiceAsync(string InvoiceNumber, string SKU);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetOrderType", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetOrderTypeResponseGetOrderTypeResult> GetOrderTypeAsync(string InvoiceNumber);
+        ServiceReference1.GetOrderTypeResponseGetOrderTypeResult GetOrderType(string InvoiceNumber);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetOrderType", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetOrderTypeResponseGetOrderTypeResult> GetOrderTypeAsync(string InvoiceNumber);
+        
+        // CODEGEN: Parameter 'arr' requires additional schema information that cannot be captured using the parameter mode. The specific attribute is 'Microsoft.Xml.Serialization.XmlElementAttribute'.
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveCapture", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.SaveCaptureResponse> SaveCaptureAsync(ServiceReference2.SaveCaptureRequest request);
+        ServiceReference1.SaveCaptureResponse SaveCapture(ServiceReference1.SaveCaptureRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveCapture", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.SaveCaptureResponse> SaveCaptureAsync(ServiceReference1.SaveCaptureRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveCaptureLog", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        int SaveCaptureLog(string Name, string ContentType, string Data, string SystemIp, string CreatedOn);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveCaptureLog", ReplyAction="*")]
         System.Threading.Tasks.Task<int> SaveCaptureLogAsync(string Name, string ContentType, string Data, string SystemIp, string CreatedOn);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetInvoicePrint", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetInvoicePrintResponseGetInvoicePrintResult> GetInvoicePrintAsync(string strType, string OrderNumber);
+        ServiceReference1.GetInvoicePrintResponseGetInvoicePrintResult GetInvoicePrint(string strType, string OrderNumber);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetInvoicePrint", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetInvoicePrintResponseGetInvoicePrintResult> GetInvoicePrintAsync(string strType, string OrderNumber);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetAllPerformaInvoice", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetAllPerformaInvoiceResponseGetAllPerformaInvoiceResult> GetAllPerformaInvoiceAsync(System.DateTime dtfrom, System.DateTime dtend, string OrderNumber, string Country, string ProductName, string SKU, string ShippingFirstName, string CreatedBy, string CompanyName);
+        ServiceReference1.GetAllPerformaInvoiceResponseGetAllPerformaInvoiceResult GetAllPerformaInvoice(System.DateTime dtfrom, System.DateTime dtend, string OrderNumber, string Country, string ProductName, string SKU, string ShippingFirstName, string CreatedBy, string CompanyName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetAllPerformaInvoice", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetAllPerformaInvoiceResponseGetAllPerformaInvoiceResult> GetAllPerformaInvoiceAsync(System.DateTime dtfrom, System.DateTime dtend, string OrderNumber, string Country, string ProductName, string SKU, string ShippingFirstName, string CreatedBy, string CompanyName);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetAllManualInvoice", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetAllManualInvoiceResponseGetAllManualInvoiceResult> GetAllManualInvoiceAsync(System.DateTime dtfrom, System.DateTime dtend, string OrderNumber, string Country, string ProductName, string SKU, string ShippingFirstName, string CreatedBy, string CompanyName);
+        ServiceReference1.GetAllManualInvoiceResponseGetAllManualInvoiceResult GetAllManualInvoice(System.DateTime dtfrom, System.DateTime dtend, string OrderNumber, string Country, string ProductName, string SKU, string ShippingFirstName, string CreatedBy, string CompanyName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetAllManualInvoice", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetAllManualInvoiceResponseGetAllManualInvoiceResult> GetAllManualInvoiceAsync(System.DateTime dtfrom, System.DateTime dtend, string OrderNumber, string Country, string ProductName, string SKU, string ShippingFirstName, string CreatedBy, string CompanyName);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SavePerchaseExpance", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string SavePerchaseExpance(string InvoiceNumber, System.DateTime InvoiceDate, string ShippingName, string CompanyName, string CreatedBy, string TotalPriceWithVat, string TotalVat);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SavePerchaseExpance", ReplyAction="*")]
         System.Threading.Tasks.Task<string> SavePerchaseExpanceAsync(string InvoiceNumber, System.DateTime InvoiceDate, string ShippingName, string CompanyName, string CreatedBy, string TotalPriceWithVat, string TotalVat);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SavePerformaInvoice", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string SavePerformaInvoice(
+                    string InvoiceNumber, 
+                    string SalesOrderNumber, 
+                    string InvoiceType, 
+                    System.DateTime InvoiceDate, 
+                    string PaymentStatus, 
+                    string AmountPaidTo, 
+                    string ShippingName, 
+                    string EmailId, 
+                    string PhoneNo, 
+                    string ShippingAddress1, 
+                    string ShippingAddress2, 
+                    string City, 
+                    string Country, 
+                    string Zipcode, 
+                    string CurrencyCode, 
+                    string ShippingPrice, 
+                    string CompanyName, 
+                    string ProductId, 
+                    string MainProductId, 
+                    string ProductName, 
+                    string SKU, 
+                    string Barcode, 
+                    string Qty, 
+                    string Vat, 
+                    string VatPercent, 
+                    string ProductPrice, 
+                    string SalePrice, 
+                    string Discount, 
+                    string Commission, 
+                    string WarehouseExpense, 
+                    string CreatedBy, 
+                    string TotalPriceWithVat, 
+                    string TotalVat);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SavePerformaInvoice", ReplyAction="*")]
         System.Threading.Tasks.Task<string> SavePerformaInvoiceAsync(
                     string InvoiceNumber, 
                     string SalesOrderNumber, 
@@ -1655,10 +2996,42 @@ namespace ServiceReference2
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ImportOrder", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<string> ImportOrderAsync(ServiceReference2.ImportOrderDtorderlist dtorderlist, string SalesChannel, string TotalAmount, string shippingcost, string InvoiceDate, string ShippingAddressName, string ShippingAddressAddressLine1, string ShippingAddressAddressLine2, string city, string country, string zipcode, string EmailId, string Phonenumber);
+        string ImportOrder(ServiceReference1.ImportOrderDtorderlist dtorderlist, string SalesChannel, string TotalAmount, string shippingcost, string InvoiceDate, string ShippingAddressName, string ShippingAddressAddressLine1, string ShippingAddressAddressLine2, string city, string country, string zipcode, string EmailId, string Phonenumber);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ImportOrder", ReplyAction="*")]
+        System.Threading.Tasks.Task<string> ImportOrderAsync(ServiceReference1.ImportOrderDtorderlist dtorderlist, string SalesChannel, string TotalAmount, string shippingcost, string InvoiceDate, string ShippingAddressName, string ShippingAddressAddressLine1, string ShippingAddressAddressLine2, string city, string country, string zipcode, string EmailId, string Phonenumber);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveManulInvoice", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string SaveManulInvoice(
+                    string MId, 
+                    string MInvoiceId, 
+                    string ShippingName, 
+                    System.DateTime InvoiceDate, 
+                    string EmailId, 
+                    string PhoneNo, 
+                    string ShippingAddress1, 
+                    string ShippingAddress2, 
+                    string City, 
+                    string State, 
+                    string Country, 
+                    string Zipcode, 
+                    string CurrencyCode, 
+                    string ShippingPrice, 
+                    string CompanyName, 
+                    string ProductName, 
+                    string SKU, 
+                    string Qty, 
+                    string Vat, 
+                    string VatPercent, 
+                    string ListPrice, 
+                    string Discount, 
+                    string CreatedBy, 
+                    string PaymentStatus, 
+                    string Reason, 
+                    string DeliveredQty);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveManulInvoice", ReplyAction="*")]
         System.Threading.Tasks.Task<string> SaveManulInvoiceAsync(
                     string MId, 
                     string MInvoiceId, 
@@ -1689,350 +3062,633 @@ namespace ServiceReference2
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateDeliveredqtyManualInvoice", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string UpdateDeliveredqtyManualInvoice(string InvoiceNumber, string SKU, int Qty);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateDeliveredqtyManualInvoice", ReplyAction="*")]
         System.Threading.Tasks.Task<string> UpdateDeliveredqtyManualInvoiceAsync(string InvoiceNumber, string SKU, int Qty);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetCompanyDetails", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetCompanyDetailsResponseGetCompanyDetailsResult> GetCompanyDetailsAsync(string companyname);
+        ServiceReference1.GetCompanyDetailsResponseGetCompanyDetailsResult GetCompanyDetails(string companyname);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetCompanyDetails", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetCompanyDetailsResponseGetCompanyDetailsResult> GetCompanyDetailsAsync(string companyname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/DeleteManualInvoice", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        bool DeleteManualInvoice(string MId, string DeletedBy);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/DeleteManualInvoice", ReplyAction="*")]
         System.Threading.Tasks.Task<bool> DeleteManualInvoiceAsync(string MId, string DeletedBy);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Updateexpiry", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        bool Updateexpiry(string dateold, string datenew, int qty, string sku);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Updateexpiry", ReplyAction="*")]
         System.Threading.Tasks.Task<bool> UpdateexpiryAsync(string dateold, string datenew, int qty, string sku);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetDuplicateOrder", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        bool GetDuplicateOrder(string ordernumber);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetDuplicateOrder", ReplyAction="*")]
         System.Threading.Tasks.Task<bool> GetDuplicateOrderAsync(string ordernumber);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/getcourierservice", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.getcourierserviceResponseGetcourierserviceResult> getcourierserviceAsync(string countryname);
+        ServiceReference1.getcourierserviceResponseGetcourierserviceResult getcourierservice(string countryname);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/getcourierservice", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.getcourierserviceResponseGetcourierserviceResult> getcourierserviceAsync(string countryname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Saveshipmentdetails", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        int Saveshipmentdetails(string Carreir, string TrackingNumber, System.DateTime ShippedOn, int OrderNumber, string parcelweight, decimal parcelcharge, string shipby, string comprep);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Saveshipmentdetails", ReplyAction="*")]
         System.Threading.Tasks.Task<int> SaveshipmentdetailsAsync(string Carreir, string TrackingNumber, System.DateTime ShippedOn, int OrderNumber, string parcelweight, decimal parcelcharge, string shipby, string comprep);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateInventoryQuantityByVarientpromotionupdated", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string UpdateInventoryQuantityByVarientpromotionupdated(string VarientId, string mquantity, string quantity, string isType);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateInventoryQuantityByVarientpromotionupdated", ReplyAction="*")]
         System.Threading.Tasks.Task<string> UpdateInventoryQuantityByVarientpromotionupdatedAsync(string VarientId, string mquantity, string quantity, string isType);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateInventoryByVarientpromotion", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string UpdateInventoryByVarientpromotion(string VarientId, string mquantity, string quantity, string companyname);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateInventoryByVarientpromotion", ReplyAction="*")]
         System.Threading.Tasks.Task<string> UpdateInventoryByVarientpromotionAsync(string VarientId, string mquantity, string quantity, string companyname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/DoAction", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string DoAction(string byaction, string action, string pagename, string oldval);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/DoAction", ReplyAction="*")]
         System.Threading.Tasks.Task<string> DoActionAsync(string byaction, string action, string pagename, string oldval);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveDoAction", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string SaveDoAction(string byaction, string action, string pagename, string oldval, string companyname, string sku, string barcode, string ordernumber, string asinitemid);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveDoAction", ReplyAction="*")]
         System.Threading.Tasks.Task<string> SaveDoActionAsync(string byaction, string action, string pagename, string oldval, string companyname, string sku, string barcode, string ordernumber, string asinitemid);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetPendingOrderDetailsbycompany", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.ArrayOfXElement> GetPendingOrderDetailsbycompanyAsync(string productid, string companyname);
+        ServiceReference1.ArrayOfXElement GetPendingOrderDetailsbycompany(string productid, string companyname);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetPendingOrderDetailsbycompany", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.ArrayOfXElement> GetPendingOrderDetailsbycompanyAsync(string productid, string companyname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetPendingOrderDetails", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.ArrayOfXElement> GetPendingOrderDetailsAsync(string Barcode, string companyname);
+        ServiceReference1.ArrayOfXElement GetPendingOrderDetails(string Barcode, string companyname);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetPendingOrderDetails", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.ArrayOfXElement> GetPendingOrderDetailsAsync(string Barcode, string companyname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetDefaultVarientDetails", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetDefaultVarientDetailsResponseGetDefaultVarientDetailsResult> GetDefaultVarientDetailsAsync(string ProductId, string companyname);
+        ServiceReference1.GetDefaultVarientDetailsResponseGetDefaultVarientDetailsResult GetDefaultVarientDetails(string ProductId, string companyname);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetDefaultVarientDetails", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetDefaultVarientDetailsResponseGetDefaultVarientDetailsResult> GetDefaultVarientDetailsAsync(string ProductId, string companyname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetDefaultVarientDetail", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetDefaultVarientDetailResponseGetDefaultVarientDetailResult> GetDefaultVarientDetailAsync(string ProductId);
+        ServiceReference1.GetDefaultVarientDetailResponseGetDefaultVarientDetailResult GetDefaultVarientDetail(string ProductId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetDefaultVarientDetail", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetDefaultVarientDetailResponseGetDefaultVarientDetailResult> GetDefaultVarientDetailAsync(string ProductId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetDefaultVarientDetailsupdated", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetDefaultVarientDetailsupdatedResponseGetDefaultVarientDetailsupdatedResult> GetDefaultVarientDetailsupdatedAsync(string ProductId);
+        ServiceReference1.GetDefaultVarientDetailsupdatedResponseGetDefaultVarientDetailsupdatedResult GetDefaultVarientDetailsupdated(string ProductId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetDefaultVarientDetailsupdated", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetDefaultVarientDetailsupdatedResponseGetDefaultVarientDetailsupdatedResult> GetDefaultVarientDetailsupdatedAsync(string ProductId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/TransferfromMaintoSFPInventory", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string TransferfromMaintoSFPInventory(string VarientId, string mquantity, string quantity, string isType);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/TransferfromMaintoSFPInventory", ReplyAction="*")]
         System.Threading.Tasks.Task<string> TransferfromMaintoSFPInventoryAsync(string VarientId, string mquantity, string quantity, string isType);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/TransferInventoryfromMaintoSFP", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string TransferInventoryfromMaintoSFP(string VarientId, string mquantity, string quantity, string companyname);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/TransferInventoryfromMaintoSFP", ReplyAction="*")]
         System.Threading.Tasks.Task<string> TransferInventoryfromMaintoSFPAsync(string VarientId, string mquantity, string quantity, string companyname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/TransferfromSFPtoMainInventory", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string TransferfromSFPtoMainInventory(string VarientId, string mquantity, string quantity, string isType);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/TransferfromSFPtoMainInventory", ReplyAction="*")]
         System.Threading.Tasks.Task<string> TransferfromSFPtoMainInventoryAsync(string VarientId, string mquantity, string quantity, string isType);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/TransferInventoryfromSFPtoMain", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string TransferInventoryfromSFPtoMain(string VarientId, string mquantity, string quantity, string companyname);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/TransferInventoryfromSFPtoMain", ReplyAction="*")]
         System.Threading.Tasks.Task<string> TransferInventoryfromSFPtoMainAsync(string VarientId, string mquantity, string quantity, string companyname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/TransferfrompromotiontoMainInventory", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string TransferfrompromotiontoMainInventory(string VarientId, string mquantity, string quantity, string isType);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/TransferfrompromotiontoMainInventory", ReplyAction="*")]
         System.Threading.Tasks.Task<string> TransferfrompromotiontoMainInventoryAsync(string VarientId, string mquantity, string quantity, string isType);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/TransferInventoryfrompromotiontoMain", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string TransferInventoryfrompromotiontoMain(string VarientId, string mquantity, string quantity, string companyname);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/TransferInventoryfrompromotiontoMain", ReplyAction="*")]
         System.Threading.Tasks.Task<string> TransferInventoryfrompromotiontoMainAsync(string VarientId, string mquantity, string quantity, string companyname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/TransferfrompromotiontoSFPInventory", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string TransferfrompromotiontoSFPInventory(string VarientId, string mquantity, string quantity, string isType);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/TransferfrompromotiontoSFPInventory", ReplyAction="*")]
         System.Threading.Tasks.Task<string> TransferfrompromotiontoSFPInventoryAsync(string VarientId, string mquantity, string quantity, string isType);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/TransferInventoryfrompromotiontoSFP", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string TransferInventoryfrompromotiontoSFP(string VarientId, string mquantity, string quantity, string companyname);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/TransferInventoryfrompromotiontoSFP", ReplyAction="*")]
         System.Threading.Tasks.Task<string> TransferInventoryfrompromotiontoSFPAsync(string VarientId, string mquantity, string quantity, string companyname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/TransferfromSFPtopromotionInventory", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string TransferfromSFPtopromotionInventory(string VarientId, string mquantity, string quantity, string isType);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/TransferfromSFPtopromotionInventory", ReplyAction="*")]
         System.Threading.Tasks.Task<string> TransferfromSFPtopromotionInventoryAsync(string VarientId, string mquantity, string quantity, string isType);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/TransferInventoryfromSFPtopromotion", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string TransferInventoryfromSFPtopromotion(string VarientId, string mquantity, string quantity, string companyname);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/TransferInventoryfromSFPtopromotion", ReplyAction="*")]
         System.Threading.Tasks.Task<string> TransferInventoryfromSFPtopromotionAsync(string VarientId, string mquantity, string quantity, string companyname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/TransferInventoryfromMainToExpiry", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string TransferInventoryfromMainToExpiry(string VarientId, string mquantity, string quantity, System.DateTime expdate);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/TransferInventoryfromMainToExpiry", ReplyAction="*")]
         System.Threading.Tasks.Task<string> TransferInventoryfromMainToExpiryAsync(string VarientId, string mquantity, string quantity, System.DateTime expdate);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateExpiryInventory", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string UpdateExpiryInventory(string VarientId, string mquantity, string quantity, string expdate);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateExpiryInventory", ReplyAction="*")]
         System.Threading.Tasks.Task<string> UpdateExpiryInventoryAsync(string VarientId, string mquantity, string quantity, string expdate);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/TransferInventoryfromMainToFBA", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string TransferInventoryfromMainToFBA(string VarientId, string mquantity, string quantity, string companyname);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/TransferInventoryfromMainToFBA", ReplyAction="*")]
         System.Threading.Tasks.Task<string> TransferInventoryfromMainToFBAAsync(string VarientId, string mquantity, string quantity, string companyname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/TransferInventoryfromFBAToMain", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string TransferInventoryfromFBAToMain(string VarientId, string mquantity, string quantity, string companyname);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/TransferInventoryfromFBAToMain", ReplyAction="*")]
         System.Threading.Tasks.Task<string> TransferInventoryfromFBAToMainAsync(string VarientId, string mquantity, string quantity, string companyname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/TransferInventoryfromSFPToFBA", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string TransferInventoryfromSFPToFBA(string VarientId, string mquantity, string quantity, string companyname);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/TransferInventoryfromSFPToFBA", ReplyAction="*")]
         System.Threading.Tasks.Task<string> TransferInventoryfromSFPToFBAAsync(string VarientId, string mquantity, string quantity, string companyname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/TransferInventoryfromFBAToSFP", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string TransferInventoryfromFBAToSFP(string VarientId, string mquantity, string quantity, string companyname);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/TransferInventoryfromFBAToSFP", ReplyAction="*")]
         System.Threading.Tasks.Task<string> TransferInventoryfromFBAToSFPAsync(string VarientId, string mquantity, string quantity, string companyname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/TransferInventoryfromPromotionToFBA", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string TransferInventoryfromPromotionToFBA(string VarientId, string mquantity, string quantity, string companyname);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/TransferInventoryfromPromotionToFBA", ReplyAction="*")]
         System.Threading.Tasks.Task<string> TransferInventoryfromPromotionToFBAAsync(string VarientId, string mquantity, string quantity, string companyname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateProductmaininventorybycompany", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string UpdateProductmaininventorybycompany(int Inventory, int ProductID, int VariantID, string company);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateProductmaininventorybycompany", ReplyAction="*")]
         System.Threading.Tasks.Task<string> UpdateProductmaininventorybycompanyAsync(int Inventory, int ProductID, int VariantID, string company);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Updatemaininventory", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string Updatemaininventory(int Inventory, int ProductID, int VariantID, string company);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Updatemaininventory", ReplyAction="*")]
         System.Threading.Tasks.Task<string> UpdatemaininventoryAsync(int Inventory, int ProductID, int VariantID, string company);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Updatepromoinventory", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string Updatepromoinventory(int Inventory, int ProductID, int VariantID, string company);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Updatepromoinventory", ReplyAction="*")]
         System.Threading.Tasks.Task<string> UpdatepromoinventoryAsync(int Inventory, int ProductID, int VariantID, string company);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateSFPinventorybycompany", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string UpdateSFPinventorybycompany(int Inventory, int ProductID, int VariantID, string company);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateSFPinventorybycompany", ReplyAction="*")]
         System.Threading.Tasks.Task<string> UpdateSFPinventorybycompanyAsync(int Inventory, int ProductID, int VariantID, string company);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateSFPinventory", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string UpdateSFPinventory(int Inventory, int ProductID, int VariantID, string company);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateSFPinventory", ReplyAction="*")]
         System.Threading.Tasks.Task<string> UpdateSFPinventoryAsync(int Inventory, int ProductID, int VariantID, string company);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateFBAinventory", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string UpdateFBAinventory(int Inventory, int ProductID, int VariantID, string company);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateFBAinventory", ReplyAction="*")]
         System.Threading.Tasks.Task<string> UpdateFBAinventoryAsync(int Inventory, int ProductID, int VariantID, string company);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateProductQuantityforAST", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string UpdateProductQuantityforAST(int Inventory, int ProductID, int VariantID, string isType, long supplierid);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateProductQuantityforAST", ReplyAction="*")]
         System.Threading.Tasks.Task<string> UpdateProductQuantityforASTAsync(int Inventory, int ProductID, int VariantID, string isType, long supplierid);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/getinventorybycompany", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.getinventorybycompanyResponseGetinventorybycompanyResult> getinventorybycompanyAsync(string productid, string companyname);
+        ServiceReference1.getinventorybycompanyResponseGetinventorybycompanyResult getinventorybycompany(string productid, string companyname);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/getinventorybycompany", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.getinventorybycompanyResponseGetinventorybycompanyResult> getinventorybycompanyAsync(string productid, string companyname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/getinventory", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.getinventoryResponseGetinventoryResult> getinventoryAsync(string productid);
+        ServiceReference1.getinventoryResponseGetinventoryResult getinventory(string productid);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/getinventory", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.getinventoryResponseGetinventoryResult> getinventoryAsync(string productid);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetExpirydatewithskubarcodebycompany", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetExpirydatewithskubarcodebycompanyResponseGetExpirydatewithskubarcodebycompanyResult> GetExpirydatewithskubarcodebycompanyAsync(string sku, string barcode, string companyname);
+        ServiceReference1.GetExpirydatewithskubarcodebycompanyResponseGetExpirydatewithskubarcodebycompanyResult GetExpirydatewithskubarcodebycompany(string sku, string barcode, string companyname);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetExpirydatewithskubarcodebycompany", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetExpirydatewithskubarcodebycompanyResponseGetExpirydatewithskubarcodebycompanyResult> GetExpirydatewithskubarcodebycompanyAsync(string sku, string barcode, string companyname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Updateexpirybybarcode", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        bool Updateexpirybybarcode(string dateold, System.DateTime datenew, int qty, string sku, string companyname, string email);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Updateexpirybybarcode", ReplyAction="*")]
         System.Threading.Tasks.Task<bool> UpdateexpirybybarcodeAsync(string dateold, System.DateTime datenew, int qty, string sku, string companyname, string email);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/saveproductdeliverywithexpiryout", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        bool saveproductdeliverywithexpiryout(System.DateTime dttime, int qty, int deliveryid, string companyname, string barcode, string sku, string type);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/saveproductdeliverywithexpiryout", ReplyAction="*")]
         System.Threading.Tasks.Task<bool> saveproductdeliverywithexpiryoutAsync(System.DateTime dttime, int qty, int deliveryid, string companyname, string barcode, string sku, string type);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetExpirydatewithskubarcodeWithoutexpiryroomdate", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetExpirydatewithskubarcodeWithoutexpiryroomdateResponseGetExpirydatewithskubarcodeWithoutexpiryroomdateResult> GetExpirydatewithskubarcodeWithoutexpiryroomdateAsync(string sku, string barcode, string companyname);
+        ServiceReference1.GetExpirydatewithskubarcodeWithoutexpiryroomdateResponseGetExpirydatewithskubarcodeWithoutexpiryroomdateResult GetExpirydatewithskubarcodeWithoutexpiryroomdate(string sku, string barcode, string companyname);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetExpirydatewithskubarcodeWithoutexpiryroomdate", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetExpirydatewithskubarcodeWithoutexpiryroomdateResponseGetExpirydatewithskubarcodeWithoutexpiryroomdateResult> GetExpirydatewithskubarcodeWithoutexpiryroomdateAsync(string sku, string barcode, string companyname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/checkexpiryqtybycompany", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        int checkexpiryqtybycompany(System.DateTime expiry, string barcode, string companyname, string sku);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/checkexpiryqtybycompany", ReplyAction="*")]
         System.Threading.Tasks.Task<int> checkexpiryqtybycompanyAsync(System.DateTime expiry, string barcode, string companyname, string sku);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/checkexpiryqty", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        int checkexpiryqty(System.DateTime expiry, string barcode, string companyname, string sku);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/checkexpiryqty", ReplyAction="*")]
         System.Threading.Tasks.Task<int> checkexpiryqtyAsync(System.DateTime expiry, string barcode, string companyname, string sku);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/checkexpiryqtyExactbydate", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        int checkexpiryqtyExactbydate(System.DateTime expiry, string companyname, string Barcode);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/checkexpiryqtyExactbydate", ReplyAction="*")]
         System.Threading.Tasks.Task<int> checkexpiryqtyExactbydateAsync(System.DateTime expiry, string companyname, string Barcode);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/transferinventorywithscanoutothercompany", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        bool transferinventorywithscanoutothercompany(string Barcode, string CompanyFrom, string CompanyTo, int qty, string byemail, string scanType);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/transferinventorywithscanoutothercompany", ReplyAction="*")]
         System.Threading.Tasks.Task<bool> transferinventorywithscanoutothercompanyAsync(string Barcode, string CompanyFrom, string CompanyTo, int qty, string byemail, string scanType);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/checkexpirymessagebycompany", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        int checkexpirymessagebycompany(string expiry, string barcode, string companyname, string sku);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/checkexpirymessagebycompany", ReplyAction="*")]
         System.Threading.Tasks.Task<int> checkexpirymessagebycompanyAsync(string expiry, string barcode, string companyname, string sku);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/checkexpirymessage", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        int checkexpirymessage(string expiry, string barcode, string companyname, string sku);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/checkexpirymessage", ReplyAction="*")]
         System.Threading.Tasks.Task<int> checkexpirymessageAsync(string expiry, string barcode, string companyname, string sku);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/transferinventorywithafterscanout", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        bool transferinventorywithafterscanout(string Barcode, string CompanyFrom, string CompanyTo, int qty, string byemail, string scanType, System.DateTime exp1, int qty1, System.DateTime exp2, int qty2, System.DateTime exp3, int qty3, string expmsg, int qtymsg);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/transferinventorywithafterscanout", ReplyAction="*")]
         System.Threading.Tasks.Task<bool> transferinventorywithafterscanoutAsync(string Barcode, string CompanyFrom, string CompanyTo, int qty, string byemail, string scanType, System.DateTime exp1, int qty1, System.DateTime exp2, int qty2, System.DateTime exp3, int qty3, string expmsg, int qtymsg);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateInventoryQuantityByVarientexpirybycompany", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string UpdateInventoryQuantityByVarientexpirybycompany(string VarientId, string mquantity, string quantity, string companyname);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateInventoryQuantityByVarientexpirybycompany", ReplyAction="*")]
         System.Threading.Tasks.Task<string> UpdateInventoryQuantityByVarientexpirybycompanyAsync(string VarientId, string mquantity, string quantity, string companyname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateexpiryInventoryByVarient", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string UpdateexpiryInventoryByVarient(string VarientId, string mquantity, string quantity, string companyname);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateexpiryInventoryByVarient", ReplyAction="*")]
         System.Threading.Tasks.Task<string> UpdateexpiryInventoryByVarientAsync(string VarientId, string mquantity, string quantity, string companyname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateInventoryQuantityByVarientpromotioncompany", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string UpdateInventoryQuantityByVarientpromotioncompany(string VarientId, string mquantity, string quantity, string company);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateInventoryQuantityByVarientpromotioncompany", ReplyAction="*")]
         System.Threading.Tasks.Task<string> UpdateInventoryQuantityByVarientpromotioncompanyAsync(string VarientId, string mquantity, string quantity, string company);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdatepromotionInventoryByVarient", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string UpdatepromotionInventoryByVarient(string VarientId, string mquantity, string quantity, string company);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdatepromotionInventoryByVarient", ReplyAction="*")]
         System.Threading.Tasks.Task<string> UpdatepromotionInventoryByVarientAsync(string VarientId, string mquantity, string quantity, string company);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateFBAInventoryByVarient", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string UpdateFBAInventoryByVarient(string VarientId, string mquantity, string quantity, string company);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateFBAInventoryByVarient", ReplyAction="*")]
         System.Threading.Tasks.Task<string> UpdateFBAInventoryByVarientAsync(string VarientId, string mquantity, string quantity, string company);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/HelloWorld", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string HelloWorld();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/HelloWorld", ReplyAction="*")]
         System.Threading.Tasks.Task<string> HelloWorldAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Getoldproductid", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        int Getoldproductid(int pid);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Getoldproductid", ReplyAction="*")]
         System.Threading.Tasks.Task<int> GetoldproductidAsync(int pid);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Getoldvariantid", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        int Getoldvariantid(int vid);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Getoldvariantid", ReplyAction="*")]
         System.Threading.Tasks.Task<int> GetoldvariantidAsync(int vid);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetIssueIdByorderNumber", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        int GetIssueIdByorderNumber(int OrderNumber);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetIssueIdByorderNumber", ReplyAction="*")]
         System.Threading.Tasks.Task<int> GetIssueIdByorderNumberAsync(int OrderNumber);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateProductQuantity", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string UpdateProductQuantity(string barcode, string quantity, string isType);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateProductQuantity", ReplyAction="*")]
         System.Threading.Tasks.Task<string> UpdateProductQuantityAsync(string barcode, string quantity, string isType);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateProductQuantityupdate", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string UpdateProductQuantityupdate(int Inventory, int ProductID, int VariantID, string isType, long supplierid);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateProductQuantityupdate", ReplyAction="*")]
         System.Threading.Tasks.Task<string> UpdateProductQuantityupdateAsync(int Inventory, int ProductID, int VariantID, string isType, long supplierid);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateProductQuantityforindia", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string UpdateProductQuantityforindia(int Inventory, int ProductID, int VariantID, string isType, long supplierid);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateProductQuantityforindia", ReplyAction="*")]
         System.Threading.Tasks.Task<string> UpdateProductQuantityforindiaAsync(int Inventory, int ProductID, int VariantID, string isType, long supplierid);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateProductQuantity1", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string UpdateProductQuantity1(int Inventory, int ProductID, int VariantID, string isType);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateProductQuantity1", ReplyAction="*")]
         System.Threading.Tasks.Task<string> UpdateProductQuantity1Async(int Inventory, int ProductID, int VariantID, string isType);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateInventoryQuantity", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string UpdateInventoryQuantity(string barcode, string mquantity, string quantity, string isType);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateInventoryQuantity", ReplyAction="*")]
         System.Threading.Tasks.Task<string> UpdateInventoryQuantityAsync(string barcode, string mquantity, string quantity, string isType);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateInventoryQuantityByVarient", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string UpdateInventoryQuantityByVarient(string VarientId, string mquantity, string quantity, string isType);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateInventoryQuantityByVarient", ReplyAction="*")]
         System.Threading.Tasks.Task<string> UpdateInventoryQuantityByVarientAsync(string VarientId, string mquantity, string quantity, string isType);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateInventoryQuantityByVarientexpiry", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string UpdateInventoryQuantityByVarientexpiry(string VarientId, string mquantity, string quantity, string isType);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateInventoryQuantityByVarientexpiry", ReplyAction="*")]
         System.Threading.Tasks.Task<string> UpdateInventoryQuantityByVarientexpiryAsync(string VarientId, string mquantity, string quantity, string isType);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateInventoryByVarientexpiry", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string UpdateInventoryByVarientexpiry(string VarientId, string mquantity, string quantity, string companyname);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateInventoryByVarientexpiry", ReplyAction="*")]
         System.Threading.Tasks.Task<string> UpdateInventoryByVarientexpiryAsync(string VarientId, string mquantity, string quantity, string companyname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/checkexpiryforscanoutwithsku", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        int checkexpiryforscanoutwithsku(System.DateTime expiry, string barcode, string inventorytype, string sku);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/checkexpiryforscanoutwithsku", ReplyAction="*")]
         System.Threading.Tasks.Task<int> checkexpiryforscanoutwithskuAsync(System.DateTime expiry, string barcode, string inventorytype, string sku);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/checkexpirymessageforscanoutwithsku", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        int checkexpirymessageforscanoutwithsku(string expiry, string barcode, string inventorytype, string sku);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/checkexpirymessageforscanoutwithsku", ReplyAction="*")]
         System.Threading.Tasks.Task<int> checkexpirymessageforscanoutwithskuAsync(string expiry, string barcode, string inventorytype, string sku);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateInventoryQuantityByVarientforindia", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string UpdateInventoryQuantityByVarientforindia(string VarientId, string mquantity, string quantity, string isType);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateInventoryQuantityByVarientforindia", ReplyAction="*")]
         System.Threading.Tasks.Task<string> UpdateInventoryQuantityByVarientforindiaAsync(string VarientId, string mquantity, string quantity, string isType);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateDeliveredQuantity", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string UpdateDeliveredQuantity(int DeliveredQuantity, int OrderNumber, int ShoppingCartRecID, int CustomerID, int ProductID, int VariantID);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateDeliveredQuantity", ReplyAction="*")]
         System.Threading.Tasks.Task<string> UpdateDeliveredQuantityAsync(int DeliveredQuantity, int OrderNumber, int ShoppingCartRecID, int CustomerID, int ProductID, int VariantID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetProductDetail", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetProductDetailResponseGetProductDetailResult> GetProductDetailAsync(string barcode);
+        ServiceReference1.GetProductDetailResponseGetProductDetailResult GetProductDetail(string barcode);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetProductDetail", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetProductDetailResponseGetProductDetailResult> GetProductDetailAsync(string barcode);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetOrder", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetOrderResponseGetOrderResult> GetOrderAsync(int orderId);
+        ServiceReference1.GetOrderResponseGetOrderResult GetOrder(int orderId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetOrder", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetOrderResponseGetOrderResult> GetOrderAsync(int orderId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IsPausedOrder", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        int IsPausedOrder(int orderId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IsPausedOrder", ReplyAction="*")]
         System.Threading.Tasks.Task<int> IsPausedOrderAsync(int orderId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IsFORCE_VOIDED", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        int IsFORCE_VOIDED(int orderId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IsFORCE_VOIDED", ReplyAction="*")]
         System.Threading.Tasks.Task<int> IsFORCE_VOIDEDAsync(int orderId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetCustomer", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetCustomerResponseGetCustomerResult> GetCustomerAsync(int CustomerId);
+        ServiceReference1.GetCustomerResponseGetCustomerResult GetCustomer(int CustomerId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetCustomer", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetCustomerResponseGetCustomerResult> GetCustomerAsync(int CustomerId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetBarCodeByVId", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetBarCodeByVIdResponseGetBarCodeByVIdResult> GetBarCodeByVIdAsync(string SKUSuffix, int VariantId);
+        ServiceReference1.GetBarCodeByVIdResponseGetBarCodeByVIdResult GetBarCodeByVId(string SKUSuffix, int VariantId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetBarCodeByVId", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetBarCodeByVIdResponseGetBarCodeByVIdResult> GetBarCodeByVIdAsync(string SKUSuffix, int VariantId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Getcompanyorder", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string Getcompanyorder(string OrderId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Getcompanyorder", ReplyAction="*")]
         System.Threading.Tasks.Task<string> GetcompanyorderAsync(string OrderId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Getcompanyname", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string Getcompanyname(int OrderId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Getcompanyname", ReplyAction="*")]
         System.Threading.Tasks.Task<string> GetcompanynameAsync(int OrderId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetVariantByPIdnSKu", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetVariantByPIdnSKuResponseGetVariantByPIdnSKuResult> GetVariantByPIdnSKuAsync(string SKUSuffix, int ProductId);
+        ServiceReference1.GetVariantByPIdnSKuResponseGetVariantByPIdnSKuResult GetVariantByPIdnSKu(string SKUSuffix, int ProductId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetVariantByPIdnSKu", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetVariantByPIdnSKuResponseGetVariantByPIdnSKuResult> GetVariantByPIdnSKuAsync(string SKUSuffix, int ProductId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetBarCodeByPIdwithcompany", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetBarCodeByPIdwithcompanyResponseGetBarCodeByPIdwithcompanyResult> GetBarCodeByPIdwithcompanyAsync(string SKU, int ProductId, string companyname);
+        ServiceReference1.GetBarCodeByPIdwithcompanyResponseGetBarCodeByPIdwithcompanyResult GetBarCodeByPIdwithcompany(string SKU, int ProductId, string companyname);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetBarCodeByPIdwithcompany", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetBarCodeByPIdwithcompanyResponseGetBarCodeByPIdwithcompanyResult> GetBarCodeByPIdwithcompanyAsync(string SKU, int ProductId, string companyname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/getwarehouseanouncement", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.ArrayOfXElement> getwarehouseanouncementAsync(string email);
+        ServiceReference1.ArrayOfXElement getwarehouseanouncement(string email);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/getwarehouseanouncement", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.ArrayOfXElement> getwarehouseanouncementAsync(string email);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Updateexpirybybarcodemsg", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        bool Updateexpirybybarcodemsg(string dateold, string datenew, int qty, string sku, string companyname, string email);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Updateexpirybybarcodemsg", ReplyAction="*")]
         System.Threading.Tasks.Task<bool> UpdateexpirybybarcodemsgAsync(string dateold, string datenew, int qty, string sku, string companyname, string email);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveProductDelivery", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        int SaveProductDelivery(
+                    long OrderNumber, 
+                    long ProductId, 
+                    long VariantId, 
+                    int DeliveredQuantity, 
+                    string DeliveredSKU, 
+                    string DeliveredBarcode, 
+                    string Email, 
+                    string InvoiceNo, 
+                    System.DateTime InvoiceDate, 
+                    long SupplierId, 
+                    string reson, 
+                    long dockedno, 
+                    string val, 
+                    string qty, 
+                    decimal creditStock, 
+                    string ValueExcVat, 
+                    string ValueIncVat, 
+                    long ManualOrderNo, 
+                    long CreditNoteNo, 
+                    string Inventoryfor, 
+                    string CompanyName, 
+                    string comment);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveProductDelivery", ReplyAction="*")]
         System.Threading.Tasks.Task<int> SaveProductDeliveryAsync(
                     long OrderNumber, 
                     long ProductId, 
@@ -2059,62 +3715,124 @@ namespace ServiceReference2
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetBarCodeByPIdsku", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetBarCodeByPIdskuResponseGetBarCodeByPIdskuResult> GetBarCodeByPIdskuAsync(string SKU, int ProductId, string companyname);
+        ServiceReference1.GetBarCodeByPIdskuResponseGetBarCodeByPIdskuResult GetBarCodeByPIdsku(string SKU, int ProductId, string companyname);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetBarCodeByPIdsku", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetBarCodeByPIdskuResponseGetBarCodeByPIdskuResult> GetBarCodeByPIdskuAsync(string SKU, int ProductId, string companyname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetSKUByOrder", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetSKUByOrderResponseGetSKUByOrderResult> GetSKUByOrderAsync(int OrderNumber, int VariantId);
+        ServiceReference1.GetSKUByOrderResponseGetSKUByOrderResult GetSKUByOrder(int OrderNumber, int VariantId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetSKUByOrder", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetSKUByOrderResponseGetSKUByOrderResult> GetSKUByOrderAsync(int OrderNumber, int VariantId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetProduct", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetProductResponseGetProductResult> GetProductAsync(int ProductId);
+        ServiceReference1.GetProductResponseGetProductResult GetProduct(int ProductId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetProduct", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetProductResponseGetProductResult> GetProductAsync(int ProductId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetPopup", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string GetPopup(string email);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetPopup", ReplyAction="*")]
         System.Threading.Tasks.Task<string> GetPopupAsync(string email);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateDamageqtyupdated", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        int UpdateDamageqtyupdated(int productid, int variantid, int qty, string companyname, string expdate, string email);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateDamageqtyupdated", ReplyAction="*")]
         System.Threading.Tasks.Task<int> UpdateDamageqtyupdatedAsync(int productid, int variantid, int qty, string companyname, string expdate, string email);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveProductINdamageroom", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        int SaveProductINdamageroom(long ProductId, long VariantId, int damageqty, string SKU, string Barcode, string Email, string InvoiceNo, System.DateTime InvoiceDate, long SupplierId, string reson, decimal val, string Expmsg, string expdate, string Inventoryfor, string CompanyName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveProductINdamageroom", ReplyAction="*")]
         System.Threading.Tasks.Task<int> SaveProductINdamageroomAsync(long ProductId, long VariantId, int damageqty, string SKU, string Barcode, string Email, string InvoiceNo, System.DateTime InvoiceDate, long SupplierId, string reson, decimal val, string Expmsg, string expdate, string Inventoryfor, string CompanyName);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetDamageExpirydate", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetDamageExpirydateResponseGetDamageExpirydateResult> GetDamageExpirydateAsync(string sku, string barcode, string inventoryfor);
+        ServiceReference1.GetDamageExpirydateResponseGetDamageExpirydateResult GetDamageExpirydate(string sku, string barcode, string inventoryfor);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetDamageExpirydate", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetDamageExpirydateResponseGetDamageExpirydateResult> GetDamageExpirydateAsync(string sku, string barcode, string inventoryfor);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetDamageExpirydt", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetDamageExpirydtResponseGetDamageExpirydtResult> GetDamageExpirydtAsync(string sku, string barcode, string companyname);
+        ServiceReference1.GetDamageExpirydtResponseGetDamageExpirydtResult GetDamageExpirydt(string sku, string barcode, string companyname);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetDamageExpirydt", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetDamageExpirydtResponseGetDamageExpirydtResult> GetDamageExpirydtAsync(string sku, string barcode, string companyname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetDamageExpiry", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetDamageExpiryResponseGetDamageExpiryResult> GetDamageExpiryAsync(string sku, string inventoryfor);
+        ServiceReference1.GetDamageExpiryResponseGetDamageExpiryResult GetDamageExpiry(string sku, string inventoryfor);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetDamageExpiry", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetDamageExpiryResponseGetDamageExpiryResult> GetDamageExpiryAsync(string sku, string inventoryfor);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetDamageExpirymsg", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetDamageExpirymsgResponseGetDamageExpirymsgResult> GetDamageExpirymsgAsync(string sku, string Companyname);
+        ServiceReference1.GetDamageExpirymsgResponseGetDamageExpirymsgResult GetDamageExpirymsg(string sku, string Companyname);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetDamageExpirymsg", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetDamageExpirymsgResponseGetDamageExpirymsgResult> GetDamageExpirymsgAsync(string sku, string Companyname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetShoppingCart", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetShoppingCartResponseGetShoppingCartResult> GetShoppingCartAsync(int OrderId);
+        ServiceReference1.GetShoppingCartResponseGetShoppingCartResult GetShoppingCart(int OrderId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetShoppingCart", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetShoppingCartResponseGetShoppingCartResult> GetShoppingCartAsync(int OrderId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetShoppingCartMultiple", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetShoppingCartMultipleResponseGetShoppingCartMultipleResult> GetShoppingCartMultipleAsync(int OrderId);
+        ServiceReference1.GetShoppingCartMultipleResponseGetShoppingCartMultipleResult GetShoppingCartMultiple(int OrderId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetShoppingCartMultiple", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetShoppingCartMultipleResponseGetShoppingCartMultipleResult> GetShoppingCartMultipleAsync(int OrderId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateMultipleShopingCart", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string UpdateMultipleShopingCart(int Ordernumber, int productid, int variantid, int qty, string deliverby, string companyname);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateMultipleShopingCart", ReplyAction="*")]
         System.Threading.Tasks.Task<string> UpdateMultipleShopingCartAsync(int Ordernumber, int productid, int variantid, int qty, string deliverby, string companyname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetShoppingCartupdate", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetShoppingCartupdateResponseGetShoppingCartupdateResult> GetShoppingCartupdateAsync(int OrderId);
+        ServiceReference1.GetShoppingCartupdateResponseGetShoppingCartupdateResult GetShoppingCartupdate(int OrderId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetShoppingCartupdate", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetShoppingCartupdateResponseGetShoppingCartupdateResult> GetShoppingCartupdateAsync(int OrderId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateProductScanIn", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        int UpdateProductScanIn(
+                    long ScanInId, 
+                    System.DateTime InvoiceDate, 
+                    long SupplierId, 
+                    long ScanInQty, 
+                    string InvoiceNo, 
+                    string Reason, 
+                    long DockedNo, 
+                    string Value, 
+                    string Quantity, 
+                    decimal CreditStockPayment, 
+                    long CreditNoteNo, 
+                    string Email, 
+                    decimal OrderRecievePrice, 
+                    long OrderSystemId, 
+                    string msg, 
+                    string dtime, 
+                    string CompanyName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateProductScanIn", ReplyAction="*")]
         System.Threading.Tasks.Task<int> UpdateProductScanInAsync(
                     long ScanInId, 
                     System.DateTime InvoiceDate, 
@@ -2136,38 +3854,87 @@ namespace ServiceReference2
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Update_OrderSystem", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        int Update_OrderSystem(long OrderSystemId, long Release_OrderSystemId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Update_OrderSystem", ReplyAction="*")]
         System.Threading.Tasks.Task<int> Update_OrderSystemAsync(long OrderSystemId, long Release_OrderSystemId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateProductDelivery", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        int UpdateProductDelivery(long DeliveryId, System.DateTime InvoiceDate, long SupplierId, long DeliveredQty, string InvoiceNo, string Reason, long DockedNo, string Value, string Quantity, decimal CreditStockPayment, long CreditNoteNo, string valueexcvat, string valueincvat, long manualordno, string Email);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateProductDelivery", ReplyAction="*")]
         System.Threading.Tasks.Task<int> UpdateProductDeliveryAsync(long DeliveryId, System.DateTime InvoiceDate, long SupplierId, long DeliveredQty, string InvoiceNo, string Reason, long DockedNo, string Value, string Quantity, decimal CreditStockPayment, long CreditNoteNo, string valueexcvat, string valueincvat, long manualordno, string Email);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateOrderSystem", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        int UpdateOrderSystem(long OrderSystemId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateOrderSystem", ReplyAction="*")]
         System.Threading.Tasks.Task<int> UpdateOrderSystemAsync(long OrderSystemId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateOrderSystemBackOrder", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        int UpdateOrderSystemBackOrder(long OrderSystemId, int qty);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateOrderSystemBackOrder", ReplyAction="*")]
         System.Threading.Tasks.Task<int> UpdateOrderSystemBackOrderAsync(long OrderSystemId, int qty);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateOrderTransactionState", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        int UpdateOrderTransactionState(long OrderId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateOrderTransactionState", ReplyAction="*")]
         System.Threading.Tasks.Task<int> UpdateOrderTransactionStateAsync(long OrderId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Updateorderstatusafterscanin", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        bool Updateorderstatusafterscanin(long Productid);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Updateorderstatusafterscanin", ReplyAction="*")]
         System.Threading.Tasks.Task<bool> UpdateorderstatusafterscaninAsync(long Productid);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Updateorderstatusaftertransferqty", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        bool Updateorderstatusaftertransferqty(long Productid);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Updateorderstatusaftertransferqty", ReplyAction="*")]
         System.Threading.Tasks.Task<bool> UpdateorderstatusaftertransferqtyAsync(long Productid);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Updateorderstatusafterscanout", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        bool Updateorderstatusafterscanout(long Productid);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Updateorderstatusafterscanout", ReplyAction="*")]
         System.Threading.Tasks.Task<bool> UpdateorderstatusafterscanoutAsync(long Productid);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveProductScanInupdated", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        int SaveProductScanInupdated(
+                    long ProductId, 
+                    long VariantId, 
+                    int ScanInQuantity, 
+                    string ScanInSKU, 
+                    string ScanInBarcode, 
+                    string Email, 
+                    string InvoiceNo, 
+                    System.DateTime InvoiceDate, 
+                    long SupplierId, 
+                    string reson, 
+                    long dockedno, 
+                    string val, 
+                    string qty, 
+                    decimal creditStock, 
+                    long creditnote, 
+                    decimal OrderRecievePrice, 
+                    long OrderSystemId, 
+                    System.DateTime Exppirydate, 
+                    string inventorytype, 
+                    string Expirymessage, 
+                    string CompanyName, 
+                    string comment);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveProductScanInupdated", ReplyAction="*")]
         System.Threading.Tasks.Task<int> SaveProductScanInupdatedAsync(
                     long ProductId, 
                     long VariantId, 
@@ -2194,14 +3961,44 @@ namespace ServiceReference2
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateProductDeliveryexpiry", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        int UpdateProductDeliveryexpiry(long DeliveryId, long DeliveredQty, string expmsg, string expdate);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateProductDeliveryexpiry", ReplyAction="*")]
         System.Threading.Tasks.Task<int> UpdateProductDeliveryexpiryAsync(long DeliveryId, long DeliveredQty, string expmsg, string expdate);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/getDeliveryexpiry", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.getDeliveryexpiryResponseGetDeliveryexpiryResult> getDeliveryexpiryAsync(long DeliveryId);
+        ServiceReference1.getDeliveryexpiryResponseGetDeliveryexpiryResult getDeliveryexpiry(long DeliveryId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/getDeliveryexpiry", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.getDeliveryexpiryResponseGetDeliveryexpiryResult> getDeliveryexpiryAsync(long DeliveryId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveProductDeliverynew", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        int SaveProductDeliverynew(
+                    long OrderNumber, 
+                    long ProductId, 
+                    long VariantId, 
+                    int DeliveredQuantity, 
+                    string DeliveredSKU, 
+                    string DeliveredBarcode, 
+                    string Email, 
+                    string InvoiceNo, 
+                    System.DateTime InvoiceDate, 
+                    long SupplierId, 
+                    string reson, 
+                    long dockedno, 
+                    string val, 
+                    string qty, 
+                    decimal creditStock, 
+                    string ValueExcVat, 
+                    string ValueIncVat, 
+                    long ManualOrderNo, 
+                    long CreditNoteNo, 
+                    string Inventoryfor, 
+                    string CompanyName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveProductDeliverynew", ReplyAction="*")]
         System.Threading.Tasks.Task<int> SaveProductDeliverynewAsync(
                     long OrderNumber, 
                     long ProductId, 
@@ -2227,6 +4024,32 @@ namespace ServiceReference2
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveProductScanIn", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        int SaveProductScanIn(
+                    long ProductId, 
+                    long VariantId, 
+                    int ScanInQuantity, 
+                    string ScanInSKU, 
+                    string ScanInBarcode, 
+                    string Email, 
+                    string InvoiceNo, 
+                    System.DateTime InvoiceDate, 
+                    long SupplierId, 
+                    string reson, 
+                    long dockedno, 
+                    string val, 
+                    string qty, 
+                    decimal creditStock, 
+                    long creditnote, 
+                    decimal OrderRecievePrice, 
+                    long OrderSystemId, 
+                    System.DateTime Exppirydate, 
+                    string inventorytype, 
+                    string Expirymessage, 
+                    string CompanyName, 
+                    string comment, 
+                    string DeliveryNoteNo);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveProductScanIn", ReplyAction="*")]
         System.Threading.Tasks.Task<int> SaveProductScanInAsync(
                     long ProductId, 
                     long VariantId, 
@@ -2254,78 +4077,135 @@ namespace ServiceReference2
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Updateexpirymsg", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        bool Updateexpirymsg(string dateold, string datenew, int qty, string sku);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Updateexpirymsg", ReplyAction="*")]
         System.Threading.Tasks.Task<bool> UpdateexpirymsgAsync(string dateold, string datenew, int qty, string sku);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetOrderQuentity", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetOrderQuentityResponseGetOrderQuentityResult> GetOrderQuentityAsync(int OrderNumber);
+        ServiceReference1.GetOrderQuentityResponseGetOrderQuentityResult GetOrderQuentity(int OrderNumber);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetOrderQuentity", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetOrderQuentityResponseGetOrderQuentityResult> GetOrderQuentityAsync(int OrderNumber);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Ispromotionstartwithsupplier", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        bool Ispromotionstartwithsupplier(int productid, long supplierid);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Ispromotionstartwithsupplier", ReplyAction="*")]
         System.Threading.Tasks.Task<bool> IspromotionstartwithsupplierAsync(int productid, long supplierid);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Ispromotionstart", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        bool Ispromotionstart(int productid);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Ispromotionstart", ReplyAction="*")]
         System.Threading.Tasks.Task<bool> IspromotionstartAsync(int productid);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IsCategoryLockedForInventoryCount", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        bool IsCategoryLockedForInventoryCount(string CategoryId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IsCategoryLockedForInventoryCount", ReplyAction="*")]
         System.Threading.Tasks.Task<bool> IsCategoryLockedForInventoryCountAsync(string CategoryId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/checkexpiryqtybymultipledate", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        int checkexpiryqtybymultipledate(System.DateTime expiry, System.DateTime expiry2, System.DateTime expiry3, string barcode, string companyname, string sku);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/checkexpiryqtybymultipledate", ReplyAction="*")]
         System.Threading.Tasks.Task<int> checkexpiryqtybymultipledateAsync(System.DateTime expiry, System.DateTime expiry2, System.DateTime expiry3, string barcode, string companyname, string sku);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetTrackedOrder", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.GetTrackedOrderResponseGetTrackedOrderResult> GetTrackedOrderAsync(string ordernumber);
+        ServiceReference1.GetTrackedOrderResponseGetTrackedOrderResult GetTrackedOrder(string ordernumber);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetTrackedOrder", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.GetTrackedOrderResponseGetTrackedOrderResult> GetTrackedOrderAsync(string ordernumber);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/saveproductdeliverywithexpiryoutbymultipledate", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        bool saveproductdeliverywithexpiryoutbymultipledate(System.DateTime dttime, System.DateTime dttime2, System.DateTime dttime3, int qty, int deliveryid, string companyname, string barcode, string sku, string type);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/saveproductdeliverywithexpiryoutbymultipledate", ReplyAction="*")]
         System.Threading.Tasks.Task<bool> saveproductdeliverywithexpiryoutbymultipledateAsync(System.DateTime dttime, System.DateTime dttime2, System.DateTime dttime3, int qty, int deliveryid, string companyname, string barcode, string sku, string type);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IsRecountstart", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        bool IsRecountstart(int productid);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IsRecountstart", ReplyAction="*")]
         System.Threading.Tasks.Task<bool> IsRecountstartAsync(int productid);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/TransferfromMaintoSFP", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string TransferfromMaintoSFP(string VarientId, string mquantity, string quantity, string isType);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/TransferfromMaintoSFP", ReplyAction="*")]
         System.Threading.Tasks.Task<string> TransferfromMaintoSFPAsync(string VarientId, string mquantity, string quantity, string isType);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/TransferfromSFPtoMain", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string TransferfromSFPtoMain(string VarientId, string mquantity, string quantity, string isType);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/TransferfromSFPtoMain", ReplyAction="*")]
         System.Threading.Tasks.Task<string> TransferfromSFPtoMainAsync(string VarientId, string mquantity, string quantity, string isType);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/TransferfromSFPtopromotion", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string TransferfromSFPtopromotion(string VarientId, string mquantity, string quantity, string isType);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/TransferfromSFPtopromotion", ReplyAction="*")]
         System.Threading.Tasks.Task<string> TransferfromSFPtopromotionAsync(string VarientId, string mquantity, string quantity, string isType);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/TransferfrompromotiontoSFP", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string TransferfrompromotiontoSFP(string VarientId, string mquantity, string quantity, string isType);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/TransferfrompromotiontoSFP", ReplyAction="*")]
         System.Threading.Tasks.Task<string> TransferfrompromotiontoSFPAsync(string VarientId, string mquantity, string quantity, string isType);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/TransferfrompromotiontoMain", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string TransferfrompromotiontoMain(string VarientId, string mquantity, string quantity, string isType);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/TransferfrompromotiontoMain", ReplyAction="*")]
         System.Threading.Tasks.Task<string> TransferfrompromotiontoMainAsync(string VarientId, string mquantity, string quantity, string isType);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateInventoryQuantityByVarientPscanoutSFP", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string UpdateInventoryQuantityByVarientPscanoutSFP(string VarientId, string mquantity, string quantity, string isType);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateInventoryQuantityByVarientPscanoutSFP", ReplyAction="*")]
         System.Threading.Tasks.Task<string> UpdateInventoryQuantityByVarientPscanoutSFPAsync(string VarientId, string mquantity, string quantity, string isType);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateInventoryByVarientPscanoutSFP", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string UpdateInventoryByVarientPscanoutSFP(string VarientId, string mquantity, string quantity, string companyname);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateInventoryByVarientPscanoutSFP", ReplyAction="*")]
         System.Threading.Tasks.Task<string> UpdateInventoryByVarientPscanoutSFPAsync(string VarientId, string mquantity, string quantity, string companyname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/getinventoryall", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.getinventoryallResponseGetinventoryallResult> getinventoryallAsync(string productid, string countryname);
+        ServiceReference1.getinventoryallResponseGetinventoryallResult getinventoryall(string productid, string countryname);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/getinventoryall", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.getinventoryallResponseGetinventoryallResult> getinventoryallAsync(string productid, string countryname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/getBankHolidays", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference2.getBankHolidaysResponseGetBankHolidaysResult> getBankHolidaysAsync();
+        ServiceReference1.getBankHolidaysResponseGetBankHolidaysResult getBankHolidays();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/getBankHolidays", ReplyAction="*")]
+        System.Threading.Tasks.Task<ServiceReference1.getBankHolidaysResponseGetBankHolidaysResult> getBankHolidaysAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveAsShipped", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        int SaveAsShipped(string Carreir, string TrackingNumber, System.DateTime ShippedOn, int OrderNumber);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SaveAsShipped", ReplyAction="*")]
         System.Threading.Tasks.Task<int> SaveAsShippedAsync(string Carreir, string TrackingNumber, System.DateTime ShippedOn, int OrderNumber);
     }
     
@@ -2333,7 +4213,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class getproductdetailsbycompanyResponseGetproductdetailsbycompanyResult
+    public partial class getproductdetailsbycompanyResponseGetproductdetailsbycompanyResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -2351,6 +4231,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -2365,46 +4246,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
             }
         }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetSellinglevelResponseGetSellinglevelResult
-    {
-        
-        private System.Xml.XmlElement[] anyField;
         
-        private System.Xml.XmlElement any1Field;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAnyElementAttribute(Namespace="http://www.w3.org/2001/XMLSchema", Order=0)]
-        public System.Xml.XmlElement[] Any
-        {
-            get
-            {
-                return this.anyField;
-            }
-            set
-            {
-                this.anyField = value;
-            }
-        }
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAnyElementAttribute(Namespace="urn:schemas-microsoft-com:xml-diffgram-v1", Order=1)]
-        public System.Xml.XmlElement Any1
+        protected void RaisePropertyChanged(string propertyName)
         {
-            get
-            {
-                return this.any1Field;
-            }
-            set
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
             {
-                this.any1Field = value;
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -2413,7 +4266,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class OrderRecievedScanByDetailsResponseOrderRecievedScanByDetailsResult
+    public partial class GetSellinglevelResponseGetSellinglevelResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -2431,6 +4284,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -2445,6 +4299,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -2453,7 +4319,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetSameCustomerOrderResponseGetSameCustomerOrderResult
+    public partial class OrderRecievedScanByDetailsResponseOrderRecievedScanByDetailsResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -2471,6 +4337,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -2485,15 +4352,27 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
             }
         }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
     }
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class LastScanInDetailsResponseLastScanInDetailsResult
+    public partial class GetSameCustomerOrderResponseGetSameCustomerOrderResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -2511,6 +4390,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -2525,15 +4405,27 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
             }
         }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
     }
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class SameDayScanInDetailsResponseSameDayScanInDetailsResult
+    public partial class LastScanInDetailsResponseLastScanInDetailsResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -2551,6 +4443,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -2565,6 +4458,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -2573,7 +4478,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class Get_Amazon_Click_And_Collect_Order_ForPickedUPResponseGet_Amazon_Click_And_Collect_Order_ForPickedUPResult
+    public partial class SameDayScanInDetailsResponseSameDayScanInDetailsResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -2591,6 +4496,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -2605,6 +4511,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -2613,7 +4531,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class Get_Saved_Notification_TimeResponseGet_Saved_Notification_TimeResult
+    public partial class Get_Amazon_Click_And_Collect_Order_ForPickedUPResponseGet_Amazon_Click_And_Collect_Order_ForPickedUPResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -2631,6 +4549,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -2645,6 +4564,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -2653,7 +4584,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class mergepdfDT
+    public partial class Get_Saved_Notification_TimeResponseGet_Saved_Notification_TimeResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -2671,6 +4602,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -2685,6 +4617,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -2693,7 +4637,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class getACACInventoryResponseGetACACInventoryResult
+    public partial class mergepdfDT : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -2711,6 +4655,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -2725,6 +4670,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -2733,7 +4690,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class getOrderRecievedReadyToPrintforcomputerResponseGetOrderRecievedReadyToPrintforcomputerResult
+    public partial class getACACInventoryResponseGetACACInventoryResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -2751,6 +4708,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -2765,6 +4723,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -2773,7 +4743,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class JKIOPUserResponseJKIOPUserResult
+    public partial class getOrderRecievedReadyToPrintforcomputerResponseGetOrderRecievedReadyToPrintforcomputerResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -2791,6 +4761,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -2805,6 +4776,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -2813,7 +4796,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class JKIOPGetAccessForRoleResponseJKIOPGetAccessForRoleResult
+    public partial class JKIOPUserResponseJKIOPUserResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -2831,6 +4814,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -2845,6 +4829,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -2853,7 +4849,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class JKIOPLoadAllUserResponseJKIOPLoadAllUserResult
+    public partial class JKIOPGetAccessForRoleResponseJKIOPGetAccessForRoleResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -2871,6 +4867,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -2885,6 +4882,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -2893,7 +4902,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class JKIOPLoadAllStudentResponseJKIOPLoadAllStudentResult
+    public partial class JKIOPLoadAllUserResponseJKIOPLoadAllUserResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -2911,6 +4920,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -2925,6 +4935,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -2933,7 +4955,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetdAllStudentbysessionResponseGetdAllStudentbysessionResult
+    public partial class JKIOPLoadAllStudentResponseJKIOPLoadAllStudentResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -2951,6 +4973,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -2965,6 +4988,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -2973,7 +5008,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class DownloadUploadedfileByIdResponseDownloadUploadedfileByIdResult
+    public partial class GetdAllStudentbysessionResponseGetdAllStudentbysessionResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -2991,6 +5026,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -3005,15 +5041,27 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
             }
         }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
     }
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class DownloadUploadedfileBySupplierResponseDownloadUploadedfileBySupplierResult
+    public partial class DownloadUploadedfileByIdResponseDownloadUploadedfileByIdResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -3031,6 +5079,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -3045,15 +5094,27 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
             }
         }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
     }
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class JKIOPLoadStudentInfoResponseJKIOPLoadStudentInfoResult
+    public partial class DownloadUploadedfileBySupplierResponseDownloadUploadedfileBySupplierResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -3071,6 +5132,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -3085,6 +5147,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -3093,7 +5167,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class JKIOPLoadStudentPaymentInfoResponseJKIOPLoadStudentPaymentInfoResult
+    public partial class JKIOPLoadStudentInfoResponseJKIOPLoadStudentInfoResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -3111,6 +5185,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -3125,6 +5200,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -3133,7 +5220,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class JKIOPLoadROllResponseJKIOPLoadROllResult
+    public partial class JKIOPLoadStudentPaymentInfoResponseJKIOPLoadStudentPaymentInfoResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -3151,6 +5238,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -3165,6 +5253,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -3173,7 +5273,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class JKIOPUSERROllResponseJKIOPUSERROllResult
+    public partial class JKIOPLoadROllResponseJKIOPLoadROllResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -3191,6 +5291,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -3205,6 +5306,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -3213,7 +5326,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class JKIOPGetAllScreenForRoleResponseJKIOPGetAllScreenForRoleResult
+    public partial class JKIOPUSERROllResponseJKIOPUSERROllResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -3231,6 +5344,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -3245,6 +5359,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -3253,7 +5379,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class JKIOPLoadPaymentResponseJKIOPLoadPaymentResult
+    public partial class JKIOPGetAllScreenForRoleResponseJKIOPGetAllScreenForRoleResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -3271,6 +5397,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -3285,6 +5412,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -3293,7 +5432,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetstudentforInvoiceResponseGetstudentforInvoiceResult
+    public partial class JKIOPLoadPaymentResponseJKIOPLoadPaymentResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -3311,6 +5450,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -3325,6 +5465,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -3333,7 +5485,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class JKIOPLoadPaymentDetailBySPIdResponseJKIOPLoadPaymentDetailBySPIdResult
+    public partial class GetstudentforInvoiceResponseGetstudentforInvoiceResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -3351,6 +5503,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -3365,6 +5518,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -3373,7 +5538,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class JKIOPLoadPaymentBySPIdResponseJKIOPLoadPaymentBySPIdResult
+    public partial class JKIOPLoadPaymentDetailBySPIdResponseJKIOPLoadPaymentDetailBySPIdResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -3391,6 +5556,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -3405,6 +5571,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -3413,7 +5591,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class JKIOPLoadPaymentByPaymentIdResponseJKIOPLoadPaymentByPaymentIdResult
+    public partial class JKIOPLoadPaymentBySPIdResponseJKIOPLoadPaymentBySPIdResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -3431,6 +5609,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -3445,6 +5624,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -3453,7 +5644,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetDocumentResponseGetDocumentResult
+    public partial class JKIOPLoadPaymentByPaymentIdResponseJKIOPLoadPaymentByPaymentIdResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -3471,6 +5662,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -3485,6 +5677,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -3493,7 +5697,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetDocumentByIdResponseGetDocumentByIdResult
+    public partial class GetDocumentResponseGetDocumentResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -3511,6 +5715,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -3525,15 +5730,27 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
             }
         }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
     }
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class JKIOPLoadStaffExpenseResponseJKIOPLoadStaffExpenseResult
+    public partial class GetDocumentByIdResponseGetDocumentByIdResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -3551,6 +5768,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -3565,15 +5783,27 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
             }
         }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
     }
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class JKIOPLoadStaffExpenseByIdResponseJKIOPLoadStaffExpenseByIdResult
+    public partial class JKIOPLoadStaffExpenseResponseJKIOPLoadStaffExpenseResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -3591,6 +5821,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -3605,6 +5836,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -3613,7 +5856,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class JKIOPLoadSupplierByIdResponseJKIOPLoadSupplierByIdResult
+    public partial class JKIOPLoadStaffExpenseByIdResponseJKIOPLoadStaffExpenseByIdResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -3631,6 +5874,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -3645,6 +5889,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -3653,7 +5909,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class JKIOPLoadSupplierResponseJKIOPLoadSupplierResult
+    public partial class JKIOPLoadSupplierByIdResponseJKIOPLoadSupplierByIdResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -3671,6 +5927,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -3685,6 +5942,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -3693,7 +5962,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class JKIOPLoadstudentbysearchResponseJKIOPLoadstudentbysearchResult
+    public partial class JKIOPLoadSupplierResponseJKIOPLoadSupplierResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -3711,6 +5980,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -3725,6 +5995,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -3733,7 +6015,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class JKIOPStudentPaymentInfoResponseJKIOPStudentPaymentInfoResult
+    public partial class JKIOPLoadstudentbysearchResponseJKIOPLoadstudentbysearchResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -3751,6 +6033,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -3765,6 +6048,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -3773,7 +6068,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class SupplierExpenseHistoryResponseSupplierExpenseHistoryResult
+    public partial class JKIOPStudentPaymentInfoResponseJKIOPStudentPaymentInfoResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -3791,6 +6086,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -3805,6 +6101,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -3813,7 +6121,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class SupplierExpenseHistoryBYHidResponseSupplierExpenseHistoryBYHidResult
+    public partial class SupplierExpenseHistoryResponseSupplierExpenseHistoryResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -3831,6 +6139,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -3845,6 +6154,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -3853,7 +6174,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class LoadExternalLinkByFormIdAndTypeResponseLoadExternalLinkByFormIdAndTypeResult
+    public partial class SupplierExpenseHistoryBYHidResponseSupplierExpenseHistoryBYHidResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -3871,6 +6192,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -3885,6 +6207,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -3893,7 +6227,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class LoadSupplierPaymentBySPIdResponseLoadSupplierPaymentBySPIdResult
+    public partial class LoadExternalLinkByFormIdAndTypeResponseLoadExternalLinkByFormIdAndTypeResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -3911,6 +6245,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -3925,6 +6260,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -3933,7 +6280,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class JKIOPSupplierPaymentBySupplierIdResponseJKIOPSupplierPaymentBySupplierIdResult
+    public partial class LoadSupplierPaymentBySPIdResponseLoadSupplierPaymentBySPIdResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -3951,6 +6298,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -3965,6 +6313,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -3973,7 +6333,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetStudentFineResponseGetStudentFineResult
+    public partial class JKIOPSupplierPaymentBySupplierIdResponseJKIOPSupplierPaymentBySupplierIdResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -3991,6 +6351,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -4005,6 +6366,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -4013,7 +6386,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class getstudentinfobyrollnumberResponseGetstudentinfobyrollnumberResult
+    public partial class GetStudentFineResponseGetStudentFineResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -4031,6 +6404,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -4045,15 +6419,27 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
             }
         }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
     }
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class getstudentfineinfobyFIneIdResponseGetstudentfineinfobyFIneIdResult
+    public partial class getstudentinfobyrollnumberResponseGetstudentinfobyrollnumberResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -4071,6 +6457,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -4085,15 +6472,27 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
             }
         }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
     }
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class getstudentfineinfobyRollnumberResponseGetstudentfineinfobyRollnumberResult
+    public partial class getstudentfineinfobyFIneIdResponseGetstudentfineinfobyFIneIdResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -4111,6 +6510,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -4125,6 +6525,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -4133,7 +6545,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class getstudentRefundinfobyRollnumberResponseGetstudentRefundinfobyRollnumberResult
+    public partial class getstudentfineinfobyRollnumberResponseGetstudentfineinfobyRollnumberResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -4151,6 +6563,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -4165,6 +6578,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -4173,7 +6598,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class getstudentRefundinfobyRefundIdResponseGetstudentRefundinfobyRefundIdResult
+    public partial class getstudentRefundinfobyRollnumberResponseGetstudentRefundinfobyRollnumberResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -4191,6 +6616,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -4205,6 +6631,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -4213,7 +6651,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetStudentRefundResponseGetStudentRefundResult
+    public partial class getstudentRefundinfobyRefundIdResponseGetstudentRefundinfobyRefundIdResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -4231,6 +6669,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -4245,6 +6684,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -4253,7 +6704,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetOfficeLeaveDetailsResponseGetOfficeLeaveDetailsResult
+    public partial class GetStudentRefundResponseGetStudentRefundResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -4271,6 +6722,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -4285,6 +6737,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -4293,7 +6757,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetStaffRotaResponseGetStaffRotaResult
+    public partial class GetOfficeLeaveDetailsResponseGetOfficeLeaveDetailsResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -4311,6 +6775,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -4325,6 +6790,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -4333,7 +6810,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetTaskNameResponseGetTaskNameResult
+    public partial class GetStaffRotaResponseGetStaffRotaResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -4351,6 +6828,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -4365,6 +6843,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -4373,7 +6863,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetTaskNamesResponseGetTaskNamesResult
+    public partial class GetTaskNameResponseGetTaskNameResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -4391,6 +6881,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -4405,6 +6896,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -4413,7 +6916,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetTeamNameResponseGetTeamNameResult
+    public partial class GetTaskNamesResponseGetTaskNamesResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -4431,6 +6934,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -4445,6 +6949,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -4453,7 +6969,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetStaffCountryWiseResponseGetStaffCountryWiseResult
+    public partial class GetTeamNameResponseGetTeamNameResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -4471,6 +6987,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -4485,6 +7002,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -4493,7 +7022,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class CheckTaskRunningOnComputerResponseCheckTaskRunningOnComputerResult
+    public partial class GetStaffCountryWiseResponseGetStaffCountryWiseResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -4511,6 +7040,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -4525,6 +7055,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -4533,7 +7075,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetTasksResponseGetTasksResult
+    public partial class CheckTaskRunningOnComputerResponseCheckTaskRunningOnComputerResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -4551,6 +7093,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -4565,15 +7108,27 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
             }
         }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
     }
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetStaffInOutResponseGetStaffInOutResult
+    public partial class GetTasksResponseGetTasksResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -4591,6 +7146,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -4605,15 +7161,27 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
             }
         }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
     }
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class checkproductcategoryforcomputerResponseCheckproductcategoryforcomputerResult
+    public partial class GetStaffInOutResponseGetStaffInOutResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -4631,6 +7199,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -4645,6 +7214,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -4653,7 +7234,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetcategoryforcomputerResponseGetcategoryforcomputerResult
+    public partial class checkproductcategoryforcomputerResponseCheckproductcategoryforcomputerResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -4671,6 +7252,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -4685,6 +7267,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -4693,7 +7287,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetunshippedorderforcomputerResponseGetunshippedorderforcomputerResult
+    public partial class GetcategoryforcomputerResponseGetcategoryforcomputerResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -4711,6 +7305,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -4725,6 +7320,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -4733,7 +7340,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class checkproductcategoryforcomputerbyordernumberResponseCheckproductcategoryforcomputerbyordernumberResult
+    public partial class GetunshippedorderforcomputerResponseGetunshippedorderforcomputerResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -4751,6 +7358,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -4765,6 +7373,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -4773,7 +7393,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class gettodayshippedordercategoryforcomputerResponseGettodayshippedordercategoryforcomputerResult
+    public partial class checkproductcategoryforcomputerbyordernumberResponseCheckproductcategoryforcomputerbyordernumberResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -4791,6 +7411,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -4805,6 +7426,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -4813,7 +7446,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetunshippedorderbycompanyResponseGetunshippedorderbycompanyResult
+    public partial class gettodayshippedordercategoryforcomputerResponseGettodayshippedordercategoryforcomputerResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -4831,6 +7464,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -4845,6 +7479,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -4853,7 +7499,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetToadyshippedorderbycompanyResponseGetToadyshippedorderbycompanyResult
+    public partial class GetunshippedorderbycompanyResponseGetunshippedorderbycompanyResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -4871,6 +7517,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -4885,6 +7532,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -4893,7 +7552,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetlateshipmentResponseGetlateshipmentResult
+    public partial class GetToadyshippedorderbycompanyResponseGetToadyshippedorderbycompanyResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -4911,6 +7570,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -4925,6 +7585,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -4933,7 +7605,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetstaffbycomputerResponseGetstaffbycomputerResult
+    public partial class GetlateshipmentResponseGetlateshipmentResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -4951,6 +7623,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -4963,8 +7636,20 @@ namespace ServiceReference2
                 return this.any1Field;
             }
             set
+            {
+                this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
             {
-                this.any1Field = value;
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -4973,7 +7658,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetShipUnshipLateshipOrderResponseGetShipUnshipLateshipOrderResult
+    public partial class GetstaffbycomputerResponseGetstaffbycomputerResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -4991,6 +7676,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -5005,6 +7691,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -5013,7 +7711,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class getunshippedorderbyComputerNameResponseGetunshippedorderbyComputerNameResult
+    public partial class GetShipUnshipLateshipOrderResponseGetShipUnshipLateshipOrderResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -5031,6 +7729,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -5045,15 +7744,27 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
             }
         }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
     }
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class getunshipandtodayshiporderforcomputerResponseGetunshipandtodayshiporderforcomputerResult
+    public partial class getunshippedorderbyComputerNameResponseGetunshippedorderbyComputerNameResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -5071,6 +7782,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -5085,6 +7797,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -5093,7 +7817,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class getComputerbypackingTodayResponseGetComputerbypackingTodayResult
+    public partial class getunshipandtodayshiporderforcomputerResponseGetunshipandtodayshiporderforcomputerResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -5111,6 +7835,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -5125,6 +7850,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -5133,7 +7870,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class getlateshipmentbycategoryforcomputerResponseGetlateshipmentbycategoryforcomputerResult
+    public partial class getComputerbypackingTodayResponseGetComputerbypackingTodayResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -5151,6 +7888,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -5165,6 +7903,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -5173,7 +7923,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class getstaffbypackingTodayResponseGetstaffbypackingTodayResult
+    public partial class getlateshipmentbycategoryforcomputerResponseGetlateshipmentbycategoryforcomputerResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -5191,6 +7941,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -5205,15 +7956,27 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
             }
         }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
     }
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetComputerNameResponseGetComputerNameResult
+    public partial class getstaffbypackingTodayResponseGetstaffbypackingTodayResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -5231,6 +7994,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -5245,6 +8009,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -5253,7 +8029,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetCurrentComputerByStaffResponseGetCurrentComputerByStaffResult
+    public partial class GetComputerNameResponseGetComputerNameResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -5271,6 +8047,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -5285,6 +8062,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -5293,7 +8082,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class getworkreportResponseGetworkreportResult
+    public partial class GetCurrentComputerByStaffResponseGetCurrentComputerByStaffResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -5311,6 +8100,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -5325,6 +8115,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -5333,7 +8135,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class getworkreportUpdatedResponseGetworkreportUpdatedResult
+    public partial class getworkreportResponseGetworkreportResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -5351,6 +8153,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -5365,15 +8168,27 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
             }
         }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
     }
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetOrderAccountwiseResponseGetOrderAccountwiseResult
+    public partial class getworkreportUpdatedResponseGetworkreportUpdatedResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -5391,6 +8206,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -5405,6 +8221,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -5413,7 +8241,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetOrderAccountwiseupdatedResponseGetOrderAccountwiseupdatedResult
+    public partial class GetOrderAccountwiseResponseGetOrderAccountwiseResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -5431,6 +8259,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -5445,6 +8274,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -5453,7 +8294,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetAllCategorybycomputerwiseResponseGetAllCategorybycomputerwiseResult
+    public partial class GetOrderAccountwiseupdatedResponseGetOrderAccountwiseupdatedResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -5471,6 +8312,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -5485,6 +8327,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -5493,7 +8347,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetAllunshippedOrderResponseGetAllunshippedOrderResult
+    public partial class GetAllCategorybycomputerwiseResponseGetAllCategorybycomputerwiseResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -5511,6 +8365,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -5525,15 +8380,27 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
             }
         }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
     }
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetAllOutOfStockOrderResponseGetAllOutOfStockOrderResult
+    public partial class GetAllunshippedOrderResponseGetAllunshippedOrderResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -5551,6 +8418,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -5565,6 +8433,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -5573,7 +8453,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetAllOrderStatusQtyResponseGetAllOrderStatusQtyResult
+    public partial class GetAllOutOfStockOrderResponseGetAllOutOfStockOrderResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -5591,6 +8471,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -5605,6 +8486,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -5613,7 +8506,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetComputerNameByShiftResponseGetComputerNameByShiftResult
+    public partial class GetAllOrderStatusQtyResponseGetAllOrderStatusQtyResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -5631,6 +8524,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -5645,6 +8539,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -5653,7 +8559,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetLoginPermissionResponseGetLoginPermissionResult
+    public partial class GetComputerNameByShiftResponseGetComputerNameByShiftResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -5671,6 +8577,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -5685,15 +8592,27 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
             }
         }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
     }
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetAccessForRoleResponseGetAccessForRoleResult
+    public partial class GetLoginPermissionResponseGetLoginPermissionResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -5711,6 +8630,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -5725,6 +8645,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -5733,7 +8665,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetorderPrintlabelResponseGetorderPrintlabelResult
+    public partial class GetAccessForRoleResponseGetAccessForRoleResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -5751,6 +8683,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -5765,6 +8698,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -5773,7 +8718,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetAutodownloadLabelOrderResponseGetAutodownloadLabelOrderResult
+    public partial class GetorderPrintlabelResponseGetorderPrintlabelResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -5791,6 +8736,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -5805,6 +8751,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -5813,7 +8771,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class getproductResponseGetproductResult
+    public partial class GetAutodownloadLabelOrderResponseGetAutodownloadLabelOrderResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -5831,6 +8789,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -5845,15 +8804,27 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
             }
         }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
     }
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetProductByIdResponseGetProductByIdResult
+    public partial class getproductResponseGetproductResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -5871,6 +8842,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -5885,6 +8857,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -5893,7 +8877,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetAllBrandResponseGetAllBrandResult
+    public partial class GetProductByIdResponseGetProductByIdResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -5911,6 +8895,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -5925,6 +8910,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -5933,7 +8930,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetTaxClassResponseGetTaxClassResult
+    public partial class GetAllBrandResponseGetAllBrandResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -5951,6 +8948,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -5965,6 +8963,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -5973,7 +8983,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetUserWithrollResponseGetUserWithrollResult
+    public partial class GetTaxClassResponseGetTaxClassResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -5991,6 +9001,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -6005,15 +9016,27 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
             }
         }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
     }
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetUserrollResponseGetUserrollResult
+    public partial class GetUserWithrollResponseGetUserWithrollResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -6031,6 +9054,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -6045,6 +9069,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -6053,7 +9089,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetAllScreenForRoleResponseGetAllScreenForRoleResult
+    public partial class GetUserrollResponseGetUserrollResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -6071,6 +9107,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -6085,6 +9122,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -6093,7 +9142,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetuserByRoleIdResponseGetuserByRoleIdResult
+    public partial class GetAllScreenForRoleResponseGetAllScreenForRoleResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -6111,6 +9160,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -6125,6 +9175,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -6133,7 +9195,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class LoadCreditnoteForPaperWorkResponseLoadCreditnoteForPaperWorkResult
+    public partial class GetuserByRoleIdResponseGetuserByRoleIdResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -6151,6 +9213,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -6165,15 +9228,27 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
             }
         }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
     }
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetCreditNoteWithoutDocResponseGetCreditNoteWithoutDocResult
+    public partial class LoadCreditnoteForPaperWorkResponseLoadCreditnoteForPaperWorkResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -6191,6 +9266,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -6205,6 +9281,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -6213,7 +9301,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class LoadQuantityAdjustmentOpenCaseResponseLoadQuantityAdjustmentOpenCaseResult
+    public partial class GetCreditNoteWithoutDocResponseGetCreditNoteWithoutDocResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -6231,6 +9319,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -6245,6 +9334,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -6253,7 +9354,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetListOfPrintOrderErrorResponseGetListOfPrintOrderErrorResult
+    public partial class LoadQuantityAdjustmentOpenCaseResponseLoadQuantityAdjustmentOpenCaseResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -6271,6 +9372,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -6285,6 +9387,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -6293,7 +9407,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetDefaultVarientResponseGetDefaultVarientResult
+    public partial class GetListOfPrintOrderErrorResponseGetListOfPrintOrderErrorResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -6311,6 +9425,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -6325,15 +9440,27 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
             }
         }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
     }
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetclearenceorderResponseGetclearenceorderResult
+    public partial class GetDefaultVarientResponseGetDefaultVarientResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -6351,6 +9478,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -6365,6 +9493,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -6373,7 +9513,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetsellingchannelResponseGetsellingchannelResult
+    public partial class GetclearenceorderResponseGetclearenceorderResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -6391,6 +9531,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -6405,6 +9546,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -6413,7 +9566,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetpostagetypeResponseGetpostagetypeResult
+    public partial class GetsellingchannelResponseGetsellingchannelResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -6431,6 +9584,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -6445,6 +9599,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -6453,7 +9619,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetpostageResponseGetpostageResult
+    public partial class GetpostagetypeResponseGetpostagetypeResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -6471,6 +9637,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -6485,15 +9652,27 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
             }
         }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
     }
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetExpiryproductdatebycompanyResponseGetExpiryproductdatebycompanyResult
+    public partial class GetpostageResponseGetpostageResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -6511,6 +9690,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -6525,6 +9705,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -6533,7 +9725,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetExpirydatebycompanynameResponseGetExpirydatebycompanynameResult
+    public partial class GetExpiryproductdatebycompanyResponseGetExpiryproductdatebycompanyResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -6551,6 +9743,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -6565,6 +9758,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -6573,7 +9778,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetExpirydateResponseGetExpirydateResult
+    public partial class GetExpirydatebycompanynameResponseGetExpirydatebycompanynameResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -6591,6 +9796,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -6605,6 +9811,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -6613,7 +9831,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetExpirydatefromexpiryroomResponseGetExpirydatefromexpiryroomResult
+    public partial class GetExpirydateResponseGetExpirydateResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -6631,6 +9849,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -6645,15 +9864,27 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
             }
         }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
     }
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetExpirymessagebycompanynameResponseGetExpirymessagebycompanynameResult
+    public partial class GetExpirydatefromexpiryroomResponseGetExpirydatefromexpiryroomResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -6671,6 +9902,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -6683,8 +9915,20 @@ namespace ServiceReference2
                 return this.any1Field;
             }
             set
+            {
+                this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
             {
-                this.any1Field = value;
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -6693,7 +9937,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetExpirymsgResponseGetExpirymsgResult
+    public partial class GetExpirymessagebycompanynameResponseGetExpirymessagebycompanynameResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -6711,6 +9955,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -6725,6 +9970,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -6733,7 +9990,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetProductDetailbycompanyResponseGetProductDetailbycompanyResult
+    public partial class GetExpirymsgResponseGetExpirymsgResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -6751,6 +10008,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -6765,6 +10023,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -6773,7 +10043,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetScanInProductResponseGetScanInProductResult
+    public partial class GetProductDetailbycompanyResponseGetProductDetailbycompanyResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -6791,6 +10061,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -6805,6 +10076,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -6813,7 +10096,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetProductDetailsResponseGetProductDetailsResult
+    public partial class GetScanInProductResponseGetScanInProductResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -6831,6 +10114,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -6845,6 +10129,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -6853,7 +10149,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetProductRackLabelResponseGetProductRackLabelResult
+    public partial class GetProductDetailsResponseGetProductDetailsResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -6871,6 +10167,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -6885,6 +10182,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -6893,7 +10202,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class getcostingbyorderResponseGetcostingbyorderResult
+    public partial class GetProductRackLabelResponseGetProductRackLabelResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -6911,6 +10220,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -6925,6 +10235,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -6933,7 +10255,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetPalletNumberResponseGetPalletNumberResult
+    public partial class getcostingbyorderResponseGetcostingbyorderResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -6951,6 +10273,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -6965,6 +10288,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -6973,7 +10308,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetPalletResponseGetPalletResult
+    public partial class GetPalletNumberResponseGetPalletNumberResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -6991,6 +10326,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -7005,6 +10341,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -7013,7 +10361,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetUserResponseGetUserResult
+    public partial class GetPalletResponseGetPalletResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -7031,6 +10379,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -7045,6 +10394,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -7053,7 +10414,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetcollectionnoofItemResponseGetcollectionnoofItemResult
+    public partial class GetUserResponseGetUserResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -7071,6 +10432,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -7085,6 +10447,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -7093,7 +10467,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetShelfingnoofItemResponseGetShelfingnoofItemResult
+    public partial class GetcollectionnoofItemResponseGetcollectionnoofItemResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -7111,6 +10485,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -7125,6 +10500,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -7133,7 +10520,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class WareHouseStaffResponseWareHouseStaffResult
+    public partial class GetShelfingnoofItemResponseGetShelfingnoofItemResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -7151,6 +10538,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -7165,6 +10553,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -7173,7 +10573,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetTaskTimerResponseGetTaskTimerResult
+    public partial class WareHouseStaffResponseWareHouseStaffResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -7191,6 +10591,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -7205,6 +10606,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -7213,7 +10626,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class checknondeliveredorderResponseChecknondeliveredorderResult
+    public partial class GetTaskTimerResponseGetTaskTimerResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -7231,6 +10644,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -7245,6 +10659,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -7253,7 +10679,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class LoadOrderIssuesResponseLoadOrderIssuesResult
+    public partial class checknondeliveredorderResponseChecknondeliveredorderResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -7271,6 +10697,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -7285,6 +10712,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -7293,7 +10732,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class getMainProductIdResponseGetMainProductIdResult
+    public partial class LoadOrderIssuesResponseLoadOrderIssuesResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -7311,6 +10750,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -7325,6 +10765,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -7333,7 +10785,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class getproductvariantbypacksizeResponseGetproductvariantbypacksizeResult
+    public partial class getMainProductIdResponseGetMainProductIdResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -7351,6 +10803,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -7365,6 +10818,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -7373,7 +10838,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class getFileTypeResponseGetFileTypeResult
+    public partial class getproductvariantbypacksizeResponseGetproductvariantbypacksizeResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -7391,6 +10856,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -7405,6 +10871,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -7413,7 +10891,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetpostagebyVIDResponseGetpostagebyVIDResult
+    public partial class getFileTypeResponseGetFileTypeResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -7431,6 +10909,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -7445,6 +10924,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -7453,7 +10944,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetpostagebyAccountResponseGetpostagebyAccountResult
+    public partial class GetpostagebyVIDResponseGetpostagebyVIDResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -7471,6 +10962,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -7485,6 +10977,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -7493,7 +10997,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class updatecostingbypostagechangeResponseUpdatecostingbypostagechangeResult
+    public partial class GetpostagebyAccountResponseGetpostagebyAccountResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -7511,6 +11015,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -7525,6 +11030,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -7533,7 +11050,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetInventoryCountDetailsResponseGetInventoryCountDetailsResult
+    public partial class updatecostingbypostagechangeResponseUpdatecostingbypostagechangeResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -7551,6 +11068,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -7565,6 +11083,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -7573,7 +11103,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetIssueReasonResponseGetIssueReasonResult
+    public partial class GetInventoryCountDetailsResponseGetInventoryCountDetailsResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -7591,6 +11121,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -7605,6 +11136,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -7613,7 +11156,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetIssueSubReasonResponseGetIssueSubReasonResult
+    public partial class GetIssueReasonResponseGetIssueReasonResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -7631,6 +11174,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -7645,6 +11189,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -7653,7 +11209,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetOrderDetailsResponseGetOrderDetailsResult
+    public partial class GetIssueSubReasonResponseGetIssueSubReasonResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -7671,6 +11227,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -7685,6 +11242,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -7693,7 +11262,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetAllCategorywithReadtytoprintorderResponseGetAllCategorywithReadtytoprintorderResult
+    public partial class GetOrderDetailsResponseGetOrderDetailsResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -7711,6 +11280,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -7725,6 +11295,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -7733,7 +11315,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetAllCategoryResponseGetAllCategoryResult
+    public partial class GetAllCategorywithReadtytoprintorderResponseGetAllCategorywithReadtytoprintorderResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -7751,6 +11333,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -7765,6 +11348,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -7773,7 +11368,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetCategoryResponseGetCategoryResult
+    public partial class GetAllCategoryResponseGetAllCategoryResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -7791,6 +11386,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -7805,6 +11401,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -7813,7 +11421,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetShoppingCartWithZeroPidResponseGetShoppingCartWithZeroPidResult
+    public partial class GetCategoryResponseGetCategoryResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -7831,6 +11439,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -7845,6 +11454,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -7853,7 +11474,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetLoginDetailResponseGetLoginDetailResult
+    public partial class GetShoppingCartWithZeroPidResponseGetShoppingCartWithZeroPidResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -7871,6 +11492,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -7885,6 +11507,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -7893,7 +11527,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetScanInDataResponseGetScanInDataResult
+    public partial class GetScanInDataResponseGetScanInDataResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -7911,6 +11545,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -7925,6 +11560,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -7933,7 +11580,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetProductDeliveryDataResponseGetProductDeliveryDataResult
+    public partial class GetProductDeliveryDataResponseGetProductDeliveryDataResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -7951,6 +11598,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -7965,6 +11613,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -7973,7 +11633,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetInventoryIdResponseGetInventoryIdResult
+    public partial class GetInventoryIdResponseGetInventoryIdResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -7991,6 +11651,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -8005,6 +11666,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -8013,7 +11686,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class FillGridAgainstSkuwithcompanyResponseFillGridAgainstSkuwithcompanyResult
+    public partial class FillGridAgainstSkuwithcompanyResponseFillGridAgainstSkuwithcompanyResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -8031,6 +11704,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -8045,6 +11719,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -8053,7 +11739,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class FillGridAgainstBarcodewithcompanyResponseFillGridAgainstBarcodewithcompanyResult
+    public partial class FillGridAgainstBarcodewithcompanyResponseFillGridAgainstBarcodewithcompanyResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -8071,6 +11757,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -8085,6 +11772,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -8093,7 +11792,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetFBAOrderingResponseGetFBAOrderingResult
+    public partial class GetFBAOrderingResponseGetFBAOrderingResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -8111,6 +11810,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -8125,6 +11825,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -8133,7 +11845,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetCompanybycountryResponseGetCompanybycountryResult
+    public partial class GetCompanybycountryResponseGetCompanybycountryResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -8151,6 +11863,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -8165,6 +11878,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -8173,7 +11898,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetSupplierResponseGetSupplierResult
+    public partial class GetSupplierResponseGetSupplierResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -8191,6 +11916,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -8205,6 +11931,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -8213,7 +11951,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetCompanyResponseGetCompanyResult
+    public partial class GetCompanyResponseGetCompanyResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -8231,6 +11969,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -8245,6 +11984,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -8253,7 +12004,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetAccountNameResponseGetAccountNameResult
+    public partial class GetAccountNameResponseGetAccountNameResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -8271,6 +12022,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -8285,6 +12037,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -8293,7 +12057,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetManualInvoiceResponseGetManualInvoiceResult
+    public partial class GetManualInvoiceResponseGetManualInvoiceResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -8311,6 +12075,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -8325,6 +12090,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -8333,7 +12110,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetOrderTypeResponseGetOrderTypeResult
+    public partial class GetOrderTypeResponseGetOrderTypeResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -8351,6 +12128,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -8365,6 +12143,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -8430,7 +12220,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetInvoicePrintResponseGetInvoicePrintResult
+    public partial class GetInvoicePrintResponseGetInvoicePrintResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -8448,6 +12238,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -8462,6 +12253,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -8470,7 +12273,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetAllPerformaInvoiceResponseGetAllPerformaInvoiceResult
+    public partial class GetAllPerformaInvoiceResponseGetAllPerformaInvoiceResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -8488,6 +12291,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -8502,6 +12306,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -8510,7 +12326,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetAllManualInvoiceResponseGetAllManualInvoiceResult
+    public partial class GetAllManualInvoiceResponseGetAllManualInvoiceResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -8528,6 +12344,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -8542,6 +12359,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -8550,7 +12379,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class ImportOrderDtorderlist
+    public partial class ImportOrderDtorderlist : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -8568,6 +12397,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -8582,6 +12412,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -8590,7 +12432,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetCompanyDetailsResponseGetCompanyDetailsResult
+    public partial class GetCompanyDetailsResponseGetCompanyDetailsResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -8608,6 +12450,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -8622,6 +12465,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -8630,7 +12485,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class getcourierserviceResponseGetcourierserviceResult
+    public partial class getcourierserviceResponseGetcourierserviceResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -8648,6 +12503,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -8662,6 +12518,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -8670,7 +12538,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetDefaultVarientDetailsResponseGetDefaultVarientDetailsResult
+    public partial class GetDefaultVarientDetailsResponseGetDefaultVarientDetailsResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -8688,6 +12556,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -8702,6 +12571,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -8710,7 +12591,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetDefaultVarientDetailResponseGetDefaultVarientDetailResult
+    public partial class GetDefaultVarientDetailResponseGetDefaultVarientDetailResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -8728,6 +12609,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -8742,6 +12624,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -8750,7 +12644,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetDefaultVarientDetailsupdatedResponseGetDefaultVarientDetailsupdatedResult
+    public partial class GetDefaultVarientDetailsupdatedResponseGetDefaultVarientDetailsupdatedResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -8768,6 +12662,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -8782,6 +12677,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -8790,7 +12697,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class getinventorybycompanyResponseGetinventorybycompanyResult
+    public partial class getinventorybycompanyResponseGetinventorybycompanyResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -8808,6 +12715,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -8822,6 +12730,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -8830,7 +12750,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class getinventoryResponseGetinventoryResult
+    public partial class getinventoryResponseGetinventoryResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -8848,6 +12768,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -8862,6 +12783,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -8870,7 +12803,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetExpirydatewithskubarcodebycompanyResponseGetExpirydatewithskubarcodebycompanyResult
+    public partial class GetExpirydatewithskubarcodebycompanyResponseGetExpirydatewithskubarcodebycompanyResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -8888,6 +12821,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -8902,6 +12836,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -8910,7 +12856,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetExpirydatewithskubarcodeWithoutexpiryroomdateResponseGetExpirydatewithskubarcodeWithoutexpiryroomdateResult
+    public partial class GetExpirydatewithskubarcodeWithoutexpiryroomdateResponseGetExpirydatewithskubarcodeWithoutexpiryroomdateResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -8928,6 +12874,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -8942,6 +12889,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -8950,7 +12909,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetProductDetailResponseGetProductDetailResult
+    public partial class GetProductDetailResponseGetProductDetailResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -8968,6 +12927,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -8982,6 +12942,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -8990,7 +12962,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetOrderResponseGetOrderResult
+    public partial class GetOrderResponseGetOrderResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -9008,6 +12980,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -9022,6 +12995,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -9030,7 +13015,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetCustomerResponseGetCustomerResult
+    public partial class GetCustomerResponseGetCustomerResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -9048,6 +13033,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -9062,6 +13048,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -9070,7 +13068,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetBarCodeByVIdResponseGetBarCodeByVIdResult
+    public partial class GetBarCodeByVIdResponseGetBarCodeByVIdResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -9088,6 +13086,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -9102,6 +13101,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -9110,7 +13121,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetVariantByPIdnSKuResponseGetVariantByPIdnSKuResult
+    public partial class GetVariantByPIdnSKuResponseGetVariantByPIdnSKuResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -9128,6 +13139,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -9142,6 +13154,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -9150,7 +13174,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetBarCodeByPIdwithcompanyResponseGetBarCodeByPIdwithcompanyResult
+    public partial class GetBarCodeByPIdwithcompanyResponseGetBarCodeByPIdwithcompanyResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -9168,6 +13192,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -9182,6 +13207,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -9190,7 +13227,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetBarCodeByPIdskuResponseGetBarCodeByPIdskuResult
+    public partial class GetBarCodeByPIdskuResponseGetBarCodeByPIdskuResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -9208,6 +13245,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -9222,6 +13260,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -9230,7 +13280,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetSKUByOrderResponseGetSKUByOrderResult
+    public partial class GetSKUByOrderResponseGetSKUByOrderResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -9248,6 +13298,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -9262,6 +13313,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -9270,7 +13333,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetProductResponseGetProductResult
+    public partial class GetProductResponseGetProductResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -9288,6 +13351,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -9302,6 +13366,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -9310,7 +13386,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetDamageExpirydateResponseGetDamageExpirydateResult
+    public partial class GetDamageExpirydateResponseGetDamageExpirydateResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -9328,6 +13404,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -9342,6 +13419,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -9350,7 +13439,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetDamageExpirydtResponseGetDamageExpirydtResult
+    public partial class GetDamageExpirydtResponseGetDamageExpirydtResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -9368,6 +13457,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -9382,6 +13472,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -9390,7 +13492,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetDamageExpiryResponseGetDamageExpiryResult
+    public partial class GetDamageExpiryResponseGetDamageExpiryResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -9408,6 +13510,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -9422,6 +13525,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -9430,7 +13545,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetDamageExpirymsgResponseGetDamageExpirymsgResult
+    public partial class GetDamageExpirymsgResponseGetDamageExpirymsgResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -9448,6 +13563,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -9462,6 +13578,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -9470,7 +13598,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetShoppingCartResponseGetShoppingCartResult
+    public partial class GetShoppingCartResponseGetShoppingCartResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -9488,6 +13616,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -9502,6 +13631,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -9510,7 +13651,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetShoppingCartMultipleResponseGetShoppingCartMultipleResult
+    public partial class GetShoppingCartMultipleResponseGetShoppingCartMultipleResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -9528,6 +13669,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -9542,6 +13684,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -9550,7 +13704,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetShoppingCartupdateResponseGetShoppingCartupdateResult
+    public partial class GetShoppingCartupdateResponseGetShoppingCartupdateResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -9568,6 +13722,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -9582,6 +13737,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -9590,7 +13757,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class getDeliveryexpiryResponseGetDeliveryexpiryResult
+    public partial class getDeliveryexpiryResponseGetDeliveryexpiryResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -9608,6 +13775,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -9622,6 +13790,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -9630,7 +13810,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetOrderQuentityResponseGetOrderQuentityResult
+    public partial class GetOrderQuentityResponseGetOrderQuentityResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -9648,6 +13828,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -9662,6 +13843,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -9670,7 +13863,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class GetTrackedOrderResponseGetTrackedOrderResult
+    public partial class GetTrackedOrderResponseGetTrackedOrderResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -9688,6 +13881,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -9702,6 +13896,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -9710,7 +13916,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class getinventoryallResponseGetinventoryallResult
+    public partial class getinventoryallResponseGetinventoryallResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -9728,6 +13934,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -9742,6 +13949,18 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -9750,7 +13969,7 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
-    public partial class getBankHolidaysResponseGetBankHolidaysResult
+    public partial class getBankHolidaysResponseGetBankHolidaysResult : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private System.Xml.XmlElement[] anyField;
@@ -9768,6 +13987,7 @@ namespace ServiceReference2
             set
             {
                 this.anyField = value;
+                this.RaisePropertyChanged("Any");
             }
         }
         
@@ -9782,18 +14002,30 @@ namespace ServiceReference2
             set
             {
                 this.any1Field = value;
+                this.RaisePropertyChanged("Any1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    public interface BarcodeWebServiceSoapChannel : ServiceReference2.BarcodeWebServiceSoap, System.ServiceModel.IClientChannel
+    public interface BarcodeWebServiceSoapChannel : ServiceReference1.BarcodeWebServiceSoap, System.ServiceModel.IClientChannel
     {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    public partial class BarcodeWebServiceSoapClient : System.ServiceModel.ClientBase<ServiceReference2.BarcodeWebServiceSoap>, ServiceReference2.BarcodeWebServiceSoap
+    public partial class BarcodeWebServiceSoapClient : System.ServiceModel.ClientBase<ServiceReference1.BarcodeWebServiceSoap>, ServiceReference1.BarcodeWebServiceSoap
     {
         
         /// <summary>
@@ -9829,9 +14061,19 @@ namespace ServiceReference2
         {
         }
         
+        public int SaveStaffIn(string StaffEmailId, string ScanInTime, string CountryName)
+        {
+            return base.Channel.SaveStaffIn(StaffEmailId, ScanInTime, CountryName);
+        }
+        
         public System.Threading.Tasks.Task<int> SaveStaffInAsync(string StaffEmailId, string ScanInTime, string CountryName)
         {
             return base.Channel.SaveStaffInAsync(StaffEmailId, ScanInTime, CountryName);
+        }
+        
+        public int SaveStaffOut(string StaffEmailId, string ScanOutTime)
+        {
+            return base.Channel.SaveStaffOut(StaffEmailId, ScanOutTime);
         }
         
         public System.Threading.Tasks.Task<int> SaveStaffOutAsync(string StaffEmailId, string ScanOutTime)
@@ -9839,9 +14081,19 @@ namespace ServiceReference2
             return base.Channel.SaveStaffOutAsync(StaffEmailId, ScanOutTime);
         }
         
+        public int SaveStaffScanIn(string StaffEmailId)
+        {
+            return base.Channel.SaveStaffScanIn(StaffEmailId);
+        }
+        
         public System.Threading.Tasks.Task<int> SaveStaffScanInAsync(string StaffEmailId)
         {
             return base.Channel.SaveStaffScanInAsync(StaffEmailId);
+        }
+        
+        public int SaveStaffScanOut(string StaffEmailId)
+        {
+            return base.Channel.SaveStaffScanOut(StaffEmailId);
         }
         
         public System.Threading.Tasks.Task<int> SaveStaffScanOutAsync(string StaffEmailId)
@@ -9849,59 +14101,119 @@ namespace ServiceReference2
             return base.Channel.SaveStaffScanOutAsync(StaffEmailId);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.getproductdetailsbycompanyResponseGetproductdetailsbycompanyResult> getproductdetailsbycompanyAsync(string Companyname)
+        public ServiceReference1.getproductdetailsbycompanyResponseGetproductdetailsbycompanyResult getproductdetailsbycompany(string Companyname)
+        {
+            return base.Channel.getproductdetailsbycompany(Companyname);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.getproductdetailsbycompanyResponseGetproductdetailsbycompanyResult> getproductdetailsbycompanyAsync(string Companyname)
         {
             return base.Channel.getproductdetailsbycompanyAsync(Companyname);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetSellinglevelResponseGetSellinglevelResult> GetSellinglevelAsync(string MainProductId)
+        public ServiceReference1.GetSellinglevelResponseGetSellinglevelResult GetSellinglevel(string MainProductId)
+        {
+            return base.Channel.GetSellinglevel(MainProductId);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetSellinglevelResponseGetSellinglevelResult> GetSellinglevelAsync(string MainProductId)
         {
             return base.Channel.GetSellinglevelAsync(MainProductId);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.OrderRecievedScanByDetailsResponseOrderRecievedScanByDetailsResult> OrderRecievedScanByDetailsAsync(string ProductId)
+        public ServiceReference1.OrderRecievedScanByDetailsResponseOrderRecievedScanByDetailsResult OrderRecievedScanByDetails(string ProductId)
+        {
+            return base.Channel.OrderRecievedScanByDetails(ProductId);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.OrderRecievedScanByDetailsResponseOrderRecievedScanByDetailsResult> OrderRecievedScanByDetailsAsync(string ProductId)
         {
             return base.Channel.OrderRecievedScanByDetailsAsync(ProductId);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetSameCustomerOrderResponseGetSameCustomerOrderResult> GetSameCustomerOrderAsync(string OrderNumber)
+        public ServiceReference1.GetSameCustomerOrderResponseGetSameCustomerOrderResult GetSameCustomerOrder(string OrderNumber)
+        {
+            return base.Channel.GetSameCustomerOrder(OrderNumber);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetSameCustomerOrderResponseGetSameCustomerOrderResult> GetSameCustomerOrderAsync(string OrderNumber)
         {
             return base.Channel.GetSameCustomerOrderAsync(OrderNumber);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.LastScanInDetailsResponseLastScanInDetailsResult> LastScanInDetailsAsync(string ProductId)
+        public ServiceReference1.LastScanInDetailsResponseLastScanInDetailsResult LastScanInDetails(string ProductId)
+        {
+            return base.Channel.LastScanInDetails(ProductId);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.LastScanInDetailsResponseLastScanInDetailsResult> LastScanInDetailsAsync(string ProductId)
         {
             return base.Channel.LastScanInDetailsAsync(ProductId);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.SameDayScanInDetailsResponseSameDayScanInDetailsResult> SameDayScanInDetailsAsync(string MainProductId)
+        public ServiceReference1.SameDayScanInDetailsResponseSameDayScanInDetailsResult SameDayScanInDetails(string MainProductId)
+        {
+            return base.Channel.SameDayScanInDetails(MainProductId);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.SameDayScanInDetailsResponseSameDayScanInDetailsResult> SameDayScanInDetailsAsync(string MainProductId)
         {
             return base.Channel.SameDayScanInDetailsAsync(MainProductId);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.Get_Amazon_Click_And_Collect_Order_ForPickedUPResponseGet_Amazon_Click_And_Collect_Order_ForPickedUPResult> Get_Amazon_Click_And_Collect_Order_ForPickedUPAsync()
+        public ServiceReference1.Get_Amazon_Click_And_Collect_Order_ForPickedUPResponseGet_Amazon_Click_And_Collect_Order_ForPickedUPResult Get_Amazon_Click_And_Collect_Order_ForPickedUP()
+        {
+            return base.Channel.Get_Amazon_Click_And_Collect_Order_ForPickedUP();
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.Get_Amazon_Click_And_Collect_Order_ForPickedUPResponseGet_Amazon_Click_And_Collect_Order_ForPickedUPResult> Get_Amazon_Click_And_Collect_Order_ForPickedUPAsync()
         {
             return base.Channel.Get_Amazon_Click_And_Collect_Order_ForPickedUPAsync();
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.Get_Saved_Notification_TimeResponseGet_Saved_Notification_TimeResult> Get_Saved_Notification_TimeAsync(string msgtype)
+        public ServiceReference1.Get_Saved_Notification_TimeResponseGet_Saved_Notification_TimeResult Get_Saved_Notification_Time(string msgtype)
+        {
+            return base.Channel.Get_Saved_Notification_Time(msgtype);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.Get_Saved_Notification_TimeResponseGet_Saved_Notification_TimeResult> Get_Saved_Notification_TimeAsync(string msgtype)
         {
             return base.Channel.Get_Saved_Notification_TimeAsync(msgtype);
         }
         
-        public System.Threading.Tasks.Task<string> mergepdfAsync(ServiceReference2.mergepdfDT dt, string mergedFileName)
+        public string mergepdf(ServiceReference1.mergepdfDT dt, string mergedFileName)
+        {
+            return base.Channel.mergepdf(dt, mergedFileName);
+        }
+        
+        public System.Threading.Tasks.Task<string> mergepdfAsync(ServiceReference1.mergepdfDT dt, string mergedFileName)
         {
             return base.Channel.mergepdfAsync(dt, mergedFileName);
         }
         
-        public System.Threading.Tasks.Task ImportASTEbayOrdersAsync(ServiceReference2.ArrayOfXElement ds)
+        public void ImportASTEbayOrders(ServiceReference1.ArrayOfXElement ds)
+        {
+            base.Channel.ImportASTEbayOrders(ds);
+        }
+        
+        public System.Threading.Tasks.Task ImportASTEbayOrdersAsync(ServiceReference1.ArrayOfXElement ds)
         {
             return base.Channel.ImportASTEbayOrdersAsync(ds);
         }
         
-        public System.Threading.Tasks.Task ImportAmazonForASTAsync(ServiceReference2.ArrayOfXElement ds)
+        public void ImportAmazonForAST(ServiceReference1.ArrayOfXElement ds)
+        {
+            base.Channel.ImportAmazonForAST(ds);
+        }
+        
+        public System.Threading.Tasks.Task ImportAmazonForASTAsync(ServiceReference1.ArrayOfXElement ds)
         {
             return base.Channel.ImportAmazonForASTAsync(ds);
+        }
+        
+        public int createconsignment()
+        {
+            return base.Channel.createconsignment();
         }
         
         public System.Threading.Tasks.Task<int> createconsignmentAsync()
@@ -9909,9 +14221,19 @@ namespace ServiceReference2
             return base.Channel.createconsignmentAsync();
         }
         
+        public int getlistofcreatedconsignment()
+        {
+            return base.Channel.getlistofcreatedconsignment();
+        }
+        
         public System.Threading.Tasks.Task<int> getlistofcreatedconsignmentAsync()
         {
             return base.Channel.getlistofcreatedconsignmentAsync();
+        }
+        
+        public int getlistofcreatedconsignmentast()
+        {
+            return base.Channel.getlistofcreatedconsignmentast();
         }
         
         public System.Threading.Tasks.Task<int> getlistofcreatedconsignmentastAsync()
@@ -9919,34 +14241,69 @@ namespace ServiceReference2
             return base.Channel.getlistofcreatedconsignmentastAsync();
         }
         
+        public bool UpdateAmazonClickAndCollectInventory(long VariantId, int Qty, string Reason, string EmailId)
+        {
+            return base.Channel.UpdateAmazonClickAndCollectInventory(VariantId, Qty, Reason, EmailId);
+        }
+        
         public System.Threading.Tasks.Task<bool> UpdateAmazonClickAndCollectInventoryAsync(long VariantId, int Qty, string Reason, string EmailId)
         {
             return base.Channel.UpdateAmazonClickAndCollectInventoryAsync(VariantId, Qty, Reason, EmailId);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.getACACInventoryResponseGetACACInventoryResult> getACACInventoryAsync(string VariantId)
+        public ServiceReference1.getACACInventoryResponseGetACACInventoryResult getACACInventory(string VariantId)
+        {
+            return base.Channel.getACACInventory(VariantId);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.getACACInventoryResponseGetACACInventoryResult> getACACInventoryAsync(string VariantId)
         {
             return base.Channel.getACACInventoryAsync(VariantId);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.getOrderRecievedReadyToPrintforcomputerResponseGetOrderRecievedReadyToPrintforcomputerResult> getOrderRecievedReadyToPrintforcomputerAsync(string computername, string companyname)
+        public ServiceReference1.getOrderRecievedReadyToPrintforcomputerResponseGetOrderRecievedReadyToPrintforcomputerResult getOrderRecievedReadyToPrintforcomputer(string computername, string companyname)
+        {
+            return base.Channel.getOrderRecievedReadyToPrintforcomputer(computername, companyname);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.getOrderRecievedReadyToPrintforcomputerResponseGetOrderRecievedReadyToPrintforcomputerResult> getOrderRecievedReadyToPrintforcomputerAsync(string computername, string companyname)
         {
             return base.Channel.getOrderRecievedReadyToPrintforcomputerAsync(computername, companyname);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.JKIOPUserResponseJKIOPUserResult> JKIOPUserAsync(string username, string password)
+        public ServiceReference1.JKIOPUserResponseJKIOPUserResult JKIOPUser(string username, string password)
+        {
+            return base.Channel.JKIOPUser(username, password);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.JKIOPUserResponseJKIOPUserResult> JKIOPUserAsync(string username, string password)
         {
             return base.Channel.JKIOPUserAsync(username, password);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.JKIOPGetAccessForRoleResponseJKIOPGetAccessForRoleResult> JKIOPGetAccessForRoleAsync(long RoleId)
+        public ServiceReference1.JKIOPGetAccessForRoleResponseJKIOPGetAccessForRoleResult JKIOPGetAccessForRole(long RoleId)
+        {
+            return base.Channel.JKIOPGetAccessForRole(RoleId);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.JKIOPGetAccessForRoleResponseJKIOPGetAccessForRoleResult> JKIOPGetAccessForRoleAsync(long RoleId)
         {
             return base.Channel.JKIOPGetAccessForRoleAsync(RoleId);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.JKIOPLoadAllUserResponseJKIOPLoadAllUserResult> JKIOPLoadAllUserAsync()
+        public ServiceReference1.JKIOPLoadAllUserResponseJKIOPLoadAllUserResult JKIOPLoadAllUser()
+        {
+            return base.Channel.JKIOPLoadAllUser();
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.JKIOPLoadAllUserResponseJKIOPLoadAllUserResult> JKIOPLoadAllUserAsync()
         {
             return base.Channel.JKIOPLoadAllUserAsync();
+        }
+        
+        public string SaveJKIOPUser(string UserId, string RoleId, string UserName, string UserPassword, bool IsActive)
+        {
+            return base.Channel.SaveJKIOPUser(UserId, RoleId, UserName, UserPassword, IsActive);
         }
         
         public System.Threading.Tasks.Task<string> SaveJKIOPUserAsync(string UserId, string RoleId, string UserName, string UserPassword, bool IsActive)
@@ -9954,9 +14311,19 @@ namespace ServiceReference2
             return base.Channel.SaveJKIOPUserAsync(UserId, RoleId, UserName, UserPassword, IsActive);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.JKIOPLoadAllStudentResponseJKIOPLoadAllStudentResult> JKIOPLoadAllStudentAsync()
+        public ServiceReference1.JKIOPLoadAllStudentResponseJKIOPLoadAllStudentResult JKIOPLoadAllStudent()
+        {
+            return base.Channel.JKIOPLoadAllStudent();
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.JKIOPLoadAllStudentResponseJKIOPLoadAllStudentResult> JKIOPLoadAllStudentAsync()
         {
             return base.Channel.JKIOPLoadAllStudentAsync();
+        }
+        
+        public int DeleteUserMaster(long UserId)
+        {
+            return base.Channel.DeleteUserMaster(UserId);
         }
         
         public System.Threading.Tasks.Task<int> DeleteUserMasterAsync(long UserId)
@@ -9964,29 +14331,59 @@ namespace ServiceReference2
             return base.Channel.DeleteUserMasterAsync(UserId);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetdAllStudentbysessionResponseGetdAllStudentbysessionResult> GetdAllStudentbysessionAsync(string session, string startdate, string enddate)
+        public ServiceReference1.GetdAllStudentbysessionResponseGetdAllStudentbysessionResult GetdAllStudentbysession(string session, string startdate, string enddate)
+        {
+            return base.Channel.GetdAllStudentbysession(session, startdate, enddate);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetdAllStudentbysessionResponseGetdAllStudentbysessionResult> GetdAllStudentbysessionAsync(string session, string startdate, string enddate)
         {
             return base.Channel.GetdAllStudentbysessionAsync(session, startdate, enddate);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.DownloadUploadedfileByIdResponseDownloadUploadedfileByIdResult> DownloadUploadedfileByIdAsync(string FormType, string FormId)
+        public ServiceReference1.DownloadUploadedfileByIdResponseDownloadUploadedfileByIdResult DownloadUploadedfileById(string FormType, string FormId)
+        {
+            return base.Channel.DownloadUploadedfileById(FormType, FormId);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.DownloadUploadedfileByIdResponseDownloadUploadedfileByIdResult> DownloadUploadedfileByIdAsync(string FormType, string FormId)
         {
             return base.Channel.DownloadUploadedfileByIdAsync(FormType, FormId);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.DownloadUploadedfileBySupplierResponseDownloadUploadedfileBySupplierResult> DownloadUploadedfileBySupplierAsync(string FormType, string FormId)
+        public ServiceReference1.DownloadUploadedfileBySupplierResponseDownloadUploadedfileBySupplierResult DownloadUploadedfileBySupplier(string FormType, string FormId)
+        {
+            return base.Channel.DownloadUploadedfileBySupplier(FormType, FormId);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.DownloadUploadedfileBySupplierResponseDownloadUploadedfileBySupplierResult> DownloadUploadedfileBySupplierAsync(string FormType, string FormId)
         {
             return base.Channel.DownloadUploadedfileBySupplierAsync(FormType, FormId);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.JKIOPLoadStudentInfoResponseJKIOPLoadStudentInfoResult> JKIOPLoadStudentInfoAsync(string StudentId)
+        public ServiceReference1.JKIOPLoadStudentInfoResponseJKIOPLoadStudentInfoResult JKIOPLoadStudentInfo(string StudentId)
+        {
+            return base.Channel.JKIOPLoadStudentInfo(StudentId);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.JKIOPLoadStudentInfoResponseJKIOPLoadStudentInfoResult> JKIOPLoadStudentInfoAsync(string StudentId)
         {
             return base.Channel.JKIOPLoadStudentInfoAsync(StudentId);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.JKIOPLoadStudentPaymentInfoResponseJKIOPLoadStudentPaymentInfoResult> JKIOPLoadStudentPaymentInfoAsync(string SPId)
+        public ServiceReference1.JKIOPLoadStudentPaymentInfoResponseJKIOPLoadStudentPaymentInfoResult JKIOPLoadStudentPaymentInfo(string SPId)
+        {
+            return base.Channel.JKIOPLoadStudentPaymentInfo(SPId);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.JKIOPLoadStudentPaymentInfoResponseJKIOPLoadStudentPaymentInfoResult> JKIOPLoadStudentPaymentInfoAsync(string SPId)
         {
             return base.Channel.JKIOPLoadStudentPaymentInfoAsync(SPId);
+        }
+        
+        public string SaveJKIOPUserRoll(string RoleName, string RoleId)
+        {
+            return base.Channel.SaveJKIOPUserRoll(RoleName, RoleId);
         }
         
         public System.Threading.Tasks.Task<string> SaveJKIOPUserRollAsync(string RoleName, string RoleId)
@@ -9994,14 +14391,29 @@ namespace ServiceReference2
             return base.Channel.SaveJKIOPUserRollAsync(RoleName, RoleId);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.JKIOPLoadROllResponseJKIOPLoadROllResult> JKIOPLoadROllAsync()
+        public ServiceReference1.JKIOPLoadROllResponseJKIOPLoadROllResult JKIOPLoadROll()
+        {
+            return base.Channel.JKIOPLoadROll();
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.JKIOPLoadROllResponseJKIOPLoadROllResult> JKIOPLoadROllAsync()
         {
             return base.Channel.JKIOPLoadROllAsync();
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.JKIOPUSERROllResponseJKIOPUSERROllResult> JKIOPUSERROllAsync(long RoleId)
+        public ServiceReference1.JKIOPUSERROllResponseJKIOPUSERROllResult JKIOPUSERROll(long RoleId)
+        {
+            return base.Channel.JKIOPUSERROll(RoleId);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.JKIOPUSERROllResponseJKIOPUSERROllResult> JKIOPUSERROllAsync(long RoleId)
         {
             return base.Channel.JKIOPUSERROllAsync(RoleId);
+        }
+        
+        public string SaveJKIOPUserRollAccess(bool DeleteAccess, string ScreenId, bool ViewAccess, bool EditAccess, string RoleAccessId, string RoleId, bool LockEditAccess)
+        {
+            return base.Channel.SaveJKIOPUserRollAccess(DeleteAccess, ScreenId, ViewAccess, EditAccess, RoleAccessId, RoleId, LockEditAccess);
         }
         
         public System.Threading.Tasks.Task<string> SaveJKIOPUserRollAccessAsync(bool DeleteAccess, string ScreenId, bool ViewAccess, bool EditAccess, string RoleAccessId, string RoleId, bool LockEditAccess)
@@ -10009,9 +14421,51 @@ namespace ServiceReference2
             return base.Channel.SaveJKIOPUserRollAccessAsync(DeleteAccess, ScreenId, ViewAccess, EditAccess, RoleAccessId, RoleId, LockEditAccess);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.JKIOPGetAllScreenForRoleResponseJKIOPGetAllScreenForRoleResult> JKIOPGetAllScreenForRoleAsync(long RoleId)
+        public ServiceReference1.JKIOPGetAllScreenForRoleResponseJKIOPGetAllScreenForRoleResult JKIOPGetAllScreenForRole(long RoleId)
+        {
+            return base.Channel.JKIOPGetAllScreenForRole(RoleId);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.JKIOPGetAllScreenForRoleResponseJKIOPGetAllScreenForRoleResult> JKIOPGetAllScreenForRoleAsync(long RoleId)
         {
             return base.Channel.JKIOPGetAllScreenForRoleAsync(RoleId);
+        }
+        
+        public string SaveJKIOPStudent(
+                    string StudentId, 
+                    string RolleNumber, 
+                    string FName, 
+                    string LName, 
+                    string DOB, 
+                    string MobileNumber, 
+                    string AlternateNumber, 
+                    string Gender, 
+                    string EmailId, 
+                    string FatherName, 
+                    string FatherMobileNumber, 
+                    string MotherName, 
+                    string Address, 
+                    string City, 
+                    string State, 
+                    string Pincode, 
+                    string StudentImage, 
+                    string CourseName, 
+                    string TotalFees, 
+                    string PaymentMode, 
+                    string NoOfEMI, 
+                    string FirstAmount, 
+                    string FirstDate, 
+                    string SecondAmount, 
+                    string SecondDate, 
+                    string ThirdAmount, 
+                    string ThirdDate, 
+                    string FourthAmount, 
+                    string FourthDate, 
+                    string username, 
+                    string CourseYear, 
+                    string SessionYear)
+        {
+            return base.Channel.SaveJKIOPStudent(StudentId, RolleNumber, FName, LName, DOB, MobileNumber, AlternateNumber, Gender, EmailId, FatherName, FatherMobileNumber, MotherName, Address, City, State, Pincode, StudentImage, CourseName, TotalFees, PaymentMode, NoOfEMI, FirstAmount, FirstDate, SecondAmount, SecondDate, ThirdAmount, ThirdDate, FourthAmount, FourthDate, username, CourseYear, SessionYear);
         }
         
         public System.Threading.Tasks.Task<string> SaveJKIOPStudentAsync(
@@ -10049,6 +14503,45 @@ namespace ServiceReference2
                     string SessionYear)
         {
             return base.Channel.SaveJKIOPStudentAsync(StudentId, RolleNumber, FName, LName, DOB, MobileNumber, AlternateNumber, Gender, EmailId, FatherName, FatherMobileNumber, MotherName, Address, City, State, Pincode, StudentImage, CourseName, TotalFees, PaymentMode, NoOfEMI, FirstAmount, FirstDate, SecondAmount, SecondDate, ThirdAmount, ThirdDate, FourthAmount, FourthDate, username, CourseYear, SessionYear);
+        }
+        
+        public string SaveStudent(
+                    string StudentId, 
+                    string RolleNumber, 
+                    string FName, 
+                    string LName, 
+                    string DOB, 
+                    string MobileNumber, 
+                    string AlternateNumber, 
+                    string Gender, 
+                    string EmailId, 
+                    string FatherName, 
+                    string FatherMobileNumber, 
+                    string MotherName, 
+                    string Address, 
+                    string City, 
+                    string State, 
+                    string Pincode, 
+                    string StudentImage, 
+                    string CourseName, 
+                    string TotalFees, 
+                    string PaymentMode, 
+                    string NoOfEMI, 
+                    string FirstAmount, 
+                    string FirstDate, 
+                    string SecondAmount, 
+                    string SecondDate, 
+                    string ThirdAmount, 
+                    string ThirdDate, 
+                    string FourthAmount, 
+                    string FourthDate, 
+                    string username, 
+                    string CourseYear, 
+                    string SessionYear, 
+                    string Cashamount, 
+                    string bankamount)
+        {
+            return base.Channel.SaveStudent(StudentId, RolleNumber, FName, LName, DOB, MobileNumber, AlternateNumber, Gender, EmailId, FatherName, FatherMobileNumber, MotherName, Address, City, State, Pincode, StudentImage, CourseName, TotalFees, PaymentMode, NoOfEMI, FirstAmount, FirstDate, SecondAmount, SecondDate, ThirdAmount, ThirdDate, FourthAmount, FourthDate, username, CourseYear, SessionYear, Cashamount, bankamount);
         }
         
         public System.Threading.Tasks.Task<string> SaveStudentAsync(
@@ -10090,6 +14583,46 @@ namespace ServiceReference2
             return base.Channel.SaveStudentAsync(StudentId, RolleNumber, FName, LName, DOB, MobileNumber, AlternateNumber, Gender, EmailId, FatherName, FatherMobileNumber, MotherName, Address, City, State, Pincode, StudentImage, CourseName, TotalFees, PaymentMode, NoOfEMI, FirstAmount, FirstDate, SecondAmount, SecondDate, ThirdAmount, ThirdDate, FourthAmount, FourthDate, username, CourseYear, SessionYear, Cashamount, bankamount);
         }
         
+        public string SaveStudentDetails(
+                    string StudentId, 
+                    string RolleNumber, 
+                    string FName, 
+                    string LName, 
+                    string DOB, 
+                    string MobileNumber, 
+                    string AlternateNumber, 
+                    string Gender, 
+                    string EmailId, 
+                    string FatherName, 
+                    string FatherMobileNumber, 
+                    string MotherName, 
+                    string Address, 
+                    string City, 
+                    string State, 
+                    string Pincode, 
+                    string StudentImage, 
+                    string CourseName, 
+                    string TotalFees, 
+                    string PaymentMode, 
+                    string NoOfEMI, 
+                    string FirstAmount, 
+                    string FirstDate, 
+                    string SecondAmount, 
+                    string SecondDate, 
+                    string ThirdAmount, 
+                    string ThirdDate, 
+                    string FourthAmount, 
+                    string FourthDate, 
+                    string username, 
+                    string CourseYear, 
+                    string SessionYear, 
+                    string Cashamount, 
+                    string bankamount, 
+                    bool IsDiscontinue)
+        {
+            return base.Channel.SaveStudentDetails(StudentId, RolleNumber, FName, LName, DOB, MobileNumber, AlternateNumber, Gender, EmailId, FatherName, FatherMobileNumber, MotherName, Address, City, State, Pincode, StudentImage, CourseName, TotalFees, PaymentMode, NoOfEMI, FirstAmount, FirstDate, SecondAmount, SecondDate, ThirdAmount, ThirdDate, FourthAmount, FourthDate, username, CourseYear, SessionYear, Cashamount, bankamount, IsDiscontinue);
+        }
+        
         public System.Threading.Tasks.Task<string> SaveStudentDetailsAsync(
                     string StudentId, 
                     string RolleNumber, 
@@ -10128,6 +14661,48 @@ namespace ServiceReference2
                     bool IsDiscontinue)
         {
             return base.Channel.SaveStudentDetailsAsync(StudentId, RolleNumber, FName, LName, DOB, MobileNumber, AlternateNumber, Gender, EmailId, FatherName, FatherMobileNumber, MotherName, Address, City, State, Pincode, StudentImage, CourseName, TotalFees, PaymentMode, NoOfEMI, FirstAmount, FirstDate, SecondAmount, SecondDate, ThirdAmount, ThirdDate, FourthAmount, FourthDate, username, CourseYear, SessionYear, Cashamount, bankamount, IsDiscontinue);
+        }
+        
+        public string SaveStudentInfo(
+                    string StudentId, 
+                    string RolleNumber, 
+                    string FName, 
+                    string LName, 
+                    string DOB, 
+                    string MobileNumber, 
+                    string AlternateNumber, 
+                    string Gender, 
+                    string EmailId, 
+                    string FatherName, 
+                    string FatherMobileNumber, 
+                    string MotherName, 
+                    string Address, 
+                    string City, 
+                    string State, 
+                    string Pincode, 
+                    string StudentImage, 
+                    string CourseName, 
+                    string TotalFees, 
+                    string PaymentMode, 
+                    string NoOfEMI, 
+                    string FirstAmount, 
+                    string FirstDate, 
+                    string SecondAmount, 
+                    string SecondDate, 
+                    string ThirdAmount, 
+                    string ThirdDate, 
+                    string FourthAmount, 
+                    string FourthDate, 
+                    string username, 
+                    string CourseYear, 
+                    string SessionYear, 
+                    string Cashamount, 
+                    string bankamount, 
+                    bool IsDiscontinue, 
+                    bool IsSCStudent, 
+                    string LedgerNumber)
+        {
+            return base.Channel.SaveStudentInfo(StudentId, RolleNumber, FName, LName, DOB, MobileNumber, AlternateNumber, Gender, EmailId, FatherName, FatherMobileNumber, MotherName, Address, City, State, Pincode, StudentImage, CourseName, TotalFees, PaymentMode, NoOfEMI, FirstAmount, FirstDate, SecondAmount, SecondDate, ThirdAmount, ThirdDate, FourthAmount, FourthDate, username, CourseYear, SessionYear, Cashamount, bankamount, IsDiscontinue, IsSCStudent, LedgerNumber);
         }
         
         public System.Threading.Tasks.Task<string> SaveStudentInfoAsync(
@@ -10172,9 +14747,19 @@ namespace ServiceReference2
             return base.Channel.SaveStudentInfoAsync(StudentId, RolleNumber, FName, LName, DOB, MobileNumber, AlternateNumber, Gender, EmailId, FatherName, FatherMobileNumber, MotherName, Address, City, State, Pincode, StudentImage, CourseName, TotalFees, PaymentMode, NoOfEMI, FirstAmount, FirstDate, SecondAmount, SecondDate, ThirdAmount, ThirdDate, FourthAmount, FourthDate, username, CourseYear, SessionYear, Cashamount, bankamount, IsDiscontinue, IsSCStudent, LedgerNumber);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.JKIOPLoadPaymentResponseJKIOPLoadPaymentResult> JKIOPLoadPaymentAsync(string coursesession, string startdate, string enddate)
+        public ServiceReference1.JKIOPLoadPaymentResponseJKIOPLoadPaymentResult JKIOPLoadPayment(string coursesession, string startdate, string enddate)
+        {
+            return base.Channel.JKIOPLoadPayment(coursesession, startdate, enddate);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.JKIOPLoadPaymentResponseJKIOPLoadPaymentResult> JKIOPLoadPaymentAsync(string coursesession, string startdate, string enddate)
         {
             return base.Channel.JKIOPLoadPaymentAsync(coursesession, startdate, enddate);
+        }
+        
+        public int checkip(string ip)
+        {
+            return base.Channel.checkip(ip);
         }
         
         public System.Threading.Tasks.Task<int> checkipAsync(string ip)
@@ -10182,34 +14767,69 @@ namespace ServiceReference2
             return base.Channel.checkipAsync(ip);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.ArrayOfXElement> GetRecievedamountHistoryAsync(string session)
+        public ServiceReference1.ArrayOfXElement GetRecievedamountHistory(string session)
+        {
+            return base.Channel.GetRecievedamountHistory(session);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.ArrayOfXElement> GetRecievedamountHistoryAsync(string session)
         {
             return base.Channel.GetRecievedamountHistoryAsync(session);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.ArrayOfXElement> GetRecievedamountDetailsAsync(string session, string Name, string type)
+        public ServiceReference1.ArrayOfXElement GetRecievedamountDetails(string session, string Name, string type)
+        {
+            return base.Channel.GetRecievedamountDetails(session, Name, type);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.ArrayOfXElement> GetRecievedamountDetailsAsync(string session, string Name, string type)
         {
             return base.Channel.GetRecievedamountDetailsAsync(session, Name, type);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetstudentforInvoiceResponseGetstudentforInvoiceResult> GetstudentforInvoiceAsync(string RollNumber)
+        public ServiceReference1.GetstudentforInvoiceResponseGetstudentforInvoiceResult GetstudentforInvoice(string RollNumber)
+        {
+            return base.Channel.GetstudentforInvoice(RollNumber);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetstudentforInvoiceResponseGetstudentforInvoiceResult> GetstudentforInvoiceAsync(string RollNumber)
         {
             return base.Channel.GetstudentforInvoiceAsync(RollNumber);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.JKIOPLoadPaymentDetailBySPIdResponseJKIOPLoadPaymentDetailBySPIdResult> JKIOPLoadPaymentDetailBySPIdAsync(string SPId)
+        public ServiceReference1.JKIOPLoadPaymentDetailBySPIdResponseJKIOPLoadPaymentDetailBySPIdResult JKIOPLoadPaymentDetailBySPId(string SPId)
+        {
+            return base.Channel.JKIOPLoadPaymentDetailBySPId(SPId);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.JKIOPLoadPaymentDetailBySPIdResponseJKIOPLoadPaymentDetailBySPIdResult> JKIOPLoadPaymentDetailBySPIdAsync(string SPId)
         {
             return base.Channel.JKIOPLoadPaymentDetailBySPIdAsync(SPId);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.JKIOPLoadPaymentBySPIdResponseJKIOPLoadPaymentBySPIdResult> JKIOPLoadPaymentBySPIdAsync(string SPId)
+        public ServiceReference1.JKIOPLoadPaymentBySPIdResponseJKIOPLoadPaymentBySPIdResult JKIOPLoadPaymentBySPId(string SPId)
+        {
+            return base.Channel.JKIOPLoadPaymentBySPId(SPId);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.JKIOPLoadPaymentBySPIdResponseJKIOPLoadPaymentBySPIdResult> JKIOPLoadPaymentBySPIdAsync(string SPId)
         {
             return base.Channel.JKIOPLoadPaymentBySPIdAsync(SPId);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.JKIOPLoadPaymentByPaymentIdResponseJKIOPLoadPaymentByPaymentIdResult> JKIOPLoadPaymentByPaymentIdAsync(string PId)
+        public ServiceReference1.JKIOPLoadPaymentByPaymentIdResponseJKIOPLoadPaymentByPaymentIdResult JKIOPLoadPaymentByPaymentId(string PId)
+        {
+            return base.Channel.JKIOPLoadPaymentByPaymentId(PId);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.JKIOPLoadPaymentByPaymentIdResponseJKIOPLoadPaymentByPaymentIdResult> JKIOPLoadPaymentByPaymentIdAsync(string PId)
         {
             return base.Channel.JKIOPLoadPaymentByPaymentIdAsync(PId);
+        }
+        
+        public string SaveSubmitstudentpaymenttobankhandover(string PId, bool IsHandOver, string HandoverName, string SubmitDate, string username, string SubmitTransactionnumber, string comment, string Depositeamount)
+        {
+            return base.Channel.SaveSubmitstudentpaymenttobankhandover(PId, IsHandOver, HandoverName, SubmitDate, username, SubmitTransactionnumber, comment, Depositeamount);
         }
         
         public System.Threading.Tasks.Task<string> SaveSubmitstudentpaymenttobankhandoverAsync(string PId, bool IsHandOver, string HandoverName, string SubmitDate, string username, string SubmitTransactionnumber, string comment, string Depositeamount)
@@ -10217,9 +14837,19 @@ namespace ServiceReference2
             return base.Channel.SaveSubmitstudentpaymenttobankhandoverAsync(PId, IsHandOver, HandoverName, SubmitDate, username, SubmitTransactionnumber, comment, Depositeamount);
         }
         
+        public string SavePaymentInfo(string PId, string PaymentMode, string Amount, string EMIAmount, string BankTransactionNumber, bool IsHandOver, string HandoverName, string ApproveBy, string SubmitDate, string username, string StudentId, string Recieveddate, string SubmitTransactionnumber, string StudentPaymentId)
+        {
+            return base.Channel.SavePaymentInfo(PId, PaymentMode, Amount, EMIAmount, BankTransactionNumber, IsHandOver, HandoverName, ApproveBy, SubmitDate, username, StudentId, Recieveddate, SubmitTransactionnumber, StudentPaymentId);
+        }
+        
         public System.Threading.Tasks.Task<string> SavePaymentInfoAsync(string PId, string PaymentMode, string Amount, string EMIAmount, string BankTransactionNumber, bool IsHandOver, string HandoverName, string ApproveBy, string SubmitDate, string username, string StudentId, string Recieveddate, string SubmitTransactionnumber, string StudentPaymentId)
         {
             return base.Channel.SavePaymentInfoAsync(PId, PaymentMode, Amount, EMIAmount, BankTransactionNumber, IsHandOver, HandoverName, ApproveBy, SubmitDate, username, StudentId, Recieveddate, SubmitTransactionnumber, StudentPaymentId);
+        }
+        
+        public string deletePaymentInfo(long PId)
+        {
+            return base.Channel.deletePaymentInfo(PId);
         }
         
         public System.Threading.Tasks.Task<string> deletePaymentInfoAsync(long PId)
@@ -10227,9 +14857,19 @@ namespace ServiceReference2
             return base.Channel.deletePaymentInfoAsync(PId);
         }
         
+        public string deletestudentPaymentInfo(long SPId)
+        {
+            return base.Channel.deletestudentPaymentInfo(SPId);
+        }
+        
         public System.Threading.Tasks.Task<string> deletestudentPaymentInfoAsync(long SPId)
         {
             return base.Channel.deletestudentPaymentInfoAsync(SPId);
+        }
+        
+        public string deletestudentInfo(long SId)
+        {
+            return base.Channel.deletestudentInfo(SId);
         }
         
         public System.Threading.Tasks.Task<string> deletestudentInfoAsync(long SId)
@@ -10237,9 +14877,19 @@ namespace ServiceReference2
             return base.Channel.deletestudentInfoAsync(SId);
         }
         
+        public string deleteSupplierPaymentHistory(long SPId)
+        {
+            return base.Channel.deleteSupplierPaymentHistory(SPId);
+        }
+        
         public System.Threading.Tasks.Task<string> deleteSupplierPaymentHistoryAsync(long SPId)
         {
             return base.Channel.deleteSupplierPaymentHistoryAsync(SPId);
+        }
+        
+        public string deleteSupplier(long SupplierId)
+        {
+            return base.Channel.deleteSupplier(SupplierId);
         }
         
         public System.Threading.Tasks.Task<string> deleteSupplierAsync(long SupplierId)
@@ -10247,19 +14897,39 @@ namespace ServiceReference2
             return base.Channel.deleteSupplierAsync(SupplierId);
         }
         
+        public string SaveDocuments(string DId, string Title, string username)
+        {
+            return base.Channel.SaveDocuments(DId, Title, username);
+        }
+        
         public System.Threading.Tasks.Task<string> SaveDocumentsAsync(string DId, string Title, string username)
         {
             return base.Channel.SaveDocumentsAsync(DId, Title, username);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetDocumentResponseGetDocumentResult> GetDocumentAsync(string DocumentId)
+        public ServiceReference1.GetDocumentResponseGetDocumentResult GetDocument(string DocumentId)
+        {
+            return base.Channel.GetDocument(DocumentId);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetDocumentResponseGetDocumentResult> GetDocumentAsync(string DocumentId)
         {
             return base.Channel.GetDocumentAsync(DocumentId);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetDocumentByIdResponseGetDocumentByIdResult> GetDocumentByIdAsync(string DocumentId)
+        public ServiceReference1.GetDocumentByIdResponseGetDocumentByIdResult GetDocumentById(string DocumentId)
+        {
+            return base.Channel.GetDocumentById(DocumentId);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetDocumentByIdResponseGetDocumentByIdResult> GetDocumentByIdAsync(string DocumentId)
         {
             return base.Channel.GetDocumentByIdAsync(DocumentId);
+        }
+        
+        public string deleteDocumentById(long DId)
+        {
+            return base.Channel.deleteDocumentById(DId);
         }
         
         public System.Threading.Tasks.Task<string> deleteDocumentByIdAsync(long DId)
@@ -10267,29 +14937,59 @@ namespace ServiceReference2
             return base.Channel.deleteDocumentByIdAsync(DId);
         }
         
+        public string SaveSupplierPaymentHistory(string SPId, string supplierid, string ExpenseReason, string ExpenseAmount, bool IsApproved, string ApproveBy, string ExpenseImage, string username, string paymentmode, string transactionId, string PaymentDate)
+        {
+            return base.Channel.SaveSupplierPaymentHistory(SPId, supplierid, ExpenseReason, ExpenseAmount, IsApproved, ApproveBy, ExpenseImage, username, paymentmode, transactionId, PaymentDate);
+        }
+        
         public System.Threading.Tasks.Task<string> SaveSupplierPaymentHistoryAsync(string SPId, string supplierid, string ExpenseReason, string ExpenseAmount, bool IsApproved, string ApproveBy, string ExpenseImage, string username, string paymentmode, string transactionId, string PaymentDate)
         {
             return base.Channel.SaveSupplierPaymentHistoryAsync(SPId, supplierid, ExpenseReason, ExpenseAmount, IsApproved, ApproveBy, ExpenseImage, username, paymentmode, transactionId, PaymentDate);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.JKIOPLoadStaffExpenseResponseJKIOPLoadStaffExpenseResult> JKIOPLoadStaffExpenseAsync()
+        public ServiceReference1.JKIOPLoadStaffExpenseResponseJKIOPLoadStaffExpenseResult JKIOPLoadStaffExpense()
+        {
+            return base.Channel.JKIOPLoadStaffExpense();
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.JKIOPLoadStaffExpenseResponseJKIOPLoadStaffExpenseResult> JKIOPLoadStaffExpenseAsync()
         {
             return base.Channel.JKIOPLoadStaffExpenseAsync();
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.JKIOPLoadStaffExpenseByIdResponseJKIOPLoadStaffExpenseByIdResult> JKIOPLoadStaffExpenseByIdAsync(string EId)
+        public ServiceReference1.JKIOPLoadStaffExpenseByIdResponseJKIOPLoadStaffExpenseByIdResult JKIOPLoadStaffExpenseById(string EId)
+        {
+            return base.Channel.JKIOPLoadStaffExpenseById(EId);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.JKIOPLoadStaffExpenseByIdResponseJKIOPLoadStaffExpenseByIdResult> JKIOPLoadStaffExpenseByIdAsync(string EId)
         {
             return base.Channel.JKIOPLoadStaffExpenseByIdAsync(EId);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.JKIOPLoadSupplierByIdResponseJKIOPLoadSupplierByIdResult> JKIOPLoadSupplierByIdAsync(string SId)
+        public ServiceReference1.JKIOPLoadSupplierByIdResponseJKIOPLoadSupplierByIdResult JKIOPLoadSupplierById(string SId)
+        {
+            return base.Channel.JKIOPLoadSupplierById(SId);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.JKIOPLoadSupplierByIdResponseJKIOPLoadSupplierByIdResult> JKIOPLoadSupplierByIdAsync(string SId)
         {
             return base.Channel.JKIOPLoadSupplierByIdAsync(SId);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.JKIOPLoadSupplierResponseJKIOPLoadSupplierResult> JKIOPLoadSupplierAsync(string supplier, string startdate, string enddate)
+        public ServiceReference1.JKIOPLoadSupplierResponseJKIOPLoadSupplierResult JKIOPLoadSupplier(string supplier, string startdate, string enddate)
+        {
+            return base.Channel.JKIOPLoadSupplier(supplier, startdate, enddate);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.JKIOPLoadSupplierResponseJKIOPLoadSupplierResult> JKIOPLoadSupplierAsync(string supplier, string startdate, string enddate)
         {
             return base.Channel.JKIOPLoadSupplierAsync(supplier, startdate, enddate);
+        }
+        
+        public string SaveJKIOPSupplier(string SId, string Name, string Email, string PhoneNo, string Address, string Comment, string BankName, string AccountNo, string IFSCCode, string username, string amount)
+        {
+            return base.Channel.SaveJKIOPSupplier(SId, Name, Email, PhoneNo, Address, Comment, BankName, AccountNo, IFSCCode, username, amount);
         }
         
         public System.Threading.Tasks.Task<string> SaveJKIOPSupplierAsync(string SId, string Name, string Email, string PhoneNo, string Address, string Comment, string BankName, string AccountNo, string IFSCCode, string username, string amount)
@@ -10297,14 +14997,29 @@ namespace ServiceReference2
             return base.Channel.SaveJKIOPSupplierAsync(SId, Name, Email, PhoneNo, Address, Comment, BankName, AccountNo, IFSCCode, username, amount);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.JKIOPLoadstudentbysearchResponseJKIOPLoadstudentbysearchResult> JKIOPLoadstudentbysearchAsync(string RollNumber, string Firstname, string FatherName, string dob)
+        public ServiceReference1.JKIOPLoadstudentbysearchResponseJKIOPLoadstudentbysearchResult JKIOPLoadstudentbysearch(string RollNumber, string Firstname, string FatherName, string dob)
+        {
+            return base.Channel.JKIOPLoadstudentbysearch(RollNumber, Firstname, FatherName, dob);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.JKIOPLoadstudentbysearchResponseJKIOPLoadstudentbysearchResult> JKIOPLoadstudentbysearchAsync(string RollNumber, string Firstname, string FatherName, string dob)
         {
             return base.Channel.JKIOPLoadstudentbysearchAsync(RollNumber, Firstname, FatherName, dob);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.JKIOPStudentPaymentInfoResponseJKIOPStudentPaymentInfoResult> JKIOPStudentPaymentInfoAsync(string StudentId)
+        public ServiceReference1.JKIOPStudentPaymentInfoResponseJKIOPStudentPaymentInfoResult JKIOPStudentPaymentInfo(string StudentId)
+        {
+            return base.Channel.JKIOPStudentPaymentInfo(StudentId);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.JKIOPStudentPaymentInfoResponseJKIOPStudentPaymentInfoResult> JKIOPStudentPaymentInfoAsync(string StudentId)
         {
             return base.Channel.JKIOPStudentPaymentInfoAsync(StudentId);
+        }
+        
+        public string SaveSupplierExpenseHistory(string HId, string EId, string PaymentMode, string Transactionnumber, string Amount, string PaidDate, bool IsApproved, string ApprovedBy, string ImageName, string username)
+        {
+            return base.Channel.SaveSupplierExpenseHistory(HId, EId, PaymentMode, Transactionnumber, Amount, PaidDate, IsApproved, ApprovedBy, ImageName, username);
         }
         
         public System.Threading.Tasks.Task<string> SaveSupplierExpenseHistoryAsync(string HId, string EId, string PaymentMode, string Transactionnumber, string Amount, string PaidDate, bool IsApproved, string ApprovedBy, string ImageName, string username)
@@ -10312,14 +15027,29 @@ namespace ServiceReference2
             return base.Channel.SaveSupplierExpenseHistoryAsync(HId, EId, PaymentMode, Transactionnumber, Amount, PaidDate, IsApproved, ApprovedBy, ImageName, username);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.SupplierExpenseHistoryResponseSupplierExpenseHistoryResult> SupplierExpenseHistoryAsync(string EId)
+        public ServiceReference1.SupplierExpenseHistoryResponseSupplierExpenseHistoryResult SupplierExpenseHistory(string EId)
+        {
+            return base.Channel.SupplierExpenseHistory(EId);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.SupplierExpenseHistoryResponseSupplierExpenseHistoryResult> SupplierExpenseHistoryAsync(string EId)
         {
             return base.Channel.SupplierExpenseHistoryAsync(EId);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.SupplierExpenseHistoryBYHidResponseSupplierExpenseHistoryBYHidResult> SupplierExpenseHistoryBYHidAsync(string HId)
+        public ServiceReference1.SupplierExpenseHistoryBYHidResponseSupplierExpenseHistoryBYHidResult SupplierExpenseHistoryBYHid(string HId)
+        {
+            return base.Channel.SupplierExpenseHistoryBYHid(HId);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.SupplierExpenseHistoryBYHidResponseSupplierExpenseHistoryBYHidResult> SupplierExpenseHistoryBYHidAsync(string HId)
         {
             return base.Channel.SupplierExpenseHistoryBYHidAsync(HId);
+        }
+        
+        public string SaveExternalLink(string FormType, string FormId, string LastUpdate, string LinkDescription, string LinkFile, string LinkFileType, string Path, string isDrawing, string username)
+        {
+            return base.Channel.SaveExternalLink(FormType, FormId, LastUpdate, LinkDescription, LinkFile, LinkFileType, Path, isDrawing, username);
         }
         
         public System.Threading.Tasks.Task<string> SaveExternalLinkAsync(string FormType, string FormId, string LastUpdate, string LinkDescription, string LinkFile, string LinkFileType, string Path, string isDrawing, string username)
@@ -10327,9 +15057,19 @@ namespace ServiceReference2
             return base.Channel.SaveExternalLinkAsync(FormType, FormId, LastUpdate, LinkDescription, LinkFile, LinkFileType, Path, isDrawing, username);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.LoadExternalLinkByFormIdAndTypeResponseLoadExternalLinkByFormIdAndTypeResult> LoadExternalLinkByFormIdAndTypeAsync(string FormType, string FormId)
+        public ServiceReference1.LoadExternalLinkByFormIdAndTypeResponseLoadExternalLinkByFormIdAndTypeResult LoadExternalLinkByFormIdAndType(string FormType, string FormId)
+        {
+            return base.Channel.LoadExternalLinkByFormIdAndType(FormType, FormId);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.LoadExternalLinkByFormIdAndTypeResponseLoadExternalLinkByFormIdAndTypeResult> LoadExternalLinkByFormIdAndTypeAsync(string FormType, string FormId)
         {
             return base.Channel.LoadExternalLinkByFormIdAndTypeAsync(FormType, FormId);
+        }
+        
+        public string DeleteExternalRecord(string ExernalId)
+        {
+            return base.Channel.DeleteExternalRecord(ExernalId);
         }
         
         public System.Threading.Tasks.Task<string> DeleteExternalRecordAsync(string ExernalId)
@@ -10337,39 +15077,96 @@ namespace ServiceReference2
             return base.Channel.DeleteExternalRecordAsync(ExernalId);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.LoadSupplierPaymentBySPIdResponseLoadSupplierPaymentBySPIdResult> LoadSupplierPaymentBySPIdAsync(string SPId)
+        public ServiceReference1.LoadSupplierPaymentBySPIdResponseLoadSupplierPaymentBySPIdResult LoadSupplierPaymentBySPId(string SPId)
+        {
+            return base.Channel.LoadSupplierPaymentBySPId(SPId);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.LoadSupplierPaymentBySPIdResponseLoadSupplierPaymentBySPIdResult> LoadSupplierPaymentBySPIdAsync(string SPId)
         {
             return base.Channel.LoadSupplierPaymentBySPIdAsync(SPId);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.JKIOPSupplierPaymentBySupplierIdResponseJKIOPSupplierPaymentBySupplierIdResult> JKIOPSupplierPaymentBySupplierIdAsync(string SupplierId)
+        public ServiceReference1.JKIOPSupplierPaymentBySupplierIdResponseJKIOPSupplierPaymentBySupplierIdResult JKIOPSupplierPaymentBySupplierId(string SupplierId)
+        {
+            return base.Channel.JKIOPSupplierPaymentBySupplierId(SupplierId);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.JKIOPSupplierPaymentBySupplierIdResponseJKIOPSupplierPaymentBySupplierIdResult> JKIOPSupplierPaymentBySupplierIdAsync(string SupplierId)
         {
             return base.Channel.JKIOPSupplierPaymentBySupplierIdAsync(SupplierId);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetStudentFineResponseGetStudentFineResult> GetStudentFineAsync(string CourseYear, string CourseSession, string fromdate, string todate)
+        public ServiceReference1.GetStudentFineResponseGetStudentFineResult GetStudentFine(string CourseYear, string CourseSession, string fromdate, string todate)
+        {
+            return base.Channel.GetStudentFine(CourseYear, CourseSession, fromdate, todate);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetStudentFineResponseGetStudentFineResult> GetStudentFineAsync(string CourseYear, string CourseSession, string fromdate, string todate)
         {
             return base.Channel.GetStudentFineAsync(CourseYear, CourseSession, fromdate, todate);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.getstudentinfobyrollnumberResponseGetstudentinfobyrollnumberResult> getstudentinfobyrollnumberAsync(string RollNumber)
+        public ServiceReference1.getstudentinfobyrollnumberResponseGetstudentinfobyrollnumberResult getstudentinfobyrollnumber(string RollNumber)
+        {
+            return base.Channel.getstudentinfobyrollnumber(RollNumber);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.getstudentinfobyrollnumberResponseGetstudentinfobyrollnumberResult> getstudentinfobyrollnumberAsync(string RollNumber)
         {
             return base.Channel.getstudentinfobyrollnumberAsync(RollNumber);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.getstudentfineinfobyFIneIdResponseGetstudentfineinfobyFIneIdResult> getstudentfineinfobyFIneIdAsync(string FineId)
+        public ServiceReference1.getstudentfineinfobyFIneIdResponseGetstudentfineinfobyFIneIdResult getstudentfineinfobyFIneId(string FineId)
+        {
+            return base.Channel.getstudentfineinfobyFIneId(FineId);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.getstudentfineinfobyFIneIdResponseGetstudentfineinfobyFIneIdResult> getstudentfineinfobyFIneIdAsync(string FineId)
         {
             return base.Channel.getstudentfineinfobyFIneIdAsync(FineId);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.getstudentfineinfobyRollnumberResponseGetstudentfineinfobyRollnumberResult> getstudentfineinfobyRollnumberAsync(string RollNumber)
+        public ServiceReference1.getstudentfineinfobyRollnumberResponseGetstudentfineinfobyRollnumberResult getstudentfineinfobyRollnumber(string RollNumber)
+        {
+            return base.Channel.getstudentfineinfobyRollnumber(RollNumber);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.getstudentfineinfobyRollnumberResponseGetstudentfineinfobyRollnumberResult> getstudentfineinfobyRollnumberAsync(string RollNumber)
         {
             return base.Channel.getstudentfineinfobyRollnumberAsync(RollNumber);
+        }
+        
+        public string SaveFinepaymenttobankhandover(string FId, bool IsHandOver, string HandoverName, string SubmitDate, string username, string SubmitTransactionnumber, string comment, string Depositeamount)
+        {
+            return base.Channel.SaveFinepaymenttobankhandover(FId, IsHandOver, HandoverName, SubmitDate, username, SubmitTransactionnumber, comment, Depositeamount);
         }
         
         public System.Threading.Tasks.Task<string> SaveFinepaymenttobankhandoverAsync(string FId, bool IsHandOver, string HandoverName, string SubmitDate, string username, string SubmitTransactionnumber, string comment, string Depositeamount)
         {
             return base.Channel.SaveFinepaymenttobankhandoverAsync(FId, IsHandOver, HandoverName, SubmitDate, username, SubmitTransactionnumber, comment, Depositeamount);
+        }
+        
+        public string SaveFinePaymentInfo(
+                    string FId, 
+                    string PaymentMode, 
+                    string Amount, 
+                    string PaidAmount, 
+                    string FineAmount, 
+                    string BankTransactionNumber, 
+                    bool IsHandOver, 
+                    string HandoverName, 
+                    string DepositeDate, 
+                    string username, 
+                    string RollNumber, 
+                    string Recieveddate, 
+                    string SubmitTransactionnumber, 
+                    string FineComment, 
+                    string DepositeComment, 
+                    string Session, 
+                    string courseyear)
+        {
+            return base.Channel.SaveFinePaymentInfo(FId, PaymentMode, Amount, PaidAmount, FineAmount, BankTransactionNumber, IsHandOver, HandoverName, DepositeDate, username, RollNumber, Recieveddate, SubmitTransactionnumber, FineComment, DepositeComment, Session, courseyear);
         }
         
         public System.Threading.Tasks.Task<string> SaveFinePaymentInfoAsync(
@@ -10394,24 +15191,49 @@ namespace ServiceReference2
             return base.Channel.SaveFinePaymentInfoAsync(FId, PaymentMode, Amount, PaidAmount, FineAmount, BankTransactionNumber, IsHandOver, HandoverName, DepositeDate, username, RollNumber, Recieveddate, SubmitTransactionnumber, FineComment, DepositeComment, Session, courseyear);
         }
         
+        public string SaveRefundPaymentInfo(string RId, string PaymentMode, string Amount, string BankTransactionNumber, string RefundDate, string username, string RollNumber, string Comment, string Session, string courseyear, string approveby, string BankName)
+        {
+            return base.Channel.SaveRefundPaymentInfo(RId, PaymentMode, Amount, BankTransactionNumber, RefundDate, username, RollNumber, Comment, Session, courseyear, approveby, BankName);
+        }
+        
         public System.Threading.Tasks.Task<string> SaveRefundPaymentInfoAsync(string RId, string PaymentMode, string Amount, string BankTransactionNumber, string RefundDate, string username, string RollNumber, string Comment, string Session, string courseyear, string approveby, string BankName)
         {
             return base.Channel.SaveRefundPaymentInfoAsync(RId, PaymentMode, Amount, BankTransactionNumber, RefundDate, username, RollNumber, Comment, Session, courseyear, approveby, BankName);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.getstudentRefundinfobyRollnumberResponseGetstudentRefundinfobyRollnumberResult> getstudentRefundinfobyRollnumberAsync(string RollNumber)
+        public ServiceReference1.getstudentRefundinfobyRollnumberResponseGetstudentRefundinfobyRollnumberResult getstudentRefundinfobyRollnumber(string RollNumber)
+        {
+            return base.Channel.getstudentRefundinfobyRollnumber(RollNumber);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.getstudentRefundinfobyRollnumberResponseGetstudentRefundinfobyRollnumberResult> getstudentRefundinfobyRollnumberAsync(string RollNumber)
         {
             return base.Channel.getstudentRefundinfobyRollnumberAsync(RollNumber);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.getstudentRefundinfobyRefundIdResponseGetstudentRefundinfobyRefundIdResult> getstudentRefundinfobyRefundIdAsync(string RId)
+        public ServiceReference1.getstudentRefundinfobyRefundIdResponseGetstudentRefundinfobyRefundIdResult getstudentRefundinfobyRefundId(string RId)
+        {
+            return base.Channel.getstudentRefundinfobyRefundId(RId);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.getstudentRefundinfobyRefundIdResponseGetstudentRefundinfobyRefundIdResult> getstudentRefundinfobyRefundIdAsync(string RId)
         {
             return base.Channel.getstudentRefundinfobyRefundIdAsync(RId);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetStudentRefundResponseGetStudentRefundResult> GetStudentRefundAsync(string CourseYear, string CourseSession, string fromdate, string todate)
+        public ServiceReference1.GetStudentRefundResponseGetStudentRefundResult GetStudentRefund(string CourseYear, string CourseSession, string fromdate, string todate)
+        {
+            return base.Channel.GetStudentRefund(CourseYear, CourseSession, fromdate, todate);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetStudentRefundResponseGetStudentRefundResult> GetStudentRefundAsync(string CourseYear, string CourseSession, string fromdate, string todate)
         {
             return base.Channel.GetStudentRefundAsync(CourseYear, CourseSession, fromdate, todate);
+        }
+        
+        public int SaveProductexpirylistinventory(string productid, int qty, string Expiry, string CompanyName)
+        {
+            return base.Channel.SaveProductexpirylistinventory(productid, qty, Expiry, CompanyName);
         }
         
         public System.Threading.Tasks.Task<int> SaveProductexpirylistinventoryAsync(string productid, int qty, string Expiry, string CompanyName)
@@ -10419,9 +15241,19 @@ namespace ServiceReference2
             return base.Channel.SaveProductexpirylistinventoryAsync(productid, qty, Expiry, CompanyName);
         }
         
+        public int SaveCollegeLog(string LogType, string LogDescription, string OldValue, string NewValue, string RollNumber, string CreatedBy)
+        {
+            return base.Channel.SaveCollegeLog(LogType, LogDescription, OldValue, NewValue, RollNumber, CreatedBy);
+        }
+        
         public System.Threading.Tasks.Task<int> SaveCollegeLogAsync(string LogType, string LogDescription, string OldValue, string NewValue, string RollNumber, string CreatedBy)
         {
             return base.Channel.SaveCollegeLogAsync(LogType, LogDescription, OldValue, NewValue, RollNumber, CreatedBy);
+        }
+        
+        public int SaveOfficeLeaveRequest(string StaffEmailId, string LeaveType, System.DateTime LFromDate, System.DateTime LToDate, string FromTime, string ToTime, string Reason, string CreatedBy)
+        {
+            return base.Channel.SaveOfficeLeaveRequest(StaffEmailId, LeaveType, LFromDate, LToDate, FromTime, ToTime, Reason, CreatedBy);
         }
         
         public System.Threading.Tasks.Task<int> SaveOfficeLeaveRequestAsync(string StaffEmailId, string LeaveType, System.DateTime LFromDate, System.DateTime LToDate, string FromTime, string ToTime, string Reason, string CreatedBy)
@@ -10429,64 +15261,129 @@ namespace ServiceReference2
             return base.Channel.SaveOfficeLeaveRequestAsync(StaffEmailId, LeaveType, LFromDate, LToDate, FromTime, ToTime, Reason, CreatedBy);
         }
         
+        public int DeleteOfficeLeaveRequest(string Id)
+        {
+            return base.Channel.DeleteOfficeLeaveRequest(Id);
+        }
+        
         public System.Threading.Tasks.Task<int> DeleteOfficeLeaveRequestAsync(string Id)
         {
             return base.Channel.DeleteOfficeLeaveRequestAsync(Id);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetOfficeLeaveDetailsResponseGetOfficeLeaveDetailsResult> GetOfficeLeaveDetailsAsync(string EmailId, System.DateTime StartDate, System.DateTime EndDate, string RequestStatus, string LeaveType)
+        public ServiceReference1.GetOfficeLeaveDetailsResponseGetOfficeLeaveDetailsResult GetOfficeLeaveDetails(string EmailId, System.DateTime StartDate, System.DateTime EndDate, string RequestStatus, string LeaveType)
+        {
+            return base.Channel.GetOfficeLeaveDetails(EmailId, StartDate, EndDate, RequestStatus, LeaveType);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetOfficeLeaveDetailsResponseGetOfficeLeaveDetailsResult> GetOfficeLeaveDetailsAsync(string EmailId, System.DateTime StartDate, System.DateTime EndDate, string RequestStatus, string LeaveType)
         {
             return base.Channel.GetOfficeLeaveDetailsAsync(EmailId, StartDate, EndDate, RequestStatus, LeaveType);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.ArrayOfXElement> GetDailyScheduleWorkAsync(string StaffEmailId)
+        public ServiceReference1.ArrayOfXElement GetDailyScheduleWork(string StaffEmailId)
+        {
+            return base.Channel.GetDailyScheduleWork(StaffEmailId);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.ArrayOfXElement> GetDailyScheduleWorkAsync(string StaffEmailId)
         {
             return base.Channel.GetDailyScheduleWorkAsync(StaffEmailId);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.ArrayOfXElement> GetDailyScheduleWorksAsync(string StaffEmailId, string TaskName, string CategoryId, string TeamName)
+        public ServiceReference1.ArrayOfXElement GetDailyScheduleWorks(string StaffEmailId, string TaskName, string CategoryId, string TeamName)
+        {
+            return base.Channel.GetDailyScheduleWorks(StaffEmailId, TaskName, CategoryId, TeamName);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.ArrayOfXElement> GetDailyScheduleWorksAsync(string StaffEmailId, string TaskName, string CategoryId, string TeamName)
         {
             return base.Channel.GetDailyScheduleWorksAsync(StaffEmailId, TaskName, CategoryId, TeamName);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetStaffRotaResponseGetStaffRotaResult> GetStaffRotaAsync(string EmailId, System.DateTime StartDate, System.DateTime EndDate)
+        public ServiceReference1.GetStaffRotaResponseGetStaffRotaResult GetStaffRota(string EmailId, System.DateTime StartDate, System.DateTime EndDate)
+        {
+            return base.Channel.GetStaffRota(EmailId, StartDate, EndDate);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetStaffRotaResponseGetStaffRotaResult> GetStaffRotaAsync(string EmailId, System.DateTime StartDate, System.DateTime EndDate)
         {
             return base.Channel.GetStaffRotaAsync(EmailId, StartDate, EndDate);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetTaskNameResponseGetTaskNameResult> GetTaskNameAsync()
+        public ServiceReference1.GetTaskNameResponseGetTaskNameResult GetTaskName()
+        {
+            return base.Channel.GetTaskName();
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetTaskNameResponseGetTaskNameResult> GetTaskNameAsync()
         {
             return base.Channel.GetTaskNameAsync();
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetTaskNamesResponseGetTaskNamesResult> GetTaskNamesAsync(string countryname)
+        public ServiceReference1.GetTaskNamesResponseGetTaskNamesResult GetTaskNames(string countryname)
+        {
+            return base.Channel.GetTaskNames(countryname);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetTaskNamesResponseGetTaskNamesResult> GetTaskNamesAsync(string countryname)
         {
             return base.Channel.GetTaskNamesAsync(countryname);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetTeamNameResponseGetTeamNameResult> GetTeamNameAsync()
+        public ServiceReference1.GetTeamNameResponseGetTeamNameResult GetTeamName()
+        {
+            return base.Channel.GetTeamName();
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetTeamNameResponseGetTeamNameResult> GetTeamNameAsync()
         {
             return base.Channel.GetTeamNameAsync();
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetStaffCountryWiseResponseGetStaffCountryWiseResult> GetStaffCountryWiseAsync(string CountryName)
+        public ServiceReference1.GetStaffCountryWiseResponseGetStaffCountryWiseResult GetStaffCountryWise(string CountryName)
+        {
+            return base.Channel.GetStaffCountryWise(CountryName);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetStaffCountryWiseResponseGetStaffCountryWiseResult> GetStaffCountryWiseAsync(string CountryName)
         {
             return base.Channel.GetStaffCountryWiseAsync(CountryName);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.CheckTaskRunningOnComputerResponseCheckTaskRunningOnComputerResult> CheckTaskRunningOnComputerAsync(string EmailId, string ComputerName)
+        public ServiceReference1.CheckTaskRunningOnComputerResponseCheckTaskRunningOnComputerResult CheckTaskRunningOnComputer(string EmailId, string ComputerName)
+        {
+            return base.Channel.CheckTaskRunningOnComputer(EmailId, ComputerName);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.CheckTaskRunningOnComputerResponseCheckTaskRunningOnComputerResult> CheckTaskRunningOnComputerAsync(string EmailId, string ComputerName)
         {
             return base.Channel.CheckTaskRunningOnComputerAsync(EmailId, ComputerName);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetTasksResponseGetTasksResult> GetTasksAsync(string CountryName)
+        public ServiceReference1.GetTasksResponseGetTasksResult GetTasks(string CountryName)
+        {
+            return base.Channel.GetTasks(CountryName);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetTasksResponseGetTasksResult> GetTasksAsync(string CountryName)
         {
             return base.Channel.GetTasksAsync(CountryName);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetStaffInOutResponseGetStaffInOutResult> GetStaffInOutAsync(string EmailId)
+        public ServiceReference1.GetStaffInOutResponseGetStaffInOutResult GetStaffInOut(string EmailId)
+        {
+            return base.Channel.GetStaffInOut(EmailId);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetStaffInOutResponseGetStaffInOutResult> GetStaffInOutAsync(string EmailId)
         {
             return base.Channel.GetStaffInOutAsync(EmailId);
+        }
+        
+        public int SaveTasksTimer(string EmailId, string TaskType, int CategoryId, string StartTime, string Comment, string ComputerName)
+        {
+            return base.Channel.SaveTasksTimer(EmailId, TaskType, CategoryId, StartTime, Comment, ComputerName);
         }
         
         public System.Threading.Tasks.Task<int> SaveTasksTimerAsync(string EmailId, string TaskType, int CategoryId, string StartTime, string Comment, string ComputerName)
@@ -10494,9 +15391,19 @@ namespace ServiceReference2
             return base.Channel.SaveTasksTimerAsync(EmailId, TaskType, CategoryId, StartTime, Comment, ComputerName);
         }
         
+        public int UpdateTasksTimer(int STId, string EndTime)
+        {
+            return base.Channel.UpdateTasksTimer(STId, EndTime);
+        }
+        
         public System.Threading.Tasks.Task<int> UpdateTasksTimerAsync(int STId, string EndTime)
         {
             return base.Channel.UpdateTasksTimerAsync(STId, EndTime);
+        }
+        
+        public string updateStatusAfterAutoTransferForcefully(int productid, string companyname)
+        {
+            return base.Channel.updateStatusAfterAutoTransferForcefully(productid, companyname);
         }
         
         public System.Threading.Tasks.Task<string> updateStatusAfterAutoTransferForcefullyAsync(int productid, string companyname)
@@ -10504,49 +15411,99 @@ namespace ServiceReference2
             return base.Channel.updateStatusAfterAutoTransferForcefullyAsync(productid, companyname);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.checkproductcategoryforcomputerResponseCheckproductcategoryforcomputerResult> checkproductcategoryforcomputerAsync(string productid, string computername)
+        public ServiceReference1.checkproductcategoryforcomputerResponseCheckproductcategoryforcomputerResult checkproductcategoryforcomputer(string productid, string computername)
+        {
+            return base.Channel.checkproductcategoryforcomputer(productid, computername);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.checkproductcategoryforcomputerResponseCheckproductcategoryforcomputerResult> checkproductcategoryforcomputerAsync(string productid, string computername)
         {
             return base.Channel.checkproductcategoryforcomputerAsync(productid, computername);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetcategoryforcomputerResponseGetcategoryforcomputerResult> GetcategoryforcomputerAsync(string computername)
+        public ServiceReference1.GetcategoryforcomputerResponseGetcategoryforcomputerResult Getcategoryforcomputer(string computername)
+        {
+            return base.Channel.Getcategoryforcomputer(computername);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetcategoryforcomputerResponseGetcategoryforcomputerResult> GetcategoryforcomputerAsync(string computername)
         {
             return base.Channel.GetcategoryforcomputerAsync(computername);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetunshippedorderforcomputerResponseGetunshippedorderforcomputerResult> GetunshippedorderforcomputerAsync(string computername, string companyname)
+        public ServiceReference1.GetunshippedorderforcomputerResponseGetunshippedorderforcomputerResult Getunshippedorderforcomputer(string computername, string companyname)
+        {
+            return base.Channel.Getunshippedorderforcomputer(computername, companyname);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetunshippedorderforcomputerResponseGetunshippedorderforcomputerResult> GetunshippedorderforcomputerAsync(string computername, string companyname)
         {
             return base.Channel.GetunshippedorderforcomputerAsync(computername, companyname);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.checkproductcategoryforcomputerbyordernumberResponseCheckproductcategoryforcomputerbyordernumberResult> checkproductcategoryforcomputerbyordernumberAsync(string ordernumber, string computername)
+        public ServiceReference1.checkproductcategoryforcomputerbyordernumberResponseCheckproductcategoryforcomputerbyordernumberResult checkproductcategoryforcomputerbyordernumber(string ordernumber, string computername)
+        {
+            return base.Channel.checkproductcategoryforcomputerbyordernumber(ordernumber, computername);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.checkproductcategoryforcomputerbyordernumberResponseCheckproductcategoryforcomputerbyordernumberResult> checkproductcategoryforcomputerbyordernumberAsync(string ordernumber, string computername)
         {
             return base.Channel.checkproductcategoryforcomputerbyordernumberAsync(ordernumber, computername);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.gettodayshippedordercategoryforcomputerResponseGettodayshippedordercategoryforcomputerResult> gettodayshippedordercategoryforcomputerAsync(string computername, string companyname)
+        public ServiceReference1.gettodayshippedordercategoryforcomputerResponseGettodayshippedordercategoryforcomputerResult gettodayshippedordercategoryforcomputer(string computername, string companyname)
+        {
+            return base.Channel.gettodayshippedordercategoryforcomputer(computername, companyname);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.gettodayshippedordercategoryforcomputerResponseGettodayshippedordercategoryforcomputerResult> gettodayshippedordercategoryforcomputerAsync(string computername, string companyname)
         {
             return base.Channel.gettodayshippedordercategoryforcomputerAsync(computername, companyname);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetunshippedorderbycompanyResponseGetunshippedorderbycompanyResult> GetunshippedorderbycompanyAsync(string companyname)
+        public ServiceReference1.GetunshippedorderbycompanyResponseGetunshippedorderbycompanyResult Getunshippedorderbycompany(string companyname)
+        {
+            return base.Channel.Getunshippedorderbycompany(companyname);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetunshippedorderbycompanyResponseGetunshippedorderbycompanyResult> GetunshippedorderbycompanyAsync(string companyname)
         {
             return base.Channel.GetunshippedorderbycompanyAsync(companyname);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetToadyshippedorderbycompanyResponseGetToadyshippedorderbycompanyResult> GetToadyshippedorderbycompanyAsync(string companyname)
+        public ServiceReference1.GetToadyshippedorderbycompanyResponseGetToadyshippedorderbycompanyResult GetToadyshippedorderbycompany(string companyname)
+        {
+            return base.Channel.GetToadyshippedorderbycompany(companyname);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetToadyshippedorderbycompanyResponseGetToadyshippedorderbycompanyResult> GetToadyshippedorderbycompanyAsync(string companyname)
         {
             return base.Channel.GetToadyshippedorderbycompanyAsync(companyname);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetlateshipmentResponseGetlateshipmentResult> GetlateshipmentAsync()
+        public ServiceReference1.GetlateshipmentResponseGetlateshipmentResult Getlateshipment()
+        {
+            return base.Channel.Getlateshipment();
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetlateshipmentResponseGetlateshipmentResult> GetlateshipmentAsync()
         {
             return base.Channel.GetlateshipmentAsync();
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetstaffbycomputerResponseGetstaffbycomputerResult> GetstaffbycomputerAsync(string computername)
+        public ServiceReference1.GetstaffbycomputerResponseGetstaffbycomputerResult Getstaffbycomputer(string computername)
+        {
+            return base.Channel.Getstaffbycomputer(computername);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetstaffbycomputerResponseGetstaffbycomputerResult> GetstaffbycomputerAsync(string computername)
         {
             return base.Channel.GetstaffbycomputerAsync(computername);
+        }
+        
+        public string Saveloginlog(string userId, string computername, string ipaddress, string companyname, string computertype, string logintype)
+        {
+            return base.Channel.Saveloginlog(userId, computername, ipaddress, companyname, computertype, logintype);
         }
         
         public System.Threading.Tasks.Task<string> SaveloginlogAsync(string userId, string computername, string ipaddress, string companyname, string computertype, string logintype)
@@ -10554,39 +15511,79 @@ namespace ServiceReference2
             return base.Channel.SaveloginlogAsync(userId, computername, ipaddress, companyname, computertype, logintype);
         }
         
+        public string Savelogouttime(string userId, string logoutreason, string logintype)
+        {
+            return base.Channel.Savelogouttime(userId, logoutreason, logintype);
+        }
+        
         public System.Threading.Tasks.Task<string> SavelogouttimeAsync(string userId, string logoutreason, string logintype)
         {
             return base.Channel.SavelogouttimeAsync(userId, logoutreason, logintype);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetShipUnshipLateshipOrderResponseGetShipUnshipLateshipOrderResult> GetShipUnshipLateshipOrderAsync()
+        public ServiceReference1.GetShipUnshipLateshipOrderResponseGetShipUnshipLateshipOrderResult GetShipUnshipLateshipOrder()
+        {
+            return base.Channel.GetShipUnshipLateshipOrder();
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetShipUnshipLateshipOrderResponseGetShipUnshipLateshipOrderResult> GetShipUnshipLateshipOrderAsync()
         {
             return base.Channel.GetShipUnshipLateshipOrderAsync();
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.getunshippedorderbyComputerNameResponseGetunshippedorderbyComputerNameResult> getunshippedorderbyComputerNameAsync(string computername)
+        public ServiceReference1.getunshippedorderbyComputerNameResponseGetunshippedorderbyComputerNameResult getunshippedorderbyComputerName(string computername)
+        {
+            return base.Channel.getunshippedorderbyComputerName(computername);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.getunshippedorderbyComputerNameResponseGetunshippedorderbyComputerNameResult> getunshippedorderbyComputerNameAsync(string computername)
         {
             return base.Channel.getunshippedorderbyComputerNameAsync(computername);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.getunshipandtodayshiporderforcomputerResponseGetunshipandtodayshiporderforcomputerResult> getunshipandtodayshiporderforcomputerAsync(string computername)
+        public ServiceReference1.getunshipandtodayshiporderforcomputerResponseGetunshipandtodayshiporderforcomputerResult getunshipandtodayshiporderforcomputer(string computername)
+        {
+            return base.Channel.getunshipandtodayshiporderforcomputer(computername);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.getunshipandtodayshiporderforcomputerResponseGetunshipandtodayshiporderforcomputerResult> getunshipandtodayshiporderforcomputerAsync(string computername)
         {
             return base.Channel.getunshipandtodayshiporderforcomputerAsync(computername);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.getComputerbypackingTodayResponseGetComputerbypackingTodayResult> getComputerbypackingTodayAsync(string computername)
+        public ServiceReference1.getComputerbypackingTodayResponseGetComputerbypackingTodayResult getComputerbypackingToday(string computername)
+        {
+            return base.Channel.getComputerbypackingToday(computername);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.getComputerbypackingTodayResponseGetComputerbypackingTodayResult> getComputerbypackingTodayAsync(string computername)
         {
             return base.Channel.getComputerbypackingTodayAsync(computername);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.getlateshipmentbycategoryforcomputerResponseGetlateshipmentbycategoryforcomputerResult> getlateshipmentbycategoryforcomputerAsync(string computername, string companyname)
+        public ServiceReference1.getlateshipmentbycategoryforcomputerResponseGetlateshipmentbycategoryforcomputerResult getlateshipmentbycategoryforcomputer(string computername, string companyname)
+        {
+            return base.Channel.getlateshipmentbycategoryforcomputer(computername, companyname);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.getlateshipmentbycategoryforcomputerResponseGetlateshipmentbycategoryforcomputerResult> getlateshipmentbycategoryforcomputerAsync(string computername, string companyname)
         {
             return base.Channel.getlateshipmentbycategoryforcomputerAsync(computername, companyname);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.getstaffbypackingTodayResponseGetstaffbypackingTodayResult> getstaffbypackingTodayAsync()
+        public ServiceReference1.getstaffbypackingTodayResponseGetstaffbypackingTodayResult getstaffbypackingToday()
+        {
+            return base.Channel.getstaffbypackingToday();
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.getstaffbypackingTodayResponseGetstaffbypackingTodayResult> getstaffbypackingTodayAsync()
         {
             return base.Channel.getstaffbypackingTodayAsync();
+        }
+        
+        public bool IsUPS(string ordernumber)
+        {
+            return base.Channel.IsUPS(ordernumber);
         }
         
         public System.Threading.Tasks.Task<bool> IsUPSAsync(string ordernumber)
@@ -10594,14 +15591,29 @@ namespace ServiceReference2
             return base.Channel.IsUPSAsync(ordernumber);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetComputerNameResponseGetComputerNameResult> GetComputerNameAsync()
+        public ServiceReference1.GetComputerNameResponseGetComputerNameResult GetComputerName()
+        {
+            return base.Channel.GetComputerName();
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetComputerNameResponseGetComputerNameResult> GetComputerNameAsync()
         {
             return base.Channel.GetComputerNameAsync();
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetCurrentComputerByStaffResponseGetCurrentComputerByStaffResult> GetCurrentComputerByStaffAsync(string EmailId)
+        public ServiceReference1.GetCurrentComputerByStaffResponseGetCurrentComputerByStaffResult GetCurrentComputerByStaff(string EmailId)
+        {
+            return base.Channel.GetCurrentComputerByStaff(EmailId);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetCurrentComputerByStaffResponseGetCurrentComputerByStaffResult> GetCurrentComputerByStaffAsync(string EmailId)
         {
             return base.Channel.GetCurrentComputerByStaffAsync(EmailId);
+        }
+        
+        public bool AutoTransferInventory(long Productid, string email, string companyname)
+        {
+            return base.Channel.AutoTransferInventory(Productid, email, companyname);
         }
         
         public System.Threading.Tasks.Task<bool> AutoTransferInventoryAsync(long Productid, string email, string companyname)
@@ -10609,24 +15621,49 @@ namespace ServiceReference2
             return base.Channel.AutoTransferInventoryAsync(Productid, email, companyname);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.getworkreportResponseGetworkreportResult> getworkreportAsync(string companyname, string computername, string username, string shift, string startdate, string enddate)
+        public ServiceReference1.getworkreportResponseGetworkreportResult getworkreport(string companyname, string computername, string username, string shift, string startdate, string enddate)
+        {
+            return base.Channel.getworkreport(companyname, computername, username, shift, startdate, enddate);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.getworkreportResponseGetworkreportResult> getworkreportAsync(string companyname, string computername, string username, string shift, string startdate, string enddate)
         {
             return base.Channel.getworkreportAsync(companyname, computername, username, shift, startdate, enddate);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.getworkreportUpdatedResponseGetworkreportUpdatedResult> getworkreportUpdatedAsync(string companyname, string computername, string username, string shift, string startdate, string enddate, string RecordType)
+        public ServiceReference1.getworkreportUpdatedResponseGetworkreportUpdatedResult getworkreportUpdated(string companyname, string computername, string username, string shift, string startdate, string enddate, string RecordType)
+        {
+            return base.Channel.getworkreportUpdated(companyname, computername, username, shift, startdate, enddate, RecordType);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.getworkreportUpdatedResponseGetworkreportUpdatedResult> getworkreportUpdatedAsync(string companyname, string computername, string username, string shift, string startdate, string enddate, string RecordType)
         {
             return base.Channel.getworkreportUpdatedAsync(companyname, computername, username, shift, startdate, enddate, RecordType);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetOrderAccountwiseResponseGetOrderAccountwiseResult> GetOrderAccountwiseAsync(string companyname, string computername, string startdate, string enddate, string category, string ordertype)
+        public ServiceReference1.GetOrderAccountwiseResponseGetOrderAccountwiseResult GetOrderAccountwise(string companyname, string computername, string startdate, string enddate, string category, string ordertype)
+        {
+            return base.Channel.GetOrderAccountwise(companyname, computername, startdate, enddate, category, ordertype);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetOrderAccountwiseResponseGetOrderAccountwiseResult> GetOrderAccountwiseAsync(string companyname, string computername, string startdate, string enddate, string category, string ordertype)
         {
             return base.Channel.GetOrderAccountwiseAsync(companyname, computername, startdate, enddate, category, ordertype);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetOrderAccountwiseupdatedResponseGetOrderAccountwiseupdatedResult> GetOrderAccountwiseupdatedAsync(string companyname, string computername, string startdate, string enddate, string category, string ordertype, string shift)
+        public ServiceReference1.GetOrderAccountwiseupdatedResponseGetOrderAccountwiseupdatedResult GetOrderAccountwiseupdated(string companyname, string computername, string startdate, string enddate, string category, string ordertype, string shift)
+        {
+            return base.Channel.GetOrderAccountwiseupdated(companyname, computername, startdate, enddate, category, ordertype, shift);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetOrderAccountwiseupdatedResponseGetOrderAccountwiseupdatedResult> GetOrderAccountwiseupdatedAsync(string companyname, string computername, string startdate, string enddate, string category, string ordertype, string shift)
         {
             return base.Channel.GetOrderAccountwiseupdatedAsync(companyname, computername, startdate, enddate, category, ordertype, shift);
+        }
+        
+        public bool CheckAllowcategory(string ComputerName, string ProductId)
+        {
+            return base.Channel.CheckAllowcategory(ComputerName, ProductId);
         }
         
         public System.Threading.Tasks.Task<bool> CheckAllowcategoryAsync(string ComputerName, string ProductId)
@@ -10634,9 +15671,42 @@ namespace ServiceReference2
             return base.Channel.CheckAllowcategoryAsync(ComputerName, ProductId);
         }
         
+        public bool AllowAllcategory(string ComputerName)
+        {
+            return base.Channel.AllowAllcategory(ComputerName);
+        }
+        
         public System.Threading.Tasks.Task<bool> AllowAllcategoryAsync(string ComputerName)
         {
             return base.Channel.AllowAllcategoryAsync(ComputerName);
+        }
+        
+        public int SaveProductDeliveryUpdated(
+                    long OrderNumber, 
+                    long ProductId, 
+                    long VariantId, 
+                    int DeliveredQuantity, 
+                    string DeliveredSKU, 
+                    string DeliveredBarcode, 
+                    string Email, 
+                    string InvoiceNo, 
+                    System.DateTime InvoiceDate, 
+                    long SupplierId, 
+                    string reson, 
+                    long dockedno, 
+                    string val, 
+                    string qty, 
+                    decimal creditStock, 
+                    string ValueExcVat, 
+                    string ValueIncVat, 
+                    long ManualOrderNo, 
+                    long CreditNoteNo, 
+                    string Inventoryfor, 
+                    string CompanyName, 
+                    string comment, 
+                    string computername)
+        {
+            return base.Channel.SaveProductDeliveryUpdated(OrderNumber, ProductId, VariantId, DeliveredQuantity, DeliveredSKU, DeliveredBarcode, Email, InvoiceNo, InvoiceDate, SupplierId, reson, dockedno, val, qty, creditStock, ValueExcVat, ValueIncVat, ManualOrderNo, CreditNoteNo, Inventoryfor, CompanyName, comment, computername);
         }
         
         public System.Threading.Tasks.Task<int> SaveProductDeliveryUpdatedAsync(
@@ -10667,6 +15737,33 @@ namespace ServiceReference2
             return base.Channel.SaveProductDeliveryUpdatedAsync(OrderNumber, ProductId, VariantId, DeliveredQuantity, DeliveredSKU, DeliveredBarcode, Email, InvoiceNo, InvoiceDate, SupplierId, reson, dockedno, val, qty, creditStock, ValueExcVat, ValueIncVat, ManualOrderNo, CreditNoteNo, Inventoryfor, CompanyName, comment, computername);
         }
         
+        public int SaveProductDeliverynewUpdated(
+                    long OrderNumber, 
+                    long ProductId, 
+                    long VariantId, 
+                    int DeliveredQuantity, 
+                    string DeliveredSKU, 
+                    string DeliveredBarcode, 
+                    string Email, 
+                    string InvoiceNo, 
+                    System.DateTime InvoiceDate, 
+                    long SupplierId, 
+                    string reson, 
+                    long dockedno, 
+                    string val, 
+                    string qty, 
+                    decimal creditStock, 
+                    string ValueExcVat, 
+                    string ValueIncVat, 
+                    long ManualOrderNo, 
+                    long CreditNoteNo, 
+                    string Inventoryfor, 
+                    string CompanyName, 
+                    string computername)
+        {
+            return base.Channel.SaveProductDeliverynewUpdated(OrderNumber, ProductId, VariantId, DeliveredQuantity, DeliveredSKU, DeliveredBarcode, Email, InvoiceNo, InvoiceDate, SupplierId, reson, dockedno, val, qty, creditStock, ValueExcVat, ValueIncVat, ManualOrderNo, CreditNoteNo, Inventoryfor, CompanyName, computername);
+        }
+        
         public System.Threading.Tasks.Task<int> SaveProductDeliverynewUpdatedAsync(
                     long OrderNumber, 
                     long ProductId, 
@@ -10694,34 +15791,100 @@ namespace ServiceReference2
             return base.Channel.SaveProductDeliverynewUpdatedAsync(OrderNumber, ProductId, VariantId, DeliveredQuantity, DeliveredSKU, DeliveredBarcode, Email, InvoiceNo, InvoiceDate, SupplierId, reson, dockedno, val, qty, creditStock, ValueExcVat, ValueIncVat, ManualOrderNo, CreditNoteNo, Inventoryfor, CompanyName, computername);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetAllCategorybycomputerwiseResponseGetAllCategorybycomputerwiseResult> GetAllCategorybycomputerwiseAsync(string computername)
+        public ServiceReference1.GetAllCategorybycomputerwiseResponseGetAllCategorybycomputerwiseResult GetAllCategorybycomputerwise(string computername)
+        {
+            return base.Channel.GetAllCategorybycomputerwise(computername);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetAllCategorybycomputerwiseResponseGetAllCategorybycomputerwiseResult> GetAllCategorybycomputerwiseAsync(string computername)
         {
             return base.Channel.GetAllCategorybycomputerwiseAsync(computername);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetAllunshippedOrderResponseGetAllunshippedOrderResult> GetAllunshippedOrderAsync()
+        public ServiceReference1.GetAllunshippedOrderResponseGetAllunshippedOrderResult GetAllunshippedOrder()
+        {
+            return base.Channel.GetAllunshippedOrder();
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetAllunshippedOrderResponseGetAllunshippedOrderResult> GetAllunshippedOrderAsync()
         {
             return base.Channel.GetAllunshippedOrderAsync();
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetAllOutOfStockOrderResponseGetAllOutOfStockOrderResult> GetAllOutOfStockOrderAsync(string companyname, string computername, string category, string shift)
+        public ServiceReference1.GetAllOutOfStockOrderResponseGetAllOutOfStockOrderResult GetAllOutOfStockOrder(string companyname, string computername, string category, string shift)
+        {
+            return base.Channel.GetAllOutOfStockOrder(companyname, computername, category, shift);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetAllOutOfStockOrderResponseGetAllOutOfStockOrderResult> GetAllOutOfStockOrderAsync(string companyname, string computername, string category, string shift)
         {
             return base.Channel.GetAllOutOfStockOrderAsync(companyname, computername, category, shift);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetAllOrderStatusQtyResponseGetAllOrderStatusQtyResult> GetAllOrderStatusQtyAsync(string companyname, string computername, string category, string shift)
+        public ServiceReference1.GetAllOrderStatusQtyResponseGetAllOrderStatusQtyResult GetAllOrderStatusQty(string companyname, string computername, string category, string shift)
+        {
+            return base.Channel.GetAllOrderStatusQty(companyname, computername, category, shift);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetAllOrderStatusQtyResponseGetAllOrderStatusQtyResult> GetAllOrderStatusQtyAsync(string companyname, string computername, string category, string shift)
         {
             return base.Channel.GetAllOrderStatusQtyAsync(companyname, computername, category, shift);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetComputerNameByShiftResponseGetComputerNameByShiftResult> GetComputerNameByShiftAsync(string shift)
+        public ServiceReference1.GetComputerNameByShiftResponseGetComputerNameByShiftResult GetComputerNameByShift(string shift)
+        {
+            return base.Channel.GetComputerNameByShift(shift);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetComputerNameByShiftResponseGetComputerNameByShiftResult> GetComputerNameByShiftAsync(string shift)
         {
             return base.Channel.GetComputerNameByShiftAsync(shift);
+        }
+        
+        public string InventoryRecord(string inventory, string MainProductId, string sfpinventory, string fbainventory, string expinventory, string sbsinventory, string ProductId, string sku, string barcode, string quantity, string reason, string companyname, string EmailId)
+        {
+            return base.Channel.InventoryRecord(inventory, MainProductId, sfpinventory, fbainventory, expinventory, sbsinventory, ProductId, sku, barcode, quantity, reason, companyname, EmailId);
         }
         
         public System.Threading.Tasks.Task<string> InventoryRecordAsync(string inventory, string MainProductId, string sfpinventory, string fbainventory, string expinventory, string sbsinventory, string ProductId, string sku, string barcode, string quantity, string reason, string companyname, string EmailId)
         {
             return base.Channel.InventoryRecordAsync(inventory, MainProductId, sfpinventory, fbainventory, expinventory, sbsinventory, ProductId, sku, barcode, quantity, reason, companyname, EmailId);
+        }
+        
+        public int SaveProductScanInNewUpdated(
+                    long ProductId, 
+                    long VariantId, 
+                    int ScanInQuantity, 
+                    string ScanInSKU, 
+                    string ScanInBarcode, 
+                    string Email, 
+                    string InvoiceNo, 
+                    System.DateTime InvoiceDate, 
+                    long SupplierId, 
+                    string reson, 
+                    long dockedno, 
+                    string val, 
+                    string qty, 
+                    decimal creditStock, 
+                    long creditnote, 
+                    decimal OrderRecievePrice, 
+                    long OrderSystemId, 
+                    System.DateTime Exppirydate, 
+                    string inventorytype, 
+                    string Expirymessage, 
+                    string CompanyName, 
+                    string comment, 
+                    string DeliveryNoteNo, 
+                    string inventory, 
+                    string MainProductId, 
+                    string sfpinventory, 
+                    string fbainventory, 
+                    string expinventory, 
+                    string sbsinventory, 
+                    string TransferOtherCompany, 
+                    System.DateTime ManufactureDate)
+        {
+            return base.Channel.SaveProductScanInNewUpdated(ProductId, VariantId, ScanInQuantity, ScanInSKU, ScanInBarcode, Email, InvoiceNo, InvoiceDate, SupplierId, reson, dockedno, val, qty, creditStock, creditnote, OrderRecievePrice, OrderSystemId, Exppirydate, inventorytype, Expirymessage, CompanyName, comment, DeliveryNoteNo, inventory, MainProductId, sfpinventory, fbainventory, expinventory, sbsinventory, TransferOtherCompany, ManufactureDate);
         }
         
         public System.Threading.Tasks.Task<int> SaveProductScanInNewUpdatedAsync(
@@ -10760,14 +15923,58 @@ namespace ServiceReference2
             return base.Channel.SaveProductScanInNewUpdatedAsync(ProductId, VariantId, ScanInQuantity, ScanInSKU, ScanInBarcode, Email, InvoiceNo, InvoiceDate, SupplierId, reson, dockedno, val, qty, creditStock, creditnote, OrderRecievePrice, OrderSystemId, Exppirydate, inventorytype, Expirymessage, CompanyName, comment, DeliveryNoteNo, inventory, MainProductId, sfpinventory, fbainventory, expinventory, sbsinventory, TransferOtherCompany, ManufactureDate);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetLoginPermissionResponseGetLoginPermissionResult> GetLoginPermissionAsync(string companyname, string emailid, string compautername)
+        public ServiceReference1.GetLoginPermissionResponseGetLoginPermissionResult GetLoginPermission(string companyname, string emailid, string compautername)
+        {
+            return base.Channel.GetLoginPermission(companyname, emailid, compautername);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetLoginPermissionResponseGetLoginPermissionResult> GetLoginPermissionAsync(string companyname, string emailid, string compautername)
         {
             return base.Channel.GetLoginPermissionAsync(companyname, emailid, compautername);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetAccessForRoleResponseGetAccessForRoleResult> GetAccessForRoleAsync(string emailid)
+        public ServiceReference1.GetAccessForRoleResponseGetAccessForRoleResult GetAccessForRole(string emailid)
+        {
+            return base.Channel.GetAccessForRole(emailid);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetAccessForRoleResponseGetAccessForRoleResult> GetAccessForRoleAsync(string emailid)
         {
             return base.Channel.GetAccessForRoleAsync(emailid);
+        }
+        
+        public int SaveProductdeliveryOnTransferInventory(
+                    long OrderNumber, 
+                    long ProductId, 
+                    long VariantId, 
+                    int DeliveredQuantity, 
+                    string DeliveredSKU, 
+                    string DeliveredBarcode, 
+                    string Email, 
+                    string InvoiceNo, 
+                    System.DateTime InvoiceDate, 
+                    long SupplierId, 
+                    string reson, 
+                    long dockedno, 
+                    string val, 
+                    string qty, 
+                    decimal creditStock, 
+                    string ValueExcVat, 
+                    string ValueIncVat, 
+                    long ManualOrderNo, 
+                    long CreditNoteNo, 
+                    string Inventoryfor, 
+                    string CompanyName, 
+                    string comment, 
+                    string computername, 
+                    string inventory, 
+                    string promoinventory, 
+                    string sfpinventory, 
+                    string fbainventory, 
+                    string expiryinventory, 
+                    string sbsinventory)
+        {
+            return base.Channel.SaveProductdeliveryOnTransferInventory(OrderNumber, ProductId, VariantId, DeliveredQuantity, DeliveredSKU, DeliveredBarcode, Email, InvoiceNo, InvoiceDate, SupplierId, reson, dockedno, val, qty, creditStock, ValueExcVat, ValueIncVat, ManualOrderNo, CreditNoteNo, Inventoryfor, CompanyName, comment, computername, inventory, promoinventory, sfpinventory, fbainventory, expiryinventory, sbsinventory);
         }
         
         public System.Threading.Tasks.Task<int> SaveProductdeliveryOnTransferInventoryAsync(
@@ -10802,6 +16009,41 @@ namespace ServiceReference2
                     string sbsinventory)
         {
             return base.Channel.SaveProductdeliveryOnTransferInventoryAsync(OrderNumber, ProductId, VariantId, DeliveredQuantity, DeliveredSKU, DeliveredBarcode, Email, InvoiceNo, InvoiceDate, SupplierId, reson, dockedno, val, qty, creditStock, ValueExcVat, ValueIncVat, ManualOrderNo, CreditNoteNo, Inventoryfor, CompanyName, comment, computername, inventory, promoinventory, sfpinventory, fbainventory, expiryinventory, sbsinventory);
+        }
+        
+        public int SaveProductScanInNew(
+                    long ProductId, 
+                    long VariantId, 
+                    int ScanInQuantity, 
+                    string ScanInSKU, 
+                    string ScanInBarcode, 
+                    string Email, 
+                    string InvoiceNo, 
+                    System.DateTime InvoiceDate, 
+                    long SupplierId, 
+                    string reson, 
+                    long dockedno, 
+                    string val, 
+                    string qty, 
+                    decimal creditStock, 
+                    long creditnote, 
+                    decimal OrderRecievePrice, 
+                    long OrderSystemId, 
+                    System.DateTime Exppirydate, 
+                    string inventorytype, 
+                    string Expirymessage, 
+                    string CompanyName, 
+                    string comment, 
+                    string DeliveryNoteNo, 
+                    string inventory, 
+                    string MainProductId, 
+                    string sfpinventory, 
+                    string fbainventory, 
+                    string expinventory, 
+                    string sbsinventory, 
+                    System.DateTime ManufactureDate)
+        {
+            return base.Channel.SaveProductScanInNew(ProductId, VariantId, ScanInQuantity, ScanInSKU, ScanInBarcode, Email, InvoiceNo, InvoiceDate, SupplierId, reson, dockedno, val, qty, creditStock, creditnote, OrderRecievePrice, OrderSystemId, Exppirydate, inventorytype, Expirymessage, CompanyName, comment, DeliveryNoteNo, inventory, MainProductId, sfpinventory, fbainventory, expinventory, sbsinventory, ManufactureDate);
         }
         
         public System.Threading.Tasks.Task<int> SaveProductScanInNewAsync(
@@ -10839,6 +16081,40 @@ namespace ServiceReference2
             return base.Channel.SaveProductScanInNewAsync(ProductId, VariantId, ScanInQuantity, ScanInSKU, ScanInBarcode, Email, InvoiceNo, InvoiceDate, SupplierId, reson, dockedno, val, qty, creditStock, creditnote, OrderRecievePrice, OrderSystemId, Exppirydate, inventorytype, Expirymessage, CompanyName, comment, DeliveryNoteNo, inventory, MainProductId, sfpinventory, fbainventory, expinventory, sbsinventory, ManufactureDate);
         }
         
+        public int SaveProductDeliveryUpdatedNEW(
+                    long OrderNumber, 
+                    long ProductId, 
+                    long VariantId, 
+                    int DeliveredQuantity, 
+                    string DeliveredSKU, 
+                    string DeliveredBarcode, 
+                    string Email, 
+                    string InvoiceNo, 
+                    System.DateTime InvoiceDate, 
+                    long SupplierId, 
+                    string reson, 
+                    long dockedno, 
+                    string val, 
+                    string qty, 
+                    decimal creditStock, 
+                    string ValueExcVat, 
+                    string ValueIncVat, 
+                    long ManualOrderNo, 
+                    long CreditNoteNo, 
+                    string Inventoryfor, 
+                    string CompanyName, 
+                    string comment, 
+                    string computername, 
+                    string inventory, 
+                    string promoinventory, 
+                    string sfpinventory, 
+                    string fbainventory, 
+                    string expiryinventory, 
+                    string sbsinventory)
+        {
+            return base.Channel.SaveProductDeliveryUpdatedNEW(OrderNumber, ProductId, VariantId, DeliveredQuantity, DeliveredSKU, DeliveredBarcode, Email, InvoiceNo, InvoiceDate, SupplierId, reson, dockedno, val, qty, creditStock, ValueExcVat, ValueIncVat, ManualOrderNo, CreditNoteNo, Inventoryfor, CompanyName, comment, computername, inventory, promoinventory, sfpinventory, fbainventory, expiryinventory, sbsinventory);
+        }
+        
         public System.Threading.Tasks.Task<int> SaveProductDeliveryUpdatedNEWAsync(
                     long OrderNumber, 
                     long ProductId, 
@@ -10871,6 +16147,39 @@ namespace ServiceReference2
                     string sbsinventory)
         {
             return base.Channel.SaveProductDeliveryUpdatedNEWAsync(OrderNumber, ProductId, VariantId, DeliveredQuantity, DeliveredSKU, DeliveredBarcode, Email, InvoiceNo, InvoiceDate, SupplierId, reson, dockedno, val, qty, creditStock, ValueExcVat, ValueIncVat, ManualOrderNo, CreditNoteNo, Inventoryfor, CompanyName, comment, computername, inventory, promoinventory, sfpinventory, fbainventory, expiryinventory, sbsinventory);
+        }
+        
+        public int SaveProductDeliverynewUpdatedNEW(
+                    long OrderNumber, 
+                    long ProductId, 
+                    long VariantId, 
+                    int DeliveredQuantity, 
+                    string DeliveredSKU, 
+                    string DeliveredBarcode, 
+                    string Email, 
+                    string InvoiceNo, 
+                    System.DateTime InvoiceDate, 
+                    long SupplierId, 
+                    string reson, 
+                    long dockedno, 
+                    string val, 
+                    string qty, 
+                    decimal creditStock, 
+                    string ValueExcVat, 
+                    string ValueIncVat, 
+                    long ManualOrderNo, 
+                    long CreditNoteNo, 
+                    string Inventoryfor, 
+                    string CompanyName, 
+                    string computername, 
+                    string inventory, 
+                    string promoinventory, 
+                    string sfpinventory, 
+                    string fbainventory, 
+                    string expiryinventory, 
+                    string sbsinventory)
+        {
+            return base.Channel.SaveProductDeliverynewUpdatedNEW(OrderNumber, ProductId, VariantId, DeliveredQuantity, DeliveredSKU, DeliveredBarcode, Email, InvoiceNo, InvoiceDate, SupplierId, reson, dockedno, val, qty, creditStock, ValueExcVat, ValueIncVat, ManualOrderNo, CreditNoteNo, Inventoryfor, CompanyName, computername, inventory, promoinventory, sfpinventory, fbainventory, expiryinventory, sbsinventory);
         }
         
         public System.Threading.Tasks.Task<int> SaveProductDeliverynewUpdatedNEWAsync(
@@ -10906,9 +16215,48 @@ namespace ServiceReference2
             return base.Channel.SaveProductDeliverynewUpdatedNEWAsync(OrderNumber, ProductId, VariantId, DeliveredQuantity, DeliveredSKU, DeliveredBarcode, Email, InvoiceNo, InvoiceDate, SupplierId, reson, dockedno, val, qty, creditStock, ValueExcVat, ValueIncVat, ManualOrderNo, CreditNoteNo, Inventoryfor, CompanyName, computername, inventory, promoinventory, sfpinventory, fbainventory, expiryinventory, sbsinventory);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.ArrayOfXElement> GetIssueMainCategory_User_OrderIssue_AccountName_InventoryCountAsync(string companyname, int Ordernumber, string issuestatus, int productid)
+        public ServiceReference1.ArrayOfXElement GetIssueMainCategory_User_OrderIssue_AccountName_InventoryCount(string companyname, int Ordernumber, string issuestatus, int productid)
+        {
+            return base.Channel.GetIssueMainCategory_User_OrderIssue_AccountName_InventoryCount(companyname, Ordernumber, issuestatus, productid);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.ArrayOfXElement> GetIssueMainCategory_User_OrderIssue_AccountName_InventoryCountAsync(string companyname, int Ordernumber, string issuestatus, int productid)
         {
             return base.Channel.GetIssueMainCategory_User_OrderIssue_AccountName_InventoryCountAsync(companyname, Ordernumber, issuestatus, productid);
+        }
+        
+        public string UpdateInventoryByPscanoutProcedure(
+                    string allowmultiple, 
+                    int Ordernumber, 
+                    int ProductId, 
+                    int VariantId, 
+                    int Outqty, 
+                    string EmailId, 
+                    string Companyname, 
+                    string CustomerId, 
+                    int MainInventory, 
+                    int Promoinventory, 
+                    int SFPInventory, 
+                    int FBAInventory, 
+                    int ExpiryInventory, 
+                    int SBSInventory, 
+                    string SKU, 
+                    string Barcode, 
+                    string Computername, 
+                    string Countryname, 
+                    System.DateTime Expirydate1, 
+                    System.DateTime Expirydate2, 
+                    System.DateTime Expirydate3, 
+                    string Expirymsg, 
+                    string IssueMainTitle, 
+                    string IssueSubtitle, 
+                    string Issuestatus, 
+                    string IsClaimed, 
+                    string Comment, 
+                    string AssignUser, 
+                    string IsStrdate)
+        {
+            return base.Channel.UpdateInventoryByPscanoutProcedure(allowmultiple, Ordernumber, ProductId, VariantId, Outqty, EmailId, Companyname, CustomerId, MainInventory, Promoinventory, SFPInventory, FBAInventory, ExpiryInventory, SBSInventory, SKU, Barcode, Computername, Countryname, Expirydate1, Expirydate2, Expirydate3, Expirymsg, IssueMainTitle, IssueSubtitle, Issuestatus, IsClaimed, Comment, AssignUser, IsStrdate);
         }
         
         public System.Threading.Tasks.Task<string> UpdateInventoryByPscanoutProcedureAsync(
@@ -10945,17 +16293,50 @@ namespace ServiceReference2
             return base.Channel.UpdateInventoryByPscanoutProcedureAsync(allowmultiple, Ordernumber, ProductId, VariantId, Outqty, EmailId, Companyname, CustomerId, MainInventory, Promoinventory, SFPInventory, FBAInventory, ExpiryInventory, SBSInventory, SKU, Barcode, Computername, Countryname, Expirydate1, Expirydate2, Expirydate3, Expirymsg, IssueMainTitle, IssueSubtitle, Issuestatus, IsClaimed, Comment, AssignUser, IsStrdate);
         }
         
+        public string UpdateMarkAsShippedOrder(string ordernumber, string trackingnumber, string shippingmethod, string password, string couriername, System.DateTime shippedon, string OrderStatus, string createdby, string parcelweight, decimal parcelcharge, string companyrepresentative)
+        {
+            return base.Channel.UpdateMarkAsShippedOrder(ordernumber, trackingnumber, shippingmethod, password, couriername, shippedon, OrderStatus, createdby, parcelweight, parcelcharge, companyrepresentative);
+        }
+        
         public System.Threading.Tasks.Task<string> UpdateMarkAsShippedOrderAsync(string ordernumber, string trackingnumber, string shippingmethod, string password, string couriername, System.DateTime shippedon, string OrderStatus, string createdby, string parcelweight, decimal parcelcharge, string companyrepresentative)
         {
             return base.Channel.UpdateMarkAsShippedOrderAsync(ordernumber, trackingnumber, shippingmethod, password, couriername, shippedon, OrderStatus, createdby, parcelweight, parcelcharge, companyrepresentative);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.ArrayOfXElement> GetorderdetailsonpscanoutAsync(string ordernumber)
+        public ServiceReference1.ArrayOfXElement Getorderdetailsonpscanout(string ordernumber)
+        {
+            return base.Channel.Getorderdetailsonpscanout(ordernumber);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.ArrayOfXElement> GetorderdetailsonpscanoutAsync(string ordernumber)
         {
             return base.Channel.GetorderdetailsonpscanoutAsync(ordernumber);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetorderPrintlabelResponseGetorderPrintlabelResult> GetorderPrintlabelAsync(
+        public ServiceReference1.GetorderPrintlabelResponseGetorderPrintlabelResult GetorderPrintlabel(
+                    string ordernumber, 
+                    int printqty, 
+                    string orderstatus, 
+                    string companyname, 
+                    string ordertype, 
+                    System.DateTime startdate, 
+                    System.DateTime enddate, 
+                    string category, 
+                    string countrytype, 
+                    string couriertype, 
+                    string couriername, 
+                    string postagename, 
+                    string Other, 
+                    string Email, 
+                    string NoChange, 
+                    System.DateTime printdate, 
+                    string Shipmethod, 
+                    string AccountName)
+        {
+            return base.Channel.GetorderPrintlabel(ordernumber, printqty, orderstatus, companyname, ordertype, startdate, enddate, category, countrytype, couriertype, couriername, postagename, Other, Email, NoChange, printdate, Shipmethod, AccountName);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetorderPrintlabelResponseGetorderPrintlabelResult> GetorderPrintlabelAsync(
                     string ordernumber, 
                     int printqty, 
                     string orderstatus, 
@@ -10978,29 +16359,59 @@ namespace ServiceReference2
             return base.Channel.GetorderPrintlabelAsync(ordernumber, printqty, orderstatus, companyname, ordertype, startdate, enddate, category, countrytype, couriertype, couriername, postagename, Other, Email, NoChange, printdate, Shipmethod, AccountName);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetAutodownloadLabelOrderResponseGetAutodownloadLabelOrderResult> GetAutodownloadLabelOrderAsync()
+        public ServiceReference1.GetAutodownloadLabelOrderResponseGetAutodownloadLabelOrderResult GetAutodownloadLabelOrder()
+        {
+            return base.Channel.GetAutodownloadLabelOrder();
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetAutodownloadLabelOrderResponseGetAutodownloadLabelOrderResult> GetAutodownloadLabelOrderAsync()
         {
             return base.Channel.GetAutodownloadLabelOrderAsync();
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.ArrayOfXElement> GetPostageTypeandCourierwithordernumberwithDateRangeAsync(string ComputerName, System.DateTime dtstartdate, System.DateTime dtenddate)
+        public ServiceReference1.ArrayOfXElement GetPostageTypeandCourierwithordernumberwithDateRange(string ComputerName, System.DateTime dtstartdate, System.DateTime dtenddate)
+        {
+            return base.Channel.GetPostageTypeandCourierwithordernumberwithDateRange(ComputerName, dtstartdate, dtenddate);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.ArrayOfXElement> GetPostageTypeandCourierwithordernumberwithDateRangeAsync(string ComputerName, System.DateTime dtstartdate, System.DateTime dtenddate)
         {
             return base.Channel.GetPostageTypeandCourierwithordernumberwithDateRangeAsync(ComputerName, dtstartdate, dtenddate);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.ArrayOfXElement> GetPostageTypeandCourierwithordernumberwithDateRangeandOrdertypeAsync(string OrderType, System.DateTime dtstartdate, System.DateTime dtenddate, string ComputerName)
+        public ServiceReference1.ArrayOfXElement GetPostageTypeandCourierwithordernumberwithDateRangeandOrdertype(string OrderType, System.DateTime dtstartdate, System.DateTime dtenddate, string ComputerName)
+        {
+            return base.Channel.GetPostageTypeandCourierwithordernumberwithDateRangeandOrdertype(OrderType, dtstartdate, dtenddate, ComputerName);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.ArrayOfXElement> GetPostageTypeandCourierwithordernumberwithDateRangeandOrdertypeAsync(string OrderType, System.DateTime dtstartdate, System.DateTime dtenddate, string ComputerName)
         {
             return base.Channel.GetPostageTypeandCourierwithordernumberwithDateRangeandOrdertypeAsync(OrderType, dtstartdate, dtenddate, ComputerName);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.ArrayOfXElement> GetPostageTypeandCourierwithordernumberAsync()
+        public ServiceReference1.ArrayOfXElement GetPostageTypeandCourierwithordernumber()
+        {
+            return base.Channel.GetPostageTypeandCourierwithordernumber();
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.ArrayOfXElement> GetPostageTypeandCourierwithordernumberAsync()
         {
             return base.Channel.GetPostageTypeandCourierwithordernumberAsync();
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.ArrayOfXElement> GetcouriernamewithtypeAsync(string country)
+        public ServiceReference1.ArrayOfXElement Getcouriernamewithtype(string country)
+        {
+            return base.Channel.Getcouriernamewithtype(country);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.ArrayOfXElement> GetcouriernamewithtypeAsync(string country)
         {
             return base.Channel.GetcouriernamewithtypeAsync(country);
+        }
+        
+        public string UpdatePrintDate(string ordernumber)
+        {
+            return base.Channel.UpdatePrintDate(ordernumber);
         }
         
         public System.Threading.Tasks.Task<string> UpdatePrintDateAsync(string ordernumber)
@@ -11008,9 +16419,19 @@ namespace ServiceReference2
             return base.Channel.UpdatePrintDateAsync(ordernumber);
         }
         
+        public string UpdateOrdertrackingwithgfs(string ordernumber, string trackingid, string username, string companyname)
+        {
+            return base.Channel.UpdateOrdertrackingwithgfs(ordernumber, trackingid, username, companyname);
+        }
+        
         public System.Threading.Tasks.Task<string> UpdateOrdertrackingwithgfsAsync(string ordernumber, string trackingid, string username, string companyname)
         {
             return base.Channel.UpdateOrdertrackingwithgfsAsync(ordernumber, trackingid, username, companyname);
+        }
+        
+        public bool saveScanProduct(string SKU, string Barcode, int OrderSystemId, string Ordertype, string CompanyName, long ProductId, int Qty, string EmailId, string InvoiceNo, string InvoiceDate, int SupplierId, string Expirydate, string Expirymsg, string DeliveryNoteNumber, string ManufactureDate)
+        {
+            return base.Channel.saveScanProduct(SKU, Barcode, OrderSystemId, Ordertype, CompanyName, ProductId, Qty, EmailId, InvoiceNo, InvoiceDate, SupplierId, Expirydate, Expirymsg, DeliveryNoteNumber, ManufactureDate);
         }
         
         public System.Threading.Tasks.Task<bool> saveScanProductAsync(string SKU, string Barcode, int OrderSystemId, string Ordertype, string CompanyName, long ProductId, int Qty, string EmailId, string InvoiceNo, string InvoiceDate, int SupplierId, string Expirydate, string Expirymsg, string DeliveryNoteNumber, string ManufactureDate)
@@ -11018,49 +16439,99 @@ namespace ServiceReference2
             return base.Channel.saveScanProductAsync(SKU, Barcode, OrderSystemId, Ordertype, CompanyName, ProductId, Qty, EmailId, InvoiceNo, InvoiceDate, SupplierId, Expirydate, Expirymsg, DeliveryNoteNumber, ManufactureDate);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.getproductResponseGetproductResult> getproductAsync(string companyname)
+        public ServiceReference1.getproductResponseGetproductResult getproduct(string companyname)
+        {
+            return base.Channel.getproduct(companyname);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.getproductResponseGetproductResult> getproductAsync(string companyname)
         {
             return base.Channel.getproductAsync(companyname);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetProductByIdResponseGetProductByIdResult> GetProductByIdAsync(int productid)
+        public ServiceReference1.GetProductByIdResponseGetProductByIdResult GetProductById(int productid)
+        {
+            return base.Channel.GetProductById(productid);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetProductByIdResponseGetProductByIdResult> GetProductByIdAsync(int productid)
         {
             return base.Channel.GetProductByIdAsync(productid);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetAllBrandResponseGetAllBrandResult> GetAllBrandAsync()
+        public ServiceReference1.GetAllBrandResponseGetAllBrandResult GetAllBrand()
+        {
+            return base.Channel.GetAllBrand();
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetAllBrandResponseGetAllBrandResult> GetAllBrandAsync()
         {
             return base.Channel.GetAllBrandAsync();
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetTaxClassResponseGetTaxClassResult> GetTaxClassAsync()
+        public ServiceReference1.GetTaxClassResponseGetTaxClassResult GetTaxClass()
+        {
+            return base.Channel.GetTaxClass();
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetTaxClassResponseGetTaxClassResult> GetTaxClassAsync()
         {
             return base.Channel.GetTaxClassAsync();
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetUserWithrollResponseGetUserWithrollResult> GetUserWithrollAsync()
+        public ServiceReference1.GetUserWithrollResponseGetUserWithrollResult GetUserWithroll()
+        {
+            return base.Channel.GetUserWithroll();
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetUserWithrollResponseGetUserWithrollResult> GetUserWithrollAsync()
         {
             return base.Channel.GetUserWithrollAsync();
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetUserrollResponseGetUserrollResult> GetUserrollAsync()
+        public ServiceReference1.GetUserrollResponseGetUserrollResult GetUserroll()
+        {
+            return base.Channel.GetUserroll();
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetUserrollResponseGetUserrollResult> GetUserrollAsync()
         {
             return base.Channel.GetUserrollAsync();
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetAllScreenForRoleResponseGetAllScreenForRoleResult> GetAllScreenForRoleAsync(long RoleId)
+        public ServiceReference1.GetAllScreenForRoleResponseGetAllScreenForRoleResult GetAllScreenForRole(long RoleId)
+        {
+            return base.Channel.GetAllScreenForRole(RoleId);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetAllScreenForRoleResponseGetAllScreenForRoleResult> GetAllScreenForRoleAsync(long RoleId)
         {
             return base.Channel.GetAllScreenForRoleAsync(RoleId);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetuserByRoleIdResponseGetuserByRoleIdResult> GetuserByRoleIdAsync(long RoleId)
+        public ServiceReference1.GetuserByRoleIdResponseGetuserByRoleIdResult GetuserByRoleId(long RoleId)
+        {
+            return base.Channel.GetuserByRoleId(RoleId);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetuserByRoleIdResponseGetuserByRoleIdResult> GetuserByRoleIdAsync(long RoleId)
         {
             return base.Channel.GetuserByRoleIdAsync(RoleId);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.LoadCreditnoteForPaperWorkResponseLoadCreditnoteForPaperWorkResult> LoadCreditnoteForPaperWorkAsync(string companyname)
+        public ServiceReference1.LoadCreditnoteForPaperWorkResponseLoadCreditnoteForPaperWorkResult LoadCreditnoteForPaperWork(string companyname)
+        {
+            return base.Channel.LoadCreditnoteForPaperWork(companyname);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.LoadCreditnoteForPaperWorkResponseLoadCreditnoteForPaperWorkResult> LoadCreditnoteForPaperWorkAsync(string companyname)
         {
             return base.Channel.LoadCreditnoteForPaperWorkAsync(companyname);
+        }
+        
+        public string UpdatePaperWorkForCreditNote(string CreditId, string DockNo, string EmailId)
+        {
+            return base.Channel.UpdatePaperWorkForCreditNote(CreditId, DockNo, EmailId);
         }
         
         public System.Threading.Tasks.Task<string> UpdatePaperWorkForCreditNoteAsync(string CreditId, string DockNo, string EmailId)
@@ -11068,9 +16539,19 @@ namespace ServiceReference2
             return base.Channel.UpdatePaperWorkForCreditNoteAsync(CreditId, DockNo, EmailId);
         }
         
+        public bool GetPagePermission(string PageName, string email)
+        {
+            return base.Channel.GetPagePermission(PageName, email);
+        }
+        
         public System.Threading.Tasks.Task<bool> GetPagePermissionAsync(string PageName, string email)
         {
             return base.Channel.GetPagePermissionAsync(PageName, email);
+        }
+        
+        public string SaveQuantityAdjustmentRecordForCheck(string qty, string InventoryType, string sku, string barcode, string companyname, string Expiry, string email, string Reason)
+        {
+            return base.Channel.SaveQuantityAdjustmentRecordForCheck(qty, InventoryType, sku, barcode, companyname, Expiry, email, Reason);
         }
         
         public System.Threading.Tasks.Task<string> SaveQuantityAdjustmentRecordForCheckAsync(string qty, string InventoryType, string sku, string barcode, string companyname, string Expiry, string email, string Reason)
@@ -11078,9 +16559,19 @@ namespace ServiceReference2
             return base.Channel.SaveQuantityAdjustmentRecordForCheckAsync(qty, InventoryType, sku, barcode, companyname, Expiry, email, Reason);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetCreditNoteWithoutDocResponseGetCreditNoteWithoutDocResult> GetCreditNoteWithoutDocAsync(string companyname, string sku, string barcode, string pipcode, string InvoiceNumber)
+        public ServiceReference1.GetCreditNoteWithoutDocResponseGetCreditNoteWithoutDocResult GetCreditNoteWithoutDoc(string companyname, string sku, string barcode, string pipcode, string InvoiceNumber)
+        {
+            return base.Channel.GetCreditNoteWithoutDoc(companyname, sku, barcode, pipcode, InvoiceNumber);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetCreditNoteWithoutDocResponseGetCreditNoteWithoutDocResult> GetCreditNoteWithoutDocAsync(string companyname, string sku, string barcode, string pipcode, string InvoiceNumber)
         {
             return base.Channel.GetCreditNoteWithoutDocAsync(companyname, sku, barcode, pipcode, InvoiceNumber);
+        }
+        
+        public string UpdateCreditNote(string CreditId, string Comment, string DocNumber, string Email)
+        {
+            return base.Channel.UpdateCreditNote(CreditId, Comment, DocNumber, Email);
         }
         
         public System.Threading.Tasks.Task<string> UpdateCreditNoteAsync(string CreditId, string Comment, string DocNumber, string Email)
@@ -11088,9 +16579,19 @@ namespace ServiceReference2
             return base.Channel.UpdateCreditNoteAsync(CreditId, Comment, DocNumber, Email);
         }
         
+        public string DataTableToJSONWithJavaScriptSerializer(string Barcode)
+        {
+            return base.Channel.DataTableToJSONWithJavaScriptSerializer(Barcode);
+        }
+        
         public System.Threading.Tasks.Task<string> DataTableToJSONWithJavaScriptSerializerAsync(string Barcode)
         {
             return base.Channel.DataTableToJSONWithJavaScriptSerializerAsync(Barcode);
+        }
+        
+        public bool OrderExist(string OrderNumber)
+        {
+            return base.Channel.OrderExist(OrderNumber);
         }
         
         public System.Threading.Tasks.Task<bool> OrderExistAsync(string OrderNumber)
@@ -11098,14 +16599,29 @@ namespace ServiceReference2
             return base.Channel.OrderExistAsync(OrderNumber);
         }
         
+        public bool TrackingNumberExist(string TrackingNumber)
+        {
+            return base.Channel.TrackingNumberExist(TrackingNumber);
+        }
+        
         public System.Threading.Tasks.Task<bool> TrackingNumberExistAsync(string TrackingNumber)
         {
             return base.Channel.TrackingNumberExistAsync(TrackingNumber);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.LoadQuantityAdjustmentOpenCaseResponseLoadQuantityAdjustmentOpenCaseResult> LoadQuantityAdjustmentOpenCaseAsync(string Barcode, string Reason)
+        public ServiceReference1.LoadQuantityAdjustmentOpenCaseResponseLoadQuantityAdjustmentOpenCaseResult LoadQuantityAdjustmentOpenCase(string Barcode, string Reason)
+        {
+            return base.Channel.LoadQuantityAdjustmentOpenCase(Barcode, Reason);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.LoadQuantityAdjustmentOpenCaseResponseLoadQuantityAdjustmentOpenCaseResult> LoadQuantityAdjustmentOpenCaseAsync(string Barcode, string Reason)
         {
             return base.Channel.LoadQuantityAdjustmentOpenCaseAsync(Barcode, Reason);
+        }
+        
+        public string Updateqtyadjustment(string AId, string qty, string EmailId)
+        {
+            return base.Channel.Updateqtyadjustment(AId, qty, EmailId);
         }
         
         public System.Threading.Tasks.Task<string> UpdateqtyadjustmentAsync(string AId, string qty, string EmailId)
@@ -11113,9 +16629,19 @@ namespace ServiceReference2
             return base.Channel.UpdateqtyadjustmentAsync(AId, qty, EmailId);
         }
         
+        public string UpdateExpiryRoomInventory(string ProductId, string quantity, string Companyname)
+        {
+            return base.Channel.UpdateExpiryRoomInventory(ProductId, quantity, Companyname);
+        }
+        
         public System.Threading.Tasks.Task<string> UpdateExpiryRoomInventoryAsync(string ProductId, string quantity, string Companyname)
         {
             return base.Channel.UpdateExpiryRoomInventoryAsync(ProductId, quantity, Companyname);
+        }
+        
+        public string UpdateDamageRoomInventory(string ProductId, string quantity, string Companyname)
+        {
+            return base.Channel.UpdateDamageRoomInventory(ProductId, quantity, Companyname);
         }
         
         public System.Threading.Tasks.Task<string> UpdateDamageRoomInventoryAsync(string ProductId, string quantity, string Companyname)
@@ -11123,9 +16649,19 @@ namespace ServiceReference2
             return base.Channel.UpdateDamageRoomInventoryAsync(ProductId, quantity, Companyname);
         }
         
+        public string AddDamageRoomInventory(string ProductId, string quantity, string Companyname)
+        {
+            return base.Channel.AddDamageRoomInventory(ProductId, quantity, Companyname);
+        }
+        
         public System.Threading.Tasks.Task<string> AddDamageRoomInventoryAsync(string ProductId, string quantity, string Companyname)
         {
             return base.Channel.AddDamageRoomInventoryAsync(ProductId, quantity, Companyname);
+        }
+        
+        public string AddExpiryRoomInventory(string ProductId, string quantity, string Companyname)
+        {
+            return base.Channel.AddExpiryRoomInventory(ProductId, quantity, Companyname);
         }
         
         public System.Threading.Tasks.Task<string> AddExpiryRoomInventoryAsync(string ProductId, string quantity, string Companyname)
@@ -11133,9 +16669,19 @@ namespace ServiceReference2
             return base.Channel.AddExpiryRoomInventoryAsync(ProductId, quantity, Companyname);
         }
         
+        public int SaveProductINExpiryroom(long ProductId, long VariantId, int damageqty, string SKU, string Barcode, string Email, string InvoiceNo, System.DateTime InvoiceDate, long SupplierId, string reson, decimal val, string Expmsg, string expdate, string Inventoryfor, string CompanyName)
+        {
+            return base.Channel.SaveProductINExpiryroom(ProductId, VariantId, damageqty, SKU, Barcode, Email, InvoiceNo, InvoiceDate, SupplierId, reson, val, Expmsg, expdate, Inventoryfor, CompanyName);
+        }
+        
         public System.Threading.Tasks.Task<int> SaveProductINExpiryroomAsync(long ProductId, long VariantId, int damageqty, string SKU, string Barcode, string Email, string InvoiceNo, System.DateTime InvoiceDate, long SupplierId, string reson, decimal val, string Expmsg, string expdate, string Inventoryfor, string CompanyName)
         {
             return base.Channel.SaveProductINExpiryroomAsync(ProductId, VariantId, damageqty, SKU, Barcode, Email, InvoiceNo, InvoiceDate, SupplierId, reson, val, Expmsg, expdate, Inventoryfor, CompanyName);
+        }
+        
+        public int SaveExpiryRoomReplacementbycompany(long ProductId, long VariantId, int damageqty, string SKU, string Barcode, string Email, string InvoiceNo, System.DateTime InvoiceDate, long SupplierId, string reson, decimal val, string Expmsg, string CompanyName)
+        {
+            return base.Channel.SaveExpiryRoomReplacementbycompany(ProductId, VariantId, damageqty, SKU, Barcode, Email, InvoiceNo, InvoiceDate, SupplierId, reson, val, Expmsg, CompanyName);
         }
         
         public System.Threading.Tasks.Task<int> SaveExpiryRoomReplacementbycompanyAsync(long ProductId, long VariantId, int damageqty, string SKU, string Barcode, string Email, string InvoiceNo, System.DateTime InvoiceDate, long SupplierId, string reson, decimal val, string Expmsg, string CompanyName)
@@ -11143,19 +16689,39 @@ namespace ServiceReference2
             return base.Channel.SaveExpiryRoomReplacementbycompanyAsync(ProductId, VariantId, damageqty, SKU, Barcode, Email, InvoiceNo, InvoiceDate, SupplierId, reson, val, Expmsg, CompanyName);
         }
         
+        public int UpdateExpiryRoomqtyupdated(int productid, int variantid, int qty, string companyname, string expdate, string email)
+        {
+            return base.Channel.UpdateExpiryRoomqtyupdated(productid, variantid, qty, companyname, expdate, email);
+        }
+        
         public System.Threading.Tasks.Task<int> UpdateExpiryRoomqtyupdatedAsync(int productid, int variantid, int qty, string companyname, string expdate, string email)
         {
             return base.Channel.UpdateExpiryRoomqtyupdatedAsync(productid, variantid, qty, companyname, expdate, email);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetListOfPrintOrderErrorResponseGetListOfPrintOrderErrorResult> GetListOfPrintOrderErrorAsync(string OrderList)
+        public ServiceReference1.GetListOfPrintOrderErrorResponseGetListOfPrintOrderErrorResult GetListOfPrintOrderError(string OrderList)
+        {
+            return base.Channel.GetListOfPrintOrderError(OrderList);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetListOfPrintOrderErrorResponseGetListOfPrintOrderErrorResult> GetListOfPrintOrderErrorAsync(string OrderList)
         {
             return base.Channel.GetListOfPrintOrderErrorAsync(OrderList);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetDefaultVarientResponseGetDefaultVarientResult> GetDefaultVarientAsync(string ProductId)
+        public ServiceReference1.GetDefaultVarientResponseGetDefaultVarientResult GetDefaultVarient(string ProductId)
+        {
+            return base.Channel.GetDefaultVarient(ProductId);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetDefaultVarientResponseGetDefaultVarientResult> GetDefaultVarientAsync(string ProductId)
         {
             return base.Channel.GetDefaultVarientAsync(ProductId);
+        }
+        
+        public bool UpdateProductInventory(long ProductId, int Qty, string InventoryType, string Reason, string EmailId, int AddQty, string AddInventoryType)
+        {
+            return base.Channel.UpdateProductInventory(ProductId, Qty, InventoryType, Reason, EmailId, AddQty, AddInventoryType);
         }
         
         public System.Threading.Tasks.Task<bool> UpdateProductInventoryAsync(long ProductId, int Qty, string InventoryType, string Reason, string EmailId, int AddQty, string AddInventoryType)
@@ -11163,9 +16729,19 @@ namespace ServiceReference2
             return base.Channel.UpdateProductInventoryAsync(ProductId, Qty, InventoryType, Reason, EmailId, AddQty, AddInventoryType);
         }
         
+        public string UpdateInventoryQuantityByVarientSFPcompany(string VarientId, string mquantity, string quantity, string company)
+        {
+            return base.Channel.UpdateInventoryQuantityByVarientSFPcompany(VarientId, mquantity, quantity, company);
+        }
+        
         public System.Threading.Tasks.Task<string> UpdateInventoryQuantityByVarientSFPcompanyAsync(string VarientId, string mquantity, string quantity, string company)
         {
             return base.Channel.UpdateInventoryQuantityByVarientSFPcompanyAsync(VarientId, mquantity, quantity, company);
+        }
+        
+        public string UpdateSFPInventoryByVarient(string VarientId, string mquantity, string quantity, string company)
+        {
+            return base.Channel.UpdateSFPInventoryByVarient(VarientId, mquantity, quantity, company);
         }
         
         public System.Threading.Tasks.Task<string> UpdateSFPInventoryByVarientAsync(string VarientId, string mquantity, string quantity, string company)
@@ -11173,9 +16749,19 @@ namespace ServiceReference2
             return base.Channel.UpdateSFPInventoryByVarientAsync(VarientId, mquantity, quantity, company);
         }
         
+        public string UpdateInventoryQuantityByVarientcompany(string VarientId, string mquantity, string quantity, string companyname)
+        {
+            return base.Channel.UpdateInventoryQuantityByVarientcompany(VarientId, mquantity, quantity, companyname);
+        }
+        
         public System.Threading.Tasks.Task<string> UpdateInventoryQuantityByVarientcompanyAsync(string VarientId, string mquantity, string quantity, string companyname)
         {
             return base.Channel.UpdateInventoryQuantityByVarientcompanyAsync(VarientId, mquantity, quantity, companyname);
+        }
+        
+        public string UpdateInventoryByVarient(string VarientId, string mquantity, string quantity, string companyname)
+        {
+            return base.Channel.UpdateInventoryByVarient(VarientId, mquantity, quantity, companyname);
         }
         
         public System.Threading.Tasks.Task<string> UpdateInventoryByVarientAsync(string VarientId, string mquantity, string quantity, string companyname)
@@ -11183,9 +16769,19 @@ namespace ServiceReference2
             return base.Channel.UpdateInventoryByVarientAsync(VarientId, mquantity, quantity, companyname);
         }
         
+        public int SaveDamageReplacementbycompany(long ProductId, long VariantId, int damageqty, string SKU, string Barcode, string Email, string InvoiceNo, System.DateTime InvoiceDate, long SupplierId, string reson, decimal val, string Expmsg, string CompanyName)
+        {
+            return base.Channel.SaveDamageReplacementbycompany(ProductId, VariantId, damageqty, SKU, Barcode, Email, InvoiceNo, InvoiceDate, SupplierId, reson, val, Expmsg, CompanyName);
+        }
+        
         public System.Threading.Tasks.Task<int> SaveDamageReplacementbycompanyAsync(long ProductId, long VariantId, int damageqty, string SKU, string Barcode, string Email, string InvoiceNo, System.DateTime InvoiceDate, long SupplierId, string reson, decimal val, string Expmsg, string CompanyName)
         {
             return base.Channel.SaveDamageReplacementbycompanyAsync(ProductId, VariantId, damageqty, SKU, Barcode, Email, InvoiceNo, InvoiceDate, SupplierId, reson, val, Expmsg, CompanyName);
+        }
+        
+        public string UpdateInventoryQuantityByVarientdamageroomcompany(string VarientId, string mquantity, string quantity, string Companyname)
+        {
+            return base.Channel.UpdateInventoryQuantityByVarientdamageroomcompany(VarientId, mquantity, quantity, Companyname);
         }
         
         public System.Threading.Tasks.Task<string> UpdateInventoryQuantityByVarientdamageroomcompanyAsync(string VarientId, string mquantity, string quantity, string Companyname)
@@ -11193,9 +16789,19 @@ namespace ServiceReference2
             return base.Channel.UpdateInventoryQuantityByVarientdamageroomcompanyAsync(VarientId, mquantity, quantity, Companyname);
         }
         
+        public string UpdateInventoryByProduct(string ProductId, string quantity, string companyname)
+        {
+            return base.Channel.UpdateInventoryByProduct(ProductId, quantity, companyname);
+        }
+        
         public System.Threading.Tasks.Task<string> UpdateInventoryByProductAsync(string ProductId, string quantity, string companyname)
         {
             return base.Channel.UpdateInventoryByProductAsync(ProductId, quantity, companyname);
+        }
+        
+        public string UpdateDamageInventoryByVarient(string VarientId, string mquantity, string quantity, string Companyname)
+        {
+            return base.Channel.UpdateDamageInventoryByVarient(VarientId, mquantity, quantity, Companyname);
         }
         
         public System.Threading.Tasks.Task<string> UpdateDamageInventoryByVarientAsync(string VarientId, string mquantity, string quantity, string Companyname)
@@ -11203,9 +16809,19 @@ namespace ServiceReference2
             return base.Channel.UpdateDamageInventoryByVarientAsync(VarientId, mquantity, quantity, Companyname);
         }
         
+        public bool saveproductdeliverywithexpiryfromscanoutwithskubycompanyname(string dttime, int qty, int deliveryid, string companyname, string barcode, string sku)
+        {
+            return base.Channel.saveproductdeliverywithexpiryfromscanoutwithskubycompanyname(dttime, qty, deliveryid, companyname, barcode, sku);
+        }
+        
         public System.Threading.Tasks.Task<bool> saveproductdeliverywithexpiryfromscanoutwithskubycompanynameAsync(string dttime, int qty, int deliveryid, string companyname, string barcode, string sku)
         {
             return base.Channel.saveproductdeliverywithexpiryfromscanoutwithskubycompanynameAsync(dttime, qty, deliveryid, companyname, barcode, sku);
+        }
+        
+        public bool saveproductdeliverywithexpiryfromscanout(string dttime, int qty, int deliveryid, string companyname, string barcode, string sku)
+        {
+            return base.Channel.saveproductdeliverywithexpiryfromscanout(dttime, qty, deliveryid, companyname, barcode, sku);
         }
         
         public System.Threading.Tasks.Task<bool> saveproductdeliverywithexpiryfromscanoutAsync(string dttime, int qty, int deliveryid, string companyname, string barcode, string sku)
@@ -11213,9 +16829,19 @@ namespace ServiceReference2
             return base.Channel.saveproductdeliverywithexpiryfromscanoutAsync(dttime, qty, deliveryid, companyname, barcode, sku);
         }
         
+        public bool saveproductdeliverywithexpiryexpirymessagewithskubycompanyname(string expirymessage, int qty, int deliveryid, string companyname, string barcode, string sku)
+        {
+            return base.Channel.saveproductdeliverywithexpiryexpirymessagewithskubycompanyname(expirymessage, qty, deliveryid, companyname, barcode, sku);
+        }
+        
         public System.Threading.Tasks.Task<bool> saveproductdeliverywithexpiryexpirymessagewithskubycompanynameAsync(string expirymessage, int qty, int deliveryid, string companyname, string barcode, string sku)
         {
             return base.Channel.saveproductdeliverywithexpiryexpirymessagewithskubycompanynameAsync(expirymessage, qty, deliveryid, companyname, barcode, sku);
+        }
+        
+        public bool saveproductdeliverywithexpiryexpirymessage(string expirymessage, int qty, int deliveryid, string companyname, string barcode, string sku)
+        {
+            return base.Channel.saveproductdeliverywithexpiryexpirymessage(expirymessage, qty, deliveryid, companyname, barcode, sku);
         }
         
         public System.Threading.Tasks.Task<bool> saveproductdeliverywithexpiryexpirymessageAsync(string expirymessage, int qty, int deliveryid, string companyname, string barcode, string sku)
@@ -11223,9 +16849,19 @@ namespace ServiceReference2
             return base.Channel.saveproductdeliverywithexpiryexpirymessageAsync(expirymessage, qty, deliveryid, companyname, barcode, sku);
         }
         
+        public string GetrestrictionValue(int ordernumber)
+        {
+            return base.Channel.GetrestrictionValue(ordernumber);
+        }
+        
         public System.Threading.Tasks.Task<string> GetrestrictionValueAsync(int ordernumber)
         {
             return base.Channel.GetrestrictionValueAsync(ordernumber);
+        }
+        
+        public bool IsRoyalMail(string variantid)
+        {
+            return base.Channel.IsRoyalMail(variantid);
         }
         
         public System.Threading.Tasks.Task<bool> IsRoyalMailAsync(string variantid)
@@ -11233,14 +16869,29 @@ namespace ServiceReference2
             return base.Channel.IsRoyalMailAsync(variantid);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetclearenceorderResponseGetclearenceorderResult> GetclearenceorderAsync(string variantid, string companyname, string channel)
+        public ServiceReference1.GetclearenceorderResponseGetclearenceorderResult Getclearenceorder(string variantid, string companyname, string channel)
+        {
+            return base.Channel.Getclearenceorder(variantid, companyname, channel);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetclearenceorderResponseGetclearenceorderResult> GetclearenceorderAsync(string variantid, string companyname, string channel)
         {
             return base.Channel.GetclearenceorderAsync(variantid, companyname, channel);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetsellingchannelResponseGetsellingchannelResult> GetsellingchannelAsync(string OrderNumber, string companyname)
+        public ServiceReference1.GetsellingchannelResponseGetsellingchannelResult Getsellingchannel(string OrderNumber, string companyname)
+        {
+            return base.Channel.Getsellingchannel(OrderNumber, companyname);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetsellingchannelResponseGetsellingchannelResult> GetsellingchannelAsync(string OrderNumber, string companyname)
         {
             return base.Channel.GetsellingchannelAsync(OrderNumber, companyname);
+        }
+        
+        public string UpdateFbaInventoryInCostingSheet(string VarientId, string CostingType, int quantity, string companyname)
+        {
+            return base.Channel.UpdateFbaInventoryInCostingSheet(VarientId, CostingType, quantity, companyname);
         }
         
         public System.Threading.Tasks.Task<string> UpdateFbaInventoryInCostingSheetAsync(string VarientId, string CostingType, int quantity, string companyname)
@@ -11248,29 +16899,59 @@ namespace ServiceReference2
             return base.Channel.UpdateFbaInventoryInCostingSheetAsync(VarientId, CostingType, quantity, companyname);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetpostagetypeResponseGetpostagetypeResult> GetpostagetypeAsync(string variantid, string companyname)
+        public ServiceReference1.GetpostagetypeResponseGetpostagetypeResult Getpostagetype(string variantid, string companyname)
+        {
+            return base.Channel.Getpostagetype(variantid, companyname);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetpostagetypeResponseGetpostagetypeResult> GetpostagetypeAsync(string variantid, string companyname)
         {
             return base.Channel.GetpostagetypeAsync(variantid, companyname);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetpostageResponseGetpostageResult> GetpostageAsync(string AccountName, string companyname)
+        public ServiceReference1.GetpostageResponseGetpostageResult Getpostage(string AccountName, string companyname)
+        {
+            return base.Channel.Getpostage(AccountName, companyname);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetpostageResponseGetpostageResult> GetpostageAsync(string AccountName, string companyname)
         {
             return base.Channel.GetpostageAsync(AccountName, companyname);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetExpiryproductdatebycompanyResponseGetExpiryproductdatebycompanyResult> GetExpiryproductdatebycompanyAsync(int ordernumber, string exptype, string companyname)
+        public ServiceReference1.GetExpiryproductdatebycompanyResponseGetExpiryproductdatebycompanyResult GetExpiryproductdatebycompany(int ordernumber, string exptype, string companyname)
+        {
+            return base.Channel.GetExpiryproductdatebycompany(ordernumber, exptype, companyname);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetExpiryproductdatebycompanyResponseGetExpiryproductdatebycompanyResult> GetExpiryproductdatebycompanyAsync(int ordernumber, string exptype, string companyname)
         {
             return base.Channel.GetExpiryproductdatebycompanyAsync(ordernumber, exptype, companyname);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetExpirydatebycompanynameResponseGetExpirydatebycompanynameResult> GetExpirydatebycompanynameAsync(string sku, string companyname)
+        public ServiceReference1.GetExpirydatebycompanynameResponseGetExpirydatebycompanynameResult GetExpirydatebycompanyname(string sku, string companyname)
+        {
+            return base.Channel.GetExpirydatebycompanyname(sku, companyname);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetExpirydatebycompanynameResponseGetExpirydatebycompanynameResult> GetExpirydatebycompanynameAsync(string sku, string companyname)
         {
             return base.Channel.GetExpirydatebycompanynameAsync(sku, companyname);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetExpirydateResponseGetExpirydateResult> GetExpirydateAsync(string sku, string companyname)
+        public ServiceReference1.GetExpirydateResponseGetExpirydateResult GetExpirydate(string sku, string companyname)
+        {
+            return base.Channel.GetExpirydate(sku, companyname);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetExpirydateResponseGetExpirydateResult> GetExpirydateAsync(string sku, string companyname)
         {
             return base.Channel.GetExpirydateAsync(sku, companyname);
+        }
+        
+        public string UpdateExpiryInventoryUpdated(string ProductId, string mquantity, string quantity, string expdate, string createdby)
+        {
+            return base.Channel.UpdateExpiryInventoryUpdated(ProductId, mquantity, quantity, expdate, createdby);
         }
         
         public System.Threading.Tasks.Task<string> UpdateExpiryInventoryUpdatedAsync(string ProductId, string mquantity, string quantity, string expdate, string createdby)
@@ -11278,9 +16959,19 @@ namespace ServiceReference2
             return base.Channel.UpdateExpiryInventoryUpdatedAsync(ProductId, mquantity, quantity, expdate, createdby);
         }
         
+        public int UpdateOrderTransactionStateupdated(long OrderId, string userid)
+        {
+            return base.Channel.UpdateOrderTransactionStateupdated(OrderId, userid);
+        }
+        
         public System.Threading.Tasks.Task<int> UpdateOrderTransactionStateupdatedAsync(long OrderId, string userid)
         {
             return base.Channel.UpdateOrderTransactionStateupdatedAsync(OrderId, userid);
+        }
+        
+        public string TransferInventoryfromMainToExpiryUpdated(string VarientId, string mquantity, string quantity, System.DateTime expdate, string createdby)
+        {
+            return base.Channel.TransferInventoryfromMainToExpiryUpdated(VarientId, mquantity, quantity, expdate, createdby);
         }
         
         public System.Threading.Tasks.Task<string> TransferInventoryfromMainToExpiryUpdatedAsync(string VarientId, string mquantity, string quantity, System.DateTime expdate, string createdby)
@@ -11288,39 +16979,79 @@ namespace ServiceReference2
             return base.Channel.TransferInventoryfromMainToExpiryUpdatedAsync(VarientId, mquantity, quantity, expdate, createdby);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetExpirydatefromexpiryroomResponseGetExpirydatefromexpiryroomResult> GetExpirydatefromexpiryroomAsync(string sku, string companyname)
+        public ServiceReference1.GetExpirydatefromexpiryroomResponseGetExpirydatefromexpiryroomResult GetExpirydatefromexpiryroom(string sku, string companyname)
+        {
+            return base.Channel.GetExpirydatefromexpiryroom(sku, companyname);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetExpirydatefromexpiryroomResponseGetExpirydatefromexpiryroomResult> GetExpirydatefromexpiryroomAsync(string sku, string companyname)
         {
             return base.Channel.GetExpirydatefromexpiryroomAsync(sku, companyname);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetExpirymessagebycompanynameResponseGetExpirymessagebycompanynameResult> GetExpirymessagebycompanynameAsync(string sku, string companyname)
+        public ServiceReference1.GetExpirymessagebycompanynameResponseGetExpirymessagebycompanynameResult GetExpirymessagebycompanyname(string sku, string companyname)
+        {
+            return base.Channel.GetExpirymessagebycompanyname(sku, companyname);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetExpirymessagebycompanynameResponseGetExpirymessagebycompanynameResult> GetExpirymessagebycompanynameAsync(string sku, string companyname)
         {
             return base.Channel.GetExpirymessagebycompanynameAsync(sku, companyname);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetExpirymsgResponseGetExpirymsgResult> GetExpirymsgAsync(string sku, string companyname)
+        public ServiceReference1.GetExpirymsgResponseGetExpirymsgResult GetExpirymsg(string sku, string companyname)
+        {
+            return base.Channel.GetExpirymsg(sku, companyname);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetExpirymsgResponseGetExpirymsgResult> GetExpirymsgAsync(string sku, string companyname)
         {
             return base.Channel.GetExpirymsgAsync(sku, companyname);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetProductDetailbycompanyResponseGetProductDetailbycompanyResult> GetProductDetailbycompanyAsync(string strCode, string strType, string companyname)
+        public ServiceReference1.GetProductDetailbycompanyResponseGetProductDetailbycompanyResult GetProductDetailbycompany(string strCode, string strType, string companyname)
+        {
+            return base.Channel.GetProductDetailbycompany(strCode, strType, companyname);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetProductDetailbycompanyResponseGetProductDetailbycompanyResult> GetProductDetailbycompanyAsync(string strCode, string strType, string companyname)
         {
             return base.Channel.GetProductDetailbycompanyAsync(strCode, strType, companyname);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetScanInProductResponseGetScanInProductResult> GetScanInProductAsync(string strCode, string strType, string companyname)
+        public ServiceReference1.GetScanInProductResponseGetScanInProductResult GetScanInProduct(string strCode, string strType, string companyname)
+        {
+            return base.Channel.GetScanInProduct(strCode, strType, companyname);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetScanInProductResponseGetScanInProductResult> GetScanInProductAsync(string strCode, string strType, string companyname)
         {
             return base.Channel.GetScanInProductAsync(strCode, strType, companyname);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetProductDetailsResponseGetProductDetailsResult> GetProductDetailsAsync(string strCode, string strType, string companyname)
+        public ServiceReference1.GetProductDetailsResponseGetProductDetailsResult GetProductDetails(string strCode, string strType, string companyname)
+        {
+            return base.Channel.GetProductDetails(strCode, strType, companyname);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetProductDetailsResponseGetProductDetailsResult> GetProductDetailsAsync(string strCode, string strType, string companyname)
         {
             return base.Channel.GetProductDetailsAsync(strCode, strType, companyname);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetProductRackLabelResponseGetProductRackLabelResult> GetProductRackLabelAsync(string strCode, string strType, string companyname)
+        public ServiceReference1.GetProductRackLabelResponseGetProductRackLabelResult GetProductRackLabel(string strCode, string strType, string companyname)
+        {
+            return base.Channel.GetProductRackLabel(strCode, strType, companyname);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetProductRackLabelResponseGetProductRackLabelResult> GetProductRackLabelAsync(string strCode, string strType, string companyname)
         {
             return base.Channel.GetProductRackLabelAsync(strCode, strType, companyname);
+        }
+        
+        public string UpdateOrderReturndStatus(string OrderNumber, string ProductId, int ReturnQty, int OrderQty, string createdby, string companyname)
+        {
+            return base.Channel.UpdateOrderReturndStatus(OrderNumber, ProductId, ReturnQty, OrderQty, createdby, companyname);
         }
         
         public System.Threading.Tasks.Task<string> UpdateOrderReturndStatusAsync(string OrderNumber, string ProductId, int ReturnQty, int OrderQty, string createdby, string companyname)
@@ -11328,44 +17059,89 @@ namespace ServiceReference2
             return base.Channel.UpdateOrderReturndStatusAsync(OrderNumber, ProductId, ReturnQty, OrderQty, createdby, companyname);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.getcostingbyorderResponseGetcostingbyorderResult> getcostingbyorderAsync(int ordernumber)
+        public ServiceReference1.getcostingbyorderResponseGetcostingbyorderResult getcostingbyorder(int ordernumber)
+        {
+            return base.Channel.getcostingbyorder(ordernumber);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.getcostingbyorderResponseGetcostingbyorderResult> getcostingbyorderAsync(int ordernumber)
         {
             return base.Channel.getcostingbyorderAsync(ordernumber);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetPalletNumberResponseGetPalletNumberResult> GetPalletNumberAsync()
+        public ServiceReference1.GetPalletNumberResponseGetPalletNumberResult GetPalletNumber()
+        {
+            return base.Channel.GetPalletNumber();
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetPalletNumberResponseGetPalletNumberResult> GetPalletNumberAsync()
         {
             return base.Channel.GetPalletNumberAsync();
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetPalletResponseGetPalletResult> GetPalletAsync(int MainProductId, int PalletNumber)
+        public ServiceReference1.GetPalletResponseGetPalletResult GetPallet(int MainProductId, int PalletNumber)
+        {
+            return base.Channel.GetPallet(MainProductId, PalletNumber);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetPalletResponseGetPalletResult> GetPalletAsync(int MainProductId, int PalletNumber)
         {
             return base.Channel.GetPalletAsync(MainProductId, PalletNumber);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetUserResponseGetUserResult> GetUserAsync()
+        public ServiceReference1.GetUserResponseGetUserResult GetUser()
+        {
+            return base.Channel.GetUser();
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetUserResponseGetUserResult> GetUserAsync()
         {
             return base.Channel.GetUserAsync();
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetcollectionnoofItemResponseGetcollectionnoofItemResult> GetcollectionnoofItemAsync(string CategoryId)
+        public ServiceReference1.GetcollectionnoofItemResponseGetcollectionnoofItemResult GetcollectionnoofItem(string CategoryId)
+        {
+            return base.Channel.GetcollectionnoofItem(CategoryId);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetcollectionnoofItemResponseGetcollectionnoofItemResult> GetcollectionnoofItemAsync(string CategoryId)
         {
             return base.Channel.GetcollectionnoofItemAsync(CategoryId);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetShelfingnoofItemResponseGetShelfingnoofItemResult> GetShelfingnoofItemAsync(string CategoryId)
+        public ServiceReference1.GetShelfingnoofItemResponseGetShelfingnoofItemResult GetShelfingnoofItem(string CategoryId)
+        {
+            return base.Channel.GetShelfingnoofItem(CategoryId);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetShelfingnoofItemResponseGetShelfingnoofItemResult> GetShelfingnoofItemAsync(string CategoryId)
         {
             return base.Channel.GetShelfingnoofItemAsync(CategoryId);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.WareHouseStaffResponseWareHouseStaffResult> WareHouseStaffAsync()
+        public ServiceReference1.WareHouseStaffResponseWareHouseStaffResult WareHouseStaff()
+        {
+            return base.Channel.WareHouseStaff();
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.WareHouseStaffResponseWareHouseStaffResult> WareHouseStaffAsync()
         {
             return base.Channel.WareHouseStaffAsync();
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetTaskTimerResponseGetTaskTimerResult> GetTaskTimerAsync(string CountryName)
+        public ServiceReference1.GetTaskTimerResponseGetTaskTimerResult GetTaskTimer(string CountryName)
+        {
+            return base.Channel.GetTaskTimer(CountryName);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetTaskTimerResponseGetTaskTimerResult> GetTaskTimerAsync(string CountryName)
         {
             return base.Channel.GetTaskTimerAsync(CountryName);
+        }
+        
+        public int SaveTaskTimer(string EmailId, string TaskType, int CategoryId, int ItemQty, string Comment, string ComputerName)
+        {
+            return base.Channel.SaveTaskTimer(EmailId, TaskType, CategoryId, ItemQty, Comment, ComputerName);
         }
         
         public System.Threading.Tasks.Task<int> SaveTaskTimerAsync(string EmailId, string TaskType, int CategoryId, int ItemQty, string Comment, string ComputerName)
@@ -11373,9 +17149,19 @@ namespace ServiceReference2
             return base.Channel.SaveTaskTimerAsync(EmailId, TaskType, CategoryId, ItemQty, Comment, ComputerName);
         }
         
+        public int SaveTaskTimers(string EmailId, string TaskType, int CategoryId, int ItemQty, string Comment)
+        {
+            return base.Channel.SaveTaskTimers(EmailId, TaskType, CategoryId, ItemQty, Comment);
+        }
+        
         public System.Threading.Tasks.Task<int> SaveTaskTimersAsync(string EmailId, string TaskType, int CategoryId, int ItemQty, string Comment)
         {
             return base.Channel.SaveTaskTimersAsync(EmailId, TaskType, CategoryId, ItemQty, Comment);
+        }
+        
+        public int UpdateTaskTimer(int STId)
+        {
+            return base.Channel.UpdateTaskTimer(STId);
         }
         
         public System.Threading.Tasks.Task<int> UpdateTaskTimerAsync(int STId)
@@ -11383,9 +17169,19 @@ namespace ServiceReference2
             return base.Channel.UpdateTaskTimerAsync(STId);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.checknondeliveredorderResponseChecknondeliveredorderResult> checknondeliveredorderAsync(int ordernumber)
+        public ServiceReference1.checknondeliveredorderResponseChecknondeliveredorderResult checknondeliveredorder(int ordernumber)
+        {
+            return base.Channel.checknondeliveredorder(ordernumber);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.checknondeliveredorderResponseChecknondeliveredorderResult> checknondeliveredorderAsync(int ordernumber)
         {
             return base.Channel.checknondeliveredorderAsync(ordernumber);
+        }
+        
+        public int Saveordercomment(int Ordernumber, string Comment, string Createdby, string CompanyName)
+        {
+            return base.Channel.Saveordercomment(Ordernumber, Comment, Createdby, CompanyName);
         }
         
         public System.Threading.Tasks.Task<int> SaveordercommentAsync(int Ordernumber, string Comment, string Createdby, string CompanyName)
@@ -11393,14 +17189,29 @@ namespace ServiceReference2
             return base.Channel.SaveordercommentAsync(Ordernumber, Comment, Createdby, CompanyName);
         }
         
+        public int Saveorderstatus(int Ordernumber, string OrderStatus, string Createdby, string CompanyName)
+        {
+            return base.Channel.Saveorderstatus(Ordernumber, OrderStatus, Createdby, CompanyName);
+        }
+        
         public System.Threading.Tasks.Task<int> SaveorderstatusAsync(int Ordernumber, string OrderStatus, string Createdby, string CompanyName)
         {
             return base.Channel.SaveorderstatusAsync(Ordernumber, OrderStatus, Createdby, CompanyName);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.LoadOrderIssuesResponseLoadOrderIssuesResult> LoadOrderIssuesAsync(int OrderId, string Resendstatus)
+        public ServiceReference1.LoadOrderIssuesResponseLoadOrderIssuesResult LoadOrderIssues(int OrderId, string Resendstatus)
+        {
+            return base.Channel.LoadOrderIssues(OrderId, Resendstatus);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.LoadOrderIssuesResponseLoadOrderIssuesResult> LoadOrderIssuesAsync(int OrderId, string Resendstatus)
         {
             return base.Channel.LoadOrderIssuesAsync(OrderId, Resendstatus);
+        }
+        
+        public bool UpdateOrderIssues(int orderno, string Title, string SubTitle, string status, string comment, string companyname, string createdby, string claim)
+        {
+            return base.Channel.UpdateOrderIssues(orderno, Title, SubTitle, status, comment, companyname, createdby, claim);
         }
         
         public System.Threading.Tasks.Task<bool> UpdateOrderIssuesAsync(int orderno, string Title, string SubTitle, string status, string comment, string companyname, string createdby, string claim)
@@ -11408,9 +17219,19 @@ namespace ServiceReference2
             return base.Channel.UpdateOrderIssuesAsync(orderno, Title, SubTitle, status, comment, companyname, createdby, claim);
         }
         
+        public bool UpdateOrderIssuesUpdated(int orderno, string Title, string SubTitle, string status, string comment, string companyname, string createdby, string claim, string asignto)
+        {
+            return base.Channel.UpdateOrderIssuesUpdated(orderno, Title, SubTitle, status, comment, companyname, createdby, claim, asignto);
+        }
+        
         public System.Threading.Tasks.Task<bool> UpdateOrderIssuesUpdatedAsync(int orderno, string Title, string SubTitle, string status, string comment, string companyname, string createdby, string claim, string asignto)
         {
             return base.Channel.UpdateOrderIssuesUpdatedAsync(orderno, Title, SubTitle, status, comment, companyname, createdby, claim, asignto);
+        }
+        
+        public string updateVariantpostage(int variantid, string accountname, string postage, string Email)
+        {
+            return base.Channel.updateVariantpostage(variantid, accountname, postage, Email);
         }
         
         public System.Threading.Tasks.Task<string> updateVariantpostageAsync(int variantid, string accountname, string postage, string Email)
@@ -11418,9 +17239,19 @@ namespace ServiceReference2
             return base.Channel.updateVariantpostageAsync(variantid, accountname, postage, Email);
         }
         
+        public string UpdateProductVariantWeight(int variantid, string productweight, string packingweight, string Email)
+        {
+            return base.Channel.UpdateProductVariantWeight(variantid, productweight, packingweight, Email);
+        }
+        
         public System.Threading.Tasks.Task<string> UpdateProductVariantWeightAsync(int variantid, string productweight, string packingweight, string Email)
         {
             return base.Channel.UpdateProductVariantWeightAsync(variantid, productweight, packingweight, Email);
+        }
+        
+        public string UpdateDimension(int VariantId, string Length, string Width, string Height)
+        {
+            return base.Channel.UpdateDimension(VariantId, Length, Width, Height);
         }
         
         public System.Threading.Tasks.Task<string> UpdateDimensionAsync(int VariantId, string Length, string Width, string Height)
@@ -11428,9 +17259,19 @@ namespace ServiceReference2
             return base.Channel.UpdateDimensionAsync(VariantId, Length, Width, Height);
         }
         
+        public string UpdateMainProductWeight(int ProductId, string productweight, string packingweight, string Email)
+        {
+            return base.Channel.UpdateMainProductWeight(ProductId, productweight, packingweight, Email);
+        }
+        
         public System.Threading.Tasks.Task<string> UpdateMainProductWeightAsync(int ProductId, string productweight, string packingweight, string Email)
         {
             return base.Channel.UpdateMainProductWeightAsync(ProductId, productweight, packingweight, Email);
+        }
+        
+        public string UpdateCategory(int productid, string categoryid, string Email)
+        {
+            return base.Channel.UpdateCategory(productid, categoryid, Email);
         }
         
         public System.Threading.Tasks.Task<string> UpdateCategoryAsync(int productid, string categoryid, string Email)
@@ -11438,19 +17279,58 @@ namespace ServiceReference2
             return base.Channel.UpdateCategoryAsync(productid, categoryid, Email);
         }
         
+        public string UpdateProductHistory(int productid, string FieldName, string FieldValue, string OldValue, string Email)
+        {
+            return base.Channel.UpdateProductHistory(productid, FieldName, FieldValue, OldValue, Email);
+        }
+        
         public System.Threading.Tasks.Task<string> UpdateProductHistoryAsync(int productid, string FieldName, string FieldValue, string OldValue, string Email)
         {
             return base.Channel.UpdateProductHistoryAsync(productid, FieldName, FieldValue, OldValue, Email);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.getMainProductIdResponseGetMainProductIdResult> getMainProductIdAsync(int productid)
+        public ServiceReference1.getMainProductIdResponseGetMainProductIdResult getMainProductId(int productid)
+        {
+            return base.Channel.getMainProductId(productid);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.getMainProductIdResponseGetMainProductIdResult> getMainProductIdAsync(int productid)
         {
             return base.Channel.getMainProductIdAsync(productid);
+        }
+        
+        public string UpdateProductWeight(int variantid, string productweight, string packingweight)
+        {
+            return base.Channel.UpdateProductWeight(variantid, productweight, packingweight);
         }
         
         public System.Threading.Tasks.Task<string> UpdateProductWeightAsync(int variantid, string productweight, string packingweight)
         {
             return base.Channel.UpdateProductWeightAsync(variantid, productweight, packingweight);
+        }
+        
+        public int SaveCreditNote(
+                    long ProductId, 
+                    long VariantId, 
+                    string SKU, 
+                    string Barcode, 
+                    string Email, 
+                    string InvoiceNo, 
+                    System.DateTime InvoiceDate, 
+                    long SupplierId, 
+                    string reson, 
+                    string dockedno, 
+                    string val, 
+                    string qty, 
+                    decimal creditStock, 
+                    string Attachfilename, 
+                    string ValueIncVat, 
+                    long CreditNoteNo, 
+                    string CompanyName, 
+                    string comment, 
+                    long DeliveryId)
+        {
+            return base.Channel.SaveCreditNote(ProductId, VariantId, SKU, Barcode, Email, InvoiceNo, InvoiceDate, SupplierId, reson, dockedno, val, qty, creditStock, Attachfilename, ValueIncVat, CreditNoteNo, CompanyName, comment, DeliveryId);
         }
         
         public System.Threading.Tasks.Task<int> SaveCreditNoteAsync(
@@ -11477,9 +17357,19 @@ namespace ServiceReference2
             return base.Channel.SaveCreditNoteAsync(ProductId, VariantId, SKU, Barcode, Email, InvoiceNo, InvoiceDate, SupplierId, reson, dockedno, val, qty, creditStock, Attachfilename, ValueIncVat, CreditNoteNo, CompanyName, comment, DeliveryId);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.getproductvariantbypacksizeResponseGetproductvariantbypacksizeResult> getproductvariantbypacksizeAsync(int productid, int packsize)
+        public ServiceReference1.getproductvariantbypacksizeResponseGetproductvariantbypacksizeResult getproductvariantbypacksize(int productid, int packsize)
+        {
+            return base.Channel.getproductvariantbypacksize(productid, packsize);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.getproductvariantbypacksizeResponseGetproductvariantbypacksizeResult> getproductvariantbypacksizeAsync(int productid, int packsize)
         {
             return base.Channel.getproductvariantbypacksizeAsync(productid, packsize);
+        }
+        
+        public string SaveInvoicesName(string FileType, string FileName, string createdby, string companyname)
+        {
+            return base.Channel.SaveInvoicesName(FileType, FileName, createdby, companyname);
         }
         
         public System.Threading.Tasks.Task<string> SaveInvoicesNameAsync(string FileType, string FileName, string createdby, string companyname)
@@ -11487,19 +17377,39 @@ namespace ServiceReference2
             return base.Channel.SaveInvoicesNameAsync(FileType, FileName, createdby, companyname);
         }
         
+        public string SaveFileType(string FileType, string createdby)
+        {
+            return base.Channel.SaveFileType(FileType, createdby);
+        }
+        
         public System.Threading.Tasks.Task<string> SaveFileTypeAsync(string FileType, string createdby)
         {
             return base.Channel.SaveFileTypeAsync(FileType, createdby);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.getFileTypeResponseGetFileTypeResult> getFileTypeAsync()
+        public ServiceReference1.getFileTypeResponseGetFileTypeResult getFileType()
+        {
+            return base.Channel.getFileType();
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.getFileTypeResponseGetFileTypeResult> getFileTypeAsync()
         {
             return base.Channel.getFileTypeAsync();
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetpostagebyVIDResponseGetpostagebyVIDResult> GetpostagebyVIDAsync(string variantid, string companyname, string accountname, string couriertype)
+        public ServiceReference1.GetpostagebyVIDResponseGetpostagebyVIDResult GetpostagebyVID(string variantid, string companyname, string accountname, string couriertype)
+        {
+            return base.Channel.GetpostagebyVID(variantid, companyname, accountname, couriertype);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetpostagebyVIDResponseGetpostagebyVIDResult> GetpostagebyVIDAsync(string variantid, string companyname, string accountname, string couriertype)
         {
             return base.Channel.GetpostagebyVIDAsync(variantid, companyname, accountname, couriertype);
+        }
+        
+        public string updatepostage(string variantid, string accountname, string postage)
+        {
+            return base.Channel.updatepostage(variantid, accountname, postage);
         }
         
         public System.Threading.Tasks.Task<string> updatepostageAsync(string variantid, string accountname, string postage)
@@ -11507,14 +17417,29 @@ namespace ServiceReference2
             return base.Channel.updatepostageAsync(variantid, accountname, postage);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetpostagebyAccountResponseGetpostagebyAccountResult> GetpostagebyAccountAsync(string companyname, string accountname, string couriertype)
+        public ServiceReference1.GetpostagebyAccountResponseGetpostagebyAccountResult GetpostagebyAccount(string companyname, string accountname, string couriertype)
+        {
+            return base.Channel.GetpostagebyAccount(companyname, accountname, couriertype);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetpostagebyAccountResponseGetpostagebyAccountResult> GetpostagebyAccountAsync(string companyname, string accountname, string couriertype)
         {
             return base.Channel.GetpostagebyAccountAsync(companyname, accountname, couriertype);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.updatecostingbypostagechangeResponseUpdatecostingbypostagechangeResult> updatecostingbypostagechangeAsync(string postage, string accname, string companyname, string variantid, string sku)
+        public ServiceReference1.updatecostingbypostagechangeResponseUpdatecostingbypostagechangeResult updatecostingbypostagechange(string postage, string accname, string companyname, string variantid, string sku)
+        {
+            return base.Channel.updatecostingbypostagechange(postage, accname, companyname, variantid, sku);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.updatecostingbypostagechangeResponseUpdatecostingbypostagechangeResult> updatecostingbypostagechangeAsync(string postage, string accname, string companyname, string variantid, string sku)
         {
             return base.Channel.updatecostingbypostagechangeAsync(postage, accname, companyname, variantid, sku);
+        }
+        
+        public string SaveUploadFile(string FileType, string comment, string FileName, string createdby, string companyname)
+        {
+            return base.Channel.SaveUploadFile(FileType, comment, FileName, createdby, companyname);
         }
         
         public System.Threading.Tasks.Task<string> SaveUploadFileAsync(string FileType, string comment, string FileName, string createdby, string companyname)
@@ -11522,9 +17447,19 @@ namespace ServiceReference2
             return base.Channel.SaveUploadFileAsync(FileType, comment, FileName, createdby, companyname);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetInventoryCountDetailsResponseGetInventoryCountDetailsResult> GetInventoryCountDetailsAsync(string productid)
+        public ServiceReference1.GetInventoryCountDetailsResponseGetInventoryCountDetailsResult GetInventoryCountDetails(string productid)
+        {
+            return base.Channel.GetInventoryCountDetails(productid);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetInventoryCountDetailsResponseGetInventoryCountDetailsResult> GetInventoryCountDetailsAsync(string productid)
         {
             return base.Channel.GetInventoryCountDetailsAsync(productid);
+        }
+        
+        public string UpdateWareHouseProductLocation(int productid, string IeleNo, string RackNo, string BoxNo)
+        {
+            return base.Channel.UpdateWareHouseProductLocation(productid, IeleNo, RackNo, BoxNo);
         }
         
         public System.Threading.Tasks.Task<string> UpdateWareHouseProductLocationAsync(int productid, string IeleNo, string RackNo, string BoxNo)
@@ -11532,14 +17467,29 @@ namespace ServiceReference2
             return base.Channel.UpdateWareHouseProductLocationAsync(productid, IeleNo, RackNo, BoxNo);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetIssueReasonResponseGetIssueReasonResult> GetIssueReasonAsync()
+        public ServiceReference1.GetIssueReasonResponseGetIssueReasonResult GetIssueReason()
+        {
+            return base.Channel.GetIssueReason();
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetIssueReasonResponseGetIssueReasonResult> GetIssueReasonAsync()
         {
             return base.Channel.GetIssueReasonAsync();
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetIssueSubReasonResponseGetIssueSubReasonResult> GetIssueSubReasonAsync(string parentid)
+        public ServiceReference1.GetIssueSubReasonResponseGetIssueSubReasonResult GetIssueSubReason(string parentid)
+        {
+            return base.Channel.GetIssueSubReason(parentid);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetIssueSubReasonResponseGetIssueSubReasonResult> GetIssueSubReasonAsync(string parentid)
         {
             return base.Channel.GetIssueSubReasonAsync(parentid);
+        }
+        
+        public string UpdateScaninOnInventoryCount(string productid)
+        {
+            return base.Channel.UpdateScaninOnInventoryCount(productid);
         }
         
         public System.Threading.Tasks.Task<string> UpdateScaninOnInventoryCountAsync(string productid)
@@ -11547,14 +17497,29 @@ namespace ServiceReference2
             return base.Channel.UpdateScaninOnInventoryCountAsync(productid);
         }
         
+        public string UpdateScaninRecord(string productid, string MainProductId)
+        {
+            return base.Channel.UpdateScaninRecord(productid, MainProductId);
+        }
+        
         public System.Threading.Tasks.Task<string> UpdateScaninRecordAsync(string productid, string MainProductId)
         {
             return base.Channel.UpdateScaninRecordAsync(productid, MainProductId);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetOrderDetailsResponseGetOrderDetailsResult> GetOrderDetailsAsync(string orderId)
+        public ServiceReference1.GetOrderDetailsResponseGetOrderDetailsResult GetOrderDetails(string orderId)
+        {
+            return base.Channel.GetOrderDetails(orderId);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetOrderDetailsResponseGetOrderDetailsResult> GetOrderDetailsAsync(string orderId)
         {
             return base.Channel.GetOrderDetailsAsync(orderId);
+        }
+        
+        public string UpdateProductCategory(int productid, string categoryid)
+        {
+            return base.Channel.UpdateProductCategory(productid, categoryid);
         }
         
         public System.Threading.Tasks.Task<string> UpdateProductCategoryAsync(int productid, string categoryid)
@@ -11562,19 +17527,39 @@ namespace ServiceReference2
             return base.Channel.UpdateProductCategoryAsync(productid, categoryid);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetAllCategorywithReadtytoprintorderResponseGetAllCategorywithReadtytoprintorderResult> GetAllCategorywithReadtytoprintorderAsync(string OrderType, System.DateTime StartDate, System.DateTime EndDate, string ComputerName)
+        public ServiceReference1.GetAllCategorywithReadtytoprintorderResponseGetAllCategorywithReadtytoprintorderResult GetAllCategorywithReadtytoprintorder(string OrderType, System.DateTime StartDate, System.DateTime EndDate, string ComputerName)
+        {
+            return base.Channel.GetAllCategorywithReadtytoprintorder(OrderType, StartDate, EndDate, ComputerName);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetAllCategorywithReadtytoprintorderResponseGetAllCategorywithReadtytoprintorderResult> GetAllCategorywithReadtytoprintorderAsync(string OrderType, System.DateTime StartDate, System.DateTime EndDate, string ComputerName)
         {
             return base.Channel.GetAllCategorywithReadtytoprintorderAsync(OrderType, StartDate, EndDate, ComputerName);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetAllCategoryResponseGetAllCategoryResult> GetAllCategoryAsync()
+        public ServiceReference1.GetAllCategoryResponseGetAllCategoryResult GetAllCategory()
+        {
+            return base.Channel.GetAllCategory();
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetAllCategoryResponseGetAllCategoryResult> GetAllCategoryAsync()
         {
             return base.Channel.GetAllCategoryAsync();
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetCategoryResponseGetCategoryResult> GetCategoryAsync()
+        public ServiceReference1.GetCategoryResponseGetCategoryResult GetCategory()
+        {
+            return base.Channel.GetCategory();
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetCategoryResponseGetCategoryResult> GetCategoryAsync()
         {
             return base.Channel.GetCategoryAsync();
+        }
+        
+        public int SaveOrderPackingWeight(int OrderNumber, string PackingWeight, string CreatedBy, string companyname)
+        {
+            return base.Channel.SaveOrderPackingWeight(OrderNumber, PackingWeight, CreatedBy, companyname);
         }
         
         public System.Threading.Tasks.Task<int> SaveOrderPackingWeightAsync(int OrderNumber, string PackingWeight, string CreatedBy, string companyname)
@@ -11582,9 +17567,19 @@ namespace ServiceReference2
             return base.Channel.SaveOrderPackingWeightAsync(OrderNumber, PackingWeight, CreatedBy, companyname);
         }
         
+        public int updateproductInventorybyInventorycount(string ProductId, string VariantId, string sku, string barcode, string email, string InventoryType, string CompanyName, string ComputerName)
+        {
+            return base.Channel.updateproductInventorybyInventorycount(ProductId, VariantId, sku, barcode, email, InventoryType, CompanyName, ComputerName);
+        }
+        
         public System.Threading.Tasks.Task<int> updateproductInventorybyInventorycountAsync(string ProductId, string VariantId, string sku, string barcode, string email, string InventoryType, string CompanyName, string ComputerName)
         {
             return base.Channel.updateproductInventorybyInventorycountAsync(ProductId, VariantId, sku, barcode, email, InventoryType, CompanyName, ComputerName);
+        }
+        
+        public int updatecostingbypostage(string AccountName, string SKU, string CompanyName, int OrderNumber, int VariantId, decimal PostageCost, string EmailId)
+        {
+            return base.Channel.updatecostingbypostage(AccountName, SKU, CompanyName, OrderNumber, VariantId, PostageCost, EmailId);
         }
         
         public System.Threading.Tasks.Task<int> updatecostingbypostageAsync(string AccountName, string SKU, string CompanyName, int OrderNumber, int VariantId, decimal PostageCost, string EmailId)
@@ -11592,9 +17587,19 @@ namespace ServiceReference2
             return base.Channel.updatecostingbypostageAsync(AccountName, SKU, CompanyName, OrderNumber, VariantId, PostageCost, EmailId);
         }
         
+        public int SaveOrderPackingWeightWithpostalservice(int OrderNumber, string PackingWeight, string postalservice, string CreatedBy, string companyname)
+        {
+            return base.Channel.SaveOrderPackingWeightWithpostalservice(OrderNumber, PackingWeight, postalservice, CreatedBy, companyname);
+        }
+        
         public System.Threading.Tasks.Task<int> SaveOrderPackingWeightWithpostalserviceAsync(int OrderNumber, string PackingWeight, string postalservice, string CreatedBy, string companyname)
         {
             return base.Channel.SaveOrderPackingWeightWithpostalserviceAsync(OrderNumber, PackingWeight, postalservice, CreatedBy, companyname);
+        }
+        
+        public string AutoTransferMainInventory(int productid, int Quantity, string companyname, string email)
+        {
+            return base.Channel.AutoTransferMainInventory(productid, Quantity, companyname, email);
         }
         
         public System.Threading.Tasks.Task<string> AutoTransferMainInventoryAsync(int productid, int Quantity, string companyname, string email)
@@ -11602,9 +17607,19 @@ namespace ServiceReference2
             return base.Channel.AutoTransferMainInventoryAsync(productid, Quantity, companyname, email);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetShoppingCartWithZeroPidResponseGetShoppingCartWithZeroPidResult> GetShoppingCartWithZeroPidAsync(int OrderId)
+        public ServiceReference1.GetShoppingCartWithZeroPidResponseGetShoppingCartWithZeroPidResult GetShoppingCartWithZeroPid(int OrderId)
+        {
+            return base.Channel.GetShoppingCartWithZeroPid(OrderId);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetShoppingCartWithZeroPidResponseGetShoppingCartWithZeroPidResult> GetShoppingCartWithZeroPidAsync(int OrderId)
         {
             return base.Channel.GetShoppingCartWithZeroPidAsync(OrderId);
+        }
+        
+        public bool CheckLoginDetail(string EMailField, string PasswordField)
+        {
+            return base.Channel.CheckLoginDetail(EMailField, PasswordField);
         }
         
         public System.Threading.Tasks.Task<bool> CheckLoginDetailAsync(string EMailField, string PasswordField)
@@ -11612,9 +17627,19 @@ namespace ServiceReference2
             return base.Channel.CheckLoginDetailAsync(EMailField, PasswordField);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetLoginDetailResponseGetLoginDetailResult> GetLoginDetailAsync(string EMailField, string PasswordField)
+        public string GetLoginDetail(string EMailField, string PasswordField)
+        {
+            return base.Channel.GetLoginDetail(EMailField, PasswordField);
+        }
+        
+        public System.Threading.Tasks.Task<string> GetLoginDetailAsync(string EMailField, string PasswordField)
         {
             return base.Channel.GetLoginDetailAsync(EMailField, PasswordField);
+        }
+        
+        public int IsHazardProduct(int productid)
+        {
+            return base.Channel.IsHazardProduct(productid);
         }
         
         public System.Threading.Tasks.Task<int> IsHazardProductAsync(int productid)
@@ -11622,34 +17647,69 @@ namespace ServiceReference2
             return base.Channel.IsHazardProductAsync(productid);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetScanInDataResponseGetScanInDataResult> GetScanInDataAsync(long scaninid)
+        public ServiceReference1.GetScanInDataResponseGetScanInDataResult GetScanInData(long scaninid)
+        {
+            return base.Channel.GetScanInData(scaninid);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetScanInDataResponseGetScanInDataResult> GetScanInDataAsync(long scaninid)
         {
             return base.Channel.GetScanInDataAsync(scaninid);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetProductDeliveryDataResponseGetProductDeliveryDataResult> GetProductDeliveryDataAsync(long Deliveryid)
+        public ServiceReference1.GetProductDeliveryDataResponseGetProductDeliveryDataResult GetProductDeliveryData(long Deliveryid)
+        {
+            return base.Channel.GetProductDeliveryData(Deliveryid);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetProductDeliveryDataResponseGetProductDeliveryDataResult> GetProductDeliveryDataAsync(long Deliveryid)
         {
             return base.Channel.GetProductDeliveryDataAsync(Deliveryid);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetInventoryIdResponseGetInventoryIdResult> GetInventoryIdAsync(long VariantId)
+        public ServiceReference1.GetInventoryIdResponseGetInventoryIdResult GetInventoryId(long VariantId)
+        {
+            return base.Channel.GetInventoryId(VariantId);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetInventoryIdResponseGetInventoryIdResult> GetInventoryIdAsync(long VariantId)
         {
             return base.Channel.GetInventoryIdAsync(VariantId);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.FillGridAgainstSkuwithcompanyResponseFillGridAgainstSkuwithcompanyResult> FillGridAgainstSkuwithcompanyAsync(string sku, string companyname)
+        public ServiceReference1.FillGridAgainstSkuwithcompanyResponseFillGridAgainstSkuwithcompanyResult FillGridAgainstSkuwithcompany(string sku, string companyname)
+        {
+            return base.Channel.FillGridAgainstSkuwithcompany(sku, companyname);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.FillGridAgainstSkuwithcompanyResponseFillGridAgainstSkuwithcompanyResult> FillGridAgainstSkuwithcompanyAsync(string sku, string companyname)
         {
             return base.Channel.FillGridAgainstSkuwithcompanyAsync(sku, companyname);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.FillGridAgainstBarcodewithcompanyResponseFillGridAgainstBarcodewithcompanyResult> FillGridAgainstBarcodewithcompanyAsync(string Barcode, string companyname)
+        public ServiceReference1.FillGridAgainstBarcodewithcompanyResponseFillGridAgainstBarcodewithcompanyResult FillGridAgainstBarcodewithcompany(string Barcode, string companyname)
+        {
+            return base.Channel.FillGridAgainstBarcodewithcompany(Barcode, companyname);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.FillGridAgainstBarcodewithcompanyResponseFillGridAgainstBarcodewithcompanyResult> FillGridAgainstBarcodewithcompanyAsync(string Barcode, string companyname)
         {
             return base.Channel.FillGridAgainstBarcodewithcompanyAsync(Barcode, companyname);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetFBAOrderingResponseGetFBAOrderingResult> GetFBAOrderingAsync(string Barcode, string companyname)
+        public ServiceReference1.GetFBAOrderingResponseGetFBAOrderingResult GetFBAOrdering(string Barcode, string companyname)
+        {
+            return base.Channel.GetFBAOrdering(Barcode, companyname);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetFBAOrderingResponseGetFBAOrderingResult> GetFBAOrderingAsync(string Barcode, string companyname)
         {
             return base.Channel.GetFBAOrderingAsync(Barcode, companyname);
+        }
+        
+        public bool checkexistmessage(string barcode)
+        {
+            return base.Channel.checkexistmessage(barcode);
         }
         
         public System.Threading.Tasks.Task<bool> checkexistmessageAsync(string barcode)
@@ -11657,56 +17717,114 @@ namespace ServiceReference2
             return base.Channel.checkexistmessageAsync(barcode);
         }
         
+        public string GetexistExpiry(string MainProductId)
+        {
+            return base.Channel.GetexistExpiry(MainProductId);
+        }
+        
         public System.Threading.Tasks.Task<string> GetexistExpiryAsync(string MainProductId)
         {
             return base.Channel.GetexistExpiryAsync(MainProductId);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetCompanybycountryResponseGetCompanybycountryResult> GetCompanybycountryAsync(string country)
+        public ServiceReference1.GetCompanybycountryResponseGetCompanybycountryResult GetCompanybycountry(string country)
+        {
+            return base.Channel.GetCompanybycountry(country);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetCompanybycountryResponseGetCompanybycountryResult> GetCompanybycountryAsync(string country)
         {
             return base.Channel.GetCompanybycountryAsync(country);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetSupplierResponseGetSupplierResult> GetSupplierAsync()
+        public ServiceReference1.GetSupplierResponseGetSupplierResult GetSupplier()
+        {
+            return base.Channel.GetSupplier();
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetSupplierResponseGetSupplierResult> GetSupplierAsync()
         {
             return base.Channel.GetSupplierAsync();
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetCompanyResponseGetCompanyResult> GetCompanyAsync()
+        public ServiceReference1.GetCompanyResponseGetCompanyResult GetCompany()
+        {
+            return base.Channel.GetCompany();
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetCompanyResponseGetCompanyResult> GetCompanyAsync()
         {
             return base.Channel.GetCompanyAsync();
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetAccountNameResponseGetAccountNameResult> GetAccountNameAsync()
+        public ServiceReference1.GetAccountNameResponseGetAccountNameResult GetAccountName()
+        {
+            return base.Channel.GetAccountName();
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetAccountNameResponseGetAccountNameResult> GetAccountNameAsync()
         {
             return base.Channel.GetAccountNameAsync();
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetManualInvoiceResponseGetManualInvoiceResult> GetManualInvoiceAsync(string InvoiceNumber, string SKU)
+        public ServiceReference1.GetManualInvoiceResponseGetManualInvoiceResult GetManualInvoice(string InvoiceNumber, string SKU)
+        {
+            return base.Channel.GetManualInvoice(InvoiceNumber, SKU);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetManualInvoiceResponseGetManualInvoiceResult> GetManualInvoiceAsync(string InvoiceNumber, string SKU)
         {
             return base.Channel.GetManualInvoiceAsync(InvoiceNumber, SKU);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetOrderTypeResponseGetOrderTypeResult> GetOrderTypeAsync(string InvoiceNumber)
+        public ServiceReference1.GetOrderTypeResponseGetOrderTypeResult GetOrderType(string InvoiceNumber)
+        {
+            return base.Channel.GetOrderType(InvoiceNumber);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetOrderTypeResponseGetOrderTypeResult> GetOrderTypeAsync(string InvoiceNumber)
         {
             return base.Channel.GetOrderTypeAsync(InvoiceNumber);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<ServiceReference2.SaveCaptureResponse> ServiceReference2.BarcodeWebServiceSoap.SaveCaptureAsync(ServiceReference2.SaveCaptureRequest request)
+        ServiceReference1.SaveCaptureResponse ServiceReference1.BarcodeWebServiceSoap.SaveCapture(ServiceReference1.SaveCaptureRequest request)
         {
-            return base.Channel.SaveCaptureAsync(request);
+            return base.Channel.SaveCapture(request);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.SaveCaptureResponse> SaveCaptureAsync(string Name, string ContentType, byte[] arr, string SystemIp, string CreatedOn)
+        public int SaveCapture(string Name, string ContentType, byte[] arr, string SystemIp, string CreatedOn)
         {
-            ServiceReference2.SaveCaptureRequest inValue = new ServiceReference2.SaveCaptureRequest();
+            ServiceReference1.SaveCaptureRequest inValue = new ServiceReference1.SaveCaptureRequest();
             inValue.Name = Name;
             inValue.ContentType = ContentType;
             inValue.arr = arr;
             inValue.SystemIp = SystemIp;
             inValue.CreatedOn = CreatedOn;
-            return ((ServiceReference2.BarcodeWebServiceSoap)(this)).SaveCaptureAsync(inValue);
+            ServiceReference1.SaveCaptureResponse retVal = ((ServiceReference1.BarcodeWebServiceSoap)(this)).SaveCapture(inValue);
+            return retVal.SaveCaptureResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<ServiceReference1.SaveCaptureResponse> ServiceReference1.BarcodeWebServiceSoap.SaveCaptureAsync(ServiceReference1.SaveCaptureRequest request)
+        {
+            return base.Channel.SaveCaptureAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.SaveCaptureResponse> SaveCaptureAsync(string Name, string ContentType, byte[] arr, string SystemIp, string CreatedOn)
+        {
+            ServiceReference1.SaveCaptureRequest inValue = new ServiceReference1.SaveCaptureRequest();
+            inValue.Name = Name;
+            inValue.ContentType = ContentType;
+            inValue.arr = arr;
+            inValue.SystemIp = SystemIp;
+            inValue.CreatedOn = CreatedOn;
+            return ((ServiceReference1.BarcodeWebServiceSoap)(this)).SaveCaptureAsync(inValue);
+        }
+        
+        public int SaveCaptureLog(string Name, string ContentType, string Data, string SystemIp, string CreatedOn)
+        {
+            return base.Channel.SaveCaptureLog(Name, ContentType, Data, SystemIp, CreatedOn);
         }
         
         public System.Threading.Tasks.Task<int> SaveCaptureLogAsync(string Name, string ContentType, string Data, string SystemIp, string CreatedOn)
@@ -11714,24 +17832,82 @@ namespace ServiceReference2
             return base.Channel.SaveCaptureLogAsync(Name, ContentType, Data, SystemIp, CreatedOn);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetInvoicePrintResponseGetInvoicePrintResult> GetInvoicePrintAsync(string strType, string OrderNumber)
+        public ServiceReference1.GetInvoicePrintResponseGetInvoicePrintResult GetInvoicePrint(string strType, string OrderNumber)
+        {
+            return base.Channel.GetInvoicePrint(strType, OrderNumber);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetInvoicePrintResponseGetInvoicePrintResult> GetInvoicePrintAsync(string strType, string OrderNumber)
         {
             return base.Channel.GetInvoicePrintAsync(strType, OrderNumber);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetAllPerformaInvoiceResponseGetAllPerformaInvoiceResult> GetAllPerformaInvoiceAsync(System.DateTime dtfrom, System.DateTime dtend, string OrderNumber, string Country, string ProductName, string SKU, string ShippingFirstName, string CreatedBy, string CompanyName)
+        public ServiceReference1.GetAllPerformaInvoiceResponseGetAllPerformaInvoiceResult GetAllPerformaInvoice(System.DateTime dtfrom, System.DateTime dtend, string OrderNumber, string Country, string ProductName, string SKU, string ShippingFirstName, string CreatedBy, string CompanyName)
+        {
+            return base.Channel.GetAllPerformaInvoice(dtfrom, dtend, OrderNumber, Country, ProductName, SKU, ShippingFirstName, CreatedBy, CompanyName);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetAllPerformaInvoiceResponseGetAllPerformaInvoiceResult> GetAllPerformaInvoiceAsync(System.DateTime dtfrom, System.DateTime dtend, string OrderNumber, string Country, string ProductName, string SKU, string ShippingFirstName, string CreatedBy, string CompanyName)
         {
             return base.Channel.GetAllPerformaInvoiceAsync(dtfrom, dtend, OrderNumber, Country, ProductName, SKU, ShippingFirstName, CreatedBy, CompanyName);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetAllManualInvoiceResponseGetAllManualInvoiceResult> GetAllManualInvoiceAsync(System.DateTime dtfrom, System.DateTime dtend, string OrderNumber, string Country, string ProductName, string SKU, string ShippingFirstName, string CreatedBy, string CompanyName)
+        public ServiceReference1.GetAllManualInvoiceResponseGetAllManualInvoiceResult GetAllManualInvoice(System.DateTime dtfrom, System.DateTime dtend, string OrderNumber, string Country, string ProductName, string SKU, string ShippingFirstName, string CreatedBy, string CompanyName)
+        {
+            return base.Channel.GetAllManualInvoice(dtfrom, dtend, OrderNumber, Country, ProductName, SKU, ShippingFirstName, CreatedBy, CompanyName);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetAllManualInvoiceResponseGetAllManualInvoiceResult> GetAllManualInvoiceAsync(System.DateTime dtfrom, System.DateTime dtend, string OrderNumber, string Country, string ProductName, string SKU, string ShippingFirstName, string CreatedBy, string CompanyName)
         {
             return base.Channel.GetAllManualInvoiceAsync(dtfrom, dtend, OrderNumber, Country, ProductName, SKU, ShippingFirstName, CreatedBy, CompanyName);
+        }
+        
+        public string SavePerchaseExpance(string InvoiceNumber, System.DateTime InvoiceDate, string ShippingName, string CompanyName, string CreatedBy, string TotalPriceWithVat, string TotalVat)
+        {
+            return base.Channel.SavePerchaseExpance(InvoiceNumber, InvoiceDate, ShippingName, CompanyName, CreatedBy, TotalPriceWithVat, TotalVat);
         }
         
         public System.Threading.Tasks.Task<string> SavePerchaseExpanceAsync(string InvoiceNumber, System.DateTime InvoiceDate, string ShippingName, string CompanyName, string CreatedBy, string TotalPriceWithVat, string TotalVat)
         {
             return base.Channel.SavePerchaseExpanceAsync(InvoiceNumber, InvoiceDate, ShippingName, CompanyName, CreatedBy, TotalPriceWithVat, TotalVat);
+        }
+        
+        public string SavePerformaInvoice(
+                    string InvoiceNumber, 
+                    string SalesOrderNumber, 
+                    string InvoiceType, 
+                    System.DateTime InvoiceDate, 
+                    string PaymentStatus, 
+                    string AmountPaidTo, 
+                    string ShippingName, 
+                    string EmailId, 
+                    string PhoneNo, 
+                    string ShippingAddress1, 
+                    string ShippingAddress2, 
+                    string City, 
+                    string Country, 
+                    string Zipcode, 
+                    string CurrencyCode, 
+                    string ShippingPrice, 
+                    string CompanyName, 
+                    string ProductId, 
+                    string MainProductId, 
+                    string ProductName, 
+                    string SKU, 
+                    string Barcode, 
+                    string Qty, 
+                    string Vat, 
+                    string VatPercent, 
+                    string ProductPrice, 
+                    string SalePrice, 
+                    string Discount, 
+                    string Commission, 
+                    string WarehouseExpense, 
+                    string CreatedBy, 
+                    string TotalPriceWithVat, 
+                    string TotalVat)
+        {
+            return base.Channel.SavePerformaInvoice(InvoiceNumber, SalesOrderNumber, InvoiceType, InvoiceDate, PaymentStatus, AmountPaidTo, ShippingName, EmailId, PhoneNo, ShippingAddress1, ShippingAddress2, City, Country, Zipcode, CurrencyCode, ShippingPrice, CompanyName, ProductId, MainProductId, ProductName, SKU, Barcode, Qty, Vat, VatPercent, ProductPrice, SalePrice, Discount, Commission, WarehouseExpense, CreatedBy, TotalPriceWithVat, TotalVat);
         }
         
         public System.Threading.Tasks.Task<string> SavePerformaInvoiceAsync(
@@ -11772,9 +17948,45 @@ namespace ServiceReference2
             return base.Channel.SavePerformaInvoiceAsync(InvoiceNumber, SalesOrderNumber, InvoiceType, InvoiceDate, PaymentStatus, AmountPaidTo, ShippingName, EmailId, PhoneNo, ShippingAddress1, ShippingAddress2, City, Country, Zipcode, CurrencyCode, ShippingPrice, CompanyName, ProductId, MainProductId, ProductName, SKU, Barcode, Qty, Vat, VatPercent, ProductPrice, SalePrice, Discount, Commission, WarehouseExpense, CreatedBy, TotalPriceWithVat, TotalVat);
         }
         
-        public System.Threading.Tasks.Task<string> ImportOrderAsync(ServiceReference2.ImportOrderDtorderlist dtorderlist, string SalesChannel, string TotalAmount, string shippingcost, string InvoiceDate, string ShippingAddressName, string ShippingAddressAddressLine1, string ShippingAddressAddressLine2, string city, string country, string zipcode, string EmailId, string Phonenumber)
+        public string ImportOrder(ServiceReference1.ImportOrderDtorderlist dtorderlist, string SalesChannel, string TotalAmount, string shippingcost, string InvoiceDate, string ShippingAddressName, string ShippingAddressAddressLine1, string ShippingAddressAddressLine2, string city, string country, string zipcode, string EmailId, string Phonenumber)
+        {
+            return base.Channel.ImportOrder(dtorderlist, SalesChannel, TotalAmount, shippingcost, InvoiceDate, ShippingAddressName, ShippingAddressAddressLine1, ShippingAddressAddressLine2, city, country, zipcode, EmailId, Phonenumber);
+        }
+        
+        public System.Threading.Tasks.Task<string> ImportOrderAsync(ServiceReference1.ImportOrderDtorderlist dtorderlist, string SalesChannel, string TotalAmount, string shippingcost, string InvoiceDate, string ShippingAddressName, string ShippingAddressAddressLine1, string ShippingAddressAddressLine2, string city, string country, string zipcode, string EmailId, string Phonenumber)
         {
             return base.Channel.ImportOrderAsync(dtorderlist, SalesChannel, TotalAmount, shippingcost, InvoiceDate, ShippingAddressName, ShippingAddressAddressLine1, ShippingAddressAddressLine2, city, country, zipcode, EmailId, Phonenumber);
+        }
+        
+        public string SaveManulInvoice(
+                    string MId, 
+                    string MInvoiceId, 
+                    string ShippingName, 
+                    System.DateTime InvoiceDate, 
+                    string EmailId, 
+                    string PhoneNo, 
+                    string ShippingAddress1, 
+                    string ShippingAddress2, 
+                    string City, 
+                    string State, 
+                    string Country, 
+                    string Zipcode, 
+                    string CurrencyCode, 
+                    string ShippingPrice, 
+                    string CompanyName, 
+                    string ProductName, 
+                    string SKU, 
+                    string Qty, 
+                    string Vat, 
+                    string VatPercent, 
+                    string ListPrice, 
+                    string Discount, 
+                    string CreatedBy, 
+                    string PaymentStatus, 
+                    string Reason, 
+                    string DeliveredQty)
+        {
+            return base.Channel.SaveManulInvoice(MId, MInvoiceId, ShippingName, InvoiceDate, EmailId, PhoneNo, ShippingAddress1, ShippingAddress2, City, State, Country, Zipcode, CurrencyCode, ShippingPrice, CompanyName, ProductName, SKU, Qty, Vat, VatPercent, ListPrice, Discount, CreatedBy, PaymentStatus, Reason, DeliveredQty);
         }
         
         public System.Threading.Tasks.Task<string> SaveManulInvoiceAsync(
@@ -11808,14 +18020,29 @@ namespace ServiceReference2
             return base.Channel.SaveManulInvoiceAsync(MId, MInvoiceId, ShippingName, InvoiceDate, EmailId, PhoneNo, ShippingAddress1, ShippingAddress2, City, State, Country, Zipcode, CurrencyCode, ShippingPrice, CompanyName, ProductName, SKU, Qty, Vat, VatPercent, ListPrice, Discount, CreatedBy, PaymentStatus, Reason, DeliveredQty);
         }
         
+        public string UpdateDeliveredqtyManualInvoice(string InvoiceNumber, string SKU, int Qty)
+        {
+            return base.Channel.UpdateDeliveredqtyManualInvoice(InvoiceNumber, SKU, Qty);
+        }
+        
         public System.Threading.Tasks.Task<string> UpdateDeliveredqtyManualInvoiceAsync(string InvoiceNumber, string SKU, int Qty)
         {
             return base.Channel.UpdateDeliveredqtyManualInvoiceAsync(InvoiceNumber, SKU, Qty);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetCompanyDetailsResponseGetCompanyDetailsResult> GetCompanyDetailsAsync(string companyname)
+        public ServiceReference1.GetCompanyDetailsResponseGetCompanyDetailsResult GetCompanyDetails(string companyname)
+        {
+            return base.Channel.GetCompanyDetails(companyname);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetCompanyDetailsResponseGetCompanyDetailsResult> GetCompanyDetailsAsync(string companyname)
         {
             return base.Channel.GetCompanyDetailsAsync(companyname);
+        }
+        
+        public bool DeleteManualInvoice(string MId, string DeletedBy)
+        {
+            return base.Channel.DeleteManualInvoice(MId, DeletedBy);
         }
         
         public System.Threading.Tasks.Task<bool> DeleteManualInvoiceAsync(string MId, string DeletedBy)
@@ -11823,9 +18050,19 @@ namespace ServiceReference2
             return base.Channel.DeleteManualInvoiceAsync(MId, DeletedBy);
         }
         
+        public bool Updateexpiry(string dateold, string datenew, int qty, string sku)
+        {
+            return base.Channel.Updateexpiry(dateold, datenew, qty, sku);
+        }
+        
         public System.Threading.Tasks.Task<bool> UpdateexpiryAsync(string dateold, string datenew, int qty, string sku)
         {
             return base.Channel.UpdateexpiryAsync(dateold, datenew, qty, sku);
+        }
+        
+        public bool GetDuplicateOrder(string ordernumber)
+        {
+            return base.Channel.GetDuplicateOrder(ordernumber);
         }
         
         public System.Threading.Tasks.Task<bool> GetDuplicateOrderAsync(string ordernumber)
@@ -11833,9 +18070,19 @@ namespace ServiceReference2
             return base.Channel.GetDuplicateOrderAsync(ordernumber);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.getcourierserviceResponseGetcourierserviceResult> getcourierserviceAsync(string countryname)
+        public ServiceReference1.getcourierserviceResponseGetcourierserviceResult getcourierservice(string countryname)
+        {
+            return base.Channel.getcourierservice(countryname);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.getcourierserviceResponseGetcourierserviceResult> getcourierserviceAsync(string countryname)
         {
             return base.Channel.getcourierserviceAsync(countryname);
+        }
+        
+        public int Saveshipmentdetails(string Carreir, string TrackingNumber, System.DateTime ShippedOn, int OrderNumber, string parcelweight, decimal parcelcharge, string shipby, string comprep)
+        {
+            return base.Channel.Saveshipmentdetails(Carreir, TrackingNumber, ShippedOn, OrderNumber, parcelweight, parcelcharge, shipby, comprep);
         }
         
         public System.Threading.Tasks.Task<int> SaveshipmentdetailsAsync(string Carreir, string TrackingNumber, System.DateTime ShippedOn, int OrderNumber, string parcelweight, decimal parcelcharge, string shipby, string comprep)
@@ -11843,9 +18090,19 @@ namespace ServiceReference2
             return base.Channel.SaveshipmentdetailsAsync(Carreir, TrackingNumber, ShippedOn, OrderNumber, parcelweight, parcelcharge, shipby, comprep);
         }
         
+        public string UpdateInventoryQuantityByVarientpromotionupdated(string VarientId, string mquantity, string quantity, string isType)
+        {
+            return base.Channel.UpdateInventoryQuantityByVarientpromotionupdated(VarientId, mquantity, quantity, isType);
+        }
+        
         public System.Threading.Tasks.Task<string> UpdateInventoryQuantityByVarientpromotionupdatedAsync(string VarientId, string mquantity, string quantity, string isType)
         {
             return base.Channel.UpdateInventoryQuantityByVarientpromotionupdatedAsync(VarientId, mquantity, quantity, isType);
+        }
+        
+        public string UpdateInventoryByVarientpromotion(string VarientId, string mquantity, string quantity, string companyname)
+        {
+            return base.Channel.UpdateInventoryByVarientpromotion(VarientId, mquantity, quantity, companyname);
         }
         
         public System.Threading.Tasks.Task<string> UpdateInventoryByVarientpromotionAsync(string VarientId, string mquantity, string quantity, string companyname)
@@ -11853,9 +18110,19 @@ namespace ServiceReference2
             return base.Channel.UpdateInventoryByVarientpromotionAsync(VarientId, mquantity, quantity, companyname);
         }
         
+        public string DoAction(string byaction, string action, string pagename, string oldval)
+        {
+            return base.Channel.DoAction(byaction, action, pagename, oldval);
+        }
+        
         public System.Threading.Tasks.Task<string> DoActionAsync(string byaction, string action, string pagename, string oldval)
         {
             return base.Channel.DoActionAsync(byaction, action, pagename, oldval);
+        }
+        
+        public string SaveDoAction(string byaction, string action, string pagename, string oldval, string companyname, string sku, string barcode, string ordernumber, string asinitemid)
+        {
+            return base.Channel.SaveDoAction(byaction, action, pagename, oldval, companyname, sku, barcode, ordernumber, asinitemid);
         }
         
         public System.Threading.Tasks.Task<string> SaveDoActionAsync(string byaction, string action, string pagename, string oldval, string companyname, string sku, string barcode, string ordernumber, string asinitemid)
@@ -11863,29 +18130,59 @@ namespace ServiceReference2
             return base.Channel.SaveDoActionAsync(byaction, action, pagename, oldval, companyname, sku, barcode, ordernumber, asinitemid);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.ArrayOfXElement> GetPendingOrderDetailsbycompanyAsync(string productid, string companyname)
+        public ServiceReference1.ArrayOfXElement GetPendingOrderDetailsbycompany(string productid, string companyname)
+        {
+            return base.Channel.GetPendingOrderDetailsbycompany(productid, companyname);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.ArrayOfXElement> GetPendingOrderDetailsbycompanyAsync(string productid, string companyname)
         {
             return base.Channel.GetPendingOrderDetailsbycompanyAsync(productid, companyname);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.ArrayOfXElement> GetPendingOrderDetailsAsync(string Barcode, string companyname)
+        public ServiceReference1.ArrayOfXElement GetPendingOrderDetails(string Barcode, string companyname)
+        {
+            return base.Channel.GetPendingOrderDetails(Barcode, companyname);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.ArrayOfXElement> GetPendingOrderDetailsAsync(string Barcode, string companyname)
         {
             return base.Channel.GetPendingOrderDetailsAsync(Barcode, companyname);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetDefaultVarientDetailsResponseGetDefaultVarientDetailsResult> GetDefaultVarientDetailsAsync(string ProductId, string companyname)
+        public ServiceReference1.GetDefaultVarientDetailsResponseGetDefaultVarientDetailsResult GetDefaultVarientDetails(string ProductId, string companyname)
+        {
+            return base.Channel.GetDefaultVarientDetails(ProductId, companyname);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetDefaultVarientDetailsResponseGetDefaultVarientDetailsResult> GetDefaultVarientDetailsAsync(string ProductId, string companyname)
         {
             return base.Channel.GetDefaultVarientDetailsAsync(ProductId, companyname);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetDefaultVarientDetailResponseGetDefaultVarientDetailResult> GetDefaultVarientDetailAsync(string ProductId)
+        public ServiceReference1.GetDefaultVarientDetailResponseGetDefaultVarientDetailResult GetDefaultVarientDetail(string ProductId)
+        {
+            return base.Channel.GetDefaultVarientDetail(ProductId);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetDefaultVarientDetailResponseGetDefaultVarientDetailResult> GetDefaultVarientDetailAsync(string ProductId)
         {
             return base.Channel.GetDefaultVarientDetailAsync(ProductId);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetDefaultVarientDetailsupdatedResponseGetDefaultVarientDetailsupdatedResult> GetDefaultVarientDetailsupdatedAsync(string ProductId)
+        public ServiceReference1.GetDefaultVarientDetailsupdatedResponseGetDefaultVarientDetailsupdatedResult GetDefaultVarientDetailsupdated(string ProductId)
+        {
+            return base.Channel.GetDefaultVarientDetailsupdated(ProductId);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetDefaultVarientDetailsupdatedResponseGetDefaultVarientDetailsupdatedResult> GetDefaultVarientDetailsupdatedAsync(string ProductId)
         {
             return base.Channel.GetDefaultVarientDetailsupdatedAsync(ProductId);
+        }
+        
+        public string TransferfromMaintoSFPInventory(string VarientId, string mquantity, string quantity, string isType)
+        {
+            return base.Channel.TransferfromMaintoSFPInventory(VarientId, mquantity, quantity, isType);
         }
         
         public System.Threading.Tasks.Task<string> TransferfromMaintoSFPInventoryAsync(string VarientId, string mquantity, string quantity, string isType)
@@ -11893,9 +18190,19 @@ namespace ServiceReference2
             return base.Channel.TransferfromMaintoSFPInventoryAsync(VarientId, mquantity, quantity, isType);
         }
         
+        public string TransferInventoryfromMaintoSFP(string VarientId, string mquantity, string quantity, string companyname)
+        {
+            return base.Channel.TransferInventoryfromMaintoSFP(VarientId, mquantity, quantity, companyname);
+        }
+        
         public System.Threading.Tasks.Task<string> TransferInventoryfromMaintoSFPAsync(string VarientId, string mquantity, string quantity, string companyname)
         {
             return base.Channel.TransferInventoryfromMaintoSFPAsync(VarientId, mquantity, quantity, companyname);
+        }
+        
+        public string TransferfromSFPtoMainInventory(string VarientId, string mquantity, string quantity, string isType)
+        {
+            return base.Channel.TransferfromSFPtoMainInventory(VarientId, mquantity, quantity, isType);
         }
         
         public System.Threading.Tasks.Task<string> TransferfromSFPtoMainInventoryAsync(string VarientId, string mquantity, string quantity, string isType)
@@ -11903,9 +18210,19 @@ namespace ServiceReference2
             return base.Channel.TransferfromSFPtoMainInventoryAsync(VarientId, mquantity, quantity, isType);
         }
         
+        public string TransferInventoryfromSFPtoMain(string VarientId, string mquantity, string quantity, string companyname)
+        {
+            return base.Channel.TransferInventoryfromSFPtoMain(VarientId, mquantity, quantity, companyname);
+        }
+        
         public System.Threading.Tasks.Task<string> TransferInventoryfromSFPtoMainAsync(string VarientId, string mquantity, string quantity, string companyname)
         {
             return base.Channel.TransferInventoryfromSFPtoMainAsync(VarientId, mquantity, quantity, companyname);
+        }
+        
+        public string TransferfrompromotiontoMainInventory(string VarientId, string mquantity, string quantity, string isType)
+        {
+            return base.Channel.TransferfrompromotiontoMainInventory(VarientId, mquantity, quantity, isType);
         }
         
         public System.Threading.Tasks.Task<string> TransferfrompromotiontoMainInventoryAsync(string VarientId, string mquantity, string quantity, string isType)
@@ -11913,9 +18230,19 @@ namespace ServiceReference2
             return base.Channel.TransferfrompromotiontoMainInventoryAsync(VarientId, mquantity, quantity, isType);
         }
         
+        public string TransferInventoryfrompromotiontoMain(string VarientId, string mquantity, string quantity, string companyname)
+        {
+            return base.Channel.TransferInventoryfrompromotiontoMain(VarientId, mquantity, quantity, companyname);
+        }
+        
         public System.Threading.Tasks.Task<string> TransferInventoryfrompromotiontoMainAsync(string VarientId, string mquantity, string quantity, string companyname)
         {
             return base.Channel.TransferInventoryfrompromotiontoMainAsync(VarientId, mquantity, quantity, companyname);
+        }
+        
+        public string TransferfrompromotiontoSFPInventory(string VarientId, string mquantity, string quantity, string isType)
+        {
+            return base.Channel.TransferfrompromotiontoSFPInventory(VarientId, mquantity, quantity, isType);
         }
         
         public System.Threading.Tasks.Task<string> TransferfrompromotiontoSFPInventoryAsync(string VarientId, string mquantity, string quantity, string isType)
@@ -11923,9 +18250,19 @@ namespace ServiceReference2
             return base.Channel.TransferfrompromotiontoSFPInventoryAsync(VarientId, mquantity, quantity, isType);
         }
         
+        public string TransferInventoryfrompromotiontoSFP(string VarientId, string mquantity, string quantity, string companyname)
+        {
+            return base.Channel.TransferInventoryfrompromotiontoSFP(VarientId, mquantity, quantity, companyname);
+        }
+        
         public System.Threading.Tasks.Task<string> TransferInventoryfrompromotiontoSFPAsync(string VarientId, string mquantity, string quantity, string companyname)
         {
             return base.Channel.TransferInventoryfrompromotiontoSFPAsync(VarientId, mquantity, quantity, companyname);
+        }
+        
+        public string TransferfromSFPtopromotionInventory(string VarientId, string mquantity, string quantity, string isType)
+        {
+            return base.Channel.TransferfromSFPtopromotionInventory(VarientId, mquantity, quantity, isType);
         }
         
         public System.Threading.Tasks.Task<string> TransferfromSFPtopromotionInventoryAsync(string VarientId, string mquantity, string quantity, string isType)
@@ -11933,9 +18270,19 @@ namespace ServiceReference2
             return base.Channel.TransferfromSFPtopromotionInventoryAsync(VarientId, mquantity, quantity, isType);
         }
         
+        public string TransferInventoryfromSFPtopromotion(string VarientId, string mquantity, string quantity, string companyname)
+        {
+            return base.Channel.TransferInventoryfromSFPtopromotion(VarientId, mquantity, quantity, companyname);
+        }
+        
         public System.Threading.Tasks.Task<string> TransferInventoryfromSFPtopromotionAsync(string VarientId, string mquantity, string quantity, string companyname)
         {
             return base.Channel.TransferInventoryfromSFPtopromotionAsync(VarientId, mquantity, quantity, companyname);
+        }
+        
+        public string TransferInventoryfromMainToExpiry(string VarientId, string mquantity, string quantity, System.DateTime expdate)
+        {
+            return base.Channel.TransferInventoryfromMainToExpiry(VarientId, mquantity, quantity, expdate);
         }
         
         public System.Threading.Tasks.Task<string> TransferInventoryfromMainToExpiryAsync(string VarientId, string mquantity, string quantity, System.DateTime expdate)
@@ -11943,9 +18290,19 @@ namespace ServiceReference2
             return base.Channel.TransferInventoryfromMainToExpiryAsync(VarientId, mquantity, quantity, expdate);
         }
         
+        public string UpdateExpiryInventory(string VarientId, string mquantity, string quantity, string expdate)
+        {
+            return base.Channel.UpdateExpiryInventory(VarientId, mquantity, quantity, expdate);
+        }
+        
         public System.Threading.Tasks.Task<string> UpdateExpiryInventoryAsync(string VarientId, string mquantity, string quantity, string expdate)
         {
             return base.Channel.UpdateExpiryInventoryAsync(VarientId, mquantity, quantity, expdate);
+        }
+        
+        public string TransferInventoryfromMainToFBA(string VarientId, string mquantity, string quantity, string companyname)
+        {
+            return base.Channel.TransferInventoryfromMainToFBA(VarientId, mquantity, quantity, companyname);
         }
         
         public System.Threading.Tasks.Task<string> TransferInventoryfromMainToFBAAsync(string VarientId, string mquantity, string quantity, string companyname)
@@ -11953,9 +18310,19 @@ namespace ServiceReference2
             return base.Channel.TransferInventoryfromMainToFBAAsync(VarientId, mquantity, quantity, companyname);
         }
         
+        public string TransferInventoryfromFBAToMain(string VarientId, string mquantity, string quantity, string companyname)
+        {
+            return base.Channel.TransferInventoryfromFBAToMain(VarientId, mquantity, quantity, companyname);
+        }
+        
         public System.Threading.Tasks.Task<string> TransferInventoryfromFBAToMainAsync(string VarientId, string mquantity, string quantity, string companyname)
         {
             return base.Channel.TransferInventoryfromFBAToMainAsync(VarientId, mquantity, quantity, companyname);
+        }
+        
+        public string TransferInventoryfromSFPToFBA(string VarientId, string mquantity, string quantity, string companyname)
+        {
+            return base.Channel.TransferInventoryfromSFPToFBA(VarientId, mquantity, quantity, companyname);
         }
         
         public System.Threading.Tasks.Task<string> TransferInventoryfromSFPToFBAAsync(string VarientId, string mquantity, string quantity, string companyname)
@@ -11963,9 +18330,19 @@ namespace ServiceReference2
             return base.Channel.TransferInventoryfromSFPToFBAAsync(VarientId, mquantity, quantity, companyname);
         }
         
+        public string TransferInventoryfromFBAToSFP(string VarientId, string mquantity, string quantity, string companyname)
+        {
+            return base.Channel.TransferInventoryfromFBAToSFP(VarientId, mquantity, quantity, companyname);
+        }
+        
         public System.Threading.Tasks.Task<string> TransferInventoryfromFBAToSFPAsync(string VarientId, string mquantity, string quantity, string companyname)
         {
             return base.Channel.TransferInventoryfromFBAToSFPAsync(VarientId, mquantity, quantity, companyname);
+        }
+        
+        public string TransferInventoryfromPromotionToFBA(string VarientId, string mquantity, string quantity, string companyname)
+        {
+            return base.Channel.TransferInventoryfromPromotionToFBA(VarientId, mquantity, quantity, companyname);
         }
         
         public System.Threading.Tasks.Task<string> TransferInventoryfromPromotionToFBAAsync(string VarientId, string mquantity, string quantity, string companyname)
@@ -11973,9 +18350,19 @@ namespace ServiceReference2
             return base.Channel.TransferInventoryfromPromotionToFBAAsync(VarientId, mquantity, quantity, companyname);
         }
         
+        public string UpdateProductmaininventorybycompany(int Inventory, int ProductID, int VariantID, string company)
+        {
+            return base.Channel.UpdateProductmaininventorybycompany(Inventory, ProductID, VariantID, company);
+        }
+        
         public System.Threading.Tasks.Task<string> UpdateProductmaininventorybycompanyAsync(int Inventory, int ProductID, int VariantID, string company)
         {
             return base.Channel.UpdateProductmaininventorybycompanyAsync(Inventory, ProductID, VariantID, company);
+        }
+        
+        public string Updatemaininventory(int Inventory, int ProductID, int VariantID, string company)
+        {
+            return base.Channel.Updatemaininventory(Inventory, ProductID, VariantID, company);
         }
         
         public System.Threading.Tasks.Task<string> UpdatemaininventoryAsync(int Inventory, int ProductID, int VariantID, string company)
@@ -11983,9 +18370,19 @@ namespace ServiceReference2
             return base.Channel.UpdatemaininventoryAsync(Inventory, ProductID, VariantID, company);
         }
         
+        public string Updatepromoinventory(int Inventory, int ProductID, int VariantID, string company)
+        {
+            return base.Channel.Updatepromoinventory(Inventory, ProductID, VariantID, company);
+        }
+        
         public System.Threading.Tasks.Task<string> UpdatepromoinventoryAsync(int Inventory, int ProductID, int VariantID, string company)
         {
             return base.Channel.UpdatepromoinventoryAsync(Inventory, ProductID, VariantID, company);
+        }
+        
+        public string UpdateSFPinventorybycompany(int Inventory, int ProductID, int VariantID, string company)
+        {
+            return base.Channel.UpdateSFPinventorybycompany(Inventory, ProductID, VariantID, company);
         }
         
         public System.Threading.Tasks.Task<string> UpdateSFPinventorybycompanyAsync(int Inventory, int ProductID, int VariantID, string company)
@@ -11993,9 +18390,19 @@ namespace ServiceReference2
             return base.Channel.UpdateSFPinventorybycompanyAsync(Inventory, ProductID, VariantID, company);
         }
         
+        public string UpdateSFPinventory(int Inventory, int ProductID, int VariantID, string company)
+        {
+            return base.Channel.UpdateSFPinventory(Inventory, ProductID, VariantID, company);
+        }
+        
         public System.Threading.Tasks.Task<string> UpdateSFPinventoryAsync(int Inventory, int ProductID, int VariantID, string company)
         {
             return base.Channel.UpdateSFPinventoryAsync(Inventory, ProductID, VariantID, company);
+        }
+        
+        public string UpdateFBAinventory(int Inventory, int ProductID, int VariantID, string company)
+        {
+            return base.Channel.UpdateFBAinventory(Inventory, ProductID, VariantID, company);
         }
         
         public System.Threading.Tasks.Task<string> UpdateFBAinventoryAsync(int Inventory, int ProductID, int VariantID, string company)
@@ -12003,24 +18410,49 @@ namespace ServiceReference2
             return base.Channel.UpdateFBAinventoryAsync(Inventory, ProductID, VariantID, company);
         }
         
+        public string UpdateProductQuantityforAST(int Inventory, int ProductID, int VariantID, string isType, long supplierid)
+        {
+            return base.Channel.UpdateProductQuantityforAST(Inventory, ProductID, VariantID, isType, supplierid);
+        }
+        
         public System.Threading.Tasks.Task<string> UpdateProductQuantityforASTAsync(int Inventory, int ProductID, int VariantID, string isType, long supplierid)
         {
             return base.Channel.UpdateProductQuantityforASTAsync(Inventory, ProductID, VariantID, isType, supplierid);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.getinventorybycompanyResponseGetinventorybycompanyResult> getinventorybycompanyAsync(string productid, string companyname)
+        public ServiceReference1.getinventorybycompanyResponseGetinventorybycompanyResult getinventorybycompany(string productid, string companyname)
+        {
+            return base.Channel.getinventorybycompany(productid, companyname);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.getinventorybycompanyResponseGetinventorybycompanyResult> getinventorybycompanyAsync(string productid, string companyname)
         {
             return base.Channel.getinventorybycompanyAsync(productid, companyname);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.getinventoryResponseGetinventoryResult> getinventoryAsync(string productid)
+        public ServiceReference1.getinventoryResponseGetinventoryResult getinventory(string productid)
+        {
+            return base.Channel.getinventory(productid);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.getinventoryResponseGetinventoryResult> getinventoryAsync(string productid)
         {
             return base.Channel.getinventoryAsync(productid);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetExpirydatewithskubarcodebycompanyResponseGetExpirydatewithskubarcodebycompanyResult> GetExpirydatewithskubarcodebycompanyAsync(string sku, string barcode, string companyname)
+        public ServiceReference1.GetExpirydatewithskubarcodebycompanyResponseGetExpirydatewithskubarcodebycompanyResult GetExpirydatewithskubarcodebycompany(string sku, string barcode, string companyname)
+        {
+            return base.Channel.GetExpirydatewithskubarcodebycompany(sku, barcode, companyname);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetExpirydatewithskubarcodebycompanyResponseGetExpirydatewithskubarcodebycompanyResult> GetExpirydatewithskubarcodebycompanyAsync(string sku, string barcode, string companyname)
         {
             return base.Channel.GetExpirydatewithskubarcodebycompanyAsync(sku, barcode, companyname);
+        }
+        
+        public bool Updateexpirybybarcode(string dateold, System.DateTime datenew, int qty, string sku, string companyname, string email)
+        {
+            return base.Channel.Updateexpirybybarcode(dateold, datenew, qty, sku, companyname, email);
         }
         
         public System.Threading.Tasks.Task<bool> UpdateexpirybybarcodeAsync(string dateold, System.DateTime datenew, int qty, string sku, string companyname, string email)
@@ -12028,14 +18460,29 @@ namespace ServiceReference2
             return base.Channel.UpdateexpirybybarcodeAsync(dateold, datenew, qty, sku, companyname, email);
         }
         
+        public bool saveproductdeliverywithexpiryout(System.DateTime dttime, int qty, int deliveryid, string companyname, string barcode, string sku, string type)
+        {
+            return base.Channel.saveproductdeliverywithexpiryout(dttime, qty, deliveryid, companyname, barcode, sku, type);
+        }
+        
         public System.Threading.Tasks.Task<bool> saveproductdeliverywithexpiryoutAsync(System.DateTime dttime, int qty, int deliveryid, string companyname, string barcode, string sku, string type)
         {
             return base.Channel.saveproductdeliverywithexpiryoutAsync(dttime, qty, deliveryid, companyname, barcode, sku, type);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetExpirydatewithskubarcodeWithoutexpiryroomdateResponseGetExpirydatewithskubarcodeWithoutexpiryroomdateResult> GetExpirydatewithskubarcodeWithoutexpiryroomdateAsync(string sku, string barcode, string companyname)
+        public ServiceReference1.GetExpirydatewithskubarcodeWithoutexpiryroomdateResponseGetExpirydatewithskubarcodeWithoutexpiryroomdateResult GetExpirydatewithskubarcodeWithoutexpiryroomdate(string sku, string barcode, string companyname)
+        {
+            return base.Channel.GetExpirydatewithskubarcodeWithoutexpiryroomdate(sku, barcode, companyname);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetExpirydatewithskubarcodeWithoutexpiryroomdateResponseGetExpirydatewithskubarcodeWithoutexpiryroomdateResult> GetExpirydatewithskubarcodeWithoutexpiryroomdateAsync(string sku, string barcode, string companyname)
         {
             return base.Channel.GetExpirydatewithskubarcodeWithoutexpiryroomdateAsync(sku, barcode, companyname);
+        }
+        
+        public int checkexpiryqtybycompany(System.DateTime expiry, string barcode, string companyname, string sku)
+        {
+            return base.Channel.checkexpiryqtybycompany(expiry, barcode, companyname, sku);
         }
         
         public System.Threading.Tasks.Task<int> checkexpiryqtybycompanyAsync(System.DateTime expiry, string barcode, string companyname, string sku)
@@ -12043,9 +18490,19 @@ namespace ServiceReference2
             return base.Channel.checkexpiryqtybycompanyAsync(expiry, barcode, companyname, sku);
         }
         
+        public int checkexpiryqty(System.DateTime expiry, string barcode, string companyname, string sku)
+        {
+            return base.Channel.checkexpiryqty(expiry, barcode, companyname, sku);
+        }
+        
         public System.Threading.Tasks.Task<int> checkexpiryqtyAsync(System.DateTime expiry, string barcode, string companyname, string sku)
         {
             return base.Channel.checkexpiryqtyAsync(expiry, barcode, companyname, sku);
+        }
+        
+        public int checkexpiryqtyExactbydate(System.DateTime expiry, string companyname, string Barcode)
+        {
+            return base.Channel.checkexpiryqtyExactbydate(expiry, companyname, Barcode);
         }
         
         public System.Threading.Tasks.Task<int> checkexpiryqtyExactbydateAsync(System.DateTime expiry, string companyname, string Barcode)
@@ -12053,9 +18510,19 @@ namespace ServiceReference2
             return base.Channel.checkexpiryqtyExactbydateAsync(expiry, companyname, Barcode);
         }
         
+        public bool transferinventorywithscanoutothercompany(string Barcode, string CompanyFrom, string CompanyTo, int qty, string byemail, string scanType)
+        {
+            return base.Channel.transferinventorywithscanoutothercompany(Barcode, CompanyFrom, CompanyTo, qty, byemail, scanType);
+        }
+        
         public System.Threading.Tasks.Task<bool> transferinventorywithscanoutothercompanyAsync(string Barcode, string CompanyFrom, string CompanyTo, int qty, string byemail, string scanType)
         {
             return base.Channel.transferinventorywithscanoutothercompanyAsync(Barcode, CompanyFrom, CompanyTo, qty, byemail, scanType);
+        }
+        
+        public int checkexpirymessagebycompany(string expiry, string barcode, string companyname, string sku)
+        {
+            return base.Channel.checkexpirymessagebycompany(expiry, barcode, companyname, sku);
         }
         
         public System.Threading.Tasks.Task<int> checkexpirymessagebycompanyAsync(string expiry, string barcode, string companyname, string sku)
@@ -12063,9 +18530,19 @@ namespace ServiceReference2
             return base.Channel.checkexpirymessagebycompanyAsync(expiry, barcode, companyname, sku);
         }
         
+        public int checkexpirymessage(string expiry, string barcode, string companyname, string sku)
+        {
+            return base.Channel.checkexpirymessage(expiry, barcode, companyname, sku);
+        }
+        
         public System.Threading.Tasks.Task<int> checkexpirymessageAsync(string expiry, string barcode, string companyname, string sku)
         {
             return base.Channel.checkexpirymessageAsync(expiry, barcode, companyname, sku);
+        }
+        
+        public bool transferinventorywithafterscanout(string Barcode, string CompanyFrom, string CompanyTo, int qty, string byemail, string scanType, System.DateTime exp1, int qty1, System.DateTime exp2, int qty2, System.DateTime exp3, int qty3, string expmsg, int qtymsg)
+        {
+            return base.Channel.transferinventorywithafterscanout(Barcode, CompanyFrom, CompanyTo, qty, byemail, scanType, exp1, qty1, exp2, qty2, exp3, qty3, expmsg, qtymsg);
         }
         
         public System.Threading.Tasks.Task<bool> transferinventorywithafterscanoutAsync(string Barcode, string CompanyFrom, string CompanyTo, int qty, string byemail, string scanType, System.DateTime exp1, int qty1, System.DateTime exp2, int qty2, System.DateTime exp3, int qty3, string expmsg, int qtymsg)
@@ -12073,9 +18550,19 @@ namespace ServiceReference2
             return base.Channel.transferinventorywithafterscanoutAsync(Barcode, CompanyFrom, CompanyTo, qty, byemail, scanType, exp1, qty1, exp2, qty2, exp3, qty3, expmsg, qtymsg);
         }
         
+        public string UpdateInventoryQuantityByVarientexpirybycompany(string VarientId, string mquantity, string quantity, string companyname)
+        {
+            return base.Channel.UpdateInventoryQuantityByVarientexpirybycompany(VarientId, mquantity, quantity, companyname);
+        }
+        
         public System.Threading.Tasks.Task<string> UpdateInventoryQuantityByVarientexpirybycompanyAsync(string VarientId, string mquantity, string quantity, string companyname)
         {
             return base.Channel.UpdateInventoryQuantityByVarientexpirybycompanyAsync(VarientId, mquantity, quantity, companyname);
+        }
+        
+        public string UpdateexpiryInventoryByVarient(string VarientId, string mquantity, string quantity, string companyname)
+        {
+            return base.Channel.UpdateexpiryInventoryByVarient(VarientId, mquantity, quantity, companyname);
         }
         
         public System.Threading.Tasks.Task<string> UpdateexpiryInventoryByVarientAsync(string VarientId, string mquantity, string quantity, string companyname)
@@ -12083,9 +18570,19 @@ namespace ServiceReference2
             return base.Channel.UpdateexpiryInventoryByVarientAsync(VarientId, mquantity, quantity, companyname);
         }
         
+        public string UpdateInventoryQuantityByVarientpromotioncompany(string VarientId, string mquantity, string quantity, string company)
+        {
+            return base.Channel.UpdateInventoryQuantityByVarientpromotioncompany(VarientId, mquantity, quantity, company);
+        }
+        
         public System.Threading.Tasks.Task<string> UpdateInventoryQuantityByVarientpromotioncompanyAsync(string VarientId, string mquantity, string quantity, string company)
         {
             return base.Channel.UpdateInventoryQuantityByVarientpromotioncompanyAsync(VarientId, mquantity, quantity, company);
+        }
+        
+        public string UpdatepromotionInventoryByVarient(string VarientId, string mquantity, string quantity, string company)
+        {
+            return base.Channel.UpdatepromotionInventoryByVarient(VarientId, mquantity, quantity, company);
         }
         
         public System.Threading.Tasks.Task<string> UpdatepromotionInventoryByVarientAsync(string VarientId, string mquantity, string quantity, string company)
@@ -12093,9 +18590,19 @@ namespace ServiceReference2
             return base.Channel.UpdatepromotionInventoryByVarientAsync(VarientId, mquantity, quantity, company);
         }
         
+        public string UpdateFBAInventoryByVarient(string VarientId, string mquantity, string quantity, string company)
+        {
+            return base.Channel.UpdateFBAInventoryByVarient(VarientId, mquantity, quantity, company);
+        }
+        
         public System.Threading.Tasks.Task<string> UpdateFBAInventoryByVarientAsync(string VarientId, string mquantity, string quantity, string company)
         {
             return base.Channel.UpdateFBAInventoryByVarientAsync(VarientId, mquantity, quantity, company);
+        }
+        
+        public string HelloWorld()
+        {
+            return base.Channel.HelloWorld();
         }
         
         public System.Threading.Tasks.Task<string> HelloWorldAsync()
@@ -12103,9 +18610,19 @@ namespace ServiceReference2
             return base.Channel.HelloWorldAsync();
         }
         
+        public int Getoldproductid(int pid)
+        {
+            return base.Channel.Getoldproductid(pid);
+        }
+        
         public System.Threading.Tasks.Task<int> GetoldproductidAsync(int pid)
         {
             return base.Channel.GetoldproductidAsync(pid);
+        }
+        
+        public int Getoldvariantid(int vid)
+        {
+            return base.Channel.Getoldvariantid(vid);
         }
         
         public System.Threading.Tasks.Task<int> GetoldvariantidAsync(int vid)
@@ -12113,9 +18630,19 @@ namespace ServiceReference2
             return base.Channel.GetoldvariantidAsync(vid);
         }
         
+        public int GetIssueIdByorderNumber(int OrderNumber)
+        {
+            return base.Channel.GetIssueIdByorderNumber(OrderNumber);
+        }
+        
         public System.Threading.Tasks.Task<int> GetIssueIdByorderNumberAsync(int OrderNumber)
         {
             return base.Channel.GetIssueIdByorderNumberAsync(OrderNumber);
+        }
+        
+        public string UpdateProductQuantity(string barcode, string quantity, string isType)
+        {
+            return base.Channel.UpdateProductQuantity(barcode, quantity, isType);
         }
         
         public System.Threading.Tasks.Task<string> UpdateProductQuantityAsync(string barcode, string quantity, string isType)
@@ -12123,9 +18650,19 @@ namespace ServiceReference2
             return base.Channel.UpdateProductQuantityAsync(barcode, quantity, isType);
         }
         
+        public string UpdateProductQuantityupdate(int Inventory, int ProductID, int VariantID, string isType, long supplierid)
+        {
+            return base.Channel.UpdateProductQuantityupdate(Inventory, ProductID, VariantID, isType, supplierid);
+        }
+        
         public System.Threading.Tasks.Task<string> UpdateProductQuantityupdateAsync(int Inventory, int ProductID, int VariantID, string isType, long supplierid)
         {
             return base.Channel.UpdateProductQuantityupdateAsync(Inventory, ProductID, VariantID, isType, supplierid);
+        }
+        
+        public string UpdateProductQuantityforindia(int Inventory, int ProductID, int VariantID, string isType, long supplierid)
+        {
+            return base.Channel.UpdateProductQuantityforindia(Inventory, ProductID, VariantID, isType, supplierid);
         }
         
         public System.Threading.Tasks.Task<string> UpdateProductQuantityforindiaAsync(int Inventory, int ProductID, int VariantID, string isType, long supplierid)
@@ -12133,9 +18670,19 @@ namespace ServiceReference2
             return base.Channel.UpdateProductQuantityforindiaAsync(Inventory, ProductID, VariantID, isType, supplierid);
         }
         
+        public string UpdateProductQuantity1(int Inventory, int ProductID, int VariantID, string isType)
+        {
+            return base.Channel.UpdateProductQuantity1(Inventory, ProductID, VariantID, isType);
+        }
+        
         public System.Threading.Tasks.Task<string> UpdateProductQuantity1Async(int Inventory, int ProductID, int VariantID, string isType)
         {
             return base.Channel.UpdateProductQuantity1Async(Inventory, ProductID, VariantID, isType);
+        }
+        
+        public string UpdateInventoryQuantity(string barcode, string mquantity, string quantity, string isType)
+        {
+            return base.Channel.UpdateInventoryQuantity(barcode, mquantity, quantity, isType);
         }
         
         public System.Threading.Tasks.Task<string> UpdateInventoryQuantityAsync(string barcode, string mquantity, string quantity, string isType)
@@ -12143,9 +18690,19 @@ namespace ServiceReference2
             return base.Channel.UpdateInventoryQuantityAsync(barcode, mquantity, quantity, isType);
         }
         
+        public string UpdateInventoryQuantityByVarient(string VarientId, string mquantity, string quantity, string isType)
+        {
+            return base.Channel.UpdateInventoryQuantityByVarient(VarientId, mquantity, quantity, isType);
+        }
+        
         public System.Threading.Tasks.Task<string> UpdateInventoryQuantityByVarientAsync(string VarientId, string mquantity, string quantity, string isType)
         {
             return base.Channel.UpdateInventoryQuantityByVarientAsync(VarientId, mquantity, quantity, isType);
+        }
+        
+        public string UpdateInventoryQuantityByVarientexpiry(string VarientId, string mquantity, string quantity, string isType)
+        {
+            return base.Channel.UpdateInventoryQuantityByVarientexpiry(VarientId, mquantity, quantity, isType);
         }
         
         public System.Threading.Tasks.Task<string> UpdateInventoryQuantityByVarientexpiryAsync(string VarientId, string mquantity, string quantity, string isType)
@@ -12153,9 +18710,19 @@ namespace ServiceReference2
             return base.Channel.UpdateInventoryQuantityByVarientexpiryAsync(VarientId, mquantity, quantity, isType);
         }
         
+        public string UpdateInventoryByVarientexpiry(string VarientId, string mquantity, string quantity, string companyname)
+        {
+            return base.Channel.UpdateInventoryByVarientexpiry(VarientId, mquantity, quantity, companyname);
+        }
+        
         public System.Threading.Tasks.Task<string> UpdateInventoryByVarientexpiryAsync(string VarientId, string mquantity, string quantity, string companyname)
         {
             return base.Channel.UpdateInventoryByVarientexpiryAsync(VarientId, mquantity, quantity, companyname);
+        }
+        
+        public int checkexpiryforscanoutwithsku(System.DateTime expiry, string barcode, string inventorytype, string sku)
+        {
+            return base.Channel.checkexpiryforscanoutwithsku(expiry, barcode, inventorytype, sku);
         }
         
         public System.Threading.Tasks.Task<int> checkexpiryforscanoutwithskuAsync(System.DateTime expiry, string barcode, string inventorytype, string sku)
@@ -12163,9 +18730,19 @@ namespace ServiceReference2
             return base.Channel.checkexpiryforscanoutwithskuAsync(expiry, barcode, inventorytype, sku);
         }
         
+        public int checkexpirymessageforscanoutwithsku(string expiry, string barcode, string inventorytype, string sku)
+        {
+            return base.Channel.checkexpirymessageforscanoutwithsku(expiry, barcode, inventorytype, sku);
+        }
+        
         public System.Threading.Tasks.Task<int> checkexpirymessageforscanoutwithskuAsync(string expiry, string barcode, string inventorytype, string sku)
         {
             return base.Channel.checkexpirymessageforscanoutwithskuAsync(expiry, barcode, inventorytype, sku);
+        }
+        
+        public string UpdateInventoryQuantityByVarientforindia(string VarientId, string mquantity, string quantity, string isType)
+        {
+            return base.Channel.UpdateInventoryQuantityByVarientforindia(VarientId, mquantity, quantity, isType);
         }
         
         public System.Threading.Tasks.Task<string> UpdateInventoryQuantityByVarientforindiaAsync(string VarientId, string mquantity, string quantity, string isType)
@@ -12173,19 +18750,39 @@ namespace ServiceReference2
             return base.Channel.UpdateInventoryQuantityByVarientforindiaAsync(VarientId, mquantity, quantity, isType);
         }
         
+        public string UpdateDeliveredQuantity(int DeliveredQuantity, int OrderNumber, int ShoppingCartRecID, int CustomerID, int ProductID, int VariantID)
+        {
+            return base.Channel.UpdateDeliveredQuantity(DeliveredQuantity, OrderNumber, ShoppingCartRecID, CustomerID, ProductID, VariantID);
+        }
+        
         public System.Threading.Tasks.Task<string> UpdateDeliveredQuantityAsync(int DeliveredQuantity, int OrderNumber, int ShoppingCartRecID, int CustomerID, int ProductID, int VariantID)
         {
             return base.Channel.UpdateDeliveredQuantityAsync(DeliveredQuantity, OrderNumber, ShoppingCartRecID, CustomerID, ProductID, VariantID);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetProductDetailResponseGetProductDetailResult> GetProductDetailAsync(string barcode)
+        public ServiceReference1.GetProductDetailResponseGetProductDetailResult GetProductDetail(string barcode)
+        {
+            return base.Channel.GetProductDetail(barcode);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetProductDetailResponseGetProductDetailResult> GetProductDetailAsync(string barcode)
         {
             return base.Channel.GetProductDetailAsync(barcode);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetOrderResponseGetOrderResult> GetOrderAsync(int orderId)
+        public ServiceReference1.GetOrderResponseGetOrderResult GetOrder(int orderId)
+        {
+            return base.Channel.GetOrder(orderId);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetOrderResponseGetOrderResult> GetOrderAsync(int orderId)
         {
             return base.Channel.GetOrderAsync(orderId);
+        }
+        
+        public int IsPausedOrder(int orderId)
+        {
+            return base.Channel.IsPausedOrder(orderId);
         }
         
         public System.Threading.Tasks.Task<int> IsPausedOrderAsync(int orderId)
@@ -12193,19 +18790,39 @@ namespace ServiceReference2
             return base.Channel.IsPausedOrderAsync(orderId);
         }
         
+        public int IsFORCE_VOIDED(int orderId)
+        {
+            return base.Channel.IsFORCE_VOIDED(orderId);
+        }
+        
         public System.Threading.Tasks.Task<int> IsFORCE_VOIDEDAsync(int orderId)
         {
             return base.Channel.IsFORCE_VOIDEDAsync(orderId);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetCustomerResponseGetCustomerResult> GetCustomerAsync(int CustomerId)
+        public ServiceReference1.GetCustomerResponseGetCustomerResult GetCustomer(int CustomerId)
+        {
+            return base.Channel.GetCustomer(CustomerId);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetCustomerResponseGetCustomerResult> GetCustomerAsync(int CustomerId)
         {
             return base.Channel.GetCustomerAsync(CustomerId);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetBarCodeByVIdResponseGetBarCodeByVIdResult> GetBarCodeByVIdAsync(string SKUSuffix, int VariantId)
+        public ServiceReference1.GetBarCodeByVIdResponseGetBarCodeByVIdResult GetBarCodeByVId(string SKUSuffix, int VariantId)
+        {
+            return base.Channel.GetBarCodeByVId(SKUSuffix, VariantId);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetBarCodeByVIdResponseGetBarCodeByVIdResult> GetBarCodeByVIdAsync(string SKUSuffix, int VariantId)
         {
             return base.Channel.GetBarCodeByVIdAsync(SKUSuffix, VariantId);
+        }
+        
+        public string Getcompanyorder(string OrderId)
+        {
+            return base.Channel.Getcompanyorder(OrderId);
         }
         
         public System.Threading.Tasks.Task<string> GetcompanyorderAsync(string OrderId)
@@ -12213,29 +18830,81 @@ namespace ServiceReference2
             return base.Channel.GetcompanyorderAsync(OrderId);
         }
         
+        public string Getcompanyname(int OrderId)
+        {
+            return base.Channel.Getcompanyname(OrderId);
+        }
+        
         public System.Threading.Tasks.Task<string> GetcompanynameAsync(int OrderId)
         {
             return base.Channel.GetcompanynameAsync(OrderId);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetVariantByPIdnSKuResponseGetVariantByPIdnSKuResult> GetVariantByPIdnSKuAsync(string SKUSuffix, int ProductId)
+        public ServiceReference1.GetVariantByPIdnSKuResponseGetVariantByPIdnSKuResult GetVariantByPIdnSKu(string SKUSuffix, int ProductId)
+        {
+            return base.Channel.GetVariantByPIdnSKu(SKUSuffix, ProductId);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetVariantByPIdnSKuResponseGetVariantByPIdnSKuResult> GetVariantByPIdnSKuAsync(string SKUSuffix, int ProductId)
         {
             return base.Channel.GetVariantByPIdnSKuAsync(SKUSuffix, ProductId);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetBarCodeByPIdwithcompanyResponseGetBarCodeByPIdwithcompanyResult> GetBarCodeByPIdwithcompanyAsync(string SKU, int ProductId, string companyname)
+        public ServiceReference1.GetBarCodeByPIdwithcompanyResponseGetBarCodeByPIdwithcompanyResult GetBarCodeByPIdwithcompany(string SKU, int ProductId, string companyname)
+        {
+            return base.Channel.GetBarCodeByPIdwithcompany(SKU, ProductId, companyname);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetBarCodeByPIdwithcompanyResponseGetBarCodeByPIdwithcompanyResult> GetBarCodeByPIdwithcompanyAsync(string SKU, int ProductId, string companyname)
         {
             return base.Channel.GetBarCodeByPIdwithcompanyAsync(SKU, ProductId, companyname);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.ArrayOfXElement> getwarehouseanouncementAsync(string email)
+        public ServiceReference1.ArrayOfXElement getwarehouseanouncement(string email)
+        {
+            return base.Channel.getwarehouseanouncement(email);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.ArrayOfXElement> getwarehouseanouncementAsync(string email)
         {
             return base.Channel.getwarehouseanouncementAsync(email);
+        }
+        
+        public bool Updateexpirybybarcodemsg(string dateold, string datenew, int qty, string sku, string companyname, string email)
+        {
+            return base.Channel.Updateexpirybybarcodemsg(dateold, datenew, qty, sku, companyname, email);
         }
         
         public System.Threading.Tasks.Task<bool> UpdateexpirybybarcodemsgAsync(string dateold, string datenew, int qty, string sku, string companyname, string email)
         {
             return base.Channel.UpdateexpirybybarcodemsgAsync(dateold, datenew, qty, sku, companyname, email);
+        }
+        
+        public int SaveProductDelivery(
+                    long OrderNumber, 
+                    long ProductId, 
+                    long VariantId, 
+                    int DeliveredQuantity, 
+                    string DeliveredSKU, 
+                    string DeliveredBarcode, 
+                    string Email, 
+                    string InvoiceNo, 
+                    System.DateTime InvoiceDate, 
+                    long SupplierId, 
+                    string reson, 
+                    long dockedno, 
+                    string val, 
+                    string qty, 
+                    decimal creditStock, 
+                    string ValueExcVat, 
+                    string ValueIncVat, 
+                    long ManualOrderNo, 
+                    long CreditNoteNo, 
+                    string Inventoryfor, 
+                    string CompanyName, 
+                    string comment)
+        {
+            return base.Channel.SaveProductDelivery(OrderNumber, ProductId, VariantId, DeliveredQuantity, DeliveredSKU, DeliveredBarcode, Email, InvoiceNo, InvoiceDate, SupplierId, reson, dockedno, val, qty, creditStock, ValueExcVat, ValueIncVat, ManualOrderNo, CreditNoteNo, Inventoryfor, CompanyName, comment);
         }
         
         public System.Threading.Tasks.Task<int> SaveProductDeliveryAsync(
@@ -12265,19 +18934,39 @@ namespace ServiceReference2
             return base.Channel.SaveProductDeliveryAsync(OrderNumber, ProductId, VariantId, DeliveredQuantity, DeliveredSKU, DeliveredBarcode, Email, InvoiceNo, InvoiceDate, SupplierId, reson, dockedno, val, qty, creditStock, ValueExcVat, ValueIncVat, ManualOrderNo, CreditNoteNo, Inventoryfor, CompanyName, comment);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetBarCodeByPIdskuResponseGetBarCodeByPIdskuResult> GetBarCodeByPIdskuAsync(string SKU, int ProductId, string companyname)
+        public ServiceReference1.GetBarCodeByPIdskuResponseGetBarCodeByPIdskuResult GetBarCodeByPIdsku(string SKU, int ProductId, string companyname)
+        {
+            return base.Channel.GetBarCodeByPIdsku(SKU, ProductId, companyname);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetBarCodeByPIdskuResponseGetBarCodeByPIdskuResult> GetBarCodeByPIdskuAsync(string SKU, int ProductId, string companyname)
         {
             return base.Channel.GetBarCodeByPIdskuAsync(SKU, ProductId, companyname);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetSKUByOrderResponseGetSKUByOrderResult> GetSKUByOrderAsync(int OrderNumber, int VariantId)
+        public ServiceReference1.GetSKUByOrderResponseGetSKUByOrderResult GetSKUByOrder(int OrderNumber, int VariantId)
+        {
+            return base.Channel.GetSKUByOrder(OrderNumber, VariantId);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetSKUByOrderResponseGetSKUByOrderResult> GetSKUByOrderAsync(int OrderNumber, int VariantId)
         {
             return base.Channel.GetSKUByOrderAsync(OrderNumber, VariantId);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetProductResponseGetProductResult> GetProductAsync(int ProductId)
+        public ServiceReference1.GetProductResponseGetProductResult GetProduct(int ProductId)
+        {
+            return base.Channel.GetProduct(ProductId);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetProductResponseGetProductResult> GetProductAsync(int ProductId)
         {
             return base.Channel.GetProductAsync(ProductId);
+        }
+        
+        public string GetPopup(string email)
+        {
+            return base.Channel.GetPopup(email);
         }
         
         public System.Threading.Tasks.Task<string> GetPopupAsync(string email)
@@ -12285,9 +18974,19 @@ namespace ServiceReference2
             return base.Channel.GetPopupAsync(email);
         }
         
+        public int UpdateDamageqtyupdated(int productid, int variantid, int qty, string companyname, string expdate, string email)
+        {
+            return base.Channel.UpdateDamageqtyupdated(productid, variantid, qty, companyname, expdate, email);
+        }
+        
         public System.Threading.Tasks.Task<int> UpdateDamageqtyupdatedAsync(int productid, int variantid, int qty, string companyname, string expdate, string email)
         {
             return base.Channel.UpdateDamageqtyupdatedAsync(productid, variantid, qty, companyname, expdate, email);
+        }
+        
+        public int SaveProductINdamageroom(long ProductId, long VariantId, int damageqty, string SKU, string Barcode, string Email, string InvoiceNo, System.DateTime InvoiceDate, long SupplierId, string reson, decimal val, string Expmsg, string expdate, string Inventoryfor, string CompanyName)
+        {
+            return base.Channel.SaveProductINdamageroom(ProductId, VariantId, damageqty, SKU, Barcode, Email, InvoiceNo, InvoiceDate, SupplierId, reson, val, Expmsg, expdate, Inventoryfor, CompanyName);
         }
         
         public System.Threading.Tasks.Task<int> SaveProductINdamageroomAsync(long ProductId, long VariantId, int damageqty, string SKU, string Barcode, string Email, string InvoiceNo, System.DateTime InvoiceDate, long SupplierId, string reson, decimal val, string Expmsg, string expdate, string Inventoryfor, string CompanyName)
@@ -12295,34 +18994,69 @@ namespace ServiceReference2
             return base.Channel.SaveProductINdamageroomAsync(ProductId, VariantId, damageqty, SKU, Barcode, Email, InvoiceNo, InvoiceDate, SupplierId, reson, val, Expmsg, expdate, Inventoryfor, CompanyName);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetDamageExpirydateResponseGetDamageExpirydateResult> GetDamageExpirydateAsync(string sku, string barcode, string inventoryfor)
+        public ServiceReference1.GetDamageExpirydateResponseGetDamageExpirydateResult GetDamageExpirydate(string sku, string barcode, string inventoryfor)
+        {
+            return base.Channel.GetDamageExpirydate(sku, barcode, inventoryfor);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetDamageExpirydateResponseGetDamageExpirydateResult> GetDamageExpirydateAsync(string sku, string barcode, string inventoryfor)
         {
             return base.Channel.GetDamageExpirydateAsync(sku, barcode, inventoryfor);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetDamageExpirydtResponseGetDamageExpirydtResult> GetDamageExpirydtAsync(string sku, string barcode, string companyname)
+        public ServiceReference1.GetDamageExpirydtResponseGetDamageExpirydtResult GetDamageExpirydt(string sku, string barcode, string companyname)
+        {
+            return base.Channel.GetDamageExpirydt(sku, barcode, companyname);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetDamageExpirydtResponseGetDamageExpirydtResult> GetDamageExpirydtAsync(string sku, string barcode, string companyname)
         {
             return base.Channel.GetDamageExpirydtAsync(sku, barcode, companyname);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetDamageExpiryResponseGetDamageExpiryResult> GetDamageExpiryAsync(string sku, string inventoryfor)
+        public ServiceReference1.GetDamageExpiryResponseGetDamageExpiryResult GetDamageExpiry(string sku, string inventoryfor)
+        {
+            return base.Channel.GetDamageExpiry(sku, inventoryfor);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetDamageExpiryResponseGetDamageExpiryResult> GetDamageExpiryAsync(string sku, string inventoryfor)
         {
             return base.Channel.GetDamageExpiryAsync(sku, inventoryfor);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetDamageExpirymsgResponseGetDamageExpirymsgResult> GetDamageExpirymsgAsync(string sku, string Companyname)
+        public ServiceReference1.GetDamageExpirymsgResponseGetDamageExpirymsgResult GetDamageExpirymsg(string sku, string Companyname)
+        {
+            return base.Channel.GetDamageExpirymsg(sku, Companyname);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetDamageExpirymsgResponseGetDamageExpirymsgResult> GetDamageExpirymsgAsync(string sku, string Companyname)
         {
             return base.Channel.GetDamageExpirymsgAsync(sku, Companyname);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetShoppingCartResponseGetShoppingCartResult> GetShoppingCartAsync(int OrderId)
+        public ServiceReference1.GetShoppingCartResponseGetShoppingCartResult GetShoppingCart(int OrderId)
+        {
+            return base.Channel.GetShoppingCart(OrderId);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetShoppingCartResponseGetShoppingCartResult> GetShoppingCartAsync(int OrderId)
         {
             return base.Channel.GetShoppingCartAsync(OrderId);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetShoppingCartMultipleResponseGetShoppingCartMultipleResult> GetShoppingCartMultipleAsync(int OrderId)
+        public ServiceReference1.GetShoppingCartMultipleResponseGetShoppingCartMultipleResult GetShoppingCartMultiple(int OrderId)
+        {
+            return base.Channel.GetShoppingCartMultiple(OrderId);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetShoppingCartMultipleResponseGetShoppingCartMultipleResult> GetShoppingCartMultipleAsync(int OrderId)
         {
             return base.Channel.GetShoppingCartMultipleAsync(OrderId);
+        }
+        
+        public string UpdateMultipleShopingCart(int Ordernumber, int productid, int variantid, int qty, string deliverby, string companyname)
+        {
+            return base.Channel.UpdateMultipleShopingCart(Ordernumber, productid, variantid, qty, deliverby, companyname);
         }
         
         public System.Threading.Tasks.Task<string> UpdateMultipleShopingCartAsync(int Ordernumber, int productid, int variantid, int qty, string deliverby, string companyname)
@@ -12330,9 +19064,36 @@ namespace ServiceReference2
             return base.Channel.UpdateMultipleShopingCartAsync(Ordernumber, productid, variantid, qty, deliverby, companyname);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetShoppingCartupdateResponseGetShoppingCartupdateResult> GetShoppingCartupdateAsync(int OrderId)
+        public ServiceReference1.GetShoppingCartupdateResponseGetShoppingCartupdateResult GetShoppingCartupdate(int OrderId)
+        {
+            return base.Channel.GetShoppingCartupdate(OrderId);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetShoppingCartupdateResponseGetShoppingCartupdateResult> GetShoppingCartupdateAsync(int OrderId)
         {
             return base.Channel.GetShoppingCartupdateAsync(OrderId);
+        }
+        
+        public int UpdateProductScanIn(
+                    long ScanInId, 
+                    System.DateTime InvoiceDate, 
+                    long SupplierId, 
+                    long ScanInQty, 
+                    string InvoiceNo, 
+                    string Reason, 
+                    long DockedNo, 
+                    string Value, 
+                    string Quantity, 
+                    decimal CreditStockPayment, 
+                    long CreditNoteNo, 
+                    string Email, 
+                    decimal OrderRecievePrice, 
+                    long OrderSystemId, 
+                    string msg, 
+                    string dtime, 
+                    string CompanyName)
+        {
+            return base.Channel.UpdateProductScanIn(ScanInId, InvoiceDate, SupplierId, ScanInQty, InvoiceNo, Reason, DockedNo, Value, Quantity, CreditStockPayment, CreditNoteNo, Email, OrderRecievePrice, OrderSystemId, msg, dtime, CompanyName);
         }
         
         public System.Threading.Tasks.Task<int> UpdateProductScanInAsync(
@@ -12357,9 +19118,19 @@ namespace ServiceReference2
             return base.Channel.UpdateProductScanInAsync(ScanInId, InvoiceDate, SupplierId, ScanInQty, InvoiceNo, Reason, DockedNo, Value, Quantity, CreditStockPayment, CreditNoteNo, Email, OrderRecievePrice, OrderSystemId, msg, dtime, CompanyName);
         }
         
+        public int Update_OrderSystem(long OrderSystemId, long Release_OrderSystemId)
+        {
+            return base.Channel.Update_OrderSystem(OrderSystemId, Release_OrderSystemId);
+        }
+        
         public System.Threading.Tasks.Task<int> Update_OrderSystemAsync(long OrderSystemId, long Release_OrderSystemId)
         {
             return base.Channel.Update_OrderSystemAsync(OrderSystemId, Release_OrderSystemId);
+        }
+        
+        public int UpdateProductDelivery(long DeliveryId, System.DateTime InvoiceDate, long SupplierId, long DeliveredQty, string InvoiceNo, string Reason, long DockedNo, string Value, string Quantity, decimal CreditStockPayment, long CreditNoteNo, string valueexcvat, string valueincvat, long manualordno, string Email)
+        {
+            return base.Channel.UpdateProductDelivery(DeliveryId, InvoiceDate, SupplierId, DeliveredQty, InvoiceNo, Reason, DockedNo, Value, Quantity, CreditStockPayment, CreditNoteNo, valueexcvat, valueincvat, manualordno, Email);
         }
         
         public System.Threading.Tasks.Task<int> UpdateProductDeliveryAsync(long DeliveryId, System.DateTime InvoiceDate, long SupplierId, long DeliveredQty, string InvoiceNo, string Reason, long DockedNo, string Value, string Quantity, decimal CreditStockPayment, long CreditNoteNo, string valueexcvat, string valueincvat, long manualordno, string Email)
@@ -12367,9 +19138,19 @@ namespace ServiceReference2
             return base.Channel.UpdateProductDeliveryAsync(DeliveryId, InvoiceDate, SupplierId, DeliveredQty, InvoiceNo, Reason, DockedNo, Value, Quantity, CreditStockPayment, CreditNoteNo, valueexcvat, valueincvat, manualordno, Email);
         }
         
+        public int UpdateOrderSystem(long OrderSystemId)
+        {
+            return base.Channel.UpdateOrderSystem(OrderSystemId);
+        }
+        
         public System.Threading.Tasks.Task<int> UpdateOrderSystemAsync(long OrderSystemId)
         {
             return base.Channel.UpdateOrderSystemAsync(OrderSystemId);
+        }
+        
+        public int UpdateOrderSystemBackOrder(long OrderSystemId, int qty)
+        {
+            return base.Channel.UpdateOrderSystemBackOrder(OrderSystemId, qty);
         }
         
         public System.Threading.Tasks.Task<int> UpdateOrderSystemBackOrderAsync(long OrderSystemId, int qty)
@@ -12377,9 +19158,19 @@ namespace ServiceReference2
             return base.Channel.UpdateOrderSystemBackOrderAsync(OrderSystemId, qty);
         }
         
+        public int UpdateOrderTransactionState(long OrderId)
+        {
+            return base.Channel.UpdateOrderTransactionState(OrderId);
+        }
+        
         public System.Threading.Tasks.Task<int> UpdateOrderTransactionStateAsync(long OrderId)
         {
             return base.Channel.UpdateOrderTransactionStateAsync(OrderId);
+        }
+        
+        public bool Updateorderstatusafterscanin(long Productid)
+        {
+            return base.Channel.Updateorderstatusafterscanin(Productid);
         }
         
         public System.Threading.Tasks.Task<bool> UpdateorderstatusafterscaninAsync(long Productid)
@@ -12387,14 +19178,51 @@ namespace ServiceReference2
             return base.Channel.UpdateorderstatusafterscaninAsync(Productid);
         }
         
+        public bool Updateorderstatusaftertransferqty(long Productid)
+        {
+            return base.Channel.Updateorderstatusaftertransferqty(Productid);
+        }
+        
         public System.Threading.Tasks.Task<bool> UpdateorderstatusaftertransferqtyAsync(long Productid)
         {
             return base.Channel.UpdateorderstatusaftertransferqtyAsync(Productid);
         }
         
+        public bool Updateorderstatusafterscanout(long Productid)
+        {
+            return base.Channel.Updateorderstatusafterscanout(Productid);
+        }
+        
         public System.Threading.Tasks.Task<bool> UpdateorderstatusafterscanoutAsync(long Productid)
         {
             return base.Channel.UpdateorderstatusafterscanoutAsync(Productid);
+        }
+        
+        public int SaveProductScanInupdated(
+                    long ProductId, 
+                    long VariantId, 
+                    int ScanInQuantity, 
+                    string ScanInSKU, 
+                    string ScanInBarcode, 
+                    string Email, 
+                    string InvoiceNo, 
+                    System.DateTime InvoiceDate, 
+                    long SupplierId, 
+                    string reson, 
+                    long dockedno, 
+                    string val, 
+                    string qty, 
+                    decimal creditStock, 
+                    long creditnote, 
+                    decimal OrderRecievePrice, 
+                    long OrderSystemId, 
+                    System.DateTime Exppirydate, 
+                    string inventorytype, 
+                    string Expirymessage, 
+                    string CompanyName, 
+                    string comment)
+        {
+            return base.Channel.SaveProductScanInupdated(ProductId, VariantId, ScanInQuantity, ScanInSKU, ScanInBarcode, Email, InvoiceNo, InvoiceDate, SupplierId, reson, dockedno, val, qty, creditStock, creditnote, OrderRecievePrice, OrderSystemId, Exppirydate, inventorytype, Expirymessage, CompanyName, comment);
         }
         
         public System.Threading.Tasks.Task<int> SaveProductScanInupdatedAsync(
@@ -12424,14 +19252,50 @@ namespace ServiceReference2
             return base.Channel.SaveProductScanInupdatedAsync(ProductId, VariantId, ScanInQuantity, ScanInSKU, ScanInBarcode, Email, InvoiceNo, InvoiceDate, SupplierId, reson, dockedno, val, qty, creditStock, creditnote, OrderRecievePrice, OrderSystemId, Exppirydate, inventorytype, Expirymessage, CompanyName, comment);
         }
         
+        public int UpdateProductDeliveryexpiry(long DeliveryId, long DeliveredQty, string expmsg, string expdate)
+        {
+            return base.Channel.UpdateProductDeliveryexpiry(DeliveryId, DeliveredQty, expmsg, expdate);
+        }
+        
         public System.Threading.Tasks.Task<int> UpdateProductDeliveryexpiryAsync(long DeliveryId, long DeliveredQty, string expmsg, string expdate)
         {
             return base.Channel.UpdateProductDeliveryexpiryAsync(DeliveryId, DeliveredQty, expmsg, expdate);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.getDeliveryexpiryResponseGetDeliveryexpiryResult> getDeliveryexpiryAsync(long DeliveryId)
+        public ServiceReference1.getDeliveryexpiryResponseGetDeliveryexpiryResult getDeliveryexpiry(long DeliveryId)
+        {
+            return base.Channel.getDeliveryexpiry(DeliveryId);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.getDeliveryexpiryResponseGetDeliveryexpiryResult> getDeliveryexpiryAsync(long DeliveryId)
         {
             return base.Channel.getDeliveryexpiryAsync(DeliveryId);
+        }
+        
+        public int SaveProductDeliverynew(
+                    long OrderNumber, 
+                    long ProductId, 
+                    long VariantId, 
+                    int DeliveredQuantity, 
+                    string DeliveredSKU, 
+                    string DeliveredBarcode, 
+                    string Email, 
+                    string InvoiceNo, 
+                    System.DateTime InvoiceDate, 
+                    long SupplierId, 
+                    string reson, 
+                    long dockedno, 
+                    string val, 
+                    string qty, 
+                    decimal creditStock, 
+                    string ValueExcVat, 
+                    string ValueIncVat, 
+                    long ManualOrderNo, 
+                    long CreditNoteNo, 
+                    string Inventoryfor, 
+                    string CompanyName)
+        {
+            return base.Channel.SaveProductDeliverynew(OrderNumber, ProductId, VariantId, DeliveredQuantity, DeliveredSKU, DeliveredBarcode, Email, InvoiceNo, InvoiceDate, SupplierId, reson, dockedno, val, qty, creditStock, ValueExcVat, ValueIncVat, ManualOrderNo, CreditNoteNo, Inventoryfor, CompanyName);
         }
         
         public System.Threading.Tasks.Task<int> SaveProductDeliverynewAsync(
@@ -12458,6 +19322,34 @@ namespace ServiceReference2
                     string CompanyName)
         {
             return base.Channel.SaveProductDeliverynewAsync(OrderNumber, ProductId, VariantId, DeliveredQuantity, DeliveredSKU, DeliveredBarcode, Email, InvoiceNo, InvoiceDate, SupplierId, reson, dockedno, val, qty, creditStock, ValueExcVat, ValueIncVat, ManualOrderNo, CreditNoteNo, Inventoryfor, CompanyName);
+        }
+        
+        public int SaveProductScanIn(
+                    long ProductId, 
+                    long VariantId, 
+                    int ScanInQuantity, 
+                    string ScanInSKU, 
+                    string ScanInBarcode, 
+                    string Email, 
+                    string InvoiceNo, 
+                    System.DateTime InvoiceDate, 
+                    long SupplierId, 
+                    string reson, 
+                    long dockedno, 
+                    string val, 
+                    string qty, 
+                    decimal creditStock, 
+                    long creditnote, 
+                    decimal OrderRecievePrice, 
+                    long OrderSystemId, 
+                    System.DateTime Exppirydate, 
+                    string inventorytype, 
+                    string Expirymessage, 
+                    string CompanyName, 
+                    string comment, 
+                    string DeliveryNoteNo)
+        {
+            return base.Channel.SaveProductScanIn(ProductId, VariantId, ScanInQuantity, ScanInSKU, ScanInBarcode, Email, InvoiceNo, InvoiceDate, SupplierId, reson, dockedno, val, qty, creditStock, creditnote, OrderRecievePrice, OrderSystemId, Exppirydate, inventorytype, Expirymessage, CompanyName, comment, DeliveryNoteNo);
         }
         
         public System.Threading.Tasks.Task<int> SaveProductScanInAsync(
@@ -12488,14 +19380,29 @@ namespace ServiceReference2
             return base.Channel.SaveProductScanInAsync(ProductId, VariantId, ScanInQuantity, ScanInSKU, ScanInBarcode, Email, InvoiceNo, InvoiceDate, SupplierId, reson, dockedno, val, qty, creditStock, creditnote, OrderRecievePrice, OrderSystemId, Exppirydate, inventorytype, Expirymessage, CompanyName, comment, DeliveryNoteNo);
         }
         
+        public bool Updateexpirymsg(string dateold, string datenew, int qty, string sku)
+        {
+            return base.Channel.Updateexpirymsg(dateold, datenew, qty, sku);
+        }
+        
         public System.Threading.Tasks.Task<bool> UpdateexpirymsgAsync(string dateold, string datenew, int qty, string sku)
         {
             return base.Channel.UpdateexpirymsgAsync(dateold, datenew, qty, sku);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetOrderQuentityResponseGetOrderQuentityResult> GetOrderQuentityAsync(int OrderNumber)
+        public ServiceReference1.GetOrderQuentityResponseGetOrderQuentityResult GetOrderQuentity(int OrderNumber)
+        {
+            return base.Channel.GetOrderQuentity(OrderNumber);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetOrderQuentityResponseGetOrderQuentityResult> GetOrderQuentityAsync(int OrderNumber)
         {
             return base.Channel.GetOrderQuentityAsync(OrderNumber);
+        }
+        
+        public bool Ispromotionstartwithsupplier(int productid, long supplierid)
+        {
+            return base.Channel.Ispromotionstartwithsupplier(productid, supplierid);
         }
         
         public System.Threading.Tasks.Task<bool> IspromotionstartwithsupplierAsync(int productid, long supplierid)
@@ -12503,9 +19410,19 @@ namespace ServiceReference2
             return base.Channel.IspromotionstartwithsupplierAsync(productid, supplierid);
         }
         
+        public bool Ispromotionstart(int productid)
+        {
+            return base.Channel.Ispromotionstart(productid);
+        }
+        
         public System.Threading.Tasks.Task<bool> IspromotionstartAsync(int productid)
         {
             return base.Channel.IspromotionstartAsync(productid);
+        }
+        
+        public bool IsCategoryLockedForInventoryCount(string CategoryId)
+        {
+            return base.Channel.IsCategoryLockedForInventoryCount(CategoryId);
         }
         
         public System.Threading.Tasks.Task<bool> IsCategoryLockedForInventoryCountAsync(string CategoryId)
@@ -12513,14 +19430,29 @@ namespace ServiceReference2
             return base.Channel.IsCategoryLockedForInventoryCountAsync(CategoryId);
         }
         
+        public int checkexpiryqtybymultipledate(System.DateTime expiry, System.DateTime expiry2, System.DateTime expiry3, string barcode, string companyname, string sku)
+        {
+            return base.Channel.checkexpiryqtybymultipledate(expiry, expiry2, expiry3, barcode, companyname, sku);
+        }
+        
         public System.Threading.Tasks.Task<int> checkexpiryqtybymultipledateAsync(System.DateTime expiry, System.DateTime expiry2, System.DateTime expiry3, string barcode, string companyname, string sku)
         {
             return base.Channel.checkexpiryqtybymultipledateAsync(expiry, expiry2, expiry3, barcode, companyname, sku);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.GetTrackedOrderResponseGetTrackedOrderResult> GetTrackedOrderAsync(string ordernumber)
+        public ServiceReference1.GetTrackedOrderResponseGetTrackedOrderResult GetTrackedOrder(string ordernumber)
+        {
+            return base.Channel.GetTrackedOrder(ordernumber);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.GetTrackedOrderResponseGetTrackedOrderResult> GetTrackedOrderAsync(string ordernumber)
         {
             return base.Channel.GetTrackedOrderAsync(ordernumber);
+        }
+        
+        public bool saveproductdeliverywithexpiryoutbymultipledate(System.DateTime dttime, System.DateTime dttime2, System.DateTime dttime3, int qty, int deliveryid, string companyname, string barcode, string sku, string type)
+        {
+            return base.Channel.saveproductdeliverywithexpiryoutbymultipledate(dttime, dttime2, dttime3, qty, deliveryid, companyname, barcode, sku, type);
         }
         
         public System.Threading.Tasks.Task<bool> saveproductdeliverywithexpiryoutbymultipledateAsync(System.DateTime dttime, System.DateTime dttime2, System.DateTime dttime3, int qty, int deliveryid, string companyname, string barcode, string sku, string type)
@@ -12528,9 +19460,19 @@ namespace ServiceReference2
             return base.Channel.saveproductdeliverywithexpiryoutbymultipledateAsync(dttime, dttime2, dttime3, qty, deliveryid, companyname, barcode, sku, type);
         }
         
+        public bool IsRecountstart(int productid)
+        {
+            return base.Channel.IsRecountstart(productid);
+        }
+        
         public System.Threading.Tasks.Task<bool> IsRecountstartAsync(int productid)
         {
             return base.Channel.IsRecountstartAsync(productid);
+        }
+        
+        public string TransferfromMaintoSFP(string VarientId, string mquantity, string quantity, string isType)
+        {
+            return base.Channel.TransferfromMaintoSFP(VarientId, mquantity, quantity, isType);
         }
         
         public System.Threading.Tasks.Task<string> TransferfromMaintoSFPAsync(string VarientId, string mquantity, string quantity, string isType)
@@ -12538,9 +19480,19 @@ namespace ServiceReference2
             return base.Channel.TransferfromMaintoSFPAsync(VarientId, mquantity, quantity, isType);
         }
         
+        public string TransferfromSFPtoMain(string VarientId, string mquantity, string quantity, string isType)
+        {
+            return base.Channel.TransferfromSFPtoMain(VarientId, mquantity, quantity, isType);
+        }
+        
         public System.Threading.Tasks.Task<string> TransferfromSFPtoMainAsync(string VarientId, string mquantity, string quantity, string isType)
         {
             return base.Channel.TransferfromSFPtoMainAsync(VarientId, mquantity, quantity, isType);
+        }
+        
+        public string TransferfromSFPtopromotion(string VarientId, string mquantity, string quantity, string isType)
+        {
+            return base.Channel.TransferfromSFPtopromotion(VarientId, mquantity, quantity, isType);
         }
         
         public System.Threading.Tasks.Task<string> TransferfromSFPtopromotionAsync(string VarientId, string mquantity, string quantity, string isType)
@@ -12548,9 +19500,19 @@ namespace ServiceReference2
             return base.Channel.TransferfromSFPtopromotionAsync(VarientId, mquantity, quantity, isType);
         }
         
+        public string TransferfrompromotiontoSFP(string VarientId, string mquantity, string quantity, string isType)
+        {
+            return base.Channel.TransferfrompromotiontoSFP(VarientId, mquantity, quantity, isType);
+        }
+        
         public System.Threading.Tasks.Task<string> TransferfrompromotiontoSFPAsync(string VarientId, string mquantity, string quantity, string isType)
         {
             return base.Channel.TransferfrompromotiontoSFPAsync(VarientId, mquantity, quantity, isType);
+        }
+        
+        public string TransferfrompromotiontoMain(string VarientId, string mquantity, string quantity, string isType)
+        {
+            return base.Channel.TransferfrompromotiontoMain(VarientId, mquantity, quantity, isType);
         }
         
         public System.Threading.Tasks.Task<string> TransferfrompromotiontoMainAsync(string VarientId, string mquantity, string quantity, string isType)
@@ -12558,9 +19520,19 @@ namespace ServiceReference2
             return base.Channel.TransferfrompromotiontoMainAsync(VarientId, mquantity, quantity, isType);
         }
         
+        public string UpdateInventoryQuantityByVarientPscanoutSFP(string VarientId, string mquantity, string quantity, string isType)
+        {
+            return base.Channel.UpdateInventoryQuantityByVarientPscanoutSFP(VarientId, mquantity, quantity, isType);
+        }
+        
         public System.Threading.Tasks.Task<string> UpdateInventoryQuantityByVarientPscanoutSFPAsync(string VarientId, string mquantity, string quantity, string isType)
         {
             return base.Channel.UpdateInventoryQuantityByVarientPscanoutSFPAsync(VarientId, mquantity, quantity, isType);
+        }
+        
+        public string UpdateInventoryByVarientPscanoutSFP(string VarientId, string mquantity, string quantity, string companyname)
+        {
+            return base.Channel.UpdateInventoryByVarientPscanoutSFP(VarientId, mquantity, quantity, companyname);
         }
         
         public System.Threading.Tasks.Task<string> UpdateInventoryByVarientPscanoutSFPAsync(string VarientId, string mquantity, string quantity, string companyname)
@@ -12568,14 +19540,29 @@ namespace ServiceReference2
             return base.Channel.UpdateInventoryByVarientPscanoutSFPAsync(VarientId, mquantity, quantity, companyname);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.getinventoryallResponseGetinventoryallResult> getinventoryallAsync(string productid, string countryname)
+        public ServiceReference1.getinventoryallResponseGetinventoryallResult getinventoryall(string productid, string countryname)
+        {
+            return base.Channel.getinventoryall(productid, countryname);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.getinventoryallResponseGetinventoryallResult> getinventoryallAsync(string productid, string countryname)
         {
             return base.Channel.getinventoryallAsync(productid, countryname);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.getBankHolidaysResponseGetBankHolidaysResult> getBankHolidaysAsync()
+        public ServiceReference1.getBankHolidaysResponseGetBankHolidaysResult getBankHolidays()
+        {
+            return base.Channel.getBankHolidays();
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.getBankHolidaysResponseGetBankHolidaysResult> getBankHolidaysAsync()
         {
             return base.Channel.getBankHolidaysAsync();
+        }
+        
+        public int SaveAsShipped(string Carreir, string TrackingNumber, System.DateTime ShippedOn, int OrderNumber)
+        {
+            return base.Channel.SaveAsShipped(Carreir, TrackingNumber, ShippedOn, OrderNumber);
         }
         
         public System.Threading.Tasks.Task<int> SaveAsShippedAsync(string Carreir, string TrackingNumber, System.DateTime ShippedOn, int OrderNumber)

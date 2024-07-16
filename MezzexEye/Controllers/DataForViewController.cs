@@ -21,7 +21,7 @@ namespace EyeMezzexz.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> ViewScreenCaptureData(string username = null, DateTime? date = null, int page = 1)
+        public async Task<IActionResult> ViewScreenCaptureData(string username = null, DateTime? date = null, int page = 1, string mediaType = "Image")
         {
             try
             {
@@ -37,10 +37,18 @@ namespace EyeMezzexz.Controllers
                     _logger.LogInformation($"Filtered data by username: {username}");
                 }
 
-                if (date.HasValue)
+                DateTime filterDate = date ?? DateTime.Today;
+                data = data.Where(d => d.Timestamp.Date == filterDate.Date).ToList();
+                _logger.LogInformation($"Filtered data by date: {filterDate.Date}");
+
+                // Filter by media type
+                if (mediaType == "Image")
                 {
-                    data = data.Where(d => d.Timestamp.Date == date.Value.Date).ToList();
-                    _logger.LogInformation($"Filtered data by date: {date.Value.Date}");
+                    data = data.Where(d => !string.IsNullOrEmpty(d.ImageUrl)).ToList();
+                }
+                else if (mediaType == "video")
+                {
+                    data = data.Where(d => !string.IsNullOrEmpty(d.VideoUrl)).ToList();
                 }
 
                 var totalItems = data.Count();
@@ -54,6 +62,8 @@ namespace EyeMezzexz.Controllers
                 };
 
                 ViewBag.Usernames = usernames;
+                ViewBag.MediaType = mediaType;
+                ViewBag.SelectedUsername = username; // Set the selected username
 
                 if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
                 {

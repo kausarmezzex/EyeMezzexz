@@ -7,14 +7,14 @@
       "System.Array",
       "System.Collections.Generic.Dictionary`2"
     ],
+    "enableDataBinding": true,
     "namespaceMappings": [
-      "*, ServiceReference2"
+      "*, ServiceReference1"
     ],
     "references": [
       "Azure.Core, {Azure.Core, 1.35.0}",
       "Azure.Identity, {Azure.Identity, 1.10.3}",
       "BCrypt.Net-Next, {BCrypt.Net-Next, 4.0.3}",
-      "C:\\Users\\Direct1\\source\\repos\\EyeMezzexz\\EyeMezzexz\\bin\\Debug\\net8.0\\ASPDNSFEncrypt.dll",
       "Microsoft.AspNetCore.Cryptography.Internal, {Microsoft.AspNetCore.Cryptography.Internal, 8.0.7}",
       "Microsoft.AspNetCore.Cryptography.KeyDerivation, {Microsoft.AspNetCore.Cryptography.KeyDerivation, 8.0.7}",
       "Microsoft.AspNetCore.Identity.EntityFrameworkCore, {Microsoft.AspNetCore.Identity.EntityFrameworkCore, 8.0.6}",
@@ -53,6 +53,7 @@
       "Microsoft.IdentityModel.Xml, {Microsoft.IdentityModel.Xml, 6.8.0}",
       "Microsoft.OpenApi, {Microsoft.OpenApi, 1.2.3}",
       "Microsoft.SqlServer.Server, {Microsoft.SqlServer.Server, 1.0.0}",
+      "Newtonsoft.Json, {Newtonsoft.Json, 13.0.1}",
       "Swashbuckle.AspNetCore.Swagger, {Swashbuckle.AspNetCore.Swagger, 6.4.0}",
       "Swashbuckle.AspNetCore.SwaggerGen, {Swashbuckle.AspNetCore.SwaggerGen, 6.4.0}",
       "Swashbuckle.AspNetCore.SwaggerUI, {Swashbuckle.AspNetCore.SwaggerUI, 6.4.0}",
@@ -85,6 +86,7 @@
       "System.Xml.ReaderWriter, {System.Xml.ReaderWriter, 4.3.0}",
       "System.Xml.XmlDocument, {System.Xml.XmlDocument, 4.3.0}"
     ],
+    "sync": true,
     "targetFramework": "net8.0",
     "typeReuseMode": "All"
   }

@@ -1,11 +1,6 @@
 ﻿using EyeMezzexz.Services;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
-using System.Xml;
-using System.Xml.Serialization;
 
 namespace EyeMezzexz.Controllers
 {
@@ -29,39 +24,29 @@ namespace EyeMezzexz.Controllers
             }
 
             var response = await _webServiceClient.GetLoginDetailAsync(loginRequest.Email, loginRequest.Password);
-
-            if (response == null || response.Any == null || response.Any.Length == 0)
+            if (string.IsNullOrEmpty(response))
             {
-                return NotFound("No login details found.");
+                return NotFound("Login details not found.");
             }
 
-            var loginDetails = DeserializeLoginDetails(response.Any);
-
-            if (loginDetails == null || loginDetails.Count == 0)
-            {
-                return NotFound("No login details found.");
-            }
-
-            return Ok(loginDetails);
+            return Ok(response);
         }
 
-        private List<LoginDetail> DeserializeLoginDetails(XmlElement[] xmlElements)
+        [HttpPost("loginSync")]
+        public IActionResult LoginSync([FromBody] LoginRequest1 loginRequest)
         {
-            try
+            if (loginRequest == null || string.IsNullOrEmpty(loginRequest.Email) || string.IsNullOrEmpty(loginRequest.Password))
             {
-                var serializer = new XmlSerializer(typeof(List<LoginDetail>), new XmlRootAttribute("LoginDetails"));
+                return BadRequest("Invalid login request.");
+            }
 
-                // Combine the XmlElement contents into a single XML string for deserialization
-                var combinedXml = string.Join("", xmlElements.Select(x => x.OuterXml));
-                using (var reader = new StringReader(combinedXml))
-                {
-                    return (List<LoginDetail>)serializer.Deserialize(reader);
-                }
-            }
-            catch
+            var response = _webServiceClient.GetLoginDetail(loginRequest.Email, loginRequest.Password);
+            if (string.IsNullOrEmpty(response))
             {
-                return null;
+                return NotFound("Login details not found.");
             }
+
+            return Ok(response);
         }
     }
 
@@ -69,25 +54,5 @@ namespace EyeMezzexz.Controllers
     {
         public string Email { get; set; }
         public string Password { get; set; }
-    }
-
-    public class LoginDetail
-    {
-        public string Email { get; set; }
-        public string Firstname { get; set; }
-        public string Lastname { get; set; }
-        // Add other necessary properties
-    }
-
-    public class GetLoginDetailResponseGetLoginDetailResult
-    {
-        private XmlElement[] anyField;
-
-        [XmlAnyElement(Namespace = "http://www.w3.org/2001/XMLSchema", Order = 0)]
-        public XmlElement[] Any
-        {
-            get { return anyField; }
-            set { anyField = value; }
-        }
     }
 }

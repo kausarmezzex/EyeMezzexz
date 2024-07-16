@@ -45,7 +45,8 @@ namespace EyeMezzexz.Controllers
                 Username = model.Username,
                 SystemName = model.SystemName,
                 TaskName = taskTimer.Task.Name, // Assign TaskName from TaskTimer
-                TaskTimerId = model.TaskTimerId // Assign TaskTimerId
+                TaskTimerId = model.TaskTimerId, // Assign TaskTimerId
+                VideoUrl = model.VideoUrl
             };
 
             _context.UploadedData.Add(uploadedData);
@@ -66,7 +67,8 @@ namespace EyeMezzexz.Controllers
                 Username = d.Username,
                 Id = d.Id,
                 SystemName = d.SystemName,
-                TaskName = d.TaskName // Include TaskName in the response
+                TaskName = d.TaskName, // Include TaskName in the response
+                VideoUrl = d.VideoUrl
             }).ToList();
 
             return Ok(data);
@@ -249,6 +251,7 @@ namespace EyeMezzexz.Controllers
     public class UploadRequest
     {
         public string ImageUrl { get; set; }
+        public string? VideoUrl { get; set; }
         public string SystemInfo { get; set; }
         public string ActivityLog { get; set; }
         public string Username { get; set; }

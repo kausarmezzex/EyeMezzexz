@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Screen Capture Data";
+    var today = DateTime.Today.ToString("yyyy-MM-dd");
 }
 
 <h1 class="mb-4 text-center">Screen Capture Data</h1>
@@ -21,7 +22,15 @@
 
         <div class="me-2 mt-3">
             <label for="date" class="form-label me-2">Date:</label>
-            <input type="date" id="date" name="date" class="form-control">
+            <input type="date" id="date" name="date" class="form-control" value="@today">
+        </div>
+
+        <div class="me-2 mt-3">
+            <label for="mediaType" class="form-label me-2">Media Type:</label>
+            <select id="mediaType" name="mediaType" class="form-select">
+                <option value="image" selected>Image</option>
+                <option value="video">Video</option>
+            </select>
         </div>
 
         <div class="me-2 mt-5">
@@ -34,13 +43,13 @@
     @await Html.PartialAsync("_ScreenCaptureData", Model)
 </div>
 
-<!-- Image Modal -->
+<!-- Image and Video Modal -->
 <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
             <div class="modal-header d-flex justify-content-between align-items-center">
                 <div class="d-flex align-items-center">
-                    <h5 class="modal-title me-3" id="imageModalLabel">Screenshot</h5>
+                    <h5 class="modal-title me-3" id="imageModalLabel">Media</h5>
                     <div id="modalDetails" class="d-flex">
                         <p class="me-3"><strong>User:</strong> <span id="modalUsername"></span></p>
                         <p class="me-3"><strong>Created Time:</strong> <span id="modalTimestamp"></span></p>
@@ -53,7 +62,8 @@
                 <button type="button" class="btn btn-secondary position-absolute start-0 top-50 translate-middle-y" id="prevImage">
                     <i class="fas fa-chevron-left"></i>
                 </button>
-                <img src="" alt="Full Screenshot" class="img-fluid" id="modalImage">
+                <img src="" alt="Full Screenshot" class="img-fluid" id="modalImage" style="display:none;">
+                <video src="" class="img-fluid" id="modalVideo" controls style="display:none;"></video>
                 <button type="button" class="btn btn-secondary position-absolute end-0 top-50 translate-middle-y" id="nextImage">
                     <i class="fas fa-chevron-right"></i>
                 </button>
@@ -63,29 +73,10 @@
 </div>
 
 <script>
-    document.getElementById('filterForm').addEventListener('submit', function (event) {
-        event.preventDefault();
-        loadPage(1);
+    document.addEventListener('DOMContentLoaded', function () {
+        attachPaginationEvents();
+        attachModalEvents();
     });
-
-    function loadPage(page) {
-        const formData = new FormData(document.getElementById('filterForm'));
-        formData.append('page', page);
-        const queryString = new URLSearchParams(formData).toString();
-
-        fetch(`/DataForView/ViewScreenCaptureData?${queryString}`, {
-            headers: {
-                'X-Requested-With': 'XMLHttpRequest'
-            }
-        })
-            .then(response => response.text())
-            .then(html => {
-                document.getElementById('screenCaptureData').innerHTML = html;
-                attachPaginationEvents();
-                attachModalEvents();
-            })
-            .catch(error => console.error('Error:', error));
-    }
 
     function attachPaginationEvents() {
         document.querySelectorAll('.pagination a[data-page]').forEach(link => {
@@ -116,14 +107,14 @@
 
     function attachModalEvents() {
         var imageModal = document.getElementById('imageModal');
-        var allImages = [];
+        var allMedia = [];
         var currentIndex = 0;
 
-        function updateModalDetails(imageUrl) {
-            var currentImageElement = document.querySelector('img[data-bs-img="' + imageUrl + '"]');
-            var username = currentImageElement.getAttribute('data-bs-username');
-            var timestamp = currentImageElement.getAttribute('data-bs-timestamp');
-            var taskName = currentImageElement.getAttribute('data-bs-taskname');
+        function updateModalDetails(mediaUrl, mediaType) {
+            var currentMediaElement = document.querySelector(`[data-bs-${mediaType.toLowerCase()}="${mediaUrl}"]`);
+            var username = currentMediaElement.getAttribute('data-bs-username');
+            var timestamp = currentMediaElement.getAttribute('data-bs-timestamp');
+            var taskName = currentMediaElement.getAttribute('data-bs-taskname');
 
             var modalUsername = document.getElementById('modalUsername');
             var modalTimestamp = document.getElementById('modalTimestamp');
@@ -136,41 +127,106 @@
 
         imageModal.addEventListener('show.bs.modal', function (event) {
             var button = event.relatedTarget;
-            var imageUrl = button.getAttribute('data-bs-img');
+            var mediaUrl = button.getAttribute('data-bs-img') || button.getAttribute('data-bs-video');
+            var mediaType = button.getAttribute('data-bs-img') ? 'img' : 'video';
             currentIndex = 0;
 
-            allImages = Array.from(document.querySelectorAll('img[data-bs-username="' + button.getAttribute('data-bs-username') + '"]')).map(img => img.getAttribute('data-bs-img'));
+            allMedia = Array.from(document.querySelectorAll(`[data-bs-${mediaType.toLowerCase()}]`)).map(media => media.getAttribute(`data-bs-${mediaType.toLowerCase()}`));
 
             var modalImage = imageModal.querySelector('#modalImage');
+            var modalVideo = imageModal.querySelector('#modalVideo');
 
-            modalImage.src = imageUrl;
-            currentIndex = allImages.indexOf(imageUrl);
+            if (mediaType === 'img') {
+                modalImage.src = mediaUrl;
+                modalImage.style.display = 'block';
+                modalVideo.style.display = 'none';
+            } else {
+                modalVideo.src = mediaUrl;
+                modalVideo.style.display = 'block';
+                modalVideo.load();
+                modalImage.style.display = 'none';
+            }
+            currentIndex = allMedia.indexOf(mediaUrl);
 
-            updateModalDetails(imageUrl);
+            updateModalDetails(mediaUrl, mediaType);
+        });
+
+        imageModal.addEventListener('hidden.bs.modal', function () {
+            var modalImage = imageModal.querySelector('#modalImage');
+            var modalVideo = imageModal.querySelector('#modalVideo');
+
+            modalImage.src = '';
+            modalVideo.pause();
+            modalVideo.src = '';
         });
 
         document.getElementById('prevImage').addEventListener('click', function () {
-            if (allImages.length > 0) {
-                currentIndex = (currentIndex - 1 + allImages.length) % allImages.length;
-                var newImageUrl = allImages[currentIndex];
-                document.getElementById('modalImage').src = newImageUrl;
-                updateModalDetails(newImageUrl);
+            if (allMedia.length > 0) {
+                currentIndex = (currentIndex - 1 + allMedia.length) % allMedia.length;
+                var newMediaUrl = allMedia[currentIndex];
+                var mediaType = document.querySelector(`[data-bs-img="${newMediaUrl}"]`) ? 'img' : 'video';
+                var modalImage = document.getElementById('modalImage');
+                var modalVideo = document.getElementById('modalVideo');
+
+                if (mediaType === 'img') {
+                    modalImage.src = newMediaUrl;
+                    modalImage.style.display = 'block';
+                    modalVideo.style.display = 'none';
+                } else {
+                    modalVideo.src = newMediaUrl;
+                    modalVideo.style.display = 'block';
+                    modalVideo.load();
+                    modalImage.style.display = 'none';
+                }
+                updateModalDetails(newMediaUrl, mediaType);
             }
         });
 
         document.getElementById('nextImage').addEventListener('click', function () {
-            if (allImages.length > 0) {
-                currentIndex = (currentIndex + 1) % allImages.length;
-                var newImageUrl = allImages[currentIndex];
-                document.getElementById('modalImage').src = newImageUrl;
-                updateModalDetails(newImageUrl);
+            if (allMedia.length > 0) {
+                currentIndex = (currentIndex + 1) % allMedia.length;
+                var newMediaUrl = allMedia[currentIndex];
+                var mediaType = document.querySelector(`[data-bs-img="${newMediaUrl}"]`) ? 'img' : 'video';
+                var modalImage = document.getElementById('modalImage');
+                var modalVideo = document.getElementById('modalVideo');
+
+                if (mediaType === 'img') {
+                    modalImage.src = newMediaUrl;
+                    modalImage.style.display = 'block';
+                    modalVideo.style.display = 'none';
+                } else {
+                    modalVideo.src = newMediaUrl;
+                    modalVideo.style.display = 'block';
+                    modalVideo.load();
+                    modalImage.style.display = 'none';
+                }
+                updateModalDetails(newMediaUrl, mediaType);
             }
         });
     }
 
-    document.addEventListener('DOMContentLoaded', function () {
-        attachPaginationEvents();
-        attachModalEvents();
+    function loadPage(page) {
+        const formData = new FormData(document.getElementById('filterForm'));
+        formData.append('page', page);
+        const queryString = new URLSearchParams(formData).toString();
+
+        fetch(`/DataForView/ViewScreenCaptureData?${queryString}`, {
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest'
+            }
+        })
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById('screenCaptureData').innerHTML = html;
+                attachPaginationEvents();
+                attachModalEvents();
+            })
+            .catch(error => console.error('Error:', error));
+    }
+
+    document.getElementById('filterForm').addEventListener('submit', function (event) {
+        event.preventDefault();
+        loadPage(1);
     });
 </script>
 

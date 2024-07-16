@@ -1,4 +1,6 @@
-﻿using ServiceReference2;
+﻿using System.Threading.Tasks;
+using ServiceReference1; // Ensure that this namespace is correctly referenced
+
 namespace EyeMezzexz.Services
 {
     public class WebServiceClient
@@ -10,14 +12,16 @@ namespace EyeMezzexz.Services
             _client = new BarcodeWebServiceSoapClient(BarcodeWebServiceSoapClient.EndpointConfiguration.BarcodeWebServiceSoap);
         }
 
-        public async Task<bool> CheckLoginDetailAsync(string email, string password)
+        // Synchronous method
+        public string GetLoginDetail(string email, string password)
         {
-            return await _client.CheckLoginDetailAsync(email, password);
+            return _client.GetLoginDetail(email, password);
         }
-        public async Task<GetLoginDetailResponseGetLoginDetailResult> GetLoginDetailAsync(string email, string password)
+
+        // Asynchronous method
+        public async Task<string> GetLoginDetailAsync(string email, string password)
         {
             return await _client.GetLoginDetailAsync(email, password);
         }
     }
 }
-    

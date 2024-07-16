@@ -84,14 +84,12 @@ namespace E_Commerce_Mezzex.Data
             await CreateUserAsync(
                 userManager, roleManager, logger,
                 "superadmin@example.com", "SuperAdmin@123",
-                "Super", "Admin", "Male", "AdminCorp",
-                true, new[] { "Administrator" });
+                "Super", "Admin", "Male",new[] { "Administrator" });
 
             await CreateUserAsync(
                 userManager, roleManager, logger,
                 "regularuser@example.com", "RegularUser@123",
-                "Regular", "User", "Female", "UserCorp",
-                false, new[] { "Registered" });
+                "Regular", "User", "Female", new[] { "Registered" });
 
             await AssignAllPermissionsToAdministrator(userManager, context, logger);
         }
@@ -105,8 +103,6 @@ namespace E_Commerce_Mezzex.Data
             string firstName,
             string lastName,
             string gender,
-            string companyName,
-            bool isTaxExempt,
             string[] roles)
         {
             if (await userManager.FindByEmailAsync(email) == null)
@@ -118,9 +114,6 @@ namespace E_Commerce_Mezzex.Data
                     FirstName = firstName,
                     LastName = lastName,
                     Gender = gender,
-                    DateOfBirth = new DateTime(1980, 1, 1),
-                    CompanyName = companyName,
-                    IsTaxExempt = isTaxExempt,
                     Active = true
                 };
 
