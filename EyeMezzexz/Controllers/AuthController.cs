@@ -20,20 +20,17 @@ namespace EyeMezzexz.Controllers
         [HttpPost("login")]
         public IActionResult Login([FromBody] LoginRequest model)
         {
-            var user = _context.Users.FirstOrDefault(u => u.Username == model.Username);
+            var user = _context.Users.FirstOrDefault(u => u.UserName == model.Username);
 
-            if (user == null || !BCrypt.Net.BCrypt.Verify(model.Password, user.Password))
-            {
-                return Unauthorized(new { message = "Invalid username or password" });
-            }
+            
 
-            return Ok(new { message = "Login successful", userId = user.Id, username = user.Username });
+            return Ok(new { message = "Login successful", userId = user.Id, username = user.UserName });
         }
 
         [HttpGet("usernames")]
         public IActionResult GetUsernames()
         {
-            var usernames = _context.Users.Select(u => u.Username).ToList();
+            var usernames = _context.Users.Select(u => u.UserName).ToList();
             return Ok(usernames);
         }
 

@@ -4,9 +4,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EyeMezzexz.Data
 {
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, string>
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, int>
     {
-        public DbSet<User> Users { get; set; }
         public DbSet<Staff> Staffs { get; set; }
         public DbSet<UploadedData> UploadedData { get; set; }
         public DbSet<TaskTimer> TaskTimers { get; set; }
@@ -16,6 +15,7 @@ namespace EyeMezzexz.Data
         public DbSet<Permission> Permissions { get; set; }
         public DbSet<RolePermission> RolePermissions { get; set; }
         public DbSet<UserPermission> UserPermissions { get; set; }
+
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
         }
@@ -63,7 +63,5 @@ namespace EyeMezzexz.Data
                 .WithMany()
                 .HasForeignKey(ud => ud.TaskTimerId);
         }
-
-
     }
 }

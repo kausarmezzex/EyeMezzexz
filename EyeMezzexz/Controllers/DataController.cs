@@ -104,7 +104,7 @@ namespace EyeMezzexz.Controllers
                 {
                     Id = t.Id,
                     UserId = t.UserId,
-                    UserName = t.User.Username,
+                    UserName = t.User.UserName,
                     TaskId = t.TaskId,
                     TaskName = t.Task.Name,
                     TaskComment = t.TaskComment,
@@ -118,7 +118,7 @@ namespace EyeMezzexz.Controllers
 
         [HttpGet("getUserCompletedTasks")]
         public IActionResult GetUserCompletedTasks(int userId)
-            {
+        {
             var today = DateTime.Today;
 
             var completedTaskTimers = _context.TaskTimers
@@ -129,7 +129,7 @@ namespace EyeMezzexz.Controllers
                 {
                     Id = t.Id,
                     UserId = t.UserId,
-                    UserName = t.User.Username,
+                    UserName = t.User.UserName,
                     TaskId = t.TaskId,
                     TaskName = t.Task.Name,
                     TaskComment = t.TaskComment,

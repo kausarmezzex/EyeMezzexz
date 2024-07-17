@@ -2,6 +2,7 @@ using E_Commerce_Mezzex.Data;
 using EyeMezzexz.Data;
 using EyeMezzexz.Models;
 using EyeMezzexz.Services;
+using MezzexEye.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using ServiceReference1;
@@ -26,7 +27,7 @@ builder.Services.AddDefaultIdentity<ApplicationUser>()
     .AddDefaultTokenProviders();
 
 
-
+builder.Services.AddTransient<UserService>();
 // Add session services
 builder.Services.AddSession(options =>
 {
@@ -96,24 +97,7 @@ void SeedDatabase(ApplicationDbContext context)
 {
     try
     {
-        if (!context.Users.Any(u => u.Username == "testuser"))
-        {
-            context.Users.AddRange(new List<User>
-            {
-                new User { Username = "testuser", Password = BCrypt.Net.BCrypt.HashPassword("password") },
-                new User { Username = "testuser1", Password = BCrypt.Net.BCrypt.HashPassword("password1") },
-                new User { Username = "testuser2", Password = BCrypt.Net.BCrypt.HashPassword("password2") },
-                new User { Username = "testuser3", Password = BCrypt.Net.BCrypt.HashPassword("password3") },
-                new User { Username = "testuser4", Password = BCrypt.Net.BCrypt.HashPassword("password4") }
-            });
-
-            context.SaveChanges();
-            Console.WriteLine("Users have been seeded to the database.");
-        }
-        else
-        {
-            Console.WriteLine("Users already exist in the database.");
-        }
+       
 
         // List of task names
         var tasks = new List<string>

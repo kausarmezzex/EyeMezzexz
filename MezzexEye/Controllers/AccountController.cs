@@ -64,6 +64,13 @@ namespace MezzexEye.Controllers
                 ModelState.AddModelError(string.Empty, error.Description);
             }
         }
+
+        public async Task<bool> UserExists(string email)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+            return user != null;
+        }
+
         [AllowAnonymous]
         public IActionResult AccessDenied()
         {

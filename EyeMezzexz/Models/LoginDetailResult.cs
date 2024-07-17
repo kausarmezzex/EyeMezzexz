@@ -2,7 +2,6 @@
 
 namespace EyeMezzexz.Models
 {
-    [XmlRoot(ElementName = "LoginDetailResult", Namespace = "http://tempuri.org/")]
     public class LoginDetailResult
     {
         public string Email { get; set; }

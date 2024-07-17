@@ -6,6 +6,6 @@
         public DateTime StaffInTime { get; set; }
         public DateTime? StaffOutTime { get; set; }
         public int UserId { get; set; } // Foreign key property
-        public User? User { get; set; }  // Navigation property
+        public ApplicationUser? User { get; set; }  // Use ApplicationUser instead of User
     }
 }
