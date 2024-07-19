@@ -79,7 +79,7 @@ namespace EyeMezzexz.Controllers
             // Fetch the newly created user details
             user = await _context.Users.FirstOrDefaultAsync(u => u.Email == loginRequest.Email);
             // Return the simplified response
-            return Ok(new { message = "Login successful", userId = user.Id, username = user.UserName });
+            return Ok(new { message = "Login successful", userId = user.Id, username = user.FirstName+" "+user.LastName });
         }
     }
 

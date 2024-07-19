@@ -8,6 +8,6 @@ namespace EyeMezzexz.Models
         public int PermissionId { get; set; }
 
         public ApplicationRole Role { get; set; }
-        public Permission Permission { get; set; }
+        public PermissionName Permission { get; set; }
     }
 }

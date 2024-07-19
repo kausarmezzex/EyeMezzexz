@@ -6,13 +6,12 @@ namespace EyeMezzexz.Data
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, int>
     {
-        public DbSet<Staff> Staffs { get; set; }
+        public DbSet<StaffInOut> StaffInOut { get; set; }
         public DbSet<UploadedData> UploadedData { get; set; }
         public DbSet<TaskTimer> TaskTimers { get; set; }
-        public DbSet<TaskModel> Tasks { get; set; }
+        public DbSet<TaskNames> TaskNames { get; set; }
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
-        public DbSet<Demo> demos { get; set; }
-        public DbSet<Permission> Permissions { get; set; }
+        public DbSet<PermissionName> PermissionsName { get; set; }
         public DbSet<RolePermission> RolePermissions { get; set; }
         public DbSet<UserPermission> UserPermissions { get; set; }
 
@@ -53,7 +52,7 @@ namespace EyeMezzexz.Data
                 .HasForeignKey(up => up.PermissionId);
 
             // Configure Staff relationships
-            modelBuilder.Entity<Staff>()
+            modelBuilder.Entity<StaffInOut>()
                 .HasOne(s => s.User)
                 .WithMany()
                 .HasForeignKey(s => s.UserId);

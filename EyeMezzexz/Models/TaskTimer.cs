@@ -10,6 +10,6 @@
         public DateTime TaskStartTime { get; set; }
         public DateTime? TaskEndTime { get; set; }
         public ApplicationUser? User { get; set; } // Use ApplicationUser instead of User
-        public TaskModel? Task { get; set; }  // Navigation property
+        public TaskNames? Task { get; set; }  // Navigation property
     }
 }

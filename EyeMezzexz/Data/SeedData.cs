@@ -59,17 +59,17 @@ namespace E_Commerce_Mezzex.Data
 
         private static async Task SeedPermissionsAsync(ApplicationDbContext context, ILogger logger)
         {
-            if (!context.Permissions.Any())
+            if (!context.PermissionsName.Any())
             {
                 var permissions = new[]
                 {
-                    new Permission { Name = "CreateCategory" },
-                    new Permission { Name = "CreateBrand" },
-                    new Permission { Name = "CreateProduct" },
-                    new Permission { Name = "ManageSettings" }
+                    new PermissionName { Name = "CreateCategory" },
+                    new PermissionName { Name = "CreateBrand" },
+                    new PermissionName { Name = "CreateProduct" },
+                    new PermissionName { Name = "ManageSettings" }
                 };
 
-                await context.Permissions.AddRangeAsync(permissions);
+                await context.PermissionsName.AddRangeAsync(permissions);
                 await context.SaveChangesAsync();
                 logger.LogInformation("Permissions seeded successfully.");
             }
@@ -178,7 +178,7 @@ namespace E_Commerce_Mezzex.Data
             var administrator = await userManager.FindByEmailAsync("superadmin@example.com");
             if (administrator != null)
             {
-                var permissions = context.Permissions.Select(p => p.Name).ToArray();
+                var permissions = context.PermissionsName.Select(p => p.Name).ToArray();
                 await AssignClaimsToUser(userManager, administrator, permissions);
                 logger.LogInformation("All permissions assigned to Administrator.");
             }

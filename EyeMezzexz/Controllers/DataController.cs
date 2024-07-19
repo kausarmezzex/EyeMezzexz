@@ -39,9 +39,7 @@ namespace EyeMezzexz.Controllers
             var uploadedData = new UploadedData
             {
                 ImageUrl = model.ImageUrl,
-                SystemInfo = model.SystemInfo,
-                ActivityLog = model.ActivityLog,
-                Timestamp = model.Timestamp,
+                CreatedOn = model.CreatedOn,
                 Username = model.Username,
                 SystemName = model.SystemName,
                 TaskName = taskTimer.Task.Name, // Assign TaskName from TaskTimer
@@ -61,9 +59,7 @@ namespace EyeMezzexz.Controllers
             var data = _context.UploadedData.Select(d => new
             {
                 ImageUrl = d.ImageUrl,
-                SystemInfo = d.SystemInfo,
-                ActivityLog = d.ActivityLog,
-                Timestamp = d.Timestamp,
+                Timestamp = d.CreatedOn,
                 Username = d.Username,
                 Id = d.Id,
                 SystemName = d.SystemName,
@@ -144,7 +140,7 @@ namespace EyeMezzexz.Controllers
         [HttpGet("getTasks")]
         public IActionResult GetTasks()
         {
-            var tasks = _context.Tasks.Select(t => new TaskModel
+            var tasks = _context.TaskNames.Select(t => new TaskNames
             {
                 Id = t.Id,
                 Name = t.Name
@@ -154,7 +150,7 @@ namespace EyeMezzexz.Controllers
         }
 
         [HttpPost("saveStaff")]
-        public IActionResult SaveStaff([FromBody] Staff model)
+        public IActionResult SaveStaff([FromBody] StaffInOut model)
         {
             if (model == null)
             {
@@ -167,7 +163,7 @@ namespace EyeMezzexz.Controllers
                 return NotFound("User not found");
             }
 
-            _context.Staffs.Add(model);
+            _context.StaffInOut.Add(model);
             _context.SaveChanges();
 
             if (model.Id == 0)
@@ -177,15 +173,15 @@ namespace EyeMezzexz.Controllers
             return Ok(new { message = "Staff data saved successfully", StaffId = model.Id });
         }
 
-        [HttpPut("updateStaff")]
-        public IActionResult UpdateStaff([FromBody] Staff model)
+        [HttpPost("updateStaff")]
+        public IActionResult UpdateStaff([FromBody] StaffInOut model)
         {
             if (model == null)
             {
                 return BadRequest("Model is null");
             }
 
-            var existingStaff = _context.Staffs.FirstOrDefault(s => s.Id == model.Id);
+            var existingStaff = _context.StaffInOut.FirstOrDefault(s => s.Id == model.Id);
             if (existingStaff == null)
             {
                 return NotFound("Staff not found");
@@ -216,7 +212,7 @@ namespace EyeMezzexz.Controllers
         [HttpGet("getStaff")]
         public IActionResult GetStaff()
         {
-            var staff = _context.Staffs.Select(s => new
+            var staff = _context.StaffInOut.Select(s => new
             {
                 s.Id,
                 s.StaffInTime,
@@ -226,7 +222,7 @@ namespace EyeMezzexz.Controllers
             return Ok(staff);
         }
 
-        [HttpPut("updateTaskTimer")]
+        [HttpPost("updateTaskTimer")]
         public IActionResult UpdateTaskTimer([FromBody] UpdateTaskTimerRequest model)
         {
             if (model == null)
@@ -246,17 +242,70 @@ namespace EyeMezzexz.Controllers
 
             return Ok(new { Message = "Task timer updated successfully", TaskTimeId = taskTimer.Id });
         }
+
+        [HttpPost("createTask")]
+        public IActionResult CreateTask([FromBody] TaskModelRequest model)
+        {
+            if (model == null)
+            {
+                return BadRequest("Model is null");
+            }
+
+            var task = new TaskNames
+            {
+                Name = model.Name,
+                TaskCreatedBy = User.Identity.Name, // Assuming you have user identity setup
+                TaskCreatedOn = DateTime.UtcNow
+            };
+
+            _context.TaskNames.Add(task);
+            _context.SaveChanges();
+
+            if (task.Id == 0)
+            {
+                return StatusCode(500, "Failed to create Task");
+            }
+            return Ok(new { Message = "Task created successfully", TaskId = task.Id });
+        }
+
+        [HttpPut("updateTask")]
+        public IActionResult UpdateTask([FromBody] TaskNames model)
+        {
+            if (model == null)
+            {
+                return BadRequest("Model is null");
+            }
+
+            var existingTask = _context.TaskNames.FirstOrDefault(t => t.Id == model.Id);
+            if (existingTask == null)
+            {
+                return NotFound("Task not found");
+            }
+
+            existingTask.Name = model.Name;
+            existingTask.TaskModifiedBy = User.Identity.Name; // Assuming you have user identity setup
+            existingTask.TaskModifiedOn = DateTime.UtcNow;
+
+            try
+            {
+                _context.SaveChanges();
+            }
+            catch (DbUpdateException ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"An error occurred while updating the task record: {ex.Message}");
+            }
+
+            return Ok(new { Message = "Task updated successfully", TaskId = existingTask.Id });
+        }
     }
 
     public class UploadRequest
     {
         public string ImageUrl { get; set; }
         public string? VideoUrl { get; set; }
-        public string SystemInfo { get; set; }
-        public string ActivityLog { get; set; }
         public string Username { get; set; }
         public string SystemName { get; set; }
-        public DateTime Timestamp { get; set; }
+        public DateTime CreatedOn { get; set; }
         public int? TaskTimerId { get; set; } // Add TaskTimerId to UploadRequest
     }
 
@@ -287,9 +336,8 @@ namespace EyeMezzexz.Controllers
         public DateTime TaskEndTime { get; set; }
     }
 
-    public class TaskModel
+    public class TaskModelRequest
     {
-        public int Id { get; set; }
         public string Name { get; set; }
     }
 }
