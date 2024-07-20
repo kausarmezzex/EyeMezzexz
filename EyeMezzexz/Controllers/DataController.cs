@@ -100,7 +100,7 @@ namespace EyeMezzexz.Controllers
                 {
                     Id = t.Id,
                     UserId = t.UserId,
-                    UserName = t.User.UserName,
+                    UserName = t.User.FirstName+" "+t.User.LastName,
                     TaskId = t.TaskId,
                     TaskName = t.Task.Name,
                     TaskComment = t.TaskComment,
@@ -125,7 +125,7 @@ namespace EyeMezzexz.Controllers
                 {
                     Id = t.Id,
                     UserId = t.UserId,
-                    UserName = t.User.UserName,
+                    UserName = t.User.FirstName +" "+ t.User.LastName,
                     TaskId = t.TaskId,
                     TaskName = t.Task.Name,
                     TaskComment = t.TaskComment,
@@ -220,6 +220,28 @@ namespace EyeMezzexz.Controllers
             }).ToList();
 
             return Ok(staff);
+        }
+
+        [HttpGet("getStaffInTime")]
+        public IActionResult GetStaffInTime(int userId)
+        {
+            var staffInOut = _context.StaffInOut
+                .Where(s => s.UserId == userId)
+                .OrderByDescending(s => s.StaffInTime)
+                .FirstOrDefault();
+
+            if (staffInOut == null)
+            {
+                return NotFound("Staff in time not found for the given user ID");
+            }
+
+            var response = new
+            {
+                StaffInTime = staffInOut.StaffInTime,
+                StaffId = staffInOut.Id
+            };
+
+            return Ok(response);
         }
 
         [HttpPost("updateTaskTimer")]
