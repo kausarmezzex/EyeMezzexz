@@ -89,7 +89,7 @@ namespace EyeMezzexz.Controllers
 
         [HttpGet("getTaskTimers")]
         public IActionResult GetTaskTimers()
-        {
+                        {
             var today = DateTime.Today;
 
             var taskTimers = _context.TaskTimers
@@ -225,14 +225,16 @@ namespace EyeMezzexz.Controllers
         [HttpGet("getStaffInTime")]
         public IActionResult GetStaffInTime(int userId)
         {
+            var today = DateTime.Today;
+
             var staffInOut = _context.StaffInOut
-                .Where(s => s.UserId == userId)
+                .Where(s => s.UserId == userId && s.StaffInTime.Date == today)
                 .OrderByDescending(s => s.StaffInTime)
                 .FirstOrDefault();
 
             if (staffInOut == null)
             {
-                return NotFound("Staff in time not found for the given user ID");
+                return NotFound("Staff in time not found for the given user ID and today's date");
             }
 
             var response = new
@@ -243,6 +245,7 @@ namespace EyeMezzexz.Controllers
 
             return Ok(response);
         }
+
 
         [HttpPost("updateTaskTimer")]
         public IActionResult UpdateTaskTimer([FromBody] UpdateTaskTimerRequest model)
@@ -288,6 +291,22 @@ namespace EyeMezzexz.Controllers
                 return StatusCode(500, "Failed to create Task");
             }
             return Ok(new { Message = "Task created successfully", TaskId = task.Id });
+        }
+
+        [HttpGet("getTaskTimeId")]
+        public IActionResult GetTaskTimeId(int taskId)
+        {
+            var taskTimer = _context.TaskTimers
+                .Where(t => t.Id == taskId && t.TaskEndTime == null)
+                .Select(t => new { t.Id })
+                .FirstOrDefault();
+
+            if (taskTimer == null)
+            {
+                return NotFound("TaskTimer not found");
+            }
+
+            return Ok(new { TaskTimeId = taskTimer.Id });
         }
 
         [HttpPut("updateTask")]
