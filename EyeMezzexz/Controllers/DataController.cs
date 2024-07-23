@@ -89,7 +89,7 @@ namespace EyeMezzexz.Controllers
 
         [HttpGet("getTaskTimers")]
         public IActionResult GetTaskTimers()
-                        {
+         {
             var today = DateTime.Today;
 
             var taskTimers = _context.TaskTimers
@@ -228,7 +228,7 @@ namespace EyeMezzexz.Controllers
             var today = DateTime.Today;
 
             var staffInOut = _context.StaffInOut
-                .Where(s => s.UserId == userId && s.StaffInTime.Date == today)
+                .Where(s => s.UserId == userId && s.StaffInTime.Date == today && s.StaffOutTime==null)
                 .OrderByDescending(s => s.StaffInTime)
                 .FirstOrDefault();
 
