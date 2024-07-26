@@ -27,7 +27,7 @@ namespace EyeMezzexz.Controllers
             {
                 int pageSize = 9; // Set pageSize to 9
                 var data = await _apiService.GetScreenCaptureDataAsync();
-                var usernames = await _apiService.GetUsernamesAsync();
+                var usernames = await _apiService.GetAllUsernamesAsync();
 
                 _logger.LogInformation("Retrieved data and usernames from the API.");
 

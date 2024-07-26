@@ -81,6 +81,17 @@ namespace EyeMezzexz.Controllers
             // Return the simplified response
             return Ok(new { message = "Login successful", userId = user.Id, username = user.FirstName+" "+user.LastName });
         }
+
+        [HttpGet("getAllUsernames")]
+        public async Task<IActionResult> GetAllUsernames()
+        {
+            var users = await _context.Users.Select(u => new { u.FirstName, u.LastName }).ToListAsync();
+
+            var usernames = users.Select(u => $"{u.FirstName} {u.LastName}").ToList();
+
+            return Ok(usernames);
+        }
+
     }
 
     public class LoginRequest1

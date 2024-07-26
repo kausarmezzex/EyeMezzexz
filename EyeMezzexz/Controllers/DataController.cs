@@ -88,8 +88,8 @@ namespace EyeMezzexz.Controllers
         }
 
         [HttpGet("getTaskTimers")]
-        public IActionResult GetTaskTimers()
-         {
+        public IActionResult GetTaskTimers(int userId)
+        {
             var today = DateTime.Today;
 
             var taskTimers = _context.TaskTimers
@@ -100,17 +100,21 @@ namespace EyeMezzexz.Controllers
                 {
                     Id = t.Id,
                     UserId = t.UserId,
-                    UserName = t.User.FirstName+" "+t.User.LastName,
+                    UserName = t.User.FirstName + " " + t.User.LastName,
                     TaskId = t.TaskId,
                     TaskName = t.Task.Name,
                     TaskComment = t.TaskComment,
                     TaskStartTime = t.TaskStartTime,
                     TaskEndTime = t.TaskEndTime
                 })
+                .OrderByDescending(t => t.UserId == userId) // Prioritize tasks of the specified user
+                .ThenBy(t => t.TaskStartTime) // Optional: Further ordering, e.g., by start time
                 .ToList();
 
             return Ok(taskTimers);
         }
+
+
 
         [HttpGet("getUserCompletedTasks")]
         public IActionResult GetUserCompletedTasks(int userId)
@@ -249,7 +253,7 @@ namespace EyeMezzexz.Controllers
 
         [HttpPost("updateTaskTimer")]
         public IActionResult UpdateTaskTimer([FromBody] UpdateTaskTimerRequest model)
-        {
+                {
             if (model == null)
             {
                 return BadRequest("Model is null");
