@@ -19,6 +19,27 @@ namespace EyeMezzexz.Controllers
             _context = context;
         }
 
+        private TimeSpan GetTimeDifference(string clientTimeZone)
+        {
+            TimeZoneInfo ukTimeZone = TimeZoneInfo.FindSystemTimeZoneById("GMT Standard Time");
+            TimeZoneInfo clientZone;
+
+            try
+            {
+                clientZone = TimeZoneInfo.FindSystemTimeZoneById(clientTimeZone);
+            }
+            catch (TimeZoneNotFoundException)
+            {
+                // Default to UK time if the client time zone is not found
+                clientZone = ukTimeZone;
+            }
+
+            DateTime ukTime = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, ukTimeZone);
+            DateTime clientTime = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, clientZone);
+
+            return clientTime - ukTime;
+        }
+
         [HttpPost("saveScreenCaptureData")]
         public IActionResult SaveScreenCaptureData([FromBody] UploadRequest model)
         {
@@ -39,11 +60,11 @@ namespace EyeMezzexz.Controllers
             var uploadedData = new UploadedData
             {
                 ImageUrl = model.ImageUrl,
-                CreatedOn = model.CreatedOn,
+                CreatedOn = _context.GetDatabaseServerTime(),
                 Username = model.Username,
                 SystemName = model.SystemName,
-                TaskName = taskTimer.Task.Name, // Assign TaskName from TaskTimer
-                TaskTimerId = model.TaskTimerId, // Assign TaskTimerId
+                TaskName = taskTimer.Task.Name,
+                TaskTimerId = model.TaskTimerId,
                 VideoUrl = model.VideoUrl
             };
 
@@ -54,7 +75,7 @@ namespace EyeMezzexz.Controllers
         }
 
         [HttpGet("getScreenCaptureData")]
-        public IActionResult GetScreenCaptureData()
+        public IActionResult GetScreenCaptureData(string clientTimeZone)
         {
             var data = _context.UploadedData.Select(d => new
             {
@@ -63,32 +84,57 @@ namespace EyeMezzexz.Controllers
                 Username = d.Username,
                 Id = d.Id,
                 SystemName = d.SystemName,
-                TaskName = d.TaskName, // Include TaskName in the response
+                TaskName = d.TaskName,
                 VideoUrl = d.VideoUrl
+            }).ToList();
+
+            var timeDifference = GetTimeDifference(clientTimeZone);
+
+            data = data.Select(d => new
+            {
+                d.ImageUrl,
+                Timestamp = d.Timestamp.Add(timeDifference),
+                d.Username,
+                d.Id,
+                d.SystemName,
+                d.TaskName,
+                d.VideoUrl
             }).ToList();
 
             return Ok(data);
         }
 
         [HttpPost("saveTaskTimer")]
-        public IActionResult SaveTaskTimer([FromBody] TaskTimer model)
+        public IActionResult SaveTaskTimer([FromBody] TaskTimerUploadRequest model)
         {
             if (model == null)
             {
                 return BadRequest("Model is null");
             }
 
-            _context.TaskTimers.Add(model);
+            var taskTimer = new TaskTimer
+            {
+                UserId = model.UserId,
+                TaskId = model.TaskId,
+                TaskComment = model.TaskComment,
+                TaskStartTime = _context.GetDatabaseServerTime(),
+                TaskEndTime = model.TaskEndTime,
+                TimeDifference = GetTimeDifference(model.ClientTimeZone),
+                ClientTimeZone = model.ClientTimeZone
+            };
+
+            _context.TaskTimers.Add(taskTimer);
             _context.SaveChanges();
-            if (model.Id == 0)
+
+            if (taskTimer.Id == 0)
             {
                 return StatusCode(500, "Failed to generate TaskTimer");
             }
-            return Ok(new { Message = "Task timer data uploaded successfully", TaskTimeId = model.Id });
+            return Ok(new { Message = "Task timer data uploaded successfully", TaskTimeId = taskTimer.Id });
         }
 
         [HttpGet("getTaskTimers")]
-        public IActionResult GetTaskTimers(int userId)
+        public IActionResult GetTaskTimers(int userId, string clientTimeZone)
         {
             var today = DateTime.Today;
 
@@ -107,50 +153,25 @@ namespace EyeMezzexz.Controllers
                     TaskStartTime = t.TaskStartTime,
                     TaskEndTime = t.TaskEndTime
                 })
-                .OrderByDescending(t => t.UserId == userId) // Prioritize tasks of the specified user
-                .ThenBy(t => t.TaskStartTime) // Optional: Further ordering, e.g., by start time
+                .OrderByDescending(t => t.UserId == userId)
+                .ThenBy(t => t.TaskStartTime)
                 .ToList();
 
-            return Ok(taskTimers);
-        }
+            var timeDifference = GetTimeDifference(clientTimeZone);
 
-
-
-        [HttpGet("getUserCompletedTasks")]
-        public IActionResult GetUserCompletedTasks(int userId)
-        {
-            var today = DateTime.Today;
-
-            var completedTaskTimers = _context.TaskTimers
-                .Include(t => t.Task)
-                .Include(t => t.User)
-                .Where(t => t.UserId == userId && t.TaskStartTime.Date == today && t.TaskEndTime != null)
-                .Select(t => new TaskTimerResponse
-                {
-                    Id = t.Id,
-                    UserId = t.UserId,
-                    UserName = t.User.FirstName +" "+ t.User.LastName,
-                    TaskId = t.TaskId,
-                    TaskName = t.Task.Name,
-                    TaskComment = t.TaskComment,
-                    TaskStartTime = t.TaskStartTime,
-                    TaskEndTime = t.TaskEndTime
-                })
-                .ToList();
-
-            return Ok(completedTaskTimers);
-        }
-
-        [HttpGet("getTasks")]
-        public IActionResult GetTasks()
-        {
-            var tasks = _context.TaskNames.Select(t => new TaskNames
+            taskTimers = taskTimers.Select(t => new TaskTimerResponse
             {
                 Id = t.Id,
-                Name = t.Name
+                UserId = t.UserId,
+                UserName = t.UserName,
+                TaskId = t.TaskId,
+                TaskName = t.TaskName,
+                TaskComment = t.TaskComment,
+                TaskStartTime = t.TaskStartTime.Add(timeDifference),
+                TaskEndTime = t.TaskEndTime.HasValue ? t.TaskEndTime.Value.Add(timeDifference) : (DateTime?)null
             }).ToList();
 
-            return Ok(tasks);
+            return Ok(taskTimers);
         }
 
         [HttpPost("saveStaff")]
@@ -166,6 +187,10 @@ namespace EyeMezzexz.Controllers
             {
                 return NotFound("User not found");
             }
+
+            model.StaffInTime = _context.GetDatabaseServerTime();
+            model.TimeDifference = GetTimeDifference(model.ClientTimeZone);
+            model.ClientTimeZone = model.ClientTimeZone;
 
             _context.StaffInOut.Add(model);
             _context.SaveChanges();
@@ -197,9 +222,11 @@ namespace EyeMezzexz.Controllers
                 return NotFound("User not found");
             }
 
-            existingStaff.StaffInTime = model.StaffInTime;
-            existingStaff.StaffOutTime = model.StaffOutTime;
+            existingStaff.StaffInTime = _context.GetDatabaseServerTime();
+            existingStaff.StaffOutTime = model.StaffOutTime.HasValue ? _context.GetDatabaseServerTime() : (DateTime?)null;
             existingStaff.UserId = model.UserId;
+            existingStaff.TimeDifference = GetTimeDifference(model.ClientTimeZone);
+            existingStaff.ClientTimeZone = model.ClientTimeZone;
 
             try
             {
@@ -214,7 +241,7 @@ namespace EyeMezzexz.Controllers
         }
 
         [HttpGet("getStaff")]
-        public IActionResult GetStaff()
+        public IActionResult GetStaff(string clientTimeZone)
         {
             var staff = _context.StaffInOut.Select(s => new
             {
@@ -223,16 +250,25 @@ namespace EyeMezzexz.Controllers
                 s.StaffOutTime
             }).ToList();
 
+            var timeDifference = GetTimeDifference(clientTimeZone);
+
+            staff = staff.Select(s => new
+            {
+                s.Id,
+                StaffInTime = s.StaffInTime.Add(timeDifference),
+                StaffOutTime = s.StaffOutTime.HasValue ? s.StaffOutTime.Value.Add(timeDifference) : (DateTime?)null
+            }).ToList();
+
             return Ok(staff);
         }
 
         [HttpGet("getStaffInTime")]
-        public IActionResult GetStaffInTime(int userId)
+        public IActionResult GetStaffInTime(int userId, string clientTimeZone)
         {
             var today = DateTime.Today;
 
             var staffInOut = _context.StaffInOut
-                .Where(s => s.UserId == userId && s.StaffInTime.Date == today && s.StaffOutTime==null)
+                .Where(s => s.UserId == userId && s.StaffInTime.Date == today && s.StaffOutTime == null)
                 .OrderByDescending(s => s.StaffInTime)
                 .FirstOrDefault();
 
@@ -247,13 +283,20 @@ namespace EyeMezzexz.Controllers
                 StaffId = staffInOut.Id
             };
 
+            var timeDifference = GetTimeDifference(clientTimeZone);
+
+            response = new
+            {
+                StaffInTime = staffInOut.StaffInTime.Add(timeDifference),
+                StaffId = staffInOut.Id
+            };
+
             return Ok(response);
         }
 
-
         [HttpPost("updateTaskTimer")]
         public IActionResult UpdateTaskTimer([FromBody] UpdateTaskTimerRequest model)
-                {
+        {
             if (model == null)
             {
                 return BadRequest("Model is null");
@@ -264,7 +307,9 @@ namespace EyeMezzexz.Controllers
             {
                 return NotFound("TaskTimer not found");
             }
-            taskTimer.TaskEndTime = model.TaskEndTime;
+            taskTimer.TaskEndTime = _context.GetDatabaseServerTime();
+            taskTimer.TimeDifference = GetTimeDifference(model.ClientTimeZone);
+            taskTimer.ClientTimeZone = model.ClientTimeZone;
 
             _context.TaskTimers.Update(taskTimer);
             _context.SaveChanges();
@@ -283,8 +328,8 @@ namespace EyeMezzexz.Controllers
             var task = new TaskNames
             {
                 Name = model.Name,
-                TaskCreatedBy = User.Identity.Name, // Assuming you have user identity setup
-                TaskCreatedOn = DateTime.UtcNow
+                TaskCreatedBy = User.Identity.Name,
+                TaskCreatedOn = _context.GetDatabaseServerTime()
             };
 
             _context.TaskNames.Add(task);
@@ -298,7 +343,7 @@ namespace EyeMezzexz.Controllers
         }
 
         [HttpGet("getTaskTimeId")]
-        public IActionResult GetTaskTimeId(int taskId)
+        public IActionResult GetTaskTimeId(int taskId, string clientTimeZone)
         {
             var taskTimer = _context.TaskTimers
                 .Where(t => t.Id == taskId && t.TaskEndTime == null)
@@ -328,8 +373,8 @@ namespace EyeMezzexz.Controllers
             }
 
             existingTask.Name = model.Name;
-            existingTask.TaskModifiedBy = User.Identity.Name; // Assuming you have user identity setup
-            existingTask.TaskModifiedOn = DateTime.UtcNow;
+            existingTask.TaskModifiedBy = User.Identity.Name;
+            existingTask.TaskModifiedOn = _context.GetDatabaseServerTime();
 
             try
             {
@@ -342,47 +387,58 @@ namespace EyeMezzexz.Controllers
 
             return Ok(new { Message = "Task updated successfully", TaskId = existingTask.Id });
         }
-    }
+        [HttpGet("getTasks")]
+        public IActionResult GetTasks()
+        {
+            var tasks = _context.TaskNames.Select(t => new TaskNames
+            {
+                Id = t.Id,
+                Name = t.Name
+            }).ToList();
 
-    public class UploadRequest
-    {
-        public string ImageUrl { get; set; }
-        public string? VideoUrl { get; set; }
-        public string Username { get; set; }
-        public string SystemName { get; set; }
-        public DateTime CreatedOn { get; set; }
-        public int? TaskTimerId { get; set; } // Add TaskTimerId to UploadRequest
+            return Ok(tasks);
+        }
     }
+}
 
-    public class TaskTimerUploadRequest
-    {
-        public int UserId { get; set; }
-        public int TaskId { get; set; }
-        public string? TaskComment { get; set; }
-        public DateTime TaskStartTime { get; set; }
-        public DateTime? TaskEndTime { get; set; }
-    }
+public class TaskModelRequest
+{
+    public string Name { get; set; }
+}
+public class UpdateTaskTimerRequest
+{
+    public int Id { get; set; }
+    public DateTime TaskEndTime { get; set; }
+    public string? ClientTimeZone { get; set; }
+}
 
-    public class TaskTimerResponse
-    {
-        public int Id { get; set; }
-        public int UserId { get; set; }
-        public string UserName { get; set; }
-        public int TaskId { get; set; }
-        public string TaskName { get; set; }
-        public string TaskComment { get; set; }
-        public DateTime TaskStartTime { get; set; }
-        public DateTime? TaskEndTime { get; set; }
-    }
+public class TaskTimerResponse
+{
+    public int Id { get; set; }
+    public int UserId { get; set; }
+    public string UserName { get; set; }
+    public int TaskId { get; set; }
+    public string TaskName { get; set; }
+    public string TaskComment { get; set; }
+    public DateTime TaskStartTime { get; set; }
+    public DateTime? TaskEndTime { get; set; }
+}
+public class TaskTimerUploadRequest
+{
+    public int UserId { get; set; }
+    public int TaskId { get; set; }
+    public string? TaskComment { get; set; }
+    public DateTime TaskStartTime { get; set; }
+    public DateTime? TaskEndTime { get; set; }
+    public string? ClientTimeZone { get; set; }
+}
 
-    public class UpdateTaskTimerRequest
-    {
-        public int Id { get; set; }
-        public DateTime TaskEndTime { get; set; }
-    }
-
-    public class TaskModelRequest
-    {
-        public string Name { get; set; }
-    }
+public class UploadRequest
+{
+    public string ImageUrl { get; set; }
+    public string? VideoUrl { get; set; }
+    public string Username { get; set; }
+    public string SystemName { get; set; }
+    public DateTime CreatedOn { get; set; }
+    public int? TaskTimerId { get; set; } // Add TaskTimerId to UploadRequest
 }

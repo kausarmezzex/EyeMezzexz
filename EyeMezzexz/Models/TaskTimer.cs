@@ -10,6 +10,8 @@
         public DateTime TaskStartTime { get; set; }
         public DateTime? TaskEndTime { get; set; }
         public ApplicationUser? User { get; set; } // Use ApplicationUser instead of User
-        public TaskNames? Task { get; set; }  // Navigation property
+        public TaskNames? Task { get; set; }
+        public string? ClientTimeZone { get; set; } // Navigation property
+        public TimeSpan? TimeDifference { get; set; }
     }
 }
