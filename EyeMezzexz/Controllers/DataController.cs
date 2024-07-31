@@ -4,7 +4,9 @@ using EyeMezzexz.Data;
 using EyeMezzexz.Models;
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 namespace EyeMezzexz.Controllers
 {
@@ -13,44 +15,52 @@ namespace EyeMezzexz.Controllers
     public class DataController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public DataController(ApplicationDbContext context)
+        public DataController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
-        private TimeSpan GetTimeDifference(string clientTimeZone)
+        private static TimeSpan GetTimeDifference(string clientTimeZone)
         {
             TimeZoneInfo ukTimeZone = TimeZoneInfo.FindSystemTimeZoneById("GMT Standard Time");
-            TimeZoneInfo clientZone;
+
+            if (clientTimeZone == "GMT Standard Time")
+            {
+                return TimeSpan.Zero;
+            }
+
+            if (clientTimeZone == "Asia/Kolkata")
+            {
+                DateTime now = DateTime.UtcNow;
+                bool isUKSummerTime = now.Month >= 3 && now.Month <= 10;
+                return isUKSummerTime ? TimeSpan.FromHours(4.5) : TimeSpan.FromHours(5.5);
+            }
 
             try
             {
-                clientZone = TimeZoneInfo.FindSystemTimeZoneById(clientTimeZone);
+                TimeZoneInfo clientZone = TimeZoneInfo.FindSystemTimeZoneById(clientTimeZone);
+                return TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, clientZone) - TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, ukTimeZone);
             }
             catch (TimeZoneNotFoundException)
             {
-                // Default to UK time if the client time zone is not found
-                clientZone = ukTimeZone;
+                return TimeSpan.Zero;
             }
-
-            DateTime ukTime = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, ukTimeZone);
-            DateTime clientTime = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, clientZone);
-
-            return clientTime - ukTime;
         }
 
         [HttpPost("saveScreenCaptureData")]
-        public IActionResult SaveScreenCaptureData([FromBody] UploadRequest model)
+        public async Task<IActionResult> SaveScreenCaptureData([FromBody] UploadRequest model)
         {
             if (model == null)
             {
                 return BadRequest("Model is null");
             }
 
-            var taskTimer = _context.TaskTimers
+            var taskTimer = await _context.TaskTimers
                 .Include(t => t.Task)
-                .FirstOrDefault(t => t.Id == model.TaskTimerId);
+                .FirstOrDefaultAsync(t => t.Id == model.TaskTimerId);
 
             if (taskTimer == null)
             {
@@ -69,43 +79,34 @@ namespace EyeMezzexz.Controllers
             };
 
             _context.UploadedData.Add(uploadedData);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
 
             return Ok(new { Message = "Screen capture data uploaded successfully" });
         }
 
         [HttpGet("getScreenCaptureData")]
-        public IActionResult GetScreenCaptureData(string clientTimeZone)
+        public async Task<IActionResult> GetScreenCaptureData(string clientTimeZone)
         {
-            var data = _context.UploadedData.Select(d => new
-            {
-                ImageUrl = d.ImageUrl,
-                Timestamp = d.CreatedOn,
-                Username = d.Username,
-                Id = d.Id,
-                SystemName = d.SystemName,
-                TaskName = d.TaskName,
-                VideoUrl = d.VideoUrl
-            }).ToList();
-
             var timeDifference = GetTimeDifference(clientTimeZone);
 
-            data = data.Select(d => new
-            {
-                d.ImageUrl,
-                Timestamp = d.Timestamp.Add(timeDifference),
-                d.Username,
-                d.Id,
-                d.SystemName,
-                d.TaskName,
-                d.VideoUrl
-            }).ToList();
+            var data = await _context.UploadedData
+                .Select(d => new
+                {
+                    d.ImageUrl,
+                    Timestamp = d.CreatedOn.Add(timeDifference),
+                    d.Username,
+                    d.Id,
+                    d.SystemName,
+                    d.TaskName,
+                    d.VideoUrl
+                })
+                .ToListAsync();
 
             return Ok(data);
         }
 
         [HttpPost("saveTaskTimer")]
-        public IActionResult SaveTaskTimer([FromBody] TaskTimerUploadRequest model)
+        public async Task<IActionResult> SaveTaskTimer([FromBody] TaskTimerUploadRequest model)
         {
             if (model == null)
             {
@@ -124,65 +125,48 @@ namespace EyeMezzexz.Controllers
             };
 
             _context.TaskTimers.Add(taskTimer);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
 
-            if (taskTimer.Id == 0)
-            {
-                return StatusCode(500, "Failed to generate TaskTimer");
-            }
             return Ok(new { Message = "Task timer data uploaded successfully", TaskTimeId = taskTimer.Id });
         }
 
         [HttpGet("getTaskTimers")]
-        public IActionResult GetTaskTimers(int userId, string clientTimeZone)
+        public async Task<IActionResult> GetTaskTimers(int userId, string clientTimeZone)
         {
             var today = DateTime.Today;
+            var timeDifference = GetTimeDifference(clientTimeZone);
 
-            var taskTimers = _context.TaskTimers
+            var taskTimers = await _context.TaskTimers
                 .Include(t => t.Task)
                 .Include(t => t.User)
                 .Where(t => t.TaskStartTime.Date == today && t.TaskEndTime == null)
+                .OrderByDescending(t => t.UserId == userId)
+                .ThenBy(t => t.TaskStartTime)
                 .Select(t => new TaskTimerResponse
                 {
                     Id = t.Id,
                     UserId = t.UserId,
-                    UserName = t.User.FirstName + " " + t.User.LastName,
+                    UserName = $"{t.User.FirstName} {t.User.LastName}",
                     TaskId = t.TaskId,
                     TaskName = t.Task.Name,
                     TaskComment = t.TaskComment,
-                    TaskStartTime = t.TaskStartTime,
-                    TaskEndTime = t.TaskEndTime
+                    TaskStartTime = t.TaskStartTime.Add(timeDifference),
+                    TaskEndTime = t.TaskEndTime.HasValue ? t.TaskEndTime.Value.Add(timeDifference) : (DateTime?)null
                 })
-                .OrderByDescending(t => t.UserId == userId)
-                .ThenBy(t => t.TaskStartTime)
-                .ToList();
-
-            var timeDifference = GetTimeDifference(clientTimeZone);
-
-            taskTimers = taskTimers.Select(t => new TaskTimerResponse
-            {
-                Id = t.Id,
-                UserId = t.UserId,
-                UserName = t.UserName,
-                TaskId = t.TaskId,
-                TaskName = t.TaskName,
-                TaskComment = t.TaskComment,
-                TaskStartTime = t.TaskStartTime.Add(timeDifference),
-                TaskEndTime = t.TaskEndTime.HasValue ? t.TaskEndTime.Value.Add(timeDifference) : (DateTime?)null
-            }).ToList();
+                .ToListAsync();
 
             return Ok(taskTimers);
         }
 
         [HttpPost("saveStaff")]
-        public IActionResult SaveStaff([FromBody] StaffInOut model)
+        public async Task<IActionResult> SaveStaff([FromBody] StaffInOut model)
         {
             if (model == null)
             {
                 return BadRequest("Model is null");
             }
 
-            var user = _context.Users.Find(model.UserId);
+            var user = await _context.Users.FindAsync(model.UserId);
             if (user == null)
             {
                 return NotFound("User not found");
@@ -190,47 +174,40 @@ namespace EyeMezzexz.Controllers
 
             model.StaffInTime = _context.GetDatabaseServerTime();
             model.TimeDifference = GetTimeDifference(model.ClientTimeZone);
-            model.ClientTimeZone = model.ClientTimeZone;
 
             _context.StaffInOut.Add(model);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
 
-            if (model.Id == 0)
-            {
-                return StatusCode(500, "Failed to generate StaffId");
-            }
             return Ok(new { message = "Staff data saved successfully", StaffId = model.Id });
         }
 
         [HttpPost("updateStaff")]
-        public IActionResult UpdateStaff([FromBody] StaffInOut model)
+        public async Task<IActionResult> UpdateStaff([FromBody] StaffInOut model)
         {
             if (model == null)
             {
                 return BadRequest("Model is null");
             }
 
-            var existingStaff = _context.StaffInOut.FirstOrDefault(s => s.Id == model.Id);
+            var existingStaff = await _context.StaffInOut.FindAsync(model.Id);
             if (existingStaff == null)
             {
                 return NotFound("Staff not found");
             }
 
-            var user = _context.Users.FirstOrDefault(u => u.Id == model.UserId);
+            var user = await _context.Users.FindAsync(model.UserId);
             if (user == null)
             {
                 return NotFound("User not found");
             }
 
-            existingStaff.StaffInTime = _context.GetDatabaseServerTime();
             existingStaff.StaffOutTime = model.StaffOutTime.HasValue ? _context.GetDatabaseServerTime() : (DateTime?)null;
-            existingStaff.UserId = model.UserId;
             existingStaff.TimeDifference = GetTimeDifference(model.ClientTimeZone);
             existingStaff.ClientTimeZone = model.ClientTimeZone;
 
             try
             {
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
             }
             catch (DbUpdateException ex)
             {
@@ -241,36 +218,32 @@ namespace EyeMezzexz.Controllers
         }
 
         [HttpGet("getStaff")]
-        public IActionResult GetStaff(string clientTimeZone)
+        public async Task<IActionResult> GetStaff(string clientTimeZone)
         {
-            var staff = _context.StaffInOut.Select(s => new
-            {
-                s.Id,
-                s.StaffInTime,
-                s.StaffOutTime
-            }).ToList();
-
             var timeDifference = GetTimeDifference(clientTimeZone);
 
-            staff = staff.Select(s => new
-            {
-                s.Id,
-                StaffInTime = s.StaffInTime.Add(timeDifference),
-                StaffOutTime = s.StaffOutTime.HasValue ? s.StaffOutTime.Value.Add(timeDifference) : (DateTime?)null
-            }).ToList();
+            var staff = await _context.StaffInOut
+                .Select(s => new
+                {
+                    s.Id,
+                    StaffInTime = s.StaffInTime.Add(timeDifference),
+                    StaffOutTime = s.StaffOutTime.HasValue ? s.StaffOutTime.Value.Add(timeDifference) : (DateTime?)null
+                })
+                .ToListAsync();
 
             return Ok(staff);
         }
 
         [HttpGet("getStaffInTime")]
-        public IActionResult GetStaffInTime(int userId, string clientTimeZone)
+        public async Task<IActionResult> GetStaffInTime(int userId, string clientTimeZone)
         {
             var today = DateTime.Today;
+            var timeDifference = GetTimeDifference(clientTimeZone);
 
-            var staffInOut = _context.StaffInOut
+            var staffInOut = await _context.StaffInOut
                 .Where(s => s.UserId == userId && s.StaffInTime.Date == today && s.StaffOutTime == null)
                 .OrderByDescending(s => s.StaffInTime)
-                .FirstOrDefault();
+                .FirstOrDefaultAsync();
 
             if (staffInOut == null)
             {
@@ -278,14 +251,6 @@ namespace EyeMezzexz.Controllers
             }
 
             var response = new
-            {
-                StaffInTime = staffInOut.StaffInTime,
-                StaffId = staffInOut.Id
-            };
-
-            var timeDifference = GetTimeDifference(clientTimeZone);
-
-            response = new
             {
                 StaffInTime = staffInOut.StaffInTime.Add(timeDifference),
                 StaffId = staffInOut.Id
@@ -295,30 +260,37 @@ namespace EyeMezzexz.Controllers
         }
 
         [HttpPost("updateTaskTimer")]
-        public IActionResult UpdateTaskTimer([FromBody] UpdateTaskTimerRequest model)
+        public async Task<IActionResult> UpdateTaskTimer([FromBody] UpdateTaskTimerRequest model)
         {
             if (model == null)
             {
                 return BadRequest("Model is null");
             }
 
-            var taskTimer = _context.TaskTimers.FirstOrDefault(t => t.Id == model.Id);
+            var taskTimer = await _context.TaskTimers.FindAsync(model.Id);
             if (taskTimer == null)
             {
                 return NotFound("TaskTimer not found");
             }
+
             taskTimer.TaskEndTime = _context.GetDatabaseServerTime();
             taskTimer.TimeDifference = GetTimeDifference(model.ClientTimeZone);
             taskTimer.ClientTimeZone = model.ClientTimeZone;
 
-            _context.TaskTimers.Update(taskTimer);
-            _context.SaveChanges();
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateException ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"An error occurred while updating the task timer: {ex.Message}");
+            }
 
             return Ok(new { Message = "Task timer updated successfully", TaskTimeId = taskTimer.Id });
         }
 
         [HttpPost("createTask")]
-        public IActionResult CreateTask([FromBody] TaskModelRequest model)
+        public async Task<IActionResult> CreateTask([FromBody] TaskModelRequest model)
         {
             if (model == null)
             {
@@ -333,22 +305,18 @@ namespace EyeMezzexz.Controllers
             };
 
             _context.TaskNames.Add(task);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
 
-            if (task.Id == 0)
-            {
-                return StatusCode(500, "Failed to create Task");
-            }
             return Ok(new { Message = "Task created successfully", TaskId = task.Id });
         }
 
         [HttpGet("getTaskTimeId")]
-        public IActionResult GetTaskTimeId(int taskId, string clientTimeZone)
+        public async Task<IActionResult> GetTaskTimeId(int taskId, string clientTimeZone)
         {
-            var taskTimer = _context.TaskTimers
+            var taskTimer = await _context.TaskTimers
                 .Where(t => t.Id == taskId && t.TaskEndTime == null)
                 .Select(t => new { t.Id })
-                .FirstOrDefault();
+                .FirstOrDefaultAsync();
 
             if (taskTimer == null)
             {
@@ -359,14 +327,14 @@ namespace EyeMezzexz.Controllers
         }
 
         [HttpPut("updateTask")]
-        public IActionResult UpdateTask([FromBody] TaskNames model)
+        public async Task<IActionResult> UpdateTask([FromBody] TaskNames model)
         {
             if (model == null)
             {
                 return BadRequest("Model is null");
             }
 
-            var existingTask = _context.TaskNames.FirstOrDefault(t => t.Id == model.Id);
+            var existingTask = await _context.TaskNames.FindAsync(model.Id);
             if (existingTask == null)
             {
                 return NotFound("Task not found");
@@ -378,7 +346,7 @@ namespace EyeMezzexz.Controllers
 
             try
             {
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
             }
             catch (DbUpdateException ex)
             {
@@ -387,19 +355,74 @@ namespace EyeMezzexz.Controllers
 
             return Ok(new { Message = "Task updated successfully", TaskId = existingTask.Id });
         }
+
+
+
         [HttpGet("getTasks")]
-        public IActionResult GetTasks()
+        public async Task<IActionResult> GetTasks()
         {
-            var tasks = _context.TaskNames.Select(t => new TaskNames
-            {
-                Id = t.Id,
-                Name = t.Name
-            }).ToList();
+            var tasks = await _context.TaskNames
+                .Select(t => new TaskNames
+                {
+                    Id = t.Id,
+                    Name = t.Name
+                })
+                .ToListAsync();
 
             return Ok(tasks);
         }
+
+        [HttpGet("getUserCompletedTasks")]
+        public async Task<IActionResult> GetUserCompletedTasks(int userId, string clientTimeZone)
+        {
+            try
+            {
+                var today = DateTime.Today;
+                var timeDifference = GetTimeDifference(clientTimeZone);
+
+                var completedTaskTimers = await _context.TaskTimers
+                    .Include(t => t.Task)
+                    .Include(t => t.User)
+                    .Where(t => t.UserId == userId && t.TaskStartTime.Date == today && t.TaskEndTime != null)
+                    .Select(t => new TaskTimerResponse
+                    {
+                        Id = t.Id,
+                        UserId = t.UserId,
+                        UserName = t.User.FirstName + " " + t.User.LastName,
+                        TaskId = t.TaskId,
+                        TaskName = t.Task.Name,
+                        TaskComment = t.TaskComment,
+                        TaskStartTime = t.TaskStartTime,
+                        TaskEndTime = t.TaskEndTime
+                    })
+                    .ToListAsync();
+
+                var adjustedCompletedTaskTimers = completedTaskTimers.Select(t => new TaskTimerResponse
+                {
+                    Id = t.Id,
+                    UserId = t.UserId,
+                    UserName = t.UserName,
+                    TaskId = t.TaskId,
+                    TaskName = t.TaskName,
+                    TaskComment = t.TaskComment,
+                    TaskStartTime = t.TaskStartTime.Add(timeDifference),
+                    TaskEndTime = t.TaskEndTime.HasValue ? t.TaskEndTime.Value.Add(timeDifference) : (DateTime?)null
+                }).ToList();
+
+                return Ok(adjustedCompletedTaskTimers);
+            }
+            catch (Exception ex)
+            {
+                // Log the exception as needed
+                return StatusCode(StatusCodes.Status500InternalServerError, $"An error occurred while retrieving completed tasks: {ex.Message}");
+            }
+        }
+
     }
+
+
 }
+
 
 public class TaskModelRequest
 {

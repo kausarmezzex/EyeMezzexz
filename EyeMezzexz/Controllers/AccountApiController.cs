@@ -22,7 +22,7 @@ namespace EyeMezzexz.Controllers
         {
             _webServiceClient = webServiceClient;
             _userService = userService;
-            _context = context;
+            _context = context; 
         }
 
         [HttpPost("login")]
@@ -90,6 +90,11 @@ namespace EyeMezzexz.Controllers
             var usernames = users.Select(u => $"{u.FirstName} {u.LastName}").ToList();
 
             return Ok(usernames);
+        }
+        [HttpGet("getUserByEmail")]
+        public async Task<ApplicationUser> GetUserByEmailAsync(string email)
+        {
+            return await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
         }
 
     }

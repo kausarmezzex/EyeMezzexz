@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -9,6 +10,7 @@ using MezzexEye.Models;
 
 namespace EyeMezzexz.Controllers
 {
+    [Authorize]
     public class DataForViewController : Controller
     {
         private readonly ApiService _apiService;
@@ -31,9 +33,34 @@ namespace EyeMezzexz.Controllers
 
                 _logger.LogInformation("Retrieved data and usernames from the API.");
 
+                // Get the logged-in user's email
+                var email = User.Identity.Name;
+                var user = await _apiService.GetUserByEmailAsync(email);
+
+                if (user == null)
+                {
+                    _logger.LogError("User not found.");
+                    return StatusCode(500, "Internal server error");
+                }
+
+                // Check the role of the logged-in user
+                if (User.IsInRole("Administrator"))
+                {
+                    _logger.LogInformation("User is an Administrator.");
+                    // No additional filtering needed, show all data and usernames
+                }
+                else if (User.IsInRole("Registered"))
+                {
+                    _logger.LogInformation("User is a Registered user.");
+                    // Filter data to only show the logged-in user's data
+                    var loggedInFullName = $"{user.FirstName} {user.LastName}";
+                    data = data.Where(d => $"{d.Username}" == loggedInFullName).ToList();
+                    usernames = usernames.Where(u => u == loggedInFullName).ToList();
+                }
+
                 if (!string.IsNullOrEmpty(username))
                 {
-                    data = data.Where(d => d.Username == username).ToList();
+                    data = data.Where(d => $"{d.Username}" == username).ToList();
                     _logger.LogInformation($"Filtered data by username: {username}");
                 }
 
@@ -63,7 +90,7 @@ namespace EyeMezzexz.Controllers
 
                 ViewBag.Usernames = usernames;
                 ViewBag.MediaType = mediaType;
-                ViewBag.SelectedUsername = username; // Set the selected username
+                ViewBag.SelectedUsername = usernames; // Set the selected username
 
                 if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
                 {

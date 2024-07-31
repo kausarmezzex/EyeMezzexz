@@ -3,33 +3,49 @@
 @{
     ViewData["Title"] = "Screen Capture Data";
     var today = DateTime.Today.ToString("yyyy-MM-dd");
+    var isAdministrator = User.IsInRole("Administrator");
 }
 
 <h1 class="mb-4 text-center">Screen Capture Data</h1>
 
 <div class="mb-4 text-center">
     <form id="filterForm" method="get" class="d-flex justify-content-center align-items-center flex-wrap">
-        <div class="me-2 mt-3">
-            <label for="username" class="form-label me-2">Username:</label>
-            <select id="username" name="username" class="form-select">
-                <option value="">All</option>
-                @foreach (var user in ViewBag.Usernames as List<string>)
-                {
-                    <option value="@user">@user</option>
-                }
-            </select>
-        </div>
+        @if (isAdministrator)
+        {
+            <div class="me-2 mt-3">
+                <label for="username" class="form-label me-2">Username:</label>
+                <select id="username" name="username" class="form-select">
+                    <option value="">All</option>
+                    @foreach (var user in ViewBag.Usernames as List<string>)
+                    {
+                        <option value="@user">@user</option>
+                    }
+                </select>
+            </div>
+        }
+        else
+        {
+            <div class="me-2 mt-3">
+                <label for="username" class="form-label me-2">Username:</label>
+                <select id="username" name="username" class="form-select">
+                    @foreach (var user in ViewBag.Usernames as List<string>)
+                    {
+                        <option value="@user">@user</option>
+                    }
+                </select>
+            </div>
+            <input type="hidden" name="username" value="@User.Identity.Name" />
+        }
 
         <div class="me-2 mt-3">
             <label for="date" class="form-label me-2">Date:</label>
             <input type="date" id="date" name="date" class="form-control" value="@today">
         </div>
 
-        <div class="me-2 mt-3">
+        <div class="me-2 mt-3" style="display: none;">
             <label for="mediaType" class="form-label me-2">Media Type:</label>
             <select id="mediaType" name="mediaType" class="form-select">
                 <option value="image" selected>Image</option>
-                <option value="video">Video</option>
             </select>
         </div>
 

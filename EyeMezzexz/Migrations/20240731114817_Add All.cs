@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace EyeMezzexz.Migrations
 {
     /// <inheritdoc />
-    public partial class AlterUser : Migration
+    public partial class AddAll : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -57,22 +57,7 @@ namespace EyeMezzexz.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "demos",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Username = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Salt = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_demos", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Permissions",
+                name: "PermissionsName",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -81,20 +66,24 @@ namespace EyeMezzexz.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Permissions", x => x.Id);
+                    table.PrimaryKey("PK_PermissionsName", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Tasks",
+                name: "TaskNames",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TaskCreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TaskCreatedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    TaskModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TaskModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Tasks", x => x.Id);
+                    table.PrimaryKey("PK_TaskNames", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -204,20 +193,22 @@ namespace EyeMezzexz.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Staffs",
+                name: "StaffInOut",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     StaffInTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     StaffOutTime = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    UserId = table.Column<int>(type: "int", nullable: false)
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    ClientTimeZone = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TimeDifference = table.Column<TimeSpan>(type: "time", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Staffs", x => x.Id);
+                    table.PrimaryKey("PK_StaffInOut", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Staffs_AspNetUsers_UserId",
+                        name: "FK_StaffInOut_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
@@ -241,9 +232,9 @@ namespace EyeMezzexz.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_RolePermissions_Permissions_PermissionId",
+                        name: "FK_RolePermissions_PermissionsName_PermissionId",
                         column: x => x.PermissionId,
-                        principalTable: "Permissions",
+                        principalTable: "PermissionsName",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -265,9 +256,9 @@ namespace EyeMezzexz.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_UserPermissions_Permissions_PermissionId",
+                        name: "FK_UserPermissions_PermissionsName_PermissionId",
                         column: x => x.PermissionId,
-                        principalTable: "Permissions",
+                        principalTable: "PermissionsName",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -282,7 +273,9 @@ namespace EyeMezzexz.Migrations
                     TaskId = table.Column<int>(type: "int", nullable: false),
                     TaskComment = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     TaskStartTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    TaskEndTime = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    TaskEndTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ClientTimeZone = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TimeDifference = table.Column<TimeSpan>(type: "time", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -294,9 +287,9 @@ namespace EyeMezzexz.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_TaskTimers_Tasks_TaskId",
+                        name: "FK_TaskTimers_TaskNames_TaskId",
                         column: x => x.TaskId,
-                        principalTable: "Tasks",
+                        principalTable: "TaskNames",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -309,13 +302,12 @@ namespace EyeMezzexz.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     VideoUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    SystemInfo = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ActivityLog = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Timestamp = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Username = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     SystemName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     TaskName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    TaskTimerId = table.Column<int>(type: "int", nullable: true)
+                    TaskTimerId = table.Column<int>(type: "int", nullable: true),
+                    ClientTimeZone = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -372,8 +364,8 @@ namespace EyeMezzexz.Migrations
                 column: "PermissionId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Staffs_UserId",
-                table: "Staffs",
+                name: "IX_StaffInOut_UserId",
+                table: "StaffInOut",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
@@ -416,13 +408,10 @@ namespace EyeMezzexz.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "demos");
-
-            migrationBuilder.DropTable(
                 name: "RolePermissions");
 
             migrationBuilder.DropTable(
-                name: "Staffs");
+                name: "StaffInOut");
 
             migrationBuilder.DropTable(
                 name: "UploadedData");
@@ -437,13 +426,13 @@ namespace EyeMezzexz.Migrations
                 name: "TaskTimers");
 
             migrationBuilder.DropTable(
-                name: "Permissions");
+                name: "PermissionsName");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "Tasks");
+                name: "TaskNames");
         }
     }
 }

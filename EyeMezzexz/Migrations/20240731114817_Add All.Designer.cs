@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EyeMezzexz.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240717071931_Alter User")]
-    partial class AlterUser
+    [Migration("20240731114817_Add All")]
+    partial class AddAll
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -138,31 +138,7 @@ namespace EyeMezzexz.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("EyeMezzexz.Models.Demo", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Salt")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Username")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("demos");
-                });
-
-            modelBuilder.Entity("EyeMezzexz.Models.Permission", b =>
+            modelBuilder.Entity("EyeMezzexz.Models.PermissionName", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -176,7 +152,7 @@ namespace EyeMezzexz.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Permissions");
+                    b.ToTable("PermissionsName");
                 });
 
             modelBuilder.Entity("EyeMezzexz.Models.RolePermission", b =>
@@ -194,7 +170,7 @@ namespace EyeMezzexz.Migrations
                     b.ToTable("RolePermissions");
                 });
 
-            modelBuilder.Entity("EyeMezzexz.Models.Staff", b =>
+            modelBuilder.Entity("EyeMezzexz.Models.StaffInOut", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -202,11 +178,17 @@ namespace EyeMezzexz.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("ClientTimeZone")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("StaffInTime")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("StaffOutTime")
                         .HasColumnType("datetime2");
+
+                    b.Property<TimeSpan?>("TimeDifference")
+                        .HasColumnType("time");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");
@@ -215,10 +197,10 @@ namespace EyeMezzexz.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Staffs");
+                    b.ToTable("StaffInOut");
                 });
 
-            modelBuilder.Entity("EyeMezzexz.Models.TaskModel", b =>
+            modelBuilder.Entity("EyeMezzexz.Models.TaskNames", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -230,9 +212,21 @@ namespace EyeMezzexz.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("TaskCreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("TaskCreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("TaskModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("TaskModifiedOn")
+                        .HasColumnType("datetime2");
+
                     b.HasKey("Id");
 
-                    b.ToTable("Tasks");
+                    b.ToTable("TaskNames");
                 });
 
             modelBuilder.Entity("EyeMezzexz.Models.TaskTimer", b =>
@@ -242,6 +236,9 @@ namespace EyeMezzexz.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ClientTimeZone")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("TaskComment")
                         .HasColumnType("nvarchar(max)");
@@ -254,6 +251,9 @@ namespace EyeMezzexz.Migrations
 
                     b.Property<DateTime>("TaskStartTime")
                         .HasColumnType("datetime2");
+
+                    b.Property<TimeSpan?>("TimeDifference")
+                        .HasColumnType("time");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");
@@ -275,15 +275,13 @@ namespace EyeMezzexz.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("ActivityLog")
-                        .IsRequired()
+                    b.Property<string>("ClientTimeZone")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("ImageUrl")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SystemInfo")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -296,9 +294,6 @@ namespace EyeMezzexz.Migrations
 
                     b.Property<int?>("TaskTimerId")
                         .HasColumnType("int");
-
-                    b.Property<DateTime>("Timestamp")
-                        .HasColumnType("datetime2");
 
                     b.Property<string>("Username")
                         .IsRequired()
@@ -438,7 +433,7 @@ namespace EyeMezzexz.Migrations
 
             modelBuilder.Entity("EyeMezzexz.Models.RolePermission", b =>
                 {
-                    b.HasOne("EyeMezzexz.Models.Permission", "Permission")
+                    b.HasOne("EyeMezzexz.Models.PermissionName", "Permission")
                         .WithMany("RolePermissions")
                         .HasForeignKey("PermissionId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -455,7 +450,7 @@ namespace EyeMezzexz.Migrations
                     b.Navigation("Role");
                 });
 
-            modelBuilder.Entity("EyeMezzexz.Models.Staff", b =>
+            modelBuilder.Entity("EyeMezzexz.Models.StaffInOut", b =>
                 {
                     b.HasOne("EyeMezzexz.Models.ApplicationUser", "User")
                         .WithMany()
@@ -468,7 +463,7 @@ namespace EyeMezzexz.Migrations
 
             modelBuilder.Entity("EyeMezzexz.Models.TaskTimer", b =>
                 {
-                    b.HasOne("EyeMezzexz.Models.TaskModel", "Task")
+                    b.HasOne("EyeMezzexz.Models.TaskNames", "Task")
                         .WithMany()
                         .HasForeignKey("TaskId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -496,7 +491,7 @@ namespace EyeMezzexz.Migrations
 
             modelBuilder.Entity("EyeMezzexz.Models.UserPermission", b =>
                 {
-                    b.HasOne("EyeMezzexz.Models.Permission", "Permission")
+                    b.HasOne("EyeMezzexz.Models.PermissionName", "Permission")
                         .WithMany("UserPermissions")
                         .HasForeignKey("PermissionId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -574,7 +569,7 @@ namespace EyeMezzexz.Migrations
                     b.Navigation("UserPermissions");
                 });
 
-            modelBuilder.Entity("EyeMezzexz.Models.Permission", b =>
+            modelBuilder.Entity("EyeMezzexz.Models.PermissionName", b =>
                 {
                     b.Navigation("RolePermissions");
 

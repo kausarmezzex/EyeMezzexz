@@ -20,17 +20,21 @@ builder.Configuration
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+// Register WebServiceClient
 builder.Services.AddTransient<WebServiceClient>();
 
 // Configure DbContext with SQL Server database
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("E-CommDConnectionString")));
 
+// Configure Identity
 builder.Services.AddDefaultIdentity<ApplicationUser>()
     .AddRoles<ApplicationRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddDefaultTokenProviders();
 
+// Register custom services
 builder.Services.AddTransient<UserService>();
 
 // Add session services
@@ -65,11 +69,10 @@ using (var scope = app.Services.CreateScope())
     try
     {
         SeedDatabase(applicationDbContext);
+
         var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
         var roleManager = services.GetRequiredService<RoleManager<ApplicationRole>>();
-        var context = services.GetRequiredService<ApplicationDbContext>();
 
-        // Initialize the seed data
         logger.LogInformation("Seeding data...");
         SeedData.Initialize(services, userManager).Wait();
         logger.LogInformation("Seeding data completed.");
@@ -88,6 +91,7 @@ if (app.Environment.IsDevelopment())
 }
 else
 {
+    // Enable Swagger for production, but restrict it if needed for security reasons
     app.UseSwagger();
     app.UseSwaggerUI(c =>
     {
@@ -98,19 +102,15 @@ else
 
 app.UseHttpsRedirection();
 app.UseCors("AllowAll");
-
 app.UseAuthorization();
 app.UseSession();
-
 app.MapControllers();
-
 app.Run();
 
 void SeedDatabase(ApplicationDbContext context)
 {
     try
     {
-        // List of task names
         var tasks = new List<string>
         {
             "Listing", "Costing", "New Product Work", "Shipment", "Live Stock",
