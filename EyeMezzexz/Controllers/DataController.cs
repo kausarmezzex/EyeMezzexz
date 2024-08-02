@@ -374,7 +374,7 @@ namespace EyeMezzexz.Controllers
 
         [HttpGet("getUserCompletedTasks")]
         public async Task<IActionResult> GetUserCompletedTasks(int userId, string clientTimeZone)
-        {
+            {
             try
             {
                 var today = DateTime.Today;
@@ -422,7 +422,6 @@ namespace EyeMezzexz.Controllers
 
 
 }
-
 
 public class TaskModelRequest
 {

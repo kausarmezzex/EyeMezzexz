@@ -1,0 +1,14 @@
+﻿@* @model List<MezzexEye.Models.TaskTimerResponse>
+
+@foreach (var task in Model)
+{
+    <tr>
+        <td>@task.UserName</td>
+        <td>@task.TaskName</td>
+        <td>@task.TaskComment</td>
+        <td>@task.TaskStartTime.ToString("yyyy-MM-dd HH:mm:ss")</td>
+        <td class="working-time" data-start-time="@task.TaskStartTime.ToString("o")"></td>
+        <td><button class="btn btn-danger endTaskButton" data-task-id="@task.Id">End Task</button></td>
+    </tr>
+}
+ *@

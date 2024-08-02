@@ -91,6 +91,24 @@ namespace EyeMezzexz.Controllers
 
             return Ok(usernames);
         }
+
+        [HttpGet("getUsernames")]
+        public async Task<IActionResult> GetUsernames(string query)
+        {
+            if (string.IsNullOrEmpty(query) || query.Length < 3)
+            {
+                return BadRequest("Query must be at least 3 characters long.");
+            }
+
+            var users = await _context.Users
+                                      .Where(u => u.Email.StartsWith(query))
+                                      .Select(u => u.Email)
+                                      .ToListAsync();
+
+            return Ok(users);
+        }
+
+
         [HttpGet("getUserByEmail")]
         public async Task<ApplicationUser> GetUserByEmailAsync(string email)
         {

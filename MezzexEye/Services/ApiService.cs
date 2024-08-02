@@ -5,15 +5,19 @@ using System.Net.Http.Json;
 using System.Threading.Tasks;
 using EyeMezzexz.Controllers;
 using EyeMezzexz.Models;
+using MezzexEye.Models;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 
 public class ApiService
 {
     private readonly HttpClient _httpClient;
+    private readonly ILogger<ApiService> _logger;
 
-    public ApiService(HttpClient httpClient)
+    public ApiService(HttpClient httpClient, ILogger<ApiService> logger)
     {
         _httpClient = httpClient;
+        _logger = logger;
     }
 
     public async Task<List<ScreenCaptureDataViewModel>> GetScreenCaptureDataAsync(string clientTimeZone = "Asia/Kolkata")
@@ -70,10 +74,38 @@ public class ApiService
         return response ?? new List<object>();
     }
 
-    public async Task<object> GetStaffInTimeAsync(int userId, string clientTimeZone = "Asia/Kolkata")
+    public async Task<StaffInTimeResponse> GetStaffInTimeAsync(int userId, string clientTimeZone = "Asia/Kolkata")
     {
-        var response = await _httpClient.GetFromJsonAsync<object>($"api/Data/getStaffInTime?userId={userId}&clientTimeZone={clientTimeZone}");
-        return response ?? new object();
+        try
+        {
+            var url = $"api/Data/getStaffInTime?userId={userId}&clientTimeZone={clientTimeZone}";
+            _logger.LogInformation("Requesting URL: {url}", url);
+
+            var response = await _httpClient.GetAsync(url);
+
+            if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
+            {
+                _logger.LogInformation("Staff in time not found for user ID: {userId}", userId);
+                return null;
+            }
+
+            // Ensure the response is successful
+            response.EnsureSuccessStatusCode();
+
+            // Read the response content
+            var responseData = await response.Content.ReadAsStringAsync();
+            _logger.LogInformation("Response Data: {responseData}", responseData);
+
+            // Deserialize the response data
+            var staffInTime = JsonConvert.DeserializeObject<StaffInTimeResponse>(responseData);
+
+            return staffInTime;
+        }
+        catch (HttpRequestException ex)
+        {
+            _logger.LogError(ex, "An error occurred while fetching staff in time.");
+            throw; // Ensure the exception is propagated
+        }
     }
 
     public async Task UpdateTaskTimerAsync(UpdateTaskTimerRequest model)
@@ -110,6 +142,6 @@ public class ApiService
         var response = await _httpClient.GetFromJsonAsync<ApplicationUser>($"api/AccountApi/getUserByEmail?email={email}");
         return response;
     }
-
+     
 }
 

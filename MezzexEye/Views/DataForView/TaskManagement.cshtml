@@ -1,0 +1,250 @@
+﻿@model MezzexEye.Models.TaskManagementViewModel
+
+@{
+    ViewData["Title"] = "Task Management";
+}
+
+<div id="taskSection" class="mb-4">
+    <h2 class="text-center">Task Management</h2>
+    <div id="taskForm">
+        <div class="form-group">
+            <label for="taskType">Task Type</label>
+            <select id="taskType" class="form-control">
+                @foreach (var task in Model.TaskTypes)
+                {
+                    <option value="@task.Id">@task.Name</option>
+                }
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="taskComment">Task Comment</label>
+            <textarea id="taskComment" class="form-control"></textarea>
+        </div>
+        <button id="startTaskButton" class="btn btn-primary">Start Task</button>
+    </div>
+
+    <div id="activeTasks" class="mt-4">
+        <h3>Active Tasks</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Task Type</th>
+                    <th>Comment</th>
+                    <th>Start Time</th>
+                    <th>Working Time</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="activeTasksBody">
+                @foreach (var task in Model.ActiveTasks)
+                {
+                    <tr>
+                        <td>@task.UserName</td>
+                        <td>@task.TaskName</td>
+                        <td>@task.TaskComment</td>
+                        <td>@task.TaskStartTime.ToString("yyyy-MM-dd HH:mm:ss")</td>
+                        <td class="working-time" data-start-time="@task.TaskStartTime.ToString("o")"></td>
+                        <td><button class="btn btn-danger endTaskButton" data-task-id="@task.Id">End Task</button></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <div id="completedTasks" class="mt-4">
+        <h3>Completed Tasks</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Task Type</th>
+                    <th>Comment</th>
+                    <th>Start Time</th>
+                    <th>End Time</th>
+                    <th>Duration</th>
+                </tr>
+            </thead>
+            <tbody id="completedTasksBody">
+                @foreach (var task in Model.CompletedTasks)
+                {
+                    <tr>
+                        <td>@task.UserName</td>
+                        <td>@task.TaskName</td>
+                        <td>@task.TaskComment</td>
+                        <td>@task.TaskStartTime.ToString("yyyy-MM-dd HH:mm:ss")</td>
+                        <td>@task.TaskEndTime?.ToString("yyyy-MM-dd HH:mm:ss")</td>
+                        <td class="task-duration" data-start-time="@task.TaskStartTime.ToString("o")" data-end-time="@task.TaskEndTime?.ToString("o")"></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <button id="staffOutButton" class="btn btn-danger mt-4">Staff Out</button>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            document.getElementById('startTaskButton').addEventListener('click', startTask);
+            document.getElementById('staffOutButton').addEventListener('click', staffOut);
+            document.querySelectorAll('.endTaskButton').forEach(button => {
+                button.addEventListener('click', function () {
+                    endTask(this.getAttribute('data-task-id'));
+                });
+            });
+
+            updateWorkingTimes();
+            setInterval(updateWorkingTimes, 1000);
+        });
+
+        function getAntiForgeryToken() {
+            return document.querySelector('input[name="__RequestVerificationToken"]').value;
+        }
+
+        async function checkActiveTasks() {
+            const response = await fetch('@Url.Action("CheckActiveTasks", "DataForView")', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            const data = await response.json();
+            return data.hasActiveTasks;
+        }
+
+        function startTask() {
+            checkClockInStatus().then(isClockedIn => {
+                if (!isClockedIn) return;
+
+                checkActiveTasks().then(hasActiveTasks => {
+                    if (hasActiveTasks) {
+                        alert("You already have an active task. Please end it before starting a new one.");
+                        return;
+                    }
+
+                    const taskType = document.getElementById('taskType').value;
+                    const taskComment = document.getElementById('taskComment').value;
+
+                    if (taskType === "other" && !taskComment.trim()) {
+                        alert("Please add a comment for 'Other' task type.");
+                        return;
+                    }
+
+                    fetch('@Url.Action("StartTask", "DataForView")', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'RequestVerificationToken': getAntiForgeryToken()
+                        },
+                        body: JSON.stringify({
+                            TaskId: taskType,
+                            TaskComment: taskComment,
+                            ClientTimeZone: Intl.DateTimeFormat().resolvedOptions().timeZone
+                        })
+                    })
+                        .then(response => response.json())
+                        .then(data => {
+                            alert(data.message);
+                            location.reload();
+                        })
+                        .catch(error => console.error('Error:', error));
+                });
+            });
+        }
+
+        function endTask(taskId) {
+            checkClockInStatus().then(isClockedIn => {
+                if (!isClockedIn) return;
+
+                fetch('@Url.Action("EndTask", "DataForView")', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'RequestVerificationToken': getAntiForgeryToken()
+                    },
+                    body: JSON.stringify({
+                        Id: taskId,
+                        ClientTimeZone: Intl.DateTimeFormat().resolvedOptions().timeZone
+                    })
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        alert(data.message);
+                        location.reload();
+                    })
+                    .catch(error => console.error('Error:', error));
+            });
+        }
+
+        function staffOut() {
+            fetch('@Url.Action("StaffOut", "DataForView")', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'RequestVerificationToken': getAntiForgeryToken()
+                },
+                body: JSON.stringify({
+                    ClientTimeZone: Intl.DateTimeFormat().resolvedOptions().timeZone
+                })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    alert(data.message);
+                    location.reload();
+                })
+                .catch(error => console.error('Error:', error));
+        }
+
+        function checkClockInStatus() {
+            return fetch('@Url.Action("CheckClockInStatus", "DataForView")', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (!data.isClockedIn) {
+                        alert("You need to clock in first.");
+                        return false;
+                    }
+                    return true;
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    return false;
+                });
+        }
+
+        function updateWorkingTimes() {
+            const workingTimeElements = document.querySelectorAll('.working-time');
+            const now = new Date();
+
+            workingTimeElements.forEach(element => {
+                const startTime = new Date(element.getAttribute('data-start-time'));
+                const diff = new Date(now - startTime);
+                const hours = diff.getUTCHours().toString().padStart(2, '0');
+                const minutes = diff.getUTCMinutes().toString().padStart(2, '0');
+                const seconds = diff.getUTCSeconds().toString().padStart(2, '0');
+                element.textContent = `${hours}:${minutes}:${seconds}`;
+            });
+
+            const durationElements = document.querySelectorAll('.task-duration');
+            durationElements.forEach(element => {
+                const startTime = new Date(element.getAttribute('data-start-time'));
+                const endTime = new Date(element.getAttribute('data-end-time'));
+                if (endTime) {
+                    const diff = new Date(endTime - startTime);
+                    const hours = diff.getUTCHours().toString().padStart(2, '0');
+                    const minutes = diff.getUTCMinutes().toString().padStart(2, '0');
+                    const seconds = diff.getUTCSeconds().toString().padStart(2, '0');
+                    element.textContent = `${hours}:${minutes}:${seconds}`;
+                }
+            });
+        }
+
+    </script>
+}

@@ -90,7 +90,7 @@ namespace EyeMezzexz.Controllers
 
                 ViewBag.Usernames = usernames;
                 ViewBag.MediaType = mediaType;
-                ViewBag.SelectedUsername = usernames; // Set the selected username
+                ViewBag.SelectedUsername = username; // Set the selected username
 
                 if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
                 {
@@ -104,6 +104,156 @@ namespace EyeMezzexz.Controllers
             catch (Exception ex)
             {
                 _logger.LogError(ex, "An error occurred while processing the screen capture data.");
+                return StatusCode(500, "Internal server error");
+            }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> TaskManagement()
+        {
+            try
+            {
+                var email = User.Identity.Name;
+                var user = await _apiService.GetUserByEmailAsync(email);
+
+                if (user == null)
+                {
+                    _logger.LogError("User not found.");
+                    return StatusCode(500, "Internal server error");
+                }
+
+                // Check if the staff member is clocked in
+                var staffInTime = await _apiService.GetStaffInTimeAsync(user.Id);
+               
+                if (staffInTime == null)
+                {
+                    _logger.LogInformation("Staff member is not clocked in.");
+                    return View("NotClockedIn"); // Return a view indicating the user needs to clock in first
+                }
+
+                var taskTypes = await _apiService.GetTasksAsync();
+                var activeTasks = await _apiService.GetTaskTimersAsync(user.Id);
+                var completedTasks = await _apiService.GetUserCompletedTasksAsync(user.Id);
+
+                var viewModel = new TaskManagementViewModel
+                {
+                    TaskTypes = taskTypes,
+                    ActiveTasks = activeTasks,
+                    CompletedTasks = completedTasks
+                };
+
+                return View(viewModel);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "An error occurred while loading task management data.");
+                return StatusCode(500, "Internal server error");
+            }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> CheckClockInStatus()
+        {
+            try
+            {
+                var email = User.Identity.Name;
+                var user = await _apiService.GetUserByEmailAsync(email);
+
+                if (user == null)
+                {
+                    return Json(new { isClockedIn = false });
+                }
+
+                var staffInTime = await _apiService.GetStaffInTimeAsync(user.Id, "Asia/Kolkata");
+                return Json(new { isClockedIn = staffInTime != null });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "An error occurred while checking clock-in status.");
+                return StatusCode(500, "Internal server error");
+            }
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> StartTask([FromBody] TaskTimerUploadRequest model)
+        {
+            try
+            {
+                if (model == null)
+                {
+                    return BadRequest("Model is null");
+                }
+                var email = User.Identity.Name;
+                var user = await _apiService.GetUserByEmailAsync(email);
+                model.UserId = user.Id;
+
+                await _apiService.SaveTaskTimerAsync(model);
+                TaskManagement();
+                return Ok(new { Message = "Task started successfully" });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "An error occurred while starting the task.");
+                return StatusCode(500, "Internal server error");
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EndTask([FromBody] UpdateTaskTimerRequest model)
+        {
+            try
+            {
+                if (model == null)
+                {
+                    return BadRequest("Model is null");
+                }
+
+                await _apiService.UpdateTaskTimerAsync(model);
+
+                return Ok(new { Message = "Task ended successfully" });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "An error occurred while ending the task.");
+                return StatusCode(500, "Internal server error");
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> StaffOut([FromBody] StaffInOut model)
+        {
+            try
+            {
+                if (model == null)
+                {
+                    return BadRequest("Model is null");
+                }
+                var email = User.Identity.Name;
+                var user = await _apiService.GetUserByEmailAsync(email);
+                var staffInTime = await _apiService.GetStaffInTimeAsync(user.Id);
+                var activeTasks = await _apiService.GetTaskTimersAsync(model.UserId);
+                foreach (var task in activeTasks)
+                {
+                    var endTaskRequest = new UpdateTaskTimerRequest
+                    {
+                        Id = task.Id,
+                        TaskEndTime = DateTime.UtcNow,
+                        ClientTimeZone = model.ClientTimeZone
+                    };
+                    await _apiService.UpdateTaskTimerAsync(endTaskRequest);
+                }
+                model.Id = staffInTime.StaffId;
+                model.StaffInTime = staffInTime.StaffInTime;
+                model.StaffOutTime = DateTime.UtcNow;
+                model.UserId = user.Id;
+                await _apiService.UpdateStaffAsync(model);
+
+                return Ok(new { Message = "Staff out successful" });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "An error occurred while updating staff out.");
                 return StatusCode(500, "Internal server error");
             }
         }
