@@ -109,6 +109,7 @@ namespace EyeMezzexz.Controllers
         }
 
 
+
         [HttpGet("getUserByEmail")]
         public async Task<ApplicationUser> GetUserByEmailAsync(string email)
         {
