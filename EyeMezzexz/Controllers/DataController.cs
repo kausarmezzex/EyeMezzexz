@@ -289,27 +289,6 @@ namespace EyeMezzexz.Controllers
             return Ok(new { Message = "Task timer updated successfully", TaskTimeId = taskTimer.Id });
         }
 
-        [HttpPost("createTask")]
-        public async Task<IActionResult> CreateTask([FromBody] TaskModelRequest model)
-        {
-            if (model == null)
-            {
-                return BadRequest("Model is null");
-            }
-
-            var task = new TaskNames
-            {
-                Name = model.Name,
-                TaskCreatedBy = User.Identity.Name,
-                TaskCreatedOn = _context.GetDatabaseServerTime()
-            };
-
-            _context.TaskNames.Add(task);
-            await _context.SaveChangesAsync();
-
-            return Ok(new { Message = "Task created successfully", TaskId = task.Id });
-        }
-
         [HttpGet("getTaskTimeId")]
         public async Task<IActionResult> GetTaskTimeId(int taskId, string clientTimeZone)
         {
@@ -324,6 +303,43 @@ namespace EyeMezzexz.Controllers
             }
 
             return Ok(new { TaskTimeId = taskTimer.Id });
+        }
+
+        [HttpPost("createTask")]
+        public async Task<IActionResult> CreateTask([FromBody] TaskModelRequest model)
+        {
+            if (model == null)
+            {
+                return BadRequest("Model is null");
+            }
+
+            var task = new TaskNames
+            {
+                Name = model.Name,
+                TaskCreatedBy = User.Identity.Name,
+                TaskCreatedOn = _context.GetDatabaseServerTime(),
+                ParentTaskId = model.ParentTaskId
+            };
+
+            if (model.ParentTaskId.HasValue)
+            {
+                var parentTask = await _context.TaskNames.FindAsync(model.ParentTaskId.Value);
+                if (parentTask == null)
+                {
+                    ModelState.AddModelError("ParentTaskId", "Invalid parent task.");
+                    return BadRequest(ModelState);
+                }
+                parentTask.SubTasks.Add(task);
+                await _context.TaskNames.AddAsync(task);
+                await _context.SaveChangesAsync();
+                return Ok(new { Message = "Sub-task created successfully", TaskId = task.Id });
+            }
+            else
+            {
+                await _context.TaskNames.AddAsync(task);
+                await _context.SaveChangesAsync();
+                return Ok(new { Message = "Task created successfully", TaskId = task.Id });
+            }
         }
 
         [HttpPut("updateTask")]
@@ -343,6 +359,18 @@ namespace EyeMezzexz.Controllers
             existingTask.Name = model.Name;
             existingTask.TaskModifiedBy = User.Identity.Name;
             existingTask.TaskModifiedOn = _context.GetDatabaseServerTime();
+            existingTask.ParentTaskId = model.ParentTaskId;
+
+            if (model.ParentTaskId.HasValue)
+            {
+                var parentTask = await _context.TaskNames.FindAsync(model.ParentTaskId.Value);
+                if (parentTask == null)
+                {
+                    ModelState.AddModelError("ParentTaskId", "Invalid parent task.");
+                    return BadRequest(ModelState);
+                }
+                parentTask.SubTasks.Add(existingTask);
+            }
 
             try
             {
@@ -426,6 +454,7 @@ namespace EyeMezzexz.Controllers
 public class TaskModelRequest
 {
     public string Name { get; set; }
+    public int? ParentTaskId { get; set; }
 }
 public class UpdateTaskTimerRequest
 {

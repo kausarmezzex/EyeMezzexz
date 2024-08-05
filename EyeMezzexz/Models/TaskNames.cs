@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace EyeMezzexz.Models
 {
@@ -12,5 +13,14 @@ namespace EyeMezzexz.Models
 
         public string? TaskModifiedBy { get; set; }
         public DateTime? TaskModifiedOn { get; set; } // Make TaskModifiedOn nullable
+
+        // Foreign key reference to Country
+        public int CountryId { get; set; }
+        public Country? Country { get; set; } // Navigation property to Country
+
+        // Hierarchical structure for sub-tasks
+        public int? ParentTaskId { get; set; }
+        public TaskNames? ParentTask { get; set; }
+        public ICollection<TaskNames> SubTasks { get; set; } = new List<TaskNames>();
     }
 }

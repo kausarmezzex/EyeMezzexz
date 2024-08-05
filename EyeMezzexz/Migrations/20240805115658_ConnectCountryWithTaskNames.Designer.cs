@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EyeMezzexz.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240731114817_Add All")]
-    partial class AddAll
+    [Migration("20240805115658_ConnectCountryWithTaskNames")]
+    partial class ConnectCountryWithTaskNames
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -138,6 +138,41 @@ namespace EyeMezzexz.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
+            modelBuilder.Entity("EyeMezzexz.Models.Country", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Countries");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Code = "UK",
+                            Name = "United Kingdom"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Code = "IN",
+                            Name = "India"
+                        });
+                });
+
             modelBuilder.Entity("EyeMezzexz.Models.PermissionName", b =>
                 {
                     b.Property<int>("Id")
@@ -208,9 +243,15 @@ namespace EyeMezzexz.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("CountryId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("ParentTaskId")
+                        .HasColumnType("int");
 
                     b.Property<string>("TaskCreatedBy")
                         .HasColumnType("nvarchar(max)");
@@ -225,6 +266,10 @@ namespace EyeMezzexz.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CountryId");
+
+                    b.HasIndex("ParentTaskId");
 
                     b.ToTable("TaskNames");
                 });
@@ -461,6 +506,23 @@ namespace EyeMezzexz.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("EyeMezzexz.Models.TaskNames", b =>
+                {
+                    b.HasOne("EyeMezzexz.Models.Country", "Country")
+                        .WithMany()
+                        .HasForeignKey("CountryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("EyeMezzexz.Models.TaskNames", "ParentTask")
+                        .WithMany("SubTasks")
+                        .HasForeignKey("ParentTaskId");
+
+                    b.Navigation("Country");
+
+                    b.Navigation("ParentTask");
+                });
+
             modelBuilder.Entity("EyeMezzexz.Models.TaskTimer", b =>
                 {
                     b.HasOne("EyeMezzexz.Models.TaskNames", "Task")
@@ -574,6 +636,11 @@ namespace EyeMezzexz.Migrations
                     b.Navigation("RolePermissions");
 
                     b.Navigation("UserPermissions");
+                });
+
+            modelBuilder.Entity("EyeMezzexz.Models.TaskNames", b =>
+                {
+                    b.Navigation("SubTasks");
                 });
 #pragma warning restore 612, 618
         }

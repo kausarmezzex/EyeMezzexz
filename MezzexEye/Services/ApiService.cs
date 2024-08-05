@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using EyeMezzexz.Controllers;
 using EyeMezzexz.Models;
 using MezzexEye.Models;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 
 public class ApiService
@@ -137,11 +137,11 @@ public class ApiService
         var response = await _httpClient.GetFromJsonAsync<List<string>>("api/AccountApi/getAllUsernames");
         return response ?? new List<string>();
     }
+
     public async Task<ApplicationUser> GetUserByEmailAsync(string email)
     {
         var response = await _httpClient.GetFromJsonAsync<ApplicationUser>($"api/AccountApi/getUserByEmail?email={email}");
         return response;
     }
-     
 }
 

@@ -3,10 +3,12 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace EyeMezzexz.Migrations
 {
     /// <inheritdoc />
-    public partial class AddAll : Migration
+    public partial class ConnectCountryWithTaskNames : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -57,6 +59,20 @@ namespace EyeMezzexz.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Countries",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Code = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Countries", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "PermissionsName",
                 columns: table => new
                 {
@@ -67,23 +83,6 @@ namespace EyeMezzexz.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_PermissionsName", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "TaskNames",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    TaskCreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    TaskCreatedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    TaskModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    TaskModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_TaskNames", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -216,6 +215,36 @@ namespace EyeMezzexz.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "TaskNames",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TaskCreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TaskCreatedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    TaskModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TaskModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    CountryId = table.Column<int>(type: "int", nullable: false),
+                    ParentTaskId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TaskNames", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_TaskNames_Countries_CountryId",
+                        column: x => x.CountryId,
+                        principalTable: "Countries",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_TaskNames_TaskNames_ParentTaskId",
+                        column: x => x.ParentTaskId,
+                        principalTable: "TaskNames",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "RolePermissions",
                 columns: table => new
                 {
@@ -319,6 +348,15 @@ namespace EyeMezzexz.Migrations
                         principalColumn: "Id");
                 });
 
+            migrationBuilder.InsertData(
+                table: "Countries",
+                columns: new[] { "Id", "Code", "Name" },
+                values: new object[,]
+                {
+                    { 1, "UK", "United Kingdom" },
+                    { 2, "IN", "India" }
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -367,6 +405,16 @@ namespace EyeMezzexz.Migrations
                 name: "IX_StaffInOut_UserId",
                 table: "StaffInOut",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TaskNames_CountryId",
+                table: "TaskNames",
+                column: "CountryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TaskNames_ParentTaskId",
+                table: "TaskNames",
+                column: "ParentTaskId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_TaskTimers_TaskId",
@@ -433,6 +481,9 @@ namespace EyeMezzexz.Migrations
 
             migrationBuilder.DropTable(
                 name: "TaskNames");
+
+            migrationBuilder.DropTable(
+                name: "Countries");
         }
     }
 }

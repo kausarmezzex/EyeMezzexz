@@ -14,7 +14,7 @@ namespace EyeMezzexz.Data
         public DbSet<PermissionName> PermissionsName { get; set; }
         public DbSet<RolePermission> RolePermissions { get; set; }
         public DbSet<UserPermission> UserPermissions { get; set; }
-
+        public DbSet<Country> Countries { get; set; }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
         }
@@ -61,6 +61,21 @@ namespace EyeMezzexz.Data
                 .HasOne(ud => ud.TaskTimer)
                 .WithMany()
                 .HasForeignKey(ud => ud.TaskTimerId);
+
+            modelBuilder.Entity<Country>().HasData(
+            new Country { Id = 1, Name = "United Kingdom", Code = "UK" },
+            new Country { Id = 2, Name = "India", Code = "IN" }
+        );
+            modelBuilder.Entity<TaskNames>()
+            .HasOne(t => t.Country)
+            .WithMany()
+            .HasForeignKey(t => t.CountryId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<TaskNames>()
+           .HasOne(t => t.ParentTask)
+           .WithMany(t => t.SubTasks)
+           .HasForeignKey(t => t.ParentTaskId);
         }
     }
 }
