@@ -5,100 +5,96 @@
 }
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Login</title>
-    <link rel="stylesheet" href="~/css/site.css" />
-    <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #f5f5f5;
-            margin: 0;
-        }
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AdminLTE 3 | Log in (v2)</title>
 
-        .login-container {
-            background: white;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 400px;
-            box-sizing: border-box;
-        }
-
-        .form-group {
-            margin-bottom: 1rem;
-            position: relative;
-        }
-
-            .form-group label {
-                display: block;
-                margin-bottom: 0.5rem;
-            }
-
-            .form-group input[type="text"],
-            .form-group input[type="password"] {
-                width: 100%;
-                padding: 0.5rem;
-                border: 1px solid #ccc;
-                border-radius: 5px;
-                box-sizing: border-box;
-                padding-right: 2.5rem; /* space for the icon */
-            }
-
-            .form-group input[type="checkbox"] {
-                margin-right: 0.5rem;
-            }
-
-        .show-password {
-            position: absolute;
-            top: 69%;
-            right: 10px;
-            transform: translateY(-50%);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-        }
-
-        .btn-primary {
-            background-color: #007bff;
-            border: none;
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-            .btn-primary:hover {
-                background-color: #0056b3;
-            }
-    </style>
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- icheck bootstrap -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/icheck-bootstrap/3.0.1/icheck-bootstrap.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/3.1.0/css/adminlte.min.css">
 </head>
-<body>
-    <div class="login-container">
-        <h2>Login</h2>
-        <form asp-action="Index" method="post">
-            <div class="form-group">
-                <label asp-for="Email"></label>
-                <input asp-for="Email" type="text" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
+<body class="login-page" style="min-height: 466px;">
+    <div class="login-box">
+        <!-- /.login-logo -->
+        <div class="card card-outline card-primary">
+            <div class="card-header text-center">
+                <a href="../../index2.html" class="h1"><b>Admin</b>LTE</a>
             </div>
-            <div class="form-group">
-                <label asp-for="Password"></label>
-                <input asp-for="Password" type="password" class="form-control" id="password" />
-                <span asp-validation-for="Password" class="text-danger"></span>
-                <span class="show-password" onclick="togglePassword()">👁️</span>
+            <div class="card-body">
+                <p class="login-box-msg">Sign in to start your session</p>
+
+                <form asp-action="Index" method="post">
+                    <div class="input-group mb-3">
+                        <input asp-for="Email" type="email" class="form-control" placeholder="Email">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-envelope"></span>
+                            </div>
+                        </div>
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input asp-for="Password" type="password" class="form-control" id="password" placeholder="Password">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                            </div>
+                            <span class="input-group-text show-password" onclick="togglePassword()">👁️</span>
+                        </div>
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                    <div class="row">
+                        <div class="col-8">
+                            <div class="icheck-primary">
+                                <input asp-for="RememberMe" type="checkbox" id="remember">
+                                <label asp-for="RememberMe">
+                                    Remember Me
+                                </label>
+                            </div>
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-4">
+                            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                </form>
+
+                <div class="social-auth-links text-center mt-2 mb-3">
+                    <a href="#" class="btn btn-block btn-primary">
+                        <i class="fab fa-facebook mr-2"></i> Sign in using Facebook
+                    </a>
+                    <a href="#" class="btn btn-block btn-danger">
+                        <i class="fab fa-google-plus mr-2"></i> Sign in using Google+
+                    </a>
+                </div>
+                <!-- /.social-auth-links -->
+
+                <p class="mb-1">
+                    <a href="forgot-password.html">I forgot my password</a>
+                </p>
+                <p class="mb-0">
+                    <a href="register.html" class="text-center">Register a new membership</a>
+                </p>
             </div>
-            <div class="form-group">
-                <input asp-for="RememberMe" type="checkbox" />
-                <label asp-for="RememberMe"></label>
-            </div>
-            <button type="submit" class="btn btn-primary">Login</button>
-        </form>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
     </div>
+    <!-- /.login-box -->
+    <!-- jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.1/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/3.1.0/js/adminlte.min.js"></script>
 
     <script>
         function togglePassword() {

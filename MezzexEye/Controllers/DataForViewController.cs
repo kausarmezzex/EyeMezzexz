@@ -35,6 +35,12 @@ namespace EyeMezzexz.Controllers
 
                 // Get the logged-in user's email
                 var email = User.Identity.Name;
+                if (email == null)
+                {
+                    _logger.LogError("User email is null.");
+                    return StatusCode(500, "Internal server error");
+                }
+
                 var user = await _apiService.GetUserByEmailAsync(email);
 
                 if (user == null)
@@ -73,7 +79,7 @@ namespace EyeMezzexz.Controllers
                 {
                     data = data.Where(d => !string.IsNullOrEmpty(d.ImageUrl)).ToList();
                 }
-                else if (mediaType == "video")
+                else if (mediaType == "Video")
                 {
                     data = data.Where(d => !string.IsNullOrEmpty(d.VideoUrl)).ToList();
                 }
@@ -108,6 +114,7 @@ namespace EyeMezzexz.Controllers
             }
         }
 
+
         [HttpGet]
         public async Task<IActionResult> TaskManagement()
         {
@@ -124,14 +131,14 @@ namespace EyeMezzexz.Controllers
 
                 // Check if the staff member is clocked in
                 var staffInTime = await _apiService.GetStaffInTimeAsync(user.Id);
-               
+
                 if (staffInTime == null)
                 {
                     _logger.LogInformation("Staff member is not clocked in.");
                     return View("NotClockedIn"); // Return a view indicating the user needs to clock in first
                 }
 
-                var taskTypes = await _apiService.GetTasksAsync();
+                var (taskTypes, _) = await _apiService.GetTasksAsync();
                 var activeTasks = await _apiService.GetTaskTimersAsync(user.Id);
                 var completedTasks = await _apiService.GetUserCompletedTasksAsync(user.Id);
 
@@ -150,6 +157,7 @@ namespace EyeMezzexz.Controllers
                 return StatusCode(500, "Internal server error");
             }
         }
+
 
         [HttpGet]
         public async Task<IActionResult> CheckClockInStatus()
@@ -174,7 +182,6 @@ namespace EyeMezzexz.Controllers
             }
         }
 
-
         [HttpPost]
         public async Task<IActionResult> StartTask([FromBody] TaskTimerUploadRequest model)
         {
@@ -189,7 +196,6 @@ namespace EyeMezzexz.Controllers
                 model.UserId = user.Id;
 
                 await _apiService.SaveTaskTimerAsync(model);
-                TaskManagement();
                 return Ok(new { Message = "Task started successfully" });
             }
             catch (Exception ex)

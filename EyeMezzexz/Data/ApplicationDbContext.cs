@@ -15,6 +15,7 @@ namespace EyeMezzexz.Data
         public DbSet<RolePermission> RolePermissions { get; set; }
         public DbSet<UserPermission> UserPermissions { get; set; }
         public DbSet<Country> Countries { get; set; }
+        public DbSet<Computer> Computers { get; set; }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
         }

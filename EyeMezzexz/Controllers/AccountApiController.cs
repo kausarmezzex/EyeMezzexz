@@ -25,62 +25,71 @@ namespace EyeMezzexz.Controllers
             _context = context; 
         }
 
+
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginRequest1 loginRequest)
         {
             if (loginRequest == null || string.IsNullOrEmpty(loginRequest.Email) || string.IsNullOrEmpty(loginRequest.Password))
             {
-                return BadRequest("Invalid login request.");
+                return BadRequest(new { message = "Invalid login request." });
             }
 
             var response = _webServiceClient.GetLoginDetail(loginRequest.Email, loginRequest.Password);
             if (string.IsNullOrEmpty(response))
             {
-                return NotFound("Login details not found.");
+                return NotFound(new { message = "Login details not found." });
             }
 
-            // Deserialize the JSON response
             var loginDetails = JsonSerializer.Deserialize<List<LoginDetailResult>>(response);
-
             if (loginDetails == null || !loginDetails.Any())
             {
-                return NotFound("Login details not found.");
+                return NotFound(new { message = "Login details not found." });
             }
 
             var firstLoginDetail = loginDetails.First();
             var firstName = firstLoginDetail.FirstName;
             var lastName = firstLoginDetail.LastName;
 
-            // Check if the user already exists in the local database
             var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == loginRequest.Email);
             if (user == null)
             {
-                // User does not exist, register the user
                 var registerViewModel = new RegisterViewModel
                 {
                     Email = loginRequest.Email,
                     Password = loginRequest.Password,
                     FirstName = firstName,
                     LastName = lastName,
-                    Gender = "Male", // Adjust as necessary
+                    Gender = "Male",
                     Active = true,
-                    Role = "Registered" // Adjust the role if necessary
+                    Role = "Registered"
                 };
 
-                // Register the user
                 var result = await _userService.RegisterUser(registerViewModel);
                 if (!result.Succeeded)
                 {
-                    return BadRequest("User registration failed.");
+                    return BadRequest(new { message = "User registration failed." });
                 }
 
-     
+                user = await _context.Users.FirstOrDefaultAsync(u => u.Email == loginRequest.Email);
             }
-            // Fetch the newly created user details
-            user = await _context.Users.FirstOrDefaultAsync(u => u.Email == loginRequest.Email);
-            // Return the simplified response
-            return Ok(new { message = "Login successful", userId = user.Id, username = user.FirstName+" "+user.LastName });
+            else
+            {
+                var today = DateTime.UtcNow.Date;
+                if (user.LastLoginTime.HasValue && user.LastLoginTime.Value.Date == today && (!user.LastLogoutTime.HasValue || user.LastLoginTime > user.LastLogoutTime))
+                {
+                    return BadRequest(new { message = "User already logged in on another device today." });
+                }
+            }
+
+            user.LastLoginTime = DateTime.UtcNow;
+            _context.Users.Update(user);
+            await _context.SaveChangesAsync();
+
+            return Ok(new { message = "Login successful", userId = user.Id, username = $"{user.FirstName} {user.LastName}" });
         }
+
+
+
 
         [HttpGet("getAllUsernames")]
         public async Task<IActionResult> GetAllUsernames()
@@ -116,8 +125,33 @@ namespace EyeMezzexz.Controllers
             return await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
         }
 
-    }
 
+        [HttpPost("logout")]
+        public async Task<IActionResult> Logout([FromBody] LogoutRequest logoutRequest)
+        {
+            if (logoutRequest == null || string.IsNullOrEmpty(logoutRequest.Email))
+            {
+                return BadRequest("Invalid logout request.");
+            }
+
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == logoutRequest.Email);
+            if (user == null)
+            {
+                return NotFound("User not found.");
+            }
+
+            user.LastLogoutTime = DateTime.UtcNow;
+            _context.Users.Update(user);
+            await _context.SaveChangesAsync();
+
+            return Ok(new { message = "Logout successful", userId = user.Id });
+        }
+
+    }
+    public class LogoutRequest
+    {
+        public string Email { get; set; }
+    }
     public class LoginRequest1
     {
         public string Email { get; set; }

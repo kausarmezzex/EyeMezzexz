@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
-using EyeMezzexz.Controllers;
 using EyeMezzexz.Models;
 using MezzexEye.Models;
 using Microsoft.Extensions.Logging;
@@ -50,10 +49,17 @@ public class ApiService
         return response ?? new List<TaskTimerResponse>();
     }
 
-    public async Task<List<TaskNames>> GetTasksAsync()
+    public async Task<(List<TaskNames> Tasks, int TotalTasks)> GetTasksAsync(int? countryId = null, int page = 1, int pageSize = 10, string search = "")
     {
-        var response = await _httpClient.GetFromJsonAsync<List<TaskNames>>("api/Data/getTasks");
-        return response ?? new List<TaskNames>();
+        var url = $"api/Data/getTasks?countryId={countryId}&page={page}&pageSize={pageSize}&search={search}";
+        var response = await _httpClient.GetFromJsonAsync<ApiResponse>(url);
+        return (response.Tasks, response.TotalTasks);
+    }
+
+    public class ApiResponse
+    {
+        public List<TaskNames> Tasks { get; set; }
+        public int TotalTasks { get; set; }
     }
 
     public async Task SaveStaffAsync(StaffInOut model)
@@ -143,5 +149,15 @@ public class ApiService
         var response = await _httpClient.GetFromJsonAsync<ApplicationUser>($"api/AccountApi/getUserByEmail?email={email}");
         return response;
     }
-}
 
+    public async Task<List<Country>> GetCountriesAsync()
+    {
+        var response = await _httpClient.GetFromJsonAsync<List<Country>>("api/Data/getCountries");
+        return response ?? new List<Country>();
+    }
+    public async Task<List<Computer>> GetComputersAsync()
+    {
+        var response = await _httpClient.GetFromJsonAsync<List<Computer>>("api/Data/getComputers");
+        return response ?? new List<Computer>();
+    }
+}

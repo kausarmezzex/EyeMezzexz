@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EyeMezzexz.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240805115658_ConnectCountryWithTaskNames")]
-    partial class ConnectCountryWithTaskNames
+    [Migration("20240805124325_ModifyTaskModel")]
+    partial class ModifyTaskModel
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

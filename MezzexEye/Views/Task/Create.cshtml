@@ -4,31 +4,66 @@
     ViewData["Title"] = "Create Task";
 }
 
-<h1>Create Task</h1>
+<h2>Create Task</h2>
 
-<h4>Task</h4>
-<hr />
-<div class="row">
-    <div class="col-md-6">
-        <form asp-action="Create">
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+<form asp-action="Create" method="post">
+    <div class="form-group mb-3">
+        <label asp-for="CountryId" class="mb-2">Country</label>
+        <select asp-for="CountryId" class="form-control" id="countrySelect" name="CountryId">
+            <option value="">[None]</option>
+            @foreach (var country in ViewBag.Countries)
+            {
+                if (country.Text == "India")
+                {
+                    <option value="@country.Value" selected>@country.Text</option>
+                }
+                else
+                {
+                    <option value="@country.Value">@country.Text</option>
+                }
+            }
+        </select>
+        <span asp-validation-for="CountryId" class="text-danger"></span>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+    <div class="form-group mb-3">
+        <label asp-for="Name" class="mb-2">Name</label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="form-group mb-3">
+        <label asp-for="ParentTaskId" class="mb-2">Parent Task</label>
+        <select asp-for="ParentTaskId" class="form-control">
+            <option value="">[None]</option>
+            @foreach (var task in ViewBag.Tasks)
+            {
+                <option value="@task.Value">@task.Text</option>
+            }
+        </select>
+        <span asp-validation-for="ParentTaskId" class="text-danger"></span>
+    </div>
+    <div class="form-group mb-3" id="computerRequiredGroup" style="display:none;">
+        <input type="checkbox" class="form-check-input" id="ComputerRequired" name="ComputerRequired" />
+        <label class="form-check-label" for="ComputerRequired">Computer Required</label>
+    </div>
+    <div class="form-group mb-3">
+        <input type="submit" value="Create" class="btn btn-primary" />
+    </div>
+</form>
 
 @section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        document.getElementById("countrySelect").addEventListener("change", function () {
+            var selectedCountry = this.options[this.selectedIndex].text;
+            var computerRequiredGroup = document.getElementById("computerRequiredGroup");
+            if (selectedCountry === "UK") {
+                computerRequiredGroup.style.display = "block";
+            } else {
+                computerRequiredGroup.style.display = "none";
+            }
+        });
+
+        // Trigger the change event on page load to handle pre-selected value
+        document.getElementById("countrySelect").dispatchEvent(new Event('change'));
+    </script>
 }

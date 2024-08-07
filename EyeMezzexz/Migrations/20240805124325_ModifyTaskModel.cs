@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace EyeMezzexz.Migrations
 {
     /// <inheritdoc />
-    public partial class ConnectCountryWithTaskNames : Migration
+    public partial class ModifyTaskModel : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -225,7 +225,7 @@ namespace EyeMezzexz.Migrations
                     TaskCreatedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
                     TaskModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     TaskModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    CountryId = table.Column<int>(type: "int", nullable: false),
+                    CountryId = table.Column<int>(type: "int", nullable: true),
                     ParentTaskId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>

@@ -2,6 +2,9 @@
 
 @{
     ViewData["Title"] = "Tasks";
+    int totalTasks = ViewBag.TotalTasks;
+    int pageSize = ViewBag.PageSize;
+    int currentPage = ViewBag.CurrentPage;
 }
 
 <h1>Tasks</h1>
@@ -9,26 +12,144 @@
 <p>
     <a asp-action="Create" class="btn btn-primary">Create New Task</a>
 </p>
+
+<div class="form-group mb-3">
+    <label for="countrySelect" class="mb-2">Filter by Country</label>
+    <select class="form-control" id="countrySelect" name="countrySelect">
+        <option value="">[All]</option>
+        @foreach (var country in ViewBag.Countries)
+        {
+            <option value="@country.Value">@country.Text</option>
+        }
+    </select>
+</div>
+
+<div class="form-group mb-3">
+    <label for="searchBox" class="mb-2">Search</label>
+    <input type="text" class="form-control" id="searchBox" placeholder="Search tasks">
+</div>
+
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.First().Name)
-            </th>
-            <th></th>
+            <th>Name</th>
+            <th>Country</th>
+            <th>Computer Required</th>
+            <th>Computer</th>
+            <th>Actions</th>
         </tr>
     </thead>
-    <tbody>
+    <tbody id="taskList">
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
+            <tr data-country-id="@item.CountryId">
+                <td>@item.Name</td>
+                <td>@item.Country?.Name ?? "N/A"</td>
+                <td>@(item.ComputerRequired.HasValue && item.ComputerRequired.Value ? "Yes" : "No")</td>
+                <td>@item.Computer?.Name ?? "N/A"</td>
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-secondary">Edit</a>
                 </td>
             </tr>
+            @if (item.SubTasks.Any())
+            {
+                foreach (var subTask in item.SubTasks)
+                {
+                    <tr data-country-id="@subTask.CountryId">
+                        <td class="pl-4">&#8627; @subTask.Name</td>
+                        <td>@subTask.Country?.Name ?? "N/A"</td>
+                        <td>@(subTask.ComputerRequired.HasValue && subTask.ComputerRequired.Value ? "Yes" : "No")</td>
+                        <td>@subTask.Computer?.Name ?? "N/A"</td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@subTask.Id" class="btn btn-secondary">Edit</a>
+                        </td>
+                    </tr>
+                }
+            }
         }
     </tbody>
 </table>
+
+<div class="pagination-container">
+    <ul id="pagination" class="pagination"></ul>
+</div>
+
+@section Scripts {
+    <script>
+        let currentPage = @currentPage;
+        const pageSize = @pageSize;
+
+        async function fetchTasks(page = 1, search = '') {
+            const selectedCountryId = document.getElementById("countrySelect").value;
+            const response = await fetch(`/Task/Index?countryId=${selectedCountryId}&page=${page}&pageSize=${pageSize}&search=${search}`, {
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                renderTasks(data.tasks);
+                renderPagination(data.totalTasks, page);
+            } else {
+                console.error('Failed to load tasks:', response.statusText);
+            }
+        }
+
+        function renderTasks(tasks) {
+            const taskList = document.getElementById("taskList");
+            taskList.innerHTML = '';
+
+            tasks.forEach(function (task) {
+                let row = `<tr data-country-id="${task.countryId}">
+                            <td>${task.name}</td>
+                            <td>${task.country ? task.country.name : 'N/A'}</td>
+                            <td>${task.computerRequired !== null ? (task.computerRequired ? 'Yes' : 'No') : 'N/A'}</td>
+                            <td>${task.computer ? task.computer.name : 'N/A'}</td>
+                            <td><a href="/Task/Edit/${task.id}" class="btn btn-secondary">Edit</a></td>
+                        </tr>`;
+
+                if (task.subTasks && task.subTasks.length > 0) {
+                    task.subTasks.forEach(function (subTask) {
+                        const subRow = `<tr data-country-id="${subTask.countryId}">
+                                    <td class="pl-4">&#8627; ${subTask.name}</td>
+                                    <td>${subTask.country ? subTask.country.name : 'N/A'}</td>
+                                    <td>${subTask.computerRequired !== null ? (subTask.computerRequired ? 'Yes' : 'No') : 'N/A'}</td>
+                                    <td>${subTask.computer ? subTask.computer.name : 'N/A'}</td>
+                                    <td><a href="/Task/Edit/${subTask.id}" class="btn btn-secondary">Edit</a></td>
+                                </tr>`;
+                        row += subRow;
+                    });
+                }
+
+                taskList.innerHTML += row;
+            });
+        }
+
+        function renderPagination(totalTasks, currentPage) {
+            const pagination = document.getElementById("pagination");
+            pagination.innerHTML = '';
+
+            const totalPages = Math.ceil(totalTasks / pageSize);
+
+            for (let i = 1; i <= totalPages; i++) {
+                const li = document.createElement("li");
+                li.classList.add("page-item", i === currentPage ? "active" : "");
+                li.innerHTML = `<a class="page-link" href="#">${i}</a>`;
+                li.addEventListener("click", (e) => {
+                    e.preventDefault();
+                    currentPage = i;
+                    fetchTasks(i);
+                });
+                pagination.appendChild(li);
+            }
+        }
+
+        document.getElementById("countrySelect").addEventListener("change", () => fetchTasks(1));
+        document.getElementById("searchBox").addEventListener("input", (e) => fetchTasks(1, e.target.value));
+
+        // Initial fetch on page load
+        fetchTasks(currentPage);
+
+    </script>
+}
