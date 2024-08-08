@@ -1,4 +1,4 @@
-﻿@model MezzexEye.Models.TaskModelRequest
+﻿@model EyeMezzexz.Models.TaskModelRequest
 
 @{
     ViewData["Title"] = "Create Task";
@@ -6,46 +6,48 @@
 
 <h2>Create Task</h2>
 
-<form asp-action="Create" method="post">
-    <div class="form-group mb-3">
-        <label asp-for="CountryId" class="mb-2">Country</label>
-        <select asp-for="CountryId" class="form-control" id="countrySelect" name="CountryId">
-            <option value="">[None]</option>
+<form asp-action="Create" method="post" class="needs-validation" novalidate>
+    <div class="mb-3">
+        <label asp-for="CountryId" class="form-label">Country</label>
+        <select asp-for="CountryId" class="form-select" id="countrySelect" name="CountryId" required>
+            <option value="">[All]</option>
             @foreach (var country in ViewBag.Countries)
             {
-                if (country.Text == "India")
-                {
-                    <option value="@country.Value" selected>@country.Text</option>
-                }
-                else
-                {
-                    <option value="@country.Value">@country.Text</option>
-                }
+                <option value="@country.Value">@country.Text</option>
             }
         </select>
-        <span asp-validation-for="CountryId" class="text-danger"></span>
+        <div class="invalid-feedback">
+            Please select a country.
+        </div>
     </div>
-    <div class="form-group mb-3">
-        <label asp-for="Name" class="mb-2">Name</label>
-        <input asp-for="Name" class="form-control" />
-        <span asp-validation-for="Name" class="text-danger"></span>
+
+    <div class="mb-3">
+        <label asp-for="Name" class="form-label">Name</label>
+        <input asp-for="Name" class="form-control" required />
+        <div class="invalid-feedback">
+            Please enter a name.
+        </div>
     </div>
-    <div class="form-group mb-3">
-        <label asp-for="ParentTaskId" class="mb-2">Parent Task</label>
-        <select asp-for="ParentTaskId" class="form-control">
+
+    <div class="mb-3">
+        <label asp-for="ParentTaskId" class="form-label">Parent Task</label>
+        <select asp-for="ParentTaskId" class="form-select">
             <option value="">[None]</option>
             @foreach (var task in ViewBag.Tasks)
             {
                 <option value="@task.Value">@task.Text</option>
             }
         </select>
-        <span asp-validation-for="ParentTaskId" class="text-danger"></span>
     </div>
-    <div class="form-group mb-3" id="computerRequiredGroup" style="display:none;">
-        <input type="checkbox" class="form-check-input" id="ComputerRequired" name="ComputerRequired" />
-        <label class="form-check-label" for="ComputerRequired">Computer Required</label>
+
+    <div class="mb-3" id="computerRequiredGroup" style="display: none;">
+        <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="ComputerRequired" name="ComputerRequired" value="true" />
+            <label class="form-check-label" for="ComputerRequired">Computer Required</label>
+        </div>
     </div>
-    <div class="form-group mb-3">
+
+    <div class="mb-3">
         <input type="submit" value="Create" class="btn btn-primary" />
     </div>
 </form>
@@ -53,10 +55,30 @@
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
     <script>
+        (function () {
+            'use strict'
+
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.querySelectorAll('.needs-validation')
+
+            // Loop over them and prevent submission
+            Array.prototype.slice.call(forms)
+                .forEach(function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (!form.checkValidity()) {
+                            event.preventDefault()
+                            event.stopPropagation()
+                        }
+
+                        form.classList.add('was-validated')
+                    }, false)
+                })
+        })()
+
         document.getElementById("countrySelect").addEventListener("change", function () {
             var selectedCountry = this.options[this.selectedIndex].text;
             var computerRequiredGroup = document.getElementById("computerRequiredGroup");
-            if (selectedCountry === "UK") {
+            if (selectedCountry === "United Kingdom") {
                 computerRequiredGroup.style.display = "block";
             } else {
                 computerRequiredGroup.style.display = "none";

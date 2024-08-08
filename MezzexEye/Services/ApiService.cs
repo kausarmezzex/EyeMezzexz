@@ -56,6 +56,12 @@ public class ApiService
         return (response.Tasks, response.TotalTasks);
     }
 
+    public async Task<List<TaskNames>> GetTasksListAsync()
+    {
+        var response = await _httpClient.GetFromJsonAsync<List<TaskNames>>("api/Data/getTasksList");
+        return response ?? new List<TaskNames>();
+    }
+
     public class ApiResponse
     {
         public List<TaskNames> Tasks { get; set; }

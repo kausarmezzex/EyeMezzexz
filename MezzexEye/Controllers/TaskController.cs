@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using EyeMezzexz.Data;
+using Microsoft.IdentityModel.Tokens;
 
 namespace MezzexEye.Controllers
 {
@@ -43,6 +44,11 @@ namespace MezzexEye.Controllers
             var user = await _userManager.GetUserAsync(User);
             model.TaskCreatedBy = user.UserName; // Set the TaskCreatedBy property to the logged-in user's name
 
+            if (!model.CountryId.HasValue)
+            {
+                ModelState.AddModelError("CountryId", "Please choose a country.");
+            }
+
             if (ModelState.IsValid)
             {
                 await _apiService.CreateTaskAsync(model);
@@ -76,43 +82,72 @@ namespace MezzexEye.Controllers
             return View(tasks);
         }
 
+
         // GET: Task/Edit/5
         public async Task<IActionResult> Edit(int id)
         {
-            var (tasks, _) = await _apiService.GetTasksAsync();
-            var task = tasks.FirstOrDefault(t => t.Id == id);
+            var task = await _context.TaskNames
+                .Include(t => t.SubTasks)
+                .Include(t => t.Country)
+                .FirstOrDefaultAsync(t => t.Id == id);
+
             if (task == null)
             {
                 return NotFound();
             }
 
-            ViewBag.Tasks = BuildTaskSelectList(tasks);
+            var tasks = await _context.TaskNames
+                .Select(t => new SelectListItem
+                {
+                    Value = t.Id.ToString(),
+                    Text = t.Name,
+                    Selected = t.Id == task.ParentTaskId
+                })
+                .ToListAsync();
 
-            var countries = await _apiService.GetCountriesAsync();
-            ViewBag.Countries = new SelectList(countries, "Id", "Name");
+            ViewBag.Tasks = tasks;
 
             return View(task);
         }
 
-        // POST: Task/Edit/5
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(TaskNames model)
         {
+            var user = await _userManager.GetUserAsync(User);
+            model.TaskModifiedBy = user.UserName; // Set the TaskModifiedBy property to the logged-in user's name
+
             if (ModelState.IsValid)
             {
-                await _apiService.UpdateTaskAsync(model);
-                return RedirectToAction(nameof(Index));
+                try
+                {
+                    // Call the UpdateTaskAsync method instead of updating the database directly
+                    await _apiService. UpdateTaskAsync(model);
+                    return RedirectToAction(nameof(Index));
+                }
+                catch (HttpRequestException ex)
+                {
+                    // Handle HTTP request exceptions
+                    ModelState.AddModelError(string.Empty, $"An error occurred while updating the task: {ex.Message}");
+                }
             }
 
-            var (tasks, _) = await _apiService.GetTasksAsync();
-            ViewBag.Tasks = BuildTaskSelectList(tasks);
+            // If we got this far, something failed; redisplay the form with the validation errors
+            var tasks = await _context.TaskNames
+                .Select(t => new
+                {
+                    t.Id,
+                    t.Name
+                })
+                .ToListAsync();
 
-            var countries = await _apiService.GetCountriesAsync();
-            ViewBag.Countries = new SelectList(countries, "Id", "Name");
+            ViewBag.Tasks = new SelectList(tasks, "Id", "Name");
 
             return View(model);
         }
+
+
 
 
         private List<SelectListItem> BuildTaskSelectList(IEnumerable<TaskNames> tasks, int? parentId = null, string prefix = "")

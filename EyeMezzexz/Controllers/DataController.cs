@@ -328,13 +328,20 @@ namespace EyeMezzexz.Controllers
                 return BadRequest("Model is null");
             }
 
+            if (!model.CountryId.HasValue)
+            {
+                ModelState.AddModelError("CountryId", "Please choose a country.");
+                return BadRequest(ModelState);
+            }
+
             var task = new TaskNames
             {
                 Name = model.Name,
                 TaskCreatedBy = model.TaskCreatedBy,
                 TaskCreatedOn = _context.GetDatabaseServerTime(),
                 ParentTaskId = model.ParentTaskId,
-                CountryId = model.CountryId
+                CountryId = model.CountryId,
+                ComputerRequired = model.ComputerRequired
             };
 
             if (model.ParentTaskId.HasValue)
@@ -358,6 +365,7 @@ namespace EyeMezzexz.Controllers
             }
         }
 
+
         [HttpPut("updateTask")]
         public async Task<IActionResult> UpdateTask([FromBody] TaskNames model)
         {
@@ -377,6 +385,7 @@ namespace EyeMezzexz.Controllers
             existingTask.ParentTaskId = model.ParentTaskId;
             existingTask.CountryId = model.CountryId;
             existingTask.TaskModifiedBy = model.TaskModifiedBy;
+            existingTask.ComputerRequired = model.ComputerRequired;
             if (model.ParentTaskId.HasValue)
             {
                 var parentTask = await _context.TaskNames.FindAsync(model.ParentTaskId.Value);
@@ -455,6 +464,25 @@ namespace EyeMezzexz.Controllers
             return Ok(new { tasks, totalTasks });
         }
 
+        [HttpGet("getTasksList")]
+        public async Task<IActionResult> GetTasksList()
+        {
+            var tasks = await _context.TaskNames
+                .Select(t => new TaskNames
+                {
+                    Id = t.Id,
+                    Name = t.Name,
+                    ComputerRequired = t.ComputerRequired,
+                    Country = t.Country,
+                    SubTasks = t.SubTasks,
+                    CountryId = t.CountryId,
+                    TaskCreatedBy = t.TaskCreatedBy,
+                    TaskCreatedOn = t.TaskCreatedOn,
+                })
+                .ToListAsync();
+
+            return Ok(tasks);
+        }
 
         [HttpGet("getUserCompletedTasks")]
         public async Task<IActionResult> GetUserCompletedTasks(int userId, string clientTimeZone)
@@ -507,17 +535,7 @@ namespace EyeMezzexz.Controllers
 
 }
 
-public class TaskModelRequest
-{
-    public string Name { get; set; }
-    public int? ParentTaskId { get; set; }
-    public int? CountryId { get; set; } // Add CountryId to TaskModelRequest
-    public int? ComputerId { get; set; } // Add ComputerId to TaskModelRequest
-    public bool? ComputerRequired { get; set; } // Add ComputerRequired to TaskModelRequest
-    public string? TaskCreatedBy { get; set; }
-    public string? TaskModifiedBy { get; set; }
 
-}
 public class UpdateTaskTimerRequest
 {
     public int Id { get; set; }

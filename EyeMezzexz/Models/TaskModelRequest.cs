@@ -1,4 +1,4 @@
-﻿namespace MezzexEye.Models
+﻿namespace EyeMezzexz.Models
 {
     public class TaskModelRequest
     {
@@ -9,5 +9,6 @@
         public bool? ComputerRequired { get; set; } // Add ComputerRequired to TaskModelRequest
         public string? TaskCreatedBy { get; set; }
         public string? TaskModifiedBy { get; set; }
+
     }
 }

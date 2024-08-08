@@ -2,34 +2,77 @@
 
 @{
     ViewData["Title"] = "Edit Task";
+    var isUk = Model.CountryId == 1;// Assuming '2' is the ID for the United Kingdom
 }
 
-<h1>Edit Task</h1>
+<h2>Edit Task</h2>
 
-<h4>Task</h4>
-<hr />
-<div class="row">
-    <div class="col-md-6">
-        <form asp-action="Edit">
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
-            <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+<form asp-action="Edit" method="post" class="needs-validation" novalidate>
+
+    <div class="mb-3">
+        <label asp-for="Name" class="form-label">Name</label>
+        <input asp-for="Name" class="form-control" required />
+        <div class="invalid-feedback">
+            Please enter a name.
+        </div>
     </div>
-</div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+    <div class="mb-3">
+        <label asp-for="ParentTaskId" class="form-label">Parent Task</label>
+        <select asp-for="ParentTaskId" class="form-select">
+            <option value="">[None]</option>
+            @foreach (var task in (IEnumerable<SelectListItem>)ViewBag.Tasks)
+            {
+                <option value="@task.Value" selected="@(task.Selected ? "selected" : null)">@task.Text</option>
+            }
+        </select>
+    </div>
+    @if (isUk)
+    {
+        <div class="mb-3">
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="ComputerRequired" name="ComputerRequired"
+                       value="true" @(Model.ComputerRequired ?? false ? "checked" : "") />
+                <input type="hidden" name="ComputerRequired" value="false" />
+                <label asp-for="ComputerRequired" class="form-check-label">Computer Required</label>
+            </div>
+        </div>
+    }
+
+
+    <div class="mb-3">
+        <label asp-for="Country.Name" class="form-label">Country</label>
+        <input asp-for="Country.Name" class="form-control" readonly />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="TaskCreatedBy" class="form-label">Created By</label>
+        <input asp-for="TaskCreatedBy" class="form-control" readonly />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="TaskCreatedOn" class="form-label">Created On</label>
+        <input asp-for="TaskCreatedOn" class="form-control" readonly />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="SubTasks" class="form-label">Sub Tasks</label>
+        <ul>
+            @foreach (var subTask in Model.SubTasks)
+            {
+                <li>@subTask.Name</li>
+            }
+        </ul>
+    </div>
+
+    <input type="hidden" asp-for="Id" />
+    <input type="hidden" asp-for="CountryId" />
+
+    <div class="mb-3">
+        <input type="submit" value="Save" class="btn btn-primary" />
+    </div>
+</form>
 
 @section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
+    <partial name="_ValidationScriptsPartial" />
 }

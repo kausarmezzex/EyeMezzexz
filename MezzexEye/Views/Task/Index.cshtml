@@ -35,31 +35,36 @@
             <th>Name</th>
             <th>Country</th>
             <th>Computer Required</th>
-            <th>Computer</th>
             <th>Actions</th>
         </tr>
     </thead>
     <tbody id="taskList">
         @foreach (var item in Model)
         {
-            <tr data-country-id="@item.CountryId">
-                <td>@item.Name</td>
+            <tr data-country-id="@item.CountryId" data-task-id="@item.Id">
+                <td>
+                    @item.Name
+                    @if (item.SubTasks.Any())
+                    {
+                        <button class="btn btn-link toggle-button" type="button" data-task-id="@item.Id">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    }
+                </td>
                 <td>@item.Country?.Name ?? "N/A"</td>
                 <td>@(item.ComputerRequired.HasValue && item.ComputerRequired.Value ? "Yes" : "No")</td>
-                <td>@item.Computer?.Name ?? "N/A"</td>
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-secondary">Edit</a>
                 </td>
             </tr>
             @if (item.SubTasks.Any())
             {
-                foreach (var subTask in item.SubTasks)
+                @foreach (var subTask in item.SubTasks)
                 {
-                    <tr data-country-id="@subTask.CountryId">
+                    <tr class="sub-task collapse" data-parent-task-id="@item.Id">
                         <td class="pl-4">&#8627; @subTask.Name</td>
                         <td>@subTask.Country?.Name ?? "N/A"</td>
                         <td>@(subTask.ComputerRequired.HasValue && subTask.ComputerRequired.Value ? "Yes" : "No")</td>
-                        <td>@subTask.Computer?.Name ?? "N/A"</td>
                         <td>
                             <a asp-action="Edit" asp-route-id="@subTask.Id" class="btn btn-secondary">Edit</a>
                         </td>
@@ -80,6 +85,7 @@
         const pageSize = @pageSize;
 
         async function fetchTasks(page = 1, search = '') {
+            currentPage = page; // Set the current page
             const selectedCountryId = document.getElementById("countrySelect").value;
             const response = await fetch(`/Task/Index?countryId=${selectedCountryId}&page=${page}&pageSize=${pageSize}&search=${search}`, {
                 headers: {
@@ -101,28 +107,47 @@
             taskList.innerHTML = '';
 
             tasks.forEach(function (task) {
-                let row = `<tr data-country-id="${task.countryId}">
-                            <td>${task.name}</td>
+                let row = `<tr data-country-id="${task.countryId}" data-task-id="${task.id}">
+                            <td>
+                                ${task.name}
+                                ${task.subTasks.length > 0 ? `<button class="btn btn-link toggle-button" type="button" data-task-id="${task.id}"><i class="fas fa-plus"></i></button>` : ''}
+                            </td>
                             <td>${task.country ? task.country.name : 'N/A'}</td>
                             <td>${task.computerRequired !== null ? (task.computerRequired ? 'Yes' : 'No') : 'N/A'}</td>
-                            <td>${task.computer ? task.computer.name : 'N/A'}</td>
                             <td><a href="/Task/Edit/${task.id}" class="btn btn-secondary">Edit</a></td>
                         </tr>`;
 
                 if (task.subTasks && task.subTasks.length > 0) {
                     task.subTasks.forEach(function (subTask) {
-                        const subRow = `<tr data-country-id="${subTask.countryId}">
+                        row += `<tr class="sub-task collapse" data-parent-task-id="${task.id}">
                                     <td class="pl-4">&#8627; ${subTask.name}</td>
                                     <td>${subTask.country ? subTask.country.name : 'N/A'}</td>
                                     <td>${subTask.computerRequired !== null ? (subTask.computerRequired ? 'Yes' : 'No') : 'N/A'}</td>
-                                    <td>${subTask.computer ? subTask.computer.name : 'N/A'}</td>
                                     <td><a href="/Task/Edit/${subTask.id}" class="btn btn-secondary">Edit</a></td>
                                 </tr>`;
-                        row += subRow;
                     });
                 }
 
                 taskList.innerHTML += row;
+            });
+
+            // Attach event listener for toggle buttons
+            document.querySelectorAll('.toggle-button').forEach(button => {
+                button.addEventListener('click', function () {
+                    const taskId = this.getAttribute('data-task-id');
+                    const targetRows = document.querySelectorAll(`.sub-task[data-parent-task-id="${taskId}"]`);
+                    targetRows.forEach(row => {
+                        row.classList.toggle('show');
+                    });
+                    const icon = this.querySelector('i');
+                    if (targetRows[0].classList.contains('show')) {
+                        icon.classList.remove('fa-plus');
+                        icon.classList.add('fa-minus');
+                    } else {
+                        icon.classList.remove('fa-minus');
+                        icon.classList.add('fa-plus');
+                    }
+                });
             });
         }
 
@@ -134,11 +159,13 @@
 
             for (let i = 1; i <= totalPages; i++) {
                 const li = document.createElement("li");
-                li.classList.add("page-item", i === currentPage ? "active" : "");
+                li.className = "page-item";
+                if (i === currentPage) {
+                    li.classList.add("active");
+                }
                 li.innerHTML = `<a class="page-link" href="#">${i}</a>`;
                 li.addEventListener("click", (e) => {
                     e.preventDefault();
-                    currentPage = i;
                     fetchTasks(i);
                 });
                 pagination.appendChild(li);
@@ -150,6 +177,5 @@
 
         // Initial fetch on page load
         fetchTasks(currentPage);
-
     </script>
 }
