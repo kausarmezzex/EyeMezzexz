@@ -1,13 +1,22 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
-  <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\EyeMezzexz\EyeMezzexz.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+	  <ProjectReference Include="..\EyeMezzexz\EyeMezzexz.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+
+		<!-- Exclude appsettings.json from EyeMezzexz project -->
+		<None Update="..\EyeMezzexz\appsettings.json">
+			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
+			<CopyToPublishDirectory>Never</CopyToPublishDirectory>
+		</None>
+	</ItemGroup>
 
 </Project>

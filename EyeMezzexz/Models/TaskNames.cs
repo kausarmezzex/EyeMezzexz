@@ -18,10 +18,6 @@ namespace EyeMezzexz.Models
         public int? CountryId { get; set; }
         public Country? Country { get; set; } // Navigation property to Country
 
-        // Foreign key reference to Computer
-        public int? ComputerId { get; set; }
-        public Computer? Computer { get; set; } // Navigation property to Computer
-
         // Hierarchical structure for sub-tasks
         public int? ParentTaskId { get; set; }
         public TaskNames? ParentTask { get; set; }
@@ -29,5 +25,6 @@ namespace EyeMezzexz.Models
 
         // Additional property for UK-based tasks
         public bool? ComputerRequired { get; set; } // Nullable to allow non-UK tasks to ignore it
+        public bool? IsDeleted { get; set; } // Flag to indicate if the record is deleted
     }
 }

@@ -334,6 +334,23 @@ namespace EyeMezzexz.Controllers
                 return BadRequest(ModelState);
             }
 
+            // Check for duplicate task
+            bool isDuplicateTask;
+            if (model.ParentTaskId.HasValue)
+            {
+                isDuplicateTask = await _context.TaskNames.AnyAsync(t => t.Name == model.Name && t.ParentTaskId == model.ParentTaskId);
+            }
+            else
+            {
+                isDuplicateTask = await _context.TaskNames.AnyAsync(t => t.Name == model.Name && t.ParentTaskId == null);
+            }
+
+            if (isDuplicateTask)
+            {
+                ModelState.AddModelError("Name", "A task with the same name already exists.");
+                return BadRequest(ModelState);
+            }
+
             var task = new TaskNames
             {
                 Name = model.Name,
@@ -386,6 +403,8 @@ namespace EyeMezzexz.Controllers
             existingTask.CountryId = model.CountryId;
             existingTask.TaskModifiedBy = model.TaskModifiedBy;
             existingTask.ComputerRequired = model.ComputerRequired;
+            existingTask.IsDeleted = model.IsDeleted; // Handle IsDeleted field
+
             if (model.ParentTaskId.HasValue)
             {
                 var parentTask = await _context.TaskNames.FindAsync(model.ParentTaskId.Value);
@@ -409,6 +428,7 @@ namespace EyeMezzexz.Controllers
             return Ok(new { Message = "Task updated successfully", TaskId = existingTask.Id });
         }
 
+
         private List<SelectListItem> BuildTaskSelectList(IEnumerable<TaskNames> tasks, int? parentId = null, string prefix = "")
         {
             var taskSelectList = new List<SelectListItem>();
@@ -428,13 +448,13 @@ namespace EyeMezzexz.Controllers
 
             return taskSelectList;
         }
-
         [HttpGet("getTasks")]
         public async Task<IActionResult> GetTasks(int? countryId = null, int page = 1, int pageSize = 10, string search = "")
         {
             var query = _context.TaskNames
                 .Include(t => t.Country)
                 .Include(t => t.SubTasks)
+                .Where(t => !t.IsDeleted.HasValue || !t.IsDeleted.Value)  // Exclude deleted tasks
                 .Where(t => !countryId.HasValue || t.CountryId == countryId)
                 .Where(t => string.IsNullOrEmpty(search) || t.Name.Contains(search))
                 .AsQueryable();
@@ -447,34 +467,40 @@ namespace EyeMezzexz.Controllers
                 {
                     t.Id,
                     t.Name,
-                    t.ComputerId,
                     t.ComputerRequired,
+                    t.TaskCreatedBy,
+                    t.TaskCreatedOn,
                     Country = t.Country != null ? new { t.Country.Id, t.Country.Name } : null,
-                    SubTasks = t.SubTasks.Select(st => new
-                    {
-                        st.Id,
-                        st.Name,
-                        st.ComputerId,
-                        st.ComputerRequired,
-                        Country = st.Country != null ? new { st.Country.Id, st.Country.Name } : null
-                    }).ToList()
+                    SubTasks = t.SubTasks
+                                .Where(st => !st.IsDeleted.HasValue || !st.IsDeleted.Value)  // Exclude deleted subtasks
+                                .Select(st => new
+                                {
+                                    st.Id,
+                                    st.Name,
+                                    st.ComputerRequired,
+                                    st.TaskCreatedBy,
+                                    st.TaskCreatedOn,
+                                    Country = st.Country != null ? new { st.Country.Id, st.Country.Name } : null
+                                }).ToList()
                 })
                 .ToListAsync();
 
             return Ok(new { tasks, totalTasks });
         }
 
+
         [HttpGet("getTasksList")]
         public async Task<IActionResult> GetTasksList()
         {
             var tasks = await _context.TaskNames
+                .Where(t => !t.IsDeleted.HasValue || !t.IsDeleted.Value)  // Exclude deleted tasks
                 .Select(t => new TaskNames
                 {
                     Id = t.Id,
                     Name = t.Name,
                     ComputerRequired = t.ComputerRequired,
                     Country = t.Country,
-                    SubTasks = t.SubTasks,
+                    SubTasks = t.SubTasks.Where(st => !st.IsDeleted.HasValue || !st.IsDeleted.Value).ToList(),  // Exclude deleted subtasks
                     CountryId = t.CountryId,
                     TaskCreatedBy = t.TaskCreatedBy,
                     TaskCreatedOn = t.TaskCreatedOn,
@@ -483,6 +509,7 @@ namespace EyeMezzexz.Controllers
 
             return Ok(tasks);
         }
+
 
         [HttpGet("getUserCompletedTasks")]
         public async Task<IActionResult> GetUserCompletedTasks(int userId, string clientTimeZone)

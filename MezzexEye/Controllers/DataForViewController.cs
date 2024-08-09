@@ -138,7 +138,7 @@ namespace EyeMezzexz.Controllers
                     return View("NotClockedIn"); // Return a view indicating the user needs to clock in first
                 }
 
-                var (taskTypes, _) = await _apiService.GetTasksAsync();
+                var taskTypes = await _apiService.GetTasksListAsync();
                 var activeTasks = await _apiService.GetTaskTimersAsync(user.Id);
                 var completedTasks = await _apiService.GetUserCompletedTasksAsync(user.Id);
 
@@ -194,7 +194,6 @@ namespace EyeMezzexz.Controllers
                 var email = User.Identity.Name;
                 var user = await _apiService.GetUserByEmailAsync(email);
                 model.UserId = user.Id;
-
                 await _apiService.SaveTaskTimerAsync(model);
                 return Ok(new { Message = "Task started successfully" });
             }

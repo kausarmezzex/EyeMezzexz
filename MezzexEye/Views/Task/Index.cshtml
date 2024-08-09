@@ -7,76 +7,83 @@
     int currentPage = ViewBag.CurrentPage;
 }
 
-<h1>Tasks</h1>
+<div class="container">
+    <h1>Tasks</h1>
 
-<p>
-    <a asp-action="Create" class="btn btn-primary">Create New Task</a>
-</p>
+    <p>
+        <a asp-action="Create" class="btn btn-primary">Create New Task</a>
+    </p>
 
-<div class="form-group mb-3">
-    <label for="countrySelect" class="mb-2">Filter by Country</label>
-    <select class="form-control" id="countrySelect" name="countrySelect">
-        <option value="">[All]</option>
-        @foreach (var country in ViewBag.Countries)
-        {
-            <option value="@country.Value">@country.Text</option>
-        }
-    </select>
-</div>
-
-<div class="form-group mb-3">
-    <label for="searchBox" class="mb-2">Search</label>
-    <input type="text" class="form-control" id="searchBox" placeholder="Search tasks">
-</div>
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Country</th>
-            <th>Computer Required</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody id="taskList">
-        @foreach (var item in Model)
-        {
-            <tr data-country-id="@item.CountryId" data-task-id="@item.Id">
-                <td>
-                    @item.Name
-                    @if (item.SubTasks.Any())
-                    {
-                        <button class="btn btn-link toggle-button" type="button" data-task-id="@item.Id">
-                            <i class="fas fa-plus"></i>
-                        </button>
-                    }
-                </td>
-                <td>@item.Country?.Name ?? "N/A"</td>
-                <td>@(item.ComputerRequired.HasValue && item.ComputerRequired.Value ? "Yes" : "No")</td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-secondary">Edit</a>
-                </td>
-            </tr>
-            @if (item.SubTasks.Any())
-            {
-                @foreach (var subTask in item.SubTasks)
+    <div class="row mb-3">
+        <div class="col-md-6 mb-3">
+            <label for="countrySelect" class="mb-2">Filter by Country</label>
+            <select class="form-control" id="countrySelect" name="countrySelect">
+                <option value="">[All]</option>
+                @foreach (var country in ViewBag.Countries)
                 {
-                    <tr class="sub-task collapse" data-parent-task-id="@item.Id">
-                        <td class="pl-4">&#8627; @subTask.Name</td>
-                        <td>@subTask.Country?.Name ?? "N/A"</td>
-                        <td>@(subTask.ComputerRequired.HasValue && subTask.ComputerRequired.Value ? "Yes" : "No")</td>
+                    <option value="@country.Value">@country.Text</option>
+                }
+            </select>
+        </div>
+        <div class="col-md-6">
+            <label for="searchBox" class="mb-2">Search</label>
+            <input type="text" class="form-control" id="searchBox" placeholder="Search tasks">
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Country</th>
+                    <th>Computer Required</th>
+                    <th>Created ON</th>
+                    <th>Created By</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="taskList">
+                @foreach (var item in Model)
+                {
+                    <tr data-country-id="@item.CountryId" data-task-id="@item.Id">
                         <td>
-                            <a asp-action="Edit" asp-route-id="@subTask.Id" class="btn btn-secondary">Edit</a>
+                            @item.Name
+                            @if (item.SubTasks.Any())
+                            {
+                                <button class="btn btn-link toggle-button" type="button" data-task-id="@item.Id">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            }
+                        </td>
+                        <td>@item.Country?.Name ?? "N/A"</td>
+                        <td>@(item.ComputerRequired.HasValue && item.ComputerRequired.Value ? "Yes" : "No")</td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-secondary">Edit</a>
                         </td>
                     </tr>
+                    @if (item.SubTasks.Any())
+                    {
+                        @foreach (var subTask in item.SubTasks)
+                        {
+                            <tr class="sub-task collapse" data-parent-task-id="@item.Id">
+                                <td class="pl-4">&#8627; @subTask.Name</td>
+                                <td>@subTask.Country?.Name ?? "N/A"</td>
+                                <td>@(subTask.ComputerRequired.HasValue && subTask.ComputerRequired.Value ? "Yes" : "No")</td>
+                                <td>
+                                    <a asp-action="Edit" asp-route-id="@subTask.Id" class="btn btn-secondary">Edit</a>
+                                </td>
+                            </tr>
+                        }
+                    }
                 }
-            }
-        }
-    </tbody>
-</table>
+            </tbody>
+        </table>
+    </div>
 
-<div class="pagination-container">
-    <ul id="pagination" class="pagination"></ul>
+    <div class="pagination-container">
+        <ul id="pagination" class="pagination justify-content-center"></ul>
+    </div>
 </div>
 
 @section Scripts {
@@ -107,24 +114,30 @@
             taskList.innerHTML = '';
 
             tasks.forEach(function (task) {
+                let createdOn = task.taskCreatedOn ? new Date(task.taskCreatedOn).toLocaleDateString() : 'N/A';
                 let row = `<tr data-country-id="${task.countryId}" data-task-id="${task.id}">
-                            <td>
-                                ${task.name}
-                                ${task.subTasks.length > 0 ? `<button class="btn btn-link toggle-button" type="button" data-task-id="${task.id}"><i class="fas fa-plus"></i></button>` : ''}
-                            </td>
-                            <td>${task.country ? task.country.name : 'N/A'}</td>
-                            <td>${task.computerRequired !== null ? (task.computerRequired ? 'Yes' : 'No') : 'N/A'}</td>
-                            <td><a href="/Task/Edit/${task.id}" class="btn btn-secondary">Edit</a></td>
-                        </tr>`;
+                                            <td>
+                                                ${task.name}
+                                                ${task.subTasks.length > 0 ? `<button class="btn btn-link toggle-button" type="button" data-task-id="${task.id}"><i class="fas fa-plus"></i></button>` : ''}
+                                            </td>
+                                            <td>${task.country ? task.country.name : 'N/A'}</td>
+                                            <td>${task.computerRequired !== null ? (task.computerRequired ? 'Yes' : 'No') : 'N/A'}</td>
+                                            <td>${createdOn}</td>
+                                            <td>${task.taskCreatedBy ?? 'N/A'}</td>
+                                            <td><a href="/Task/Edit/${task.id}" class="btn btn-secondary">Edit</a></td>
+                                        </tr>`;
 
                 if (task.subTasks && task.subTasks.length > 0) {
                     task.subTasks.forEach(function (subTask) {
+                        let subCreatedOn = subTask.taskCreatedOn ? new Date(subTask.taskCreatedOn).toLocaleDateString() : 'N/A';
                         row += `<tr class="sub-task collapse" data-parent-task-id="${task.id}">
-                                    <td class="pl-4">&#8627; ${subTask.name}</td>
-                                    <td>${subTask.country ? subTask.country.name : 'N/A'}</td>
-                                    <td>${subTask.computerRequired !== null ? (subTask.computerRequired ? 'Yes' : 'No') : 'N/A'}</td>
-                                    <td><a href="/Task/Edit/${subTask.id}" class="btn btn-secondary">Edit</a></td>
-                                </tr>`;
+                                                    <td class="pl-4">&#8627; ${subTask.name}</td>
+                                                    <td>${subTask.country ? subTask.country.name : 'N/A'}</td>
+                                                    <td>${subTask.computerRequired !== null ? (subTask.computerRequired ? 'Yes' : 'No') : 'N/A'}</td>
+                                                    <td>${subCreatedOn}</td>
+                                                    <td>${subTask.taskCreatedBy ?? 'N/A'}</td>
+                                                    <td><a href="/Task/Edit/${subTask.id}" class="btn btn-secondary">Edit</a></td>
+                                                </tr>`;
                     });
                 }
 

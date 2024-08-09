@@ -27,7 +27,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 // Register ApiService with HttpClient
 builder.Services.AddHttpClient<ApiService>(client =>
 {
-    client.BaseAddress = new Uri("https://localhost:7045/"); // Ensure this is your correct API base URL
+    client.BaseAddress = new Uri("https://smapi.mezzex.com/"); // Ensure this is your correct API base URL
 });
 
 // Configure Identity services
@@ -42,8 +42,6 @@ builder.Services.AddIdentity<ApplicationUser, ApplicationRole>(options =>
 })
 .AddEntityFrameworkStores<ApplicationDbContext>()
 .AddDefaultTokenProviders();
-
-builder.Services.AddControllersWithViews();
 
 // Configure session services
 builder.Services.AddDistributedMemoryCache(); // Adds a default in-memory implementation of IDistributedCache

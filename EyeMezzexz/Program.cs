@@ -28,7 +28,7 @@ builder.Services.AddTransient<WebServiceClient>();
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("E-CommDConnectionString")));
 
-// Configure Identity
+// Configure Identity with default identity and roles
 builder.Services.AddDefaultIdentity<ApplicationUser>()
     .AddRoles<ApplicationRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>()
@@ -45,7 +45,7 @@ builder.Services.AddSession(options =>
     options.IdleTimeout = TimeSpan.FromMinutes(60);
 });
 
-// Configure CORS
+// Configure CORS to allow any origin, method, and header
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll",
@@ -68,7 +68,7 @@ using (var scope = app.Services.CreateScope())
 
     try
     {
-        SeedDatabase(applicationDbContext);
+        SeedDatabase(applicationDbContext, logger);
 
         var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
         var roleManager = services.GetRequiredService<RoleManager<ApplicationRole>>();
@@ -107,7 +107,7 @@ app.UseSession();
 app.MapControllers();
 app.Run();
 
-void SeedDatabase(ApplicationDbContext context)
+void SeedDatabase(ApplicationDbContext context, ILogger logger)
 {
     try
     {
@@ -129,10 +129,10 @@ void SeedDatabase(ApplicationDbContext context)
         }
 
         context.SaveChanges();
-        Console.WriteLine("Tasks have been seeded to the database.");
+        logger.LogInformation("Tasks have been seeded to the database.");
     }
     catch (Exception ex)
     {
-        Console.WriteLine($"An error occurred while seeding the database: {ex.Message}");
+        logger.LogError($"An error occurred while seeding the database: {ex.Message}");
     }
 }
