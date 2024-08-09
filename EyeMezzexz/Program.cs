@@ -1,4 +1,5 @@
 using E_Commerce_Mezzex.Data;
+using EyeMezzexz.Controllers;
 using EyeMezzexz.Data;
 using EyeMezzexz.Models;
 using EyeMezzexz.Services;
@@ -35,8 +36,10 @@ builder.Services.AddDefaultIdentity<ApplicationUser>()
     .AddDefaultTokenProviders();
 
 // Register custom services
-builder.Services.AddTransient<UserService>();
-
+builder.Services.AddTransient<WebServiceClient>(); // Register WebServiceClient
+builder.Services.AddTransient<UserService>(); // Register UserService
+builder.Services.AddTransient<DataController>();
+builder.Services.AddTransient<AccountApiController>();
 // Add session services
 builder.Services.AddSession(options =>
 {

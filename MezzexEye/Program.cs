@@ -1,22 +1,19 @@
 using EyeMezzexz.Data;
-using EyeMezzexz.Services;
 using EyeMezzexz.Models;
+using EyeMezzexz.Services;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using EyeMezzexz.Controllers;
+using MezzexEye.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-
-builder.Services.AddHttpClient<ApiService>();
-
-// Add the DataForViewController with dependency injection
-builder.Services.AddTransient<DataForViewController>();
-
 // Add logging
-builder.Services.AddLogging();
-
+builder.Logging.AddConsole();
+builder.Services.AddTransient<WebServiceClient>(); // Register WebServiceClient
+builder.Services.AddTransient<UserService>(); // Register UserService
+builder.Services.AddTransient<DataController>();
+builder.Services.AddTransient<AccountApiController>();
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
@@ -24,13 +21,8 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("E-CommDConnectionString")));
 
-// Register ApiService with HttpClient
-builder.Services.AddHttpClient<ApiService>(client =>
-{
-    client.BaseAddress = new Uri("https://smapi.mezzex.com/"); // Ensure this is your correct API base URL
-});
 
-// Configure Identity services
+// Register Identity services
 builder.Services.AddIdentity<ApplicationUser, ApplicationRole>(options =>
 {
     options.Password.RequireDigit = true;
@@ -43,15 +35,16 @@ builder.Services.AddIdentity<ApplicationUser, ApplicationRole>(options =>
 .AddEntityFrameworkStores<ApplicationDbContext>()
 .AddDefaultTokenProviders();
 
-// Configure session services
-builder.Services.AddDistributedMemoryCache(); // Adds a default in-memory implementation of IDistributedCache
+// Configure session services (if needed)
+builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options =>
 {
-    options.IdleTimeout = TimeSpan.FromMinutes(30); // Set session timeout
-    options.Cookie.HttpOnly = true; // Make the session cookie HTTP only
-    options.Cookie.IsEssential = true; // Make the session cookie essential
+    options.IdleTimeout = TimeSpan.FromMinutes(30);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
 });
 
+// Configure cookie settings for authentication
 builder.Services.ConfigureApplicationCookie(options =>
 {
     options.Cookie.HttpOnly = true;
@@ -59,12 +52,12 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.Cookie.SameSite = SameSiteMode.Strict;
     options.ExpireTimeSpan = TimeSpan.FromMinutes(60);
     options.SlidingExpiration = true;
-    options.LoginPath = "/Login/Index"; // Update with your login path
+    options.LoginPath = "/Login/Index";
     options.LogoutPath = "/Login/Logout";
     options.AccessDeniedPath = "/Login/AccessDenied";
 });
 
-// Configure authorization policies
+// Configure authorization policies (if any)
 builder.Services.AddAuthorization(options =>
 {
     options.AddPolicy("CreateCategoryPolicy", policy =>
@@ -79,7 +72,7 @@ builder.Services.AddAuthorization(options =>
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// Configure the HTTP request pipeline
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
@@ -91,7 +84,6 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-// Enable session before authentication and authorization
 app.UseSession();
 
 app.UseAuthentication();

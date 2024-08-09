@@ -7,19 +7,19 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using EyeMezzexz.Data;
-using Microsoft.IdentityModel.Tokens;
+using EyeMezzexz.Controllers;
 
 namespace MezzexEye.Controllers
 {
     public class TaskController : Controller
     {
-        private readonly ApiService _apiService;
+        private readonly DataController _dataController;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly ApplicationDbContext _context;
 
-        public TaskController(ApiService apiService, UserManager<ApplicationUser> userManager, ApplicationDbContext context)
+        public TaskController(DataController dataController, UserManager<ApplicationUser> userManager, ApplicationDbContext context)
         {
-            _apiService = apiService;
+            _dataController = dataController;
             _userManager = userManager;
             _context = context;
         }
@@ -27,10 +27,13 @@ namespace MezzexEye.Controllers
         // GET: Task/Create
         public async Task<IActionResult> Create()
         {
-            var (tasks, _) = await _apiService.GetTasksAsync();
+            // Call directly from DataController
+            var tasksResponse = await _dataController.GetTasksList();
+            var tasks = (tasksResponse as OkObjectResult)?.Value as List<TaskNames>;
             ViewBag.Tasks = BuildTaskSelectList(tasks);
 
-            var countries = await _apiService.GetCountriesAsync();
+            var countriesResponse = await _dataController.GetCountries();
+            var countries = (countriesResponse as OkObjectResult)?.Value as List<Country>;
             ViewBag.Countries = new SelectList(countries, "Id", "Name");
 
             return View();
@@ -51,37 +54,42 @@ namespace MezzexEye.Controllers
 
             if (ModelState.IsValid)
             {
-                await _apiService.CreateTaskAsync(model);
+                // Call directly from DataController
+                await _dataController.CreateTask(model);
                 return RedirectToAction(nameof(Index)); // Assuming you have an Index action to list tasks
             }
 
-            var (tasks, _) = await _apiService.GetTasksAsync();
+            var tasksResponse = await _dataController.GetTasksList();
+            var tasks = (tasksResponse as OkObjectResult)?.Value as List<TaskNames>;
             ViewBag.Tasks = BuildTaskSelectList(tasks);
 
-            var countries = await _apiService.GetCountriesAsync();
+            var countriesResponse = await _dataController.GetCountries();
+            var countries = (countriesResponse as OkObjectResult)?.Value as List<Country>;
             ViewBag.Countries = new SelectList(countries, "Id", "Name");
 
             return View(model);
         }
 
-
         public async Task<IActionResult> Index(int? countryId = null, int page = 1, int pageSize = 10, string search = "")
         {
-            var (tasks, totalTasks) = await _apiService.GetTasksAsync(countryId, page, pageSize, search);
+            // Call directly from DataController
+            var tasksResponse = await _dataController.GetTasks(countryId, page, pageSize, search);
+            var tasks = (tasksResponse as OkObjectResult)?.Value as List<TaskNames>;
+            var totalTasks = (tasksResponse as OkObjectResult)?.Value as int?;
 
             if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
             {
                 return Json(new { tasks, totalTasks });
             }
 
-            var countries = await _apiService.GetCountriesAsync();
+            var countriesResponse = await _dataController.GetCountries();
+            var countries = (countriesResponse as OkObjectResult)?.Value as List<Country>;
             ViewBag.Countries = new SelectList(countries, "Id", "Name");
             ViewBag.TotalTasks = totalTasks;
             ViewBag.PageSize = pageSize;
             ViewBag.CurrentPage = page;
             return View(tasks);
         }
-
 
         // GET: Task/Edit/5
         public async Task<IActionResult> Edit(int id)
@@ -110,7 +118,6 @@ namespace MezzexEye.Controllers
             return View(task);
         }
 
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(TaskNames model)
@@ -122,13 +129,13 @@ namespace MezzexEye.Controllers
             {
                 try
                 {
-                    // Call the UpdateTaskAsync method instead of updating the database directly
-                    await _apiService. UpdateTaskAsync(model);
+                    // Call directly from DataController
+                    await _dataController.UpdateTask(model);
                     return RedirectToAction(nameof(Index));
                 }
-                catch (HttpRequestException ex)
+                catch (Exception ex)
                 {
-                    // Handle HTTP request exceptions
+                    // Handle exceptions if necessary
                     ModelState.AddModelError(string.Empty, $"An error occurred while updating the task: {ex.Message}");
                 }
             }
@@ -146,9 +153,6 @@ namespace MezzexEye.Controllers
 
             return View(model);
         }
-
-
-
 
         private List<SelectListItem> BuildTaskSelectList(IEnumerable<TaskNames> tasks, int? parentId = null, string prefix = "")
         {
