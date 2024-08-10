@@ -79,17 +79,7 @@ namespace EyeMezzexz.Data
            .WithMany(t => t.SubTasks)
            .HasForeignKey(t => t.ParentTaskId);
 
-            modelBuilder.Entity<Team>()
-                .HasOne(t => t.Country)
-                .WithMany()
-                .HasForeignKey(t => t.CountryId)
-                .OnDelete(DeleteBehavior.Restrict);
 
-            // Team-Users relationship
-            modelBuilder.Entity<Team>()
-                .HasMany(t => t.Users)
-                .WithOne(u => u.Team)
-                .HasForeignKey(u => u.TeamId);
         }
     }
 }
