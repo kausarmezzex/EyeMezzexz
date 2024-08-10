@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EyeMezzexz.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240808102829_Add_Computer_Model")]
-    partial class Add_Computer_Model
+    [Migration("20240810095733_Add Initial1")]
+    partial class AddInitial1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -280,14 +280,14 @@ namespace EyeMezzexz.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("ComputerId")
-                        .HasColumnType("int");
-
                     b.Property<bool?>("ComputerRequired")
                         .HasColumnType("bit");
 
                     b.Property<int?>("CountryId")
                         .HasColumnType("int");
+
+                    b.Property<bool?>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -309,8 +309,6 @@ namespace EyeMezzexz.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ComputerId");
 
                     b.HasIndex("CountryId");
 
@@ -355,6 +353,33 @@ namespace EyeMezzexz.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("TaskTimers");
+                });
+
+            modelBuilder.Entity("EyeMezzexz.Models.Team", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Teams");
                 });
 
             modelBuilder.Entity("EyeMezzexz.Models.UploadedData", b =>
@@ -553,10 +578,6 @@ namespace EyeMezzexz.Migrations
 
             modelBuilder.Entity("EyeMezzexz.Models.TaskNames", b =>
                 {
-                    b.HasOne("EyeMezzexz.Models.Computer", "Computer")
-                        .WithMany()
-                        .HasForeignKey("ComputerId");
-
                     b.HasOne("EyeMezzexz.Models.Country", "Country")
                         .WithMany()
                         .HasForeignKey("CountryId")
@@ -565,8 +586,6 @@ namespace EyeMezzexz.Migrations
                     b.HasOne("EyeMezzexz.Models.TaskNames", "ParentTask")
                         .WithMany("SubTasks")
                         .HasForeignKey("ParentTaskId");
-
-                    b.Navigation("Computer");
 
                     b.Navigation("Country");
 

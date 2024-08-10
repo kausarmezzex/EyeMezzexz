@@ -557,6 +557,32 @@ namespace EyeMezzexz.Controllers
             }
         }
 
+        [HttpPost("createTeam")]
+        public async Task<IActionResult> CreateTeam([FromBody] Team model)
+        {
+            if (model == null)
+            {
+                return BadRequest("Model is null");
+            }
+
+            // Check if a team with the same name already exists
+            bool isDuplicateTeam = await _context.Teams.AnyAsync(t => t.Name == model.Name && !t.IsDeleted);
+            if (isDuplicateTeam)
+            {
+                ModelState.AddModelError("Name", "A team with the same name already exists.");
+                return BadRequest(ModelState);
+            }
+
+            model.CreatedOn = _context.GetDatabaseServerTime();
+            model.IsDeleted = false;
+
+            _context.Teams.Add(model);
+            await _context.SaveChangesAsync();
+
+            return Ok(new { Message = "Team created successfully", TeamId = model.Id });
+        }
+
+
     }
 
 

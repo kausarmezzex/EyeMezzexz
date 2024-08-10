@@ -22,9 +22,6 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// Register WebServiceClient
-builder.Services.AddTransient<WebServiceClient>();
-
 // Configure DbContext with SQL Server database
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("E-CommDConnectionString")));
@@ -71,7 +68,6 @@ using (var scope = app.Services.CreateScope())
 
     try
     {
-        SeedDatabase(applicationDbContext, logger);
 
         var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
         var roleManager = services.GetRequiredService<RoleManager<ApplicationRole>>();
@@ -110,32 +106,3 @@ app.UseSession();
 app.MapControllers();
 app.Run();
 
-void SeedDatabase(ApplicationDbContext context, ILogger logger)
-{
-    try
-    {
-        var tasks = new List<string>
-        {
-            "Listing", "Costing", "New Product Work", "Shipment", "Live Stock",
-            "Clearance", "Promotion", "Amazon Emails", "Ebay Email", "DP Ordering",
-            "AST Ordering", "Supplier Invoice", "VAT Invoice Entry", "Break",
-            "Other", "Credit Note", "Inventory Check", "Lunch", "Washroom",
-            "Out Of Stock", "Meeting"
-        };
-
-        foreach (var taskName in tasks)
-        {
-            if (!context.TaskNames.Any(t => t.Name == taskName))
-            {
-                context.TaskNames.Add(new TaskNames { Name = taskName });
-            }
-        }
-
-        context.SaveChanges();
-        logger.LogInformation("Tasks have been seeded to the database.");
-    }
-    catch (Exception ex)
-    {
-        logger.LogError($"An error occurred while seeding the database: {ex.Message}");
-    }
-}

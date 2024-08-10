@@ -14,6 +14,8 @@ builder.Services.AddTransient<WebServiceClient>(); // Register WebServiceClient
 builder.Services.AddTransient<UserService>(); // Register UserService
 builder.Services.AddTransient<DataController>();
 builder.Services.AddTransient<AccountApiController>();
+builder.Services.AddTransient<ApiService>();
+builder.Services.AddScoped<IApiService, ApiService>();
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 

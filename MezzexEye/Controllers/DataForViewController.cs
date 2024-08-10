@@ -4,6 +4,7 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using EyeMezzexz.Models;
+using EyeMezzexz.Services;
 using Microsoft.Extensions.Logging;
 using MezzexEye.Models;
 
@@ -12,34 +13,27 @@ namespace EyeMezzexz.Controllers
     [Authorize]
     public class DataForViewController : Controller
     {
-        private readonly DataController _dataController;
-        private readonly AccountApiController _accountApiController;
+        private readonly ApiService _apiService;
         private readonly ILogger<DataForViewController> _logger;
 
-        public DataForViewController(DataController dataController, AccountApiController accountApiController, ILogger<DataForViewController> logger)
+        public DataForViewController(ApiService apiService, ILogger<DataForViewController> logger)
         {
-            _dataController = dataController ?? throw new ArgumentNullException(nameof(dataController));
-            _accountApiController = accountApiController ?? throw new ArgumentNullException(nameof(accountApiController));
-            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            _apiService = apiService;
+            _logger = logger;
         }
-
 
         [HttpGet]
         public async Task<IActionResult> ViewScreenCaptureData(string username = null, DateTime? date = null, int page = 1, string mediaType = "Image")
         {
             try
             {
-                int pageSize = 9;
+                int pageSize = 9; // Set pageSize to 9
+                var data = await _apiService.GetScreenCaptureDataAsync();
+                var usernames = await _apiService.GetAllUsernamesAsync();
 
-                // Call directly from DataController
-                var dataResponse = await _dataController.GetScreenCaptureData("Asia/Kolkata");
-                var data = (dataResponse as OkObjectResult)?.Value as List<ScreenCaptureDataViewModel>;
+                _logger.LogInformation("Retrieved data and usernames from the API.");
 
-                var usernamesResponse = await _accountApiController.GetAllUsernames();
-                var usernames = (usernamesResponse as OkObjectResult)?.Value as List<string>;
-
-                _logger.LogInformation("Retrieved data and usernames from the DataController and AccountApiController.");
-
+                // Get the logged-in user's email
                 var email = User.Identity.Name;
                 if (email == null)
                 {
@@ -47,8 +41,7 @@ namespace EyeMezzexz.Controllers
                     return StatusCode(500, "Internal server error");
                 }
 
-                var userResponse = await _accountApiController.GetUserByEmailAsync(email);
-                var user = userResponse as ApplicationUser;
+                var user = await _apiService.GetUserByEmailAsync(email);
 
                 if (user == null)
                 {
@@ -56,13 +49,16 @@ namespace EyeMezzexz.Controllers
                     return StatusCode(500, "Internal server error");
                 }
 
+                // Check the role of the logged-in user
                 if (User.IsInRole("Administrator"))
                 {
                     _logger.LogInformation("User is an Administrator.");
+                    // No additional filtering needed, show all data and usernames
                 }
                 else if (User.IsInRole("Registered"))
                 {
                     _logger.LogInformation("User is a Registered user.");
+                    // Filter data to only show the logged-in user's data
                     var loggedInFullName = $"{user.FirstName} {user.LastName}";
                     data = data.Where(d => $"{d.Username}" == loggedInFullName).ToList();
                     usernames = usernames.Where(u => u == loggedInFullName).ToList();
@@ -78,6 +74,7 @@ namespace EyeMezzexz.Controllers
                 data = data.Where(d => d.Timestamp.Date == filterDate.Date).ToList();
                 _logger.LogInformation($"Filtered data by date: {filterDate.Date}");
 
+                // Filter by media type
                 if (mediaType == "Image")
                 {
                     data = data.Where(d => !string.IsNullOrEmpty(d.ImageUrl)).ToList();
@@ -99,7 +96,7 @@ namespace EyeMezzexz.Controllers
 
                 ViewBag.Usernames = usernames;
                 ViewBag.MediaType = mediaType;
-                ViewBag.SelectedUsername = username;
+                ViewBag.SelectedUsername = username; // Set the selected username
 
                 if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
                 {
@@ -117,14 +114,14 @@ namespace EyeMezzexz.Controllers
             }
         }
 
+
         [HttpGet]
         public async Task<IActionResult> TaskManagement()
         {
             try
             {
                 var email = User.Identity.Name;
-                var userResponse = await _accountApiController.GetUserByEmailAsync(email);
-                var user = userResponse as ApplicationUser;
+                var user = await _apiService.GetUserByEmailAsync(email);
 
                 if (user == null)
                 {
@@ -132,23 +129,18 @@ namespace EyeMezzexz.Controllers
                     return StatusCode(500, "Internal server error");
                 }
 
-                var staffInTimeResponse = await _dataController.GetStaffInTime(user.Id, "Asia/Kolkata");
-                var staffInTime = (staffInTimeResponse as OkObjectResult)?.Value as StaffInTimeResponse;
+                // Check if the staff member is clocked in
+                var staffInTime = await _apiService.GetStaffInTimeAsync(user.Id);
 
                 if (staffInTime == null)
                 {
                     _logger.LogInformation("Staff member is not clocked in.");
-                    return View("NotClockedIn");
+                    return View("NotClockedIn"); // Return a view indicating the user needs to clock in first
                 }
 
-                var taskTypesResponse = await _dataController.GetTasksList();
-                var taskTypes = (taskTypesResponse as OkObjectResult)?.Value as List<TaskNames>;
-
-                var activeTasksResponse = await _dataController.GetTaskTimers(user.Id, "Asia/Kolkata");
-                var activeTasks = (activeTasksResponse as OkObjectResult)?.Value as List<TaskTimerResponse>;
-
-                var completedTasksResponse = await _dataController.GetUserCompletedTasks(user.Id, "Asia/Kolkata");
-                var completedTasks = (completedTasksResponse as OkObjectResult)?.Value as List<TaskTimerResponse>;
+                var (taskTypes, _) = await _apiService.GetTasksAsync();
+                var activeTasks = await _apiService.GetTaskTimersAsync(user.Id);
+                var completedTasks = await _apiService.GetUserCompletedTasksAsync(user.Id);
 
                 var viewModel = new TaskManagementViewModel
                 {
@@ -166,23 +158,21 @@ namespace EyeMezzexz.Controllers
             }
         }
 
+
         [HttpGet]
         public async Task<IActionResult> CheckClockInStatus()
         {
             try
             {
                 var email = User.Identity.Name;
-                var userResponse = await _accountApiController.GetUserByEmailAsync(email);
-                var user = userResponse as ApplicationUser;
+                var user = await _apiService.GetUserByEmailAsync(email);
 
                 if (user == null)
                 {
                     return Json(new { isClockedIn = false });
                 }
 
-                var staffInTimeResponse = await _dataController.GetStaffInTime(user.Id, "Asia/Kolkata");
-                var staffInTime = (staffInTimeResponse as OkObjectResult)?.Value as StaffInTimeResponse;
-
+                var staffInTime = await _apiService.GetStaffInTimeAsync(user.Id, "Asia/Kolkata");
                 return Json(new { isClockedIn = staffInTime != null });
             }
             catch (Exception ex)
@@ -201,18 +191,11 @@ namespace EyeMezzexz.Controllers
                 {
                     return BadRequest("Model is null");
                 }
-
                 var email = User.Identity.Name;
-                var userResponse = await _accountApiController.GetUserByEmailAsync(email);
-                var user = userResponse as ApplicationUser;
-
-                if (user == null)
-                {
-                    return BadRequest("User not found");
-                }
-
+                var user = await _apiService.GetUserByEmailAsync(email);
                 model.UserId = user.Id;
-                var result = await _dataController.SaveTaskTimer(model);
+
+                await _apiService.SaveTaskTimerAsync(model);
                 return Ok(new { Message = "Task started successfully" });
             }
             catch (Exception ex)
@@ -232,7 +215,8 @@ namespace EyeMezzexz.Controllers
                     return BadRequest("Model is null");
                 }
 
-                await _dataController.UpdateTaskTimer(model);
+                await _apiService.UpdateTaskTimerAsync(model);
+
                 return Ok(new { Message = "Task ended successfully" });
             }
             catch (Exception ex)
@@ -251,27 +235,10 @@ namespace EyeMezzexz.Controllers
                 {
                     return BadRequest("Model is null");
                 }
-
                 var email = User.Identity.Name;
-                var userResponse = await _accountApiController.GetUserByEmailAsync(email);
-                var user = userResponse as ApplicationUser;
-
-                if (user == null)
-                {
-                    return BadRequest("User not found");
-                }
-
-                var staffInTimeResponse = await _dataController.GetStaffInTime(user.Id, "Asia/Kolkata");
-                var staffInTime = (staffInTimeResponse as OkObjectResult)?.Value as StaffInTimeResponse;
-
-                if (staffInTime == null)
-                {
-                    return BadRequest("Staff in time not found");
-                }
-
-                var activeTasksResponse = await _dataController.GetTaskTimers(user.Id, "Asia/Kolkata");
-                var activeTasks = (activeTasksResponse as OkObjectResult)?.Value as List<TaskTimerResponse>;
-
+                var user = await _apiService.GetUserByEmailAsync(email);
+                var staffInTime = await _apiService.GetStaffInTimeAsync(user.Id);
+                var activeTasks = await _apiService.GetTaskTimersAsync(model.UserId);
                 foreach (var task in activeTasks)
                 {
                     var endTaskRequest = new UpdateTaskTimerRequest
@@ -280,15 +247,13 @@ namespace EyeMezzexz.Controllers
                         TaskEndTime = DateTime.UtcNow,
                         ClientTimeZone = model.ClientTimeZone
                     };
-                    await _dataController.UpdateTaskTimer(endTaskRequest);
+                    await _apiService.UpdateTaskTimerAsync(endTaskRequest);
                 }
-
                 model.Id = staffInTime.StaffId;
                 model.StaffInTime = staffInTime.StaffInTime;
                 model.StaffOutTime = DateTime.UtcNow;
                 model.UserId = user.Id;
-
-                await _dataController.UpdateStaff(model);
+                await _apiService.UpdateStaffAsync(model);
 
                 return Ok(new { Message = "Staff out successful" });
             }
@@ -297,6 +262,51 @@ namespace EyeMezzexz.Controllers
                 _logger.LogError(ex, "An error occurred while updating staff out.");
                 return StatusCode(500, "Internal server error");
             }
+        }
+        // GET: /DataForView/CreateTeam
+        [HttpGet]
+        public IActionResult CreateTeam()
+        {
+            return View();
+        }
+
+        // POST: /DataForView/CreateTeam
+        [HttpPost]
+        public async Task<IActionResult> CreateTeam(TeamViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var email = User.Identity.Name;
+                    var user = await _apiService.GetUserByEmailAsync(email);
+
+                    var team = new Team
+                    {
+                        Name = model.Name,
+                        CreatedBy = user.Email
+                    };
+
+                    int teamId = await _apiService.CreateTeamAsync(team);
+
+                    if (teamId > 0)
+                    {
+                        _logger.LogInformation("Team created successfully with ID: {TeamId}", teamId);
+                        return RedirectToAction("TeamDetails", new { id = teamId });
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "Failed to create team. Please try again.");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError(ex, "An error occurred while creating the team.");
+                    ModelState.AddModelError("", "An error occurred while creating the team.");
+                }
+            }
+
+            return View(model);
         }
     }
 }

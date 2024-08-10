@@ -16,6 +16,7 @@ namespace EyeMezzexz.Data
         public DbSet<UserPermission> UserPermissions { get; set; }
         public DbSet<Country> Countries { get; set; }
         public DbSet<Computer> Computers { get; set; }
+        public DbSet<Team> Teams { get; set; }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
         }
@@ -77,6 +78,18 @@ namespace EyeMezzexz.Data
            .HasOne(t => t.ParentTask)
            .WithMany(t => t.SubTasks)
            .HasForeignKey(t => t.ParentTaskId);
+
+            modelBuilder.Entity<Team>()
+                .HasOne(t => t.Country)
+                .WithMany()
+                .HasForeignKey(t => t.CountryId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // Team-Users relationship
+            modelBuilder.Entity<Team>()
+                .HasMany(t => t.Users)
+                .WithOne(u => u.Team)
+                .HasForeignKey(u => u.TeamId);
         }
     }
 }

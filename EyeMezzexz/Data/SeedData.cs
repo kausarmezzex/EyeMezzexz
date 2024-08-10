@@ -38,7 +38,7 @@ namespace E_Commerce_Mezzex.Data
 
         private static async Task SeedRolesAsync(RoleManager<ApplicationRole> roleManager, ILogger logger)
         {
-            string[] roleNames = { "Registered", "ForumModerator", "Guest", "Admin", "Administrator" };
+            string[] roleNames = { "Registered", "Admin", "Administrator" };
 
             foreach (var roleName in roleNames)
             {
@@ -83,7 +83,7 @@ namespace E_Commerce_Mezzex.Data
         {
             await CreateUserAsync(
                 userManager, roleManager, logger,
-                "superadmin@example.com", "SuperAdmin@123",
+                "islam@direct-pharmacy.co.uk", "Sonaislam@143#",
                 "Super", "Admin", "Male",new[] { "Administrator" });
 
             await CreateUserAsync(

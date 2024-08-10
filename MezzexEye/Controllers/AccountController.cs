@@ -76,7 +76,99 @@ namespace MezzexEye.Controllers
         {
             return View();
         }
-       
+
+ 
+        public async Task<IActionResult> AllUsers()
+        {
+            var users = _userManager.Users.ToList();
+            var userViewModels = new List<UserViewModel>();
+
+            foreach (var user in users)
+            {
+                var userRoles = await _userManager.GetRolesAsync(user);
+                userViewModels.Add(new UserViewModel
+                {
+                    Id = user.Id,
+                    UserName = user.UserName,
+                    Email = user.Email,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
+                    Gender = user.Gender,
+                    Active = user.Active,
+                    Roles = userRoles.ToList()
+                });
+            }
+
+            return View(userViewModels);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> EditUser(int id)  // id as int
+        {
+            var user = await _userManager.FindByIdAsync(id.ToString()); // Use ToString() since Identity methods expect string
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            var roles = await _userManager.GetRolesAsync(user);
+
+            var model = new UserViewModel
+            {
+                Id = id,  // Directly assign the int Id
+                UserName = user.UserName,
+                Email = user.Email,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Gender = user.Gender,
+                Active = user.Active,
+                Roles = roles.ToList()
+            };
+
+            ViewBag.AllRoles = _roleManager.Roles.Select(r => r.Name).ToList();
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditUser(UserViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                ViewBag.AllRoles = _roleManager.Roles.Select(r => r.Name).ToList();
+                return View(model);
+            }
+
+            var user = await _userManager.FindByIdAsync(model.Id.ToString());  // Use ToString() since Identity methods expect string
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            user.UserName = model.UserName;
+            user.Email = model.Email;
+            user.FirstName = model.FirstName;
+            user.LastName = model.LastName;
+            user.Gender = model.Gender;
+            user.Active = model.Active;
+
+            var result = await _userManager.UpdateAsync(user);
+            if (result.Succeeded)
+            {
+                var currentRoles = await _userManager.GetRolesAsync(user);
+                var rolesToRemove = currentRoles.Except(model.Roles).ToList();
+                var rolesToAdd = model.Roles.Except(currentRoles).ToList();
+
+                await _userManager.RemoveFromRolesAsync(user, rolesToRemove);
+                await _userManager.AddToRolesAsync(user, rolesToAdd);
+
+                return RedirectToAction("AllUsers");
+            }
+
+            AddErrors(result);
+            ViewBag.AllRoles = _roleManager.Roles.Select(r => r.Name).ToList();
+            return View(model);
+        }
 
     }
 }

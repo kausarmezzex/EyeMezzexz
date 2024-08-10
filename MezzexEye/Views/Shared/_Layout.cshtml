@@ -1,4 +1,14 @@
-﻿<!DOCTYPE html>
+﻿   <!-- /.navbar -->
+        @using MezzexEye.Services
+        @inject IApiService _apiService
+
+@{
+    var email = User.Identity.Name;
+    var user = _apiService.GetUserByEmailAsync(email).Result;
+    var fullName = user != null ? $"{user.FirstName} {user.LastName}" : email;
+}
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -90,26 +100,22 @@
                 </li>
             </ul>
         </nav>
-        <!-- /.navbar -->
-        <!-- Main Sidebar Container -->
+     
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
             <a href="index3.html" class="brand-link">
                 <img src="~/Admin/dist/img/mezzex_logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-                <span class="brand-text font-weight-light">Mezzex Eye</span>
+                <span class="brand-text font-weight-light">Mezzex Staff</span>
             </a>
 
             <!-- Sidebar -->
             <div class="sidebar">
                 <!-- Sidebar user panel (optional) -->
-                <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-                    <div class="image">
-                        <img src="~/Admin/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+                    <div class="user-panel mt-3 pb-3 mb-3 d-flex align-items-center">
+                        <div class="info">
+                            <span class="d-block text-white font-weight-bold">Welcome, @fullName</span>
+                        </div>
                     </div>
-                    <div class="info">
-                        <a href="#" class="d-block">@User.Identity.Name</a>
-                    </div>
-                </div>
 
 
                 <!-- Sidebar Menu -->
@@ -201,6 +207,38 @@
                                         <a asp-controller="Account" asp-action="Register" class="nav-link">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>Add User</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a asp-controller="Account" asp-action="AllUsers" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>All Users</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <i class="nav-icon fas fa-tasks"></i>
+                                    <p>
+                                        Manage Team
+                                        <i class="right fas fa-angle-left"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview">
+
+                                    <li class="nav-item">
+                                        <a asp-controller="Task" asp-action="index" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>All Tasks</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a asp-controller="DataForView" asp-action="CreateTeam" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Create Team </p>
                                         </a>
                                     </li>
                                 </ul>

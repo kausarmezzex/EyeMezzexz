@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using EyeMezzexz.Data;
 using EyeMezzexz.Controllers;
+using Newtonsoft.Json;
 
 namespace MezzexEye.Controllers
 {
@@ -72,10 +73,25 @@ namespace MezzexEye.Controllers
 
         public async Task<IActionResult> Index(int? countryId = null, int page = 1, int pageSize = 10, string search = "")
         {
-            // Call directly from DataController
             var tasksResponse = await _dataController.GetTasks(countryId, page, pageSize, search);
-            var tasks = (tasksResponse as OkObjectResult)?.Value as List<TaskNames>;
-            var totalTasks = (tasksResponse as OkObjectResult)?.Value as int?;
+            var value = (tasksResponse as OkObjectResult)?.Value;
+
+            if (value == null)
+            {
+                return StatusCode(500, "Failed to retrieve data from the API.");
+            }
+
+            // Convert the value to JSON string and deserialize
+            var jsonString = JsonConvert.SerializeObject(value);
+            var result = JsonConvert.DeserializeObject<TasksResponseDto>(jsonString);
+
+            if (result == null)
+            {
+                return StatusCode(500, "Failed to deserialize the data from the API.");
+            }
+
+            var tasks = result.Tasks;
+            var totalTasks = result.TotalTasks;
 
             if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
             {
@@ -90,6 +106,7 @@ namespace MezzexEye.Controllers
             ViewBag.CurrentPage = page;
             return View(tasks);
         }
+
 
         // GET: Task/Edit/5
         public async Task<IActionResult> Edit(int id)
@@ -113,10 +130,17 @@ namespace MezzexEye.Controllers
                 })
                 .ToListAsync();
 
+            var countriesResponse = await _dataController.GetCountries();
+            var countries = (countriesResponse as OkObjectResult)?.Value as List<Country>;
+
+            // Set the selected country in the ViewBag
+            ViewBag.Countries = new SelectList(countries, "Id", "Name", task.CountryId);
             ViewBag.Tasks = tasks;
 
             return View(task);
         }
+
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -174,4 +198,9 @@ namespace MezzexEye.Controllers
             return taskSelectList;
         }
     }
+}
+public class TasksResponseDto
+{
+    public List<TaskNames> Tasks { get; set; }
+    public int TotalTasks { get; set; }
 }
