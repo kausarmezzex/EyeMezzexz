@@ -37,6 +37,7 @@ builder.Services.AddTransient<WebServiceClient>(); // Register WebServiceClient
 builder.Services.AddTransient<UserService>(); // Register UserService
 builder.Services.AddTransient<DataController>();
 builder.Services.AddTransient<AccountApiController>();
+builder.Services.AddTransient<TeamAssignmentApiController>();
 // Add session services
 builder.Services.AddSession(options =>
 {

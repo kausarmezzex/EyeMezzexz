@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using System;
+using System.Collections.Generic;
 
 namespace EyeMezzexz.Models
 {
@@ -10,6 +12,9 @@ namespace EyeMezzexz.Models
         public bool Active { get; set; }
         public DateTime? LastLoginTime { get; set; }
         public DateTime? LastLogoutTime { get; set; }
+
+        // New properties
+        public string CountryName { get; set; }
 
         public ICollection<UserPermission> UserPermissions { get; set; }
     }

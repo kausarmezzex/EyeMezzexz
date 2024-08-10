@@ -37,7 +37,9 @@ namespace MezzexEye.Controllers
                     FirstName = model.FirstName,
                     LastName = model.LastName,
                     Gender = model.Gender,
-                    Active = model.Active
+                    Active = model.Active,
+                    CountryName = model.CountryName,
+                    PhoneNumber = model.Phone
                 };
 
                 var result = await _userManager.CreateAsync(user, model.Password);

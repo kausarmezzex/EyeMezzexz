@@ -1,4 +1,5 @@
-﻿using System.Xml.Serialization;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Xml.Serialization;
 
 namespace EyeMezzexz.Models
 {
@@ -7,5 +8,11 @@ namespace EyeMezzexz.Models
         public string Email { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+
+        // New properties
+        public string CountryName { get; set; }
+        public string Phone { get; set; }
     }
+
+
 }

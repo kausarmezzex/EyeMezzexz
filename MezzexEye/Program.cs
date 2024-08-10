@@ -16,6 +16,7 @@ builder.Services.AddTransient<DataController>();
 builder.Services.AddTransient<AccountApiController>();
 builder.Services.AddTransient<ApiService>();
 builder.Services.AddScoped<IApiService, ApiService>();
+builder.Services.AddTransient<TeamAssignmentApiController>();
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 

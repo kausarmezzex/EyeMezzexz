@@ -308,5 +308,66 @@ namespace EyeMezzexz.Controllers
 
             return View(model);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> AssignUserToTeam()
+        {
+            try
+            {
+                var model = await _apiService.GetAssignmentDataAsync();
+                if (model == null)
+                {
+                    _logger.LogError("Failed to load assignment data.");
+                    return StatusCode(500, "Failed to load assignment data.");
+                }
+                return View(model);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "An error occurred while loading the assignment data.");
+                return StatusCode(500, "Internal server error");
+            }
+        }
+
+        // POST: /DataForView/AssignUserToTeam
+        [HttpPost]
+        public async Task<IActionResult> AssignUserToTeam(TeamAssignmentViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    bool success = await _apiService.AssignUserToTeamAsync(model);
+                    if (success)
+                    {
+                        _logger.LogInformation("User assigned to team successfully.");
+                        return RedirectToAction("TeamAssignmentSuccess"); // Create a success page or redirect as needed
+                    }
+                    else
+                    {
+                        _logger.LogError("Failed to assign user to team.");
+                        ModelState.AddModelError("", "Failed to assign user to team. Please try again.");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError(ex, "An error occurred while assigning the user to the team.");
+                    ModelState.AddModelError("", "An error occurred while assigning the user to the team.");
+                }
+            }
+
+            // Reload the assignment data if the model state is invalid
+            var assignmentData = await _apiService.GetAssignmentDataAsync();
+            if (assignmentData == null)
+            {
+                _logger.LogError("Failed to reload assignment data.");
+                return StatusCode(500, "Failed to reload assignment data.");
+            }
+            model.Teams = assignmentData.Teams;
+            model.Users = assignmentData.Users;
+            model.Countries = assignmentData.Countries;
+
+            return View(model);
+        }
     }
 }

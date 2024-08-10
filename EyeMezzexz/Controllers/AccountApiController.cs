@@ -50,6 +50,8 @@ namespace EyeMezzexz.Controllers
             var firstLoginDetail = loginDetails.First();
             var firstName = firstLoginDetail.FirstName;
             var lastName = firstLoginDetail.LastName;
+            var country = firstLoginDetail.CountryName;
+            var phoneNumber = firstLoginDetail.Phone;
 
             var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == loginRequest.Email);
             if (user == null)
@@ -62,7 +64,9 @@ namespace EyeMezzexz.Controllers
                     LastName = lastName,
                     Gender = "Male",
                     Active = true,
-                    Role = "Registered"
+                    Role = "Registered",
+                    CountryName = country,
+                    Phone = phoneNumber,
                 };
 
                 var result = await _userService.RegisterUser(registerViewModel);
@@ -164,5 +168,8 @@ namespace EyeMezzexz.Controllers
         public string Email { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+
+        public string CountryName { get; set; }
+        public string Phone { get; set; }
     }
 }

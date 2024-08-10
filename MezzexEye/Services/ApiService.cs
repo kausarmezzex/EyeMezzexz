@@ -11,15 +11,16 @@ public class ApiService : IApiService
 {
     private readonly DataController _dataController;
     private readonly AccountApiController _accountApiController;
+    private readonly TeamAssignmentApiController _teamAssignmentApiController;
     private readonly ILogger<ApiService> _logger;
 
-    public ApiService(DataController dataController, AccountApiController accountApiController, ILogger<ApiService> logger)
+    public ApiService(DataController dataController, AccountApiController accountApiController, TeamAssignmentApiController teamAssignmentApiController, ILogger<ApiService> logger)
     {
         _dataController = dataController;
         _accountApiController = accountApiController;
+        _teamAssignmentApiController = teamAssignmentApiController;
         _logger = logger;
     }
-
     public async Task<List<ScreenCaptureDataViewModel>> GetScreenCaptureDataAsync(string clientTimeZone = "Asia/Kolkata")
     {
         var result = await _dataController.GetScreenCaptureData(clientTimeZone) as OkObjectResult;
@@ -133,6 +134,18 @@ public class ApiService : IApiService
     var response = result?.Value as dynamic; // Assuming the response contains dynamic object with Message and TeamId
     return response?.TeamId ?? 0;
 }
+    public async Task<TeamAssignmentViewModel> GetAssignmentDataAsync()
+    {
+        var result = await _teamAssignmentApiController.GetAssignmentData() as OkObjectResult;
+        return result?.Value as TeamAssignmentViewModel;
+    }
+
+    // Method to assign user to a team
+    public async Task<bool> AssignUserToTeamAsync(TeamAssignmentViewModel model)
+    {
+        var result = await _teamAssignmentApiController.AssignUserToTeam(model) as OkObjectResult;
+        return result != null;
+    }
 
     public class ApiResponse
     {

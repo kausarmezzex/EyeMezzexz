@@ -26,7 +26,17 @@ namespace MezzexEye.ViewModel
 
         [Required]
         public string Gender { get; set; }
+
         public bool Active { get; set; }
+
         public string Role { get; set; }
+
+        // New properties
+        [Required]
+        public string CountryName { get; set; }
+
+        [Required]
+        [Phone]
+        public string Phone { get; set; }
     }
 }
