@@ -1,8 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
 using EyeMezzexz.Models;
 using EyeMezzexz.Data;
 using Microsoft.AspNetCore.Mvc.Rendering;

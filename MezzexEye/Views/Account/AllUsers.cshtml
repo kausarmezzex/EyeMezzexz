@@ -9,6 +9,8 @@
             <th>Last Name</th>
             <th>Gender</th>
             <th>Active</th>
+            <th>Country</th>
+            <th>Phone Number</th>
             <th>Roles</th>
             <th>Actions</th>
         </tr>
@@ -23,6 +25,9 @@
                 <td>@user.LastName</td>
                 <td>@user.Gender</td>
                 <td>@user.Active</td>
+                <td>@user.CountryName</td>
+                <td>@user.Phone</td>
+               
                 <td>@string.Join(", ", user.Roles)</td>
                 <td>
                     <a asp-action="EditUser" asp-route-id="@user.Id" class="btn btn-primary">Edit</a>

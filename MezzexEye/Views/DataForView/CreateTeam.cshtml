@@ -7,6 +7,19 @@
 <h2>Create a New Team</h2>
 
 <form asp-action="CreateTeam" method="post">
+    <div class="mb-3">
+        <label asp-for="CountryId" class="form-label">Country</label>
+        <select asp-for="CountryId" class="form-select" id="countrySelect" name="CountryId" required>
+            <option value="">[All]</option>
+            @foreach (var country in ViewBag.Countries)
+            {
+                <option value="@country.Value">@country.Text</option>
+            }
+        </select>
+        <div class="invalid-feedback">
+            Please select a country.
+        </div>
+    </div>
     <div class="form-group">
         <label asp-for="Name" class="control-label"></label>
         <input asp-for="Name" class="form-control" />
@@ -17,4 +30,33 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+    <script>
+        (function () {
+            'use strict'
+
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.querySelectorAll('.needs-validation')
+
+            // Loop over them and prevent submission
+            Array.prototype.slice.call(forms)
+                .forEach(function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (!form.checkValidity()) {
+                            event.preventDefault()
+                            event.stopPropagation()
+                        }
+
+                        form.classList.add('was-validated')
+                    }, false)
+                })
+        })()
+
+        document.getElementById("countrySelect").addEventListener("change", function () {
+            var selectedCountry = this.options[this.selectedIndex].text;
+            
+        });
+
+        // Trigger the change event on page load to handle pre-selected value
+        document.getElementById("countrySelect").dispatchEvent(new Event('change'));
+    </script>
 }

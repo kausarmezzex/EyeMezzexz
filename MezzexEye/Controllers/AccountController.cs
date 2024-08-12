@@ -97,6 +97,8 @@ namespace MezzexEye.Controllers
                     LastName = user.LastName,
                     Gender = user.Gender,
                     Active = user.Active,
+                    CountryName = user.CountryName,
+                    Phone = user.PhoneNumber,
                     Roles = userRoles.ToList()
                 });
             }
@@ -124,6 +126,8 @@ namespace MezzexEye.Controllers
                 LastName = user.LastName,
                 Gender = user.Gender,
                 Active = user.Active,
+                CountryName = user.CountryName,
+                Phone = user.PhoneNumber,
                 Roles = roles.ToList()
             };
 
@@ -152,6 +156,8 @@ namespace MezzexEye.Controllers
             user.FirstName = model.FirstName;
             user.LastName = model.LastName;
             user.Gender = model.Gender;
+            user.CountryName = model.CountryName;
+            user.PhoneNumber = model.Phone;
             user.Active = model.Active;
 
             var result = await _userManager.UpdateAsync(user);

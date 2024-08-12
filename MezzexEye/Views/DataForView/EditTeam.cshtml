@@ -1,0 +1,24 @@
+﻿@model EyeMezzexz.Models.TeamViewModel
+
+<h2>Edit Team</h2>
+
+<form asp-action="EditTeam" method="post">
+    <div class="form-group">
+        <label asp-for="Name" class="control-label">Team Name</label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="CountryId" class="form-label">Country</label>
+        <select asp-for="CountryId" class="form-select" id="country-select">
+            @foreach (var country in (IEnumerable<SelectListItem>)ViewBag.Countries)
+            {
+                <option value="@country.Value" selected="@(country.Selected ? "selected" : null)">@country.Text</option>
+            }
+        </select>
+        <span asp-validation-for="CountryId" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>

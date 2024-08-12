@@ -9,6 +9,9 @@
         public string LastName { get; set; }
         public string Gender { get; set; }
         public bool Active { get; set; }
+        public string CountryName { get; set; }
+        public string Phone { get; set; }
+
         public List<string> Roles { get; set; }
     }
 }

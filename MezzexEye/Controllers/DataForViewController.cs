@@ -1,12 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
 using EyeMezzexz.Models;
-using EyeMezzexz.Services;
-using Microsoft.Extensions.Logging;
 using MezzexEye.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Newtonsoft.Json;
+using MezzexEye.ViewModel;
 
 namespace EyeMezzexz.Controllers
 {
@@ -15,9 +13,12 @@ namespace EyeMezzexz.Controllers
     {
         private readonly ApiService _apiService;
         private readonly ILogger<DataForViewController> _logger;
+        private readonly DataController _dataController; 
+        public DataController DataController { get; }
 
-        public DataForViewController(ApiService apiService, ILogger<DataForViewController> logger)
+        public DataForViewController(DataController dataController, ApiService apiService, ILogger<DataForViewController> logger)
         {
+            _dataController = dataController;
             _apiService = apiService;
             _logger = logger;
         }
@@ -265,10 +266,41 @@ namespace EyeMezzexz.Controllers
         }
         // GET: /DataForView/CreateTeam
         [HttpGet]
-        public IActionResult CreateTeam()
+        public async Task<IActionResult> CreateTeam()
         {
+            var countriesResponse = await _dataController.GetCountries();
+            var countries = (countriesResponse as OkObjectResult)?.Value as List<Country>;
+            ViewBag.Countries = new SelectList(countries, "Id", "Name");
             return View();
         }
+
+        public async Task<IActionResult> TeamList()
+        {
+            try
+            {
+                // Call the GetTeams method from the DataController
+                var responseTeam = await _dataController.GetTeams();
+
+                // Extract the data from the action result and cast it to List<TeamViewModel>
+                var teams = (responseTeam as OkObjectResult)?.Value as List<TeamViewModel>;
+
+                if (teams == null)
+                {
+                    _logger.LogError("Failed to retrieve teams.");
+                    return StatusCode(500, "Failed to retrieve teams.");
+                }
+
+                // Pass the List<TeamViewModel> to the view
+                return View(teams);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "An error occurred while retrieving the team list.");
+                return StatusCode(500, "Internal server error");
+            }
+        }
+
+
 
         // POST: /DataForView/CreateTeam
         [HttpPost]
@@ -305,6 +337,80 @@ namespace EyeMezzexz.Controllers
                     ModelState.AddModelError("", "An error occurred while creating the team.");
                 }
             }
+
+            return View(model);
+        }
+
+
+        [HttpGet]
+        public async Task<IActionResult> EditTeam(int id)
+        {
+            try
+            {
+                // Directly call the API method to get the team details
+                var responseTeam = await _dataController.GetTeam(id); // Assume you have a GetTeam method in the API
+                var team = (responseTeam as OkObjectResult)?.Value as TeamViewModel;
+
+                if (team == null)
+                {
+                    _logger.LogError("Failed to retrieve team details.");
+                    return NotFound("Team not found.");
+                }
+
+                // Get the list of countries if CountryId is null
+                if (team.CountryId == null)
+                {
+                    var countriesResponse = await _dataController.GetCountries();
+                    var countries = (countriesResponse as OkObjectResult)?.Value as List<Country>;
+                    ViewBag.Countries = new SelectList(countries, "Id", "Name");
+                }
+                else
+                {
+                    ViewBag.Countries = new SelectList(new List<Country> { new Country { Id = team.CountryId.Value, Name = team.CountryName } }, "Id", "Name");
+                }
+
+                return View(team);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "An error occurred while retrieving the team data.");
+                return StatusCode(500, "Internal server error");
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditTeam(TeamViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    model.ModifyBy = User.Identity.Name;
+                    // Directly call the API method to update the team
+                    var result = await _dataController.EditTeam(model.Id, model);
+
+                    if ((result as OkObjectResult) != null)
+                    {
+                        _logger.LogInformation("Team updated successfully.");
+                        return RedirectToAction("TeamList");
+                    }
+                    else
+                    {
+                        _logger.LogError("Failed to update team.");
+                        ModelState.AddModelError("", "Failed to update team.");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError(ex, "An error occurred while updating the team.");
+                    ModelState.AddModelError("", "An error occurred while updating the team.");
+                }
+            }
+
+            // Re-populate countries list if the model state is invalid
+            var countriesResponse = await _dataController.GetCountries();
+            var countries = (countriesResponse as OkObjectResult)?.Value as List<Country>;
+            ViewBag.Countries = new SelectList(countries, "Id", "Name");
 
             return View(model);
         }
@@ -369,5 +475,40 @@ namespace EyeMezzexz.Controllers
 
             return View(model);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> GetTeamsAndUsersByCountry(string countryName)
+        {
+            try
+            {
+                // Fetch teams and users based on the selected country
+                var responseTeams = await _dataController.GetTeamsByCountry(countryName);
+                var responseUsers = await _dataController.GetUsersByCountryName(countryName);
+
+                var teamsJson = JsonConvert.SerializeObject((responseTeams as OkObjectResult)?.Value);
+                var usersJson = JsonConvert.SerializeObject((responseUsers as OkObjectResult)?.Value);
+
+                var teams = JsonConvert.DeserializeObject<List<TeamViewModel>>(teamsJson);
+                var users = JsonConvert.DeserializeObject<List<UserModel>>(usersJson);
+
+                if (teams == null || users == null)
+                {
+                    return StatusCode(500, "Failed to retrieve teams or users.");
+                }
+
+                return Json(new
+                {
+                    teams = teams.Select(t => new { id = t.Id, name = t.Name }),
+                    users = users.Select(u => new { id = u.Id, name = $"{u.FirstName} {u.LastName}" })
+                });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "An error occurred while fetching teams and users.");
+                return StatusCode(500, "Internal server error");
+            }
+        }
+
+
     }
 }

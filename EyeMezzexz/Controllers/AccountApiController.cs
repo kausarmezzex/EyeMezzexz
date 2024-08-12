@@ -4,9 +4,7 @@ using EyeMezzexz.Services;
 using MezzexEye.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Linq;
 using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace EyeMezzexz.Controllers
 {
@@ -35,11 +33,12 @@ namespace EyeMezzexz.Controllers
                 return BadRequest(new { message = "Invalid login request." });
             }
 
-            var response = _webServiceClient.GetLoginDetail(loginRequest.Email, loginRequest.Password);
+            var response = await Task.Run(() => _webServiceClient.GetLoginDetail(loginRequest.Email, loginRequest.Password));
             if (string.IsNullOrEmpty(response))
             {
                 return NotFound(new { message = "Login details not found." });
             }
+
 
             var loginDetails = JsonSerializer.Deserialize<List<LoginDetailResult>>(response);
             if (loginDetails == null || !loginDetails.Any())
@@ -50,7 +49,10 @@ namespace EyeMezzexz.Controllers
             var firstLoginDetail = loginDetails.First();
             var firstName = firstLoginDetail.FirstName;
             var lastName = firstLoginDetail.LastName;
-            var country = firstLoginDetail.CountryName;
+
+            // Check if the country name is "UK" and replace it with "United Kingdom"
+            var country = firstLoginDetail.CountryName == "UK" ? "United Kingdom" : firstLoginDetail.CountryName;
+
             var phoneNumber = firstLoginDetail.Phone;
 
             var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == loginRequest.Email);
@@ -65,7 +67,7 @@ namespace EyeMezzexz.Controllers
                     Gender = "Male",
                     Active = true,
                     Role = "Registered",
-                    CountryName = country,
+                    CountryName = country, // Save the adjusted country name
                     Phone = phoneNumber,
                 };
 
@@ -90,10 +92,8 @@ namespace EyeMezzexz.Controllers
             _context.Users.Update(user);
             await _context.SaveChangesAsync();
 
-            return Ok(new { message = "Login successful", userId = user.Id, username = $"{user.FirstName} {user.LastName}" });
+            return Ok(new { message = "Login successful", userId = user.Id, username = $"{user.FirstName} {user.LastName}", country = user.CountryName });
         }
-
-
 
 
         [HttpGet("getAllUsernames")]

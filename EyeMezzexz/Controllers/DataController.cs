@@ -2,9 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using EyeMezzexz.Data;
 using EyeMezzexz.Models;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -510,6 +507,49 @@ namespace EyeMezzexz.Controllers
             return Ok(tasks);
         }
 
+        [HttpGet("getTasksListWithCountry")]
+        public async Task<IActionResult> GetTasksListWithCountry(string country = null)
+        {
+            var tasksQuery = _context.TaskNames
+                .Where(t => !t.IsDeleted.HasValue || !t.IsDeleted.Value);  // Exclude deleted tasks
+
+            // If a country is provided, filter the tasks by the given country
+            if (!string.IsNullOrEmpty(country))
+            {
+                tasksQuery = tasksQuery.Where(t => t.Country.Name == country);
+            }
+
+            var tasks = await tasksQuery
+                .Select(t => new TaskNames
+                {
+                    Id = t.Id,
+                    Name = t.Name,
+                    ComputerRequired = t.ComputerRequired,
+                    Country = t.Country,
+                    SubTasks = t.SubTasks.Where(st => !st.IsDeleted.HasValue || !st.IsDeleted.Value).ToList(),  // Exclude deleted subtasks
+                    CountryId = t.CountryId,
+                    TaskCreatedBy = t.TaskCreatedBy,
+                    TaskCreatedOn = t.TaskCreatedOn,
+                })
+                .ToListAsync();
+
+            // Fetch the default tasks from the database
+            var defaultTasks = await _context.TaskNames
+                .Where(t => (t.Name == "Break" || t.Name == "Lunch" || t.Name == "Other")
+                            && (!t.IsDeleted.HasValue || !t.IsDeleted.Value))
+                .ToListAsync();
+
+            // Remove default tasks from the list if they already exist
+            var taskNames = tasks.Select(t => t.Name).ToHashSet();
+            var filteredDefaultTasks = defaultTasks
+                .Where(t => !taskNames.Contains(t.Name))
+                .ToList();
+
+            // Add the filtered default tasks to the list
+            tasks.AddRange(filteredDefaultTasks);
+
+            return Ok(tasks);
+        }
 
         [HttpGet("getUserCompletedTasks")]
         public async Task<IActionResult> GetUserCompletedTasks(int userId, string clientTimeZone)
@@ -581,11 +621,117 @@ namespace EyeMezzexz.Controllers
 
             return Ok(new { Message = "Team created successfully", TeamId = model.Id });
         }
+        [HttpGet("getTeams")]
+        public async Task<IActionResult> GetTeams()
+        {
+            var teams = await _context.Teams
+                .Where(t => !t.IsDeleted)
+                .Include(t => t.Country)  // Include the Country data
+                .Select(t => new TeamViewModel
+                {
+                    Id = t.Id,
+                    Name = t.Name,
+                    CountryName = t.Country != null ? t.Country.Name : "N/A",
+                    CreatedOn = t.CreatedOn,
+                    CreatedBy = t.CreatedBy,
+                    ModifyOn = t.ModifyOn,
+                    ModifyBy = t.ModifyBy
+                })
+                .ToListAsync();
+
+            return Ok(teams);
+        }
+        [HttpPost("editTeam/{id}")]
+        public async Task<IActionResult> EditTeam(int id, [FromBody] TeamViewModel model)
+        {
+            if (model == null || id != model.Id)
+            {
+                return BadRequest("Invalid team data.");
+            }
+
+            var team = await _context.Teams.FindAsync(id);
+            if (team == null)
+            {
+                return NotFound("Team not found.");
+            }
+
+            // Update team properties
+            team.Name = model.Name;
+            team.CountryId = model.CountryId;
+            team.ModifyBy = model.ModifyBy;
+            team.ModifyOn = DateTime.UtcNow; // Assuming user identity is available
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateException ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Error updating team: {ex.Message}");
+            }
+
+            return Ok(new { Message = "Team updated successfully" });
+        }
+        [HttpGet("getTeam/{id}")]
+        public async Task<IActionResult> GetTeam(int id)
+        {
+            var team = await _context.Teams
+                .Include(t => t.Country)  // Include the related Country data
+                .FirstOrDefaultAsync(t => t.Id == id && !t.IsDeleted);  // Ensure the team is not deleted
+
+            if (team == null)
+            {
+                return NotFound("Team not found.");
+            }
+
+            // Map the team entity to TeamViewModel
+            var teamViewModel = new TeamViewModel
+            {
+                Id = team.Id,
+                Name = team.Name,
+                CountryId = team.CountryId,
+                CountryName = team.Country?.Name,
+                CreatedOn = team.CreatedOn,
+                CreatedBy = team.CreatedBy,
+                ModifyOn = team.ModifyOn,
+                ModifyBy = team.ModifyBy
+            };
+
+            return Ok(teamViewModel);
+        }
+        [HttpGet("getTeamsByCountryName")]
+        public async Task<IActionResult> GetTeamsByCountry(string countryName)
+        {
+            var teams = await _context.Teams
+                .Where(t => t.Country.Name == countryName)
+                .Select(t => new TeamViewModel
+                {
+                    Id = t.Id,
+                    Name = t.Name
+                })
+                .ToListAsync();
+
+            return Ok(teams);
+        }
+
+        [HttpGet("getUsersByCountryName")]
+        public async Task<IActionResult> GetUsersByCountryName(string countryName)
+        {
+            var users = await _context.Users
+                .Where(u => u.CountryName == countryName)
+                .Select(u => new ApplicationUser
+                {
+                    Id = u.Id,
+                    FirstName = u.FirstName,
+                    LastName = u.LastName
+                })
+                .ToListAsync();
+
+            return Ok(users);
+        }
 
 
     }
-
-
 }
 
 

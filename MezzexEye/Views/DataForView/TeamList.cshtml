@@ -1,0 +1,32 @@
+﻿@model List<EyeMezzexz.Models.TeamViewModel>
+
+<h2>Team List</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Team Name</th>
+            <th>Country</th>
+            <th>Created On</th>
+            <th>Created By</th>
+            <th>Modified By</th>
+            <th>Actions</th>  <!-- New column for actions -->
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var team in Model)
+        {
+            <tr>
+                <td>@team.Name</td>
+                <td>@team.CountryName</td>
+                <td>@team.CreatedOn.ToString("yyyy-MM-dd")</td>
+                <td>@team.CreatedBy</td>
+                <td>@team.ModifyBy</td>
+                <td>
+                    <!-- Edit Button -->
+                    <a asp-action="EditTeam" asp-route-id="@team.Id" class="btn btn-primary btn-sm">Edit</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
