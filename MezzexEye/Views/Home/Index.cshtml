@@ -3,53 +3,86 @@
 }
 
 <div class="row">
+    <!-- Total Users Section -->
     <div class="col-lg-3 col-6">
-        <!-- small box -->
         <div class="small-box bg-info">
             <div class="inner">
-                <h3>150</h3>
+                <h3>@ViewBag.TotalUsers</h3> <!-- Display total users -->
 
-                <p>New Orders</p>
+                <p>Total Users</p> <!-- Label for total users -->
             </div>
             <div class="icon">
-                <i class="ion ion-bag"></i>
+                <i class="ion ion-person"></i> <!-- User icon -->
             </div>
-            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            @if (User.IsInRole("Admin") || User.IsInRole("Administrator"))
+            {
+                <a asp-controller="Account" asp-action="AllUsers" class="small-box-footer">
+                    More info <i class="fas fa-arrow-circle-right"></i> <!-- Link to All Users page -->
+                </a>
+            }
+            else
+            {
+                <a href="javascript:void(0);" class="small-box-footer" title="Access restricted to Admins only">
+                    More info <i class="fas fa-arrow-circle-right"></i> <!-- Disabled link -->
+                </a>
+            }
         </div>
     </div>
     <!-- ./col -->
+    <!-- Total Running Tasks Section -->
     <div class="col-lg-3 col-6">
-        <!-- small box -->
         <div class="small-box bg-success">
             <div class="inner">
-                <h3>53<sup style="font-size: 20px">%</sup></h3>
+                <h3>@ViewBag.TotalRunningTasks</h3> <!-- Display total running tasks -->
 
-                <p>Bounce Rate</p>
+                <p>Total Running Tasks</p> <!-- Label for total running tasks -->
             </div>
             <div class="icon">
-                <i class="ion ion-stats-bars"></i>
+                <i class="ion ion-clipboard"></i> <!-- Task icon -->
             </div>
-            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            @if (User.IsInRole("Admin") || User.IsInRole("Administrator"))
+            {
+                <a asp-controller="DataForView" asp-action="ViewAllRunningTasks" class="small-box-footer">
+                    More info <i class="fas fa-arrow-circle-right"></i> <!-- Link to All Running Tasks page -->
+                </a>
+            }
+            else
+            {
+                <a href="javascript:void(0);" class="small-box-footer" title="Access restricted to Admins only">
+                    More info <i class="fas fa-arrow-circle-right"></i> <!-- Disabled link -->
+                </a>
+            }
         </div>
     </div>
     <!-- ./col -->
+    <!-- Existing Sections (e.g., Total Users Whose Not Strat Task ) -->
+    <!-- Existing Sections (e.g., Total Users Whose Not Started Task) -->
     <div class="col-lg-3 col-6">
-        <!-- small box -->
         <div class="small-box bg-warning">
             <div class="inner">
-                <h3>44</h3>
-
-                <p>User Registrations</p>
+                <h3>@ViewBag.UsersNotStartTask</h3>
+                <p>Total User Whose Not Start Task</p>
             </div>
             <div class="icon">
                 <i class="ion ion-person-add"></i>
             </div>
-            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            @if (User.IsInRole("Admin") || User.IsInRole("Administrator"))
+            {
+                <a asp-controller="DataForView" asp-action="ViewIncompleteTasks" class="small-box-footer">
+                    More info <i class="fas fa-arrow-circle-right"></i> <!-- Link to View Incomplete Tasks page -->
+                </a>
+            }
+            else
+            {
+                <a href="javascript:void(0);" class="small-box-footer" title="Access restricted to Admins only">
+                    More info <i class="fas fa-arrow-circle-right"></i> <!-- Disabled link -->
+                </a>
+            }
         </div>
     </div>
     <!-- ./col -->
+
     <div class="col-lg-3 col-6">
-        <!-- small box -->
         <div class="small-box bg-danger">
             <div class="inner">
                 <h3>65</h3>

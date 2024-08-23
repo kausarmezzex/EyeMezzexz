@@ -1,0 +1,73 @@
+﻿@model EyeMezzexz.Models.RunningTasksViewModel
+
+<div class="container">
+    <div class="row mb-4">
+        <!-- Total Running Tasks Card -->
+        <div class="col-lg-6 mb-3">
+            <a asp-controller="DataForView" asp-action="ViewAllRunningTasks" class="text-decoration-none">
+                <div class="card shadow-sm border-0 rounded-lg">
+                    <div class="card-body d-flex align-items-center">
+                        <div class="flex-grow-1">
+                            <h5 class="card-title text-muted mb-2">Total Running Tasks</h5>
+                            <h2 class="display-4 fw-bold mb-0 text-success">@Model.TotalRunningTasks</h2>
+                        </div>
+                        <div class="ms-3">
+                            <i class="fas fa-tasks fa-3x text-success"></i>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <!-- Total Users Not Started Tasks Card -->
+        <div class="col-lg-6 mb-3">
+            <a asp-controller="DataForView" asp-action="ViewIncompleteTasks" class="text-decoration-none">
+                <div class="card shadow-sm border-0 rounded-lg">
+                    <div class="card-body d-flex align-items-center">
+                        <div class="flex-grow-1">
+                            <h5 class="card-title text-muted mb-2">Total Users Whose Not Start Task</h5>
+                            <h2 class="display-4 fw-bold mb-0 text-warning">@ViewBag.UsersNotStartTask</h2>
+                        </div>
+                        <div class="ms-3">
+                            <i class="fas fa-user-clock fa-3x text-warning"></i>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <div class="card shadow-sm border-0 rounded-lg">
+        <div class="card-body">
+            <h4 class="card-title text-center mb-4">Details of Running Tasks</h4>
+            <table class="table table-hover">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">Task Name</th>
+                        <th scope="col">User Name</th>
+                        <th scope="col">Start Time</th>
+                        <th scope="col">Comment</th>
+                        <th scope="col" class="text-center">Action</th> <!-- Centered action button -->
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var task in Model.AllRunningTasks)
+                    {
+                        <tr>
+                            <td>@task.TaskName</td>
+                            <td>@task.UserName</td>
+                            <td>@task.TaskStartTime</td>
+                            <td>@task.TaskComment</td>
+                            <td class="text-center">
+                                <!-- "Show Screen" button -->
+                                <a asp-controller="DataForView" asp-action="ViewScreenCaptureData" asp-route-username="@task.UserName" class="btn btn-outline-primary btn-sm">
+                                    Show Screen
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

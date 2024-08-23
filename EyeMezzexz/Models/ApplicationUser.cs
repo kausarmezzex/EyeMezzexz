@@ -14,7 +14,7 @@ namespace EyeMezzexz.Models
         public DateTime? LastLogoutTime { get; set; }
 
         // New properties
-        public string CountryName { get; set; }
+        public string? CountryName { get; set; }
 
         public ICollection<UserPermission> UserPermissions { get; set; }
     }

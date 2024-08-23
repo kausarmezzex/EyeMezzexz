@@ -178,5 +178,12 @@ namespace MezzexEye.Controllers
             return View(model);
         }
 
+        public async Task<int> GetTotalUsers()
+        {
+            var users = _userManager.Users.ToList();
+            return users.Count;
+        }
+
+
     }
 }

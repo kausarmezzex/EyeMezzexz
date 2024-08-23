@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace EyeMezzexz.Migrations
 {
     /// <inheritdoc />
-    public partial class AddInitial : Migration
+    public partial class Add1 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -40,6 +40,7 @@ namespace EyeMezzexz.Migrations
                     Active = table.Column<bool>(type: "bit", nullable: false),
                     LastLoginTime = table.Column<DateTime>(type: "datetime2", nullable: true),
                     LastLogoutTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    CountryName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -267,6 +268,30 @@ namespace EyeMezzexz.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Teams",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    CountryId = table.Column<int>(type: "int", nullable: true),
+                    ModifyOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ModifyBy = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Teams", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Teams_Countries_CountryId",
+                        column: x => x.CountryId,
+                        principalTable: "Countries",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "RolePermissions",
                 columns: table => new
                 {
@@ -325,6 +350,7 @@ namespace EyeMezzexz.Migrations
                     TaskComment = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     TaskStartTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     TaskEndTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    UserId1 = table.Column<int>(type: "int", nullable: false),
                     ClientTimeZone = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     TimeDifference = table.Column<TimeSpan>(type: "time", nullable: true)
                 },
@@ -332,15 +358,55 @@ namespace EyeMezzexz.Migrations
                 {
                     table.PrimaryKey("PK_TaskTimers", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_TaskTimers_AspNetUsers_UserId",
+                        name: "FK_TaskTimers_AspNetUsers_UserId1",
+                        column: x => x.UserId1,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_TaskTimers_StaffInOut_UserId",
+                        column: x => x.UserId,
+                        principalTable: "StaffInOut",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_TaskTimers_TaskNames_TaskId",
+                        column: x => x.TaskId,
+                        principalTable: "TaskNames",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "StaffAssignToTeam",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    TeamId = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    CountryId = table.Column<int>(type: "int", nullable: false),
+                    AssignedOn = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_StaffAssignToTeam", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_StaffAssignToTeam_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_TaskTimers_TaskNames_TaskId",
-                        column: x => x.TaskId,
-                        principalTable: "TaskNames",
+                        name: "FK_StaffAssignToTeam_Countries_CountryId",
+                        column: x => x.CountryId,
+                        principalTable: "Countries",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_StaffAssignToTeam_Teams_TeamId",
+                        column: x => x.TeamId,
+                        principalTable: "Teams",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -424,6 +490,21 @@ namespace EyeMezzexz.Migrations
                 column: "PermissionId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_StaffAssignToTeam_CountryId",
+                table: "StaffAssignToTeam",
+                column: "CountryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_StaffAssignToTeam_TeamId",
+                table: "StaffAssignToTeam",
+                column: "TeamId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_StaffAssignToTeam_UserId",
+                table: "StaffAssignToTeam",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_StaffInOut_UserId",
                 table: "StaffInOut",
                 column: "UserId");
@@ -447,6 +528,16 @@ namespace EyeMezzexz.Migrations
                 name: "IX_TaskTimers_UserId",
                 table: "TaskTimers",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TaskTimers_UserId1",
+                table: "TaskTimers",
+                column: "UserId1");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Teams_CountryId",
+                table: "Teams",
+                column: "CountryId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_UploadedData_TaskTimerId",
@@ -484,7 +575,7 @@ namespace EyeMezzexz.Migrations
                 name: "RolePermissions");
 
             migrationBuilder.DropTable(
-                name: "StaffInOut");
+                name: "StaffAssignToTeam");
 
             migrationBuilder.DropTable(
                 name: "UploadedData");
@@ -496,16 +587,22 @@ namespace EyeMezzexz.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
+                name: "Teams");
+
+            migrationBuilder.DropTable(
                 name: "TaskTimers");
 
             migrationBuilder.DropTable(
                 name: "PermissionsName");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
+                name: "StaffInOut");
 
             migrationBuilder.DropTable(
                 name: "TaskNames");
+
+            migrationBuilder.DropTable(
+                name: "AspNetUsers");
 
             migrationBuilder.DropTable(
                 name: "Countries");

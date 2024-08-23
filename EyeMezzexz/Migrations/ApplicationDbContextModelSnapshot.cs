@@ -71,7 +71,6 @@ namespace EyeMezzexz.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CountryName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
@@ -243,6 +242,37 @@ namespace EyeMezzexz.Migrations
                     b.ToTable("RolePermissions");
                 });
 
+            modelBuilder.Entity("EyeMezzexz.Models.StaffAssignToTeam", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("AssignedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("CountryId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TeamId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CountryId");
+
+                    b.HasIndex("TeamId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("StaffAssignToTeam");
+                });
+
             modelBuilder.Entity("EyeMezzexz.Models.StaffInOut", b =>
                 {
                     b.Property<int>("Id")
@@ -378,7 +408,6 @@ namespace EyeMezzexz.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("ModifyBy")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("ModifyOn")
@@ -393,37 +422,6 @@ namespace EyeMezzexz.Migrations
                     b.HasIndex("CountryId");
 
                     b.ToTable("Teams");
-                });
-
-            modelBuilder.Entity("EyeMezzexz.Models.TeamAssignment", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("AssignedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("CountryId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TeamId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CountryId");
-
-                    b.HasIndex("TeamId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("TeamAssignments");
                 });
 
             modelBuilder.Entity("EyeMezzexz.Models.UploadedData", b =>
@@ -609,6 +607,33 @@ namespace EyeMezzexz.Migrations
                     b.Navigation("Role");
                 });
 
+            modelBuilder.Entity("EyeMezzexz.Models.StaffAssignToTeam", b =>
+                {
+                    b.HasOne("EyeMezzexz.Models.Country", "Country")
+                        .WithMany()
+                        .HasForeignKey("CountryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("EyeMezzexz.Models.Team", "Team")
+                        .WithMany()
+                        .HasForeignKey("TeamId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("EyeMezzexz.Models.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Country");
+
+                    b.Navigation("Team");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("EyeMezzexz.Models.StaffInOut", b =>
                 {
                     b.HasOne("EyeMezzexz.Models.ApplicationUser", "User")
@@ -662,33 +687,6 @@ namespace EyeMezzexz.Migrations
                         .HasForeignKey("CountryId");
 
                     b.Navigation("Country");
-                });
-
-            modelBuilder.Entity("EyeMezzexz.Models.TeamAssignment", b =>
-                {
-                    b.HasOne("EyeMezzexz.Models.Country", "Country")
-                        .WithMany()
-                        .HasForeignKey("CountryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("EyeMezzexz.Models.Team", "Team")
-                        .WithMany()
-                        .HasForeignKey("TeamId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("EyeMezzexz.Models.ApplicationUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Country");
-
-                    b.Navigation("Team");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("EyeMezzexz.Models.UploadedData", b =>

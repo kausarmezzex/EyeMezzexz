@@ -5,7 +5,7 @@
 namespace EyeMezzexz.Migrations
 {
     /// <inheritdoc />
-    public partial class RemovePhone1 : Migration
+    public partial class Add12 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

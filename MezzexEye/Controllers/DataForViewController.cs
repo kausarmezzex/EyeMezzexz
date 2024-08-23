@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using EyeMezzexz.Models;
+using EyeMezzexz.Services;
+using Microsoft.Extensions.Logging;
 using MezzexEye.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
@@ -13,14 +15,16 @@ namespace EyeMezzexz.Controllers
     {
         private readonly ApiService _apiService;
         private readonly ILogger<DataForViewController> _logger;
-        private readonly DataController _dataController; 
+        private readonly DataController _dataController;
+        private readonly TeamAssignmentApiController _teamAssignmentApiController;
         public DataController DataController { get; }
 
-        public DataForViewController(DataController dataController, ApiService apiService, ILogger<DataForViewController> logger)
+        public DataForViewController(DataController dataController, ApiService apiService, ILogger<DataForViewController> logger, TeamAssignmentApiController teamAssignmentApiController)
         {
             _dataController = dataController;
             _apiService = apiService;
             _logger = logger;
+            _teamAssignmentApiController = teamAssignmentApiController;
         }
 
         [HttpGet]
@@ -159,6 +163,33 @@ namespace EyeMezzexz.Controllers
             }
         }
 
+        [HttpGet]
+        public async Task<IActionResult> ViewAllRunningTasks()
+        {
+            try
+            {
+                // Call the API service to get all running tasks and their total count
+                var (allRunningTasks, totalRunningTasks) = await _apiService.GetAllUserRunningTasksAsync("Asia/Kolkata");
+                var incompleteTasks = await _apiService.GetIncompleteTasksAsync("Asia/Kolkata");
+
+                // Count the total number of incomplete tasks
+                var totalIncompleteTasks = incompleteTasks.Count;
+                ViewBag.UsersNotStartTask = totalIncompleteTasks;
+                // Create a view model to pass data to the view
+                var viewModel = new RunningTasksViewModel
+                {
+                    AllRunningTasks = allRunningTasks,
+                    TotalRunningTasks = totalRunningTasks
+                };
+
+                return View(viewModel);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "An error occurred while retrieving running tasks.");
+                return StatusCode(500, "Internal server error");
+            }
+        }
 
         [HttpGet]
         public async Task<IActionResult> CheckClockInStatus()
@@ -316,7 +347,8 @@ namespace EyeMezzexz.Controllers
                     var team = new Team
                     {
                         Name = model.Name,
-                        CreatedBy = user.Email
+                        CreatedBy = user.Email,
+                        CountryId = model.CountryId,
                     };
 
                     int teamId = await _apiService.CreateTeamAsync(team);
@@ -324,11 +356,16 @@ namespace EyeMezzexz.Controllers
                     if (teamId > 0)
                     {
                         _logger.LogInformation("Team created successfully with ID: {TeamId}", teamId);
-                        return RedirectToAction("TeamDetails", new { id = teamId });
+                        return RedirectToAction("TeamList");
                     }
                     else
                     {
+                        var countriesResponse = await _dataController.GetCountries();
+                        var countries = (countriesResponse as OkObjectResult)?.Value as List<Country>;
+                        ViewBag.Countries = new SelectList(countries, "Id", "Name");
+                        
                         ModelState.AddModelError("", "Failed to create team. Please try again.");
+                        return View(model);
                     }
                 }
                 catch (Exception ex)
@@ -347,8 +384,11 @@ namespace EyeMezzexz.Controllers
         {
             try
             {
-                // Directly call the API method to get the team details
-                var responseTeam = await _dataController.GetTeam(id); // Assume you have a GetTeam method in the API
+                var countriesResponse = await _dataController.GetCountries();
+                var countries = (countriesResponse as OkObjectResult)?.Value as List<Country>;
+
+                // Fetch the team details
+                var responseTeam = await _dataController.GetTeam(id);
                 var team = (responseTeam as OkObjectResult)?.Value as TeamViewModel;
 
                 if (team == null)
@@ -357,17 +397,8 @@ namespace EyeMezzexz.Controllers
                     return NotFound("Team not found.");
                 }
 
-                // Get the list of countries if CountryId is null
-                if (team.CountryId == null)
-                {
-                    var countriesResponse = await _dataController.GetCountries();
-                    var countries = (countriesResponse as OkObjectResult)?.Value as List<Country>;
-                    ViewBag.Countries = new SelectList(countries, "Id", "Name");
-                }
-                else
-                {
-                    ViewBag.Countries = new SelectList(new List<Country> { new Country { Id = team.CountryId.Value, Name = team.CountryName } }, "Id", "Name");
-                }
+                // Populate ViewBag with country list
+                ViewBag.Countries = new SelectList(countries, "Id", "Name", team.CountryId);
 
                 return View(team);
             }
@@ -377,6 +408,7 @@ namespace EyeMezzexz.Controllers
                 return StatusCode(500, "Internal server error");
             }
         }
+
 
         [HttpPost]
         public async Task<IActionResult> EditTeam(TeamViewModel model)
@@ -447,7 +479,7 @@ namespace EyeMezzexz.Controllers
                     if (success)
                     {
                         _logger.LogInformation("User assigned to team successfully.");
-                        return RedirectToAction("TeamAssignmentSuccess"); // Create a success page or redirect as needed
+                        return RedirectToAction("TeamList"); // Create a success page or redirect as needed
                     }
                     else
                     {
@@ -507,6 +539,63 @@ namespace EyeMezzexz.Controllers
                 _logger.LogError(ex, "An error occurred while fetching teams and users.");
                 return StatusCode(500, "Internal server error");
             }
+        }
+        [HttpGet]
+        public async Task<IActionResult> ViewAllTeamAssignments()
+        {
+            try
+            {
+                var response = await _teamAssignmentApiController.GetAllTeamAssignments();
+                var assignments = (response as OkObjectResult)?.Value as List<TeamAssignmentViewModel1>;
+
+                if (assignments == null)
+                {
+                    _logger.LogError("Failed to retrieve team assignments.");
+                    return StatusCode(500, "Failed to retrieve team assignments.");
+                }
+
+                return View(assignments); // Pass the strongly typed model to the view
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "An error occurred while retrieving team assignments.");
+                return StatusCode(500, "Internal server error");
+            }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> ViewIncompleteTasks()
+        {
+            try
+            {
+                // Fetch incomplete tasks using the ApiService
+                var incompleteTasks = await _apiService.GetIncompleteTasksAsync("Asia/Kolkata");
+
+                // Count the total number of incomplete tasks
+                var totalIncompleteTasks = incompleteTasks.Count;
+
+                // Create a view model to pass to the view
+                var viewModel = new IncompleteTasksViewModel
+                {
+                    IncompleteTasks = incompleteTasks,
+                    TotalIncompleteTasks = totalIncompleteTasks
+                };
+
+                // Return the view with the view model
+                return View(viewModel);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "An error occurred while retrieving incomplete tasks.");
+                return StatusCode(500, "Internal server error");
+            }
+        }
+
+
+        public async Task<int> GetTotalRunningTasks()
+        {
+            var (_, totalRunningTasks) = await _apiService.GetAllUserRunningTasksAsync("Asia/Kolkata");
+            return totalRunningTasks;
         }
 
 

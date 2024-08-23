@@ -41,7 +41,7 @@ namespace EyeMezzexz.Controllers
         {
             if (ModelState.IsValid)
             {
-                var teamAssignment = new TeamAssignment
+                var teamAssignment = new StaffAssignToTeam
                 {
                     TeamId = model.SelectedTeamId,
                     UserId = model.SelectedUserId,
@@ -49,13 +49,34 @@ namespace EyeMezzexz.Controllers
                     AssignedOn = DateTime.UtcNow
                 };
 
-                _context.TeamAssignments.Add(teamAssignment);
+                _context.StaffAssignToTeam.Add(teamAssignment);
                 await _context.SaveChangesAsync();
 
                 return Ok(new { Message = "User assigned to team successfully" });
             }
 
             return BadRequest(ModelState);
+        }
+        // GET: api/TeamAssignmentApi/GetAllTeamAssignments
+        [HttpGet("GetAllTeamAssignments")]
+        public async Task<IActionResult> GetAllTeamAssignments()
+        {
+            var teamAssignments = await _context.StaffAssignToTeam
+                .Include(t => t.Team)
+                .Include(u => u.User)
+                .Include(c => c.Country)
+                .ToListAsync();
+
+            var result = teamAssignments.Select(ta => new TeamAssignmentViewModel1
+            {
+                Id = ta.Id,
+                TeamName = ta.Team.Name,
+                UserName = $"{ta.User.FirstName} {ta.User.LastName}",
+                CountryName = ta.Country.Name,
+                AssignedOn = ta.AssignedOn
+            }).ToList();
+
+            return Ok(result);
         }
     }
 }

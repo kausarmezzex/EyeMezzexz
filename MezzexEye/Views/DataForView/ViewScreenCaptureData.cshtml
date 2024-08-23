@@ -69,7 +69,16 @@
                     <div id="modalDetails" class="d-flex">
                         <p class="me-3"><strong>User:</strong> <span id="modalUsername"></span></p>
                         <p class="me-3"><strong>Created Time:</strong> <span id="modalTimestamp"></span></p>
-                        <p><strong>Task Name:</strong> <span id="modalTaskName"></span></p>
+                        <p class="me-3"><strong>Task Name:</strong> <span id="modalTaskName"></span></p>
+                        <p><strong>Task Comment:</strong> <span id="modalComment"></span></p>
+                    </div>
+                </div>
+                <div class="d-flex align-items-center ms-3">
+                    <button id="pauseButton" class="btn btn-warning me-3 ms-3" style="display: none;">Pause</button>
+                    <button id="resumeButton" class="btn btn-success me-3" style="display: none;">Resume</button>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input me-3" type="checkbox" id="autoScrollToggle">
+                        <label class="form-check-label me-3" for="autoScrollToggle">Auto Scroll</label>
                     </div>
                 </div>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -87,6 +96,7 @@
         </div>
     </div>
 </div>
+
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
@@ -125,21 +135,90 @@
         var imageModal = document.getElementById('imageModal');
         var allMedia = [];
         var currentIndex = 0;
+        var autoScrollInterval = null;
+        var isAutoScrollEnabled = false;
 
         function updateModalDetails(mediaUrl, mediaType) {
             var currentMediaElement = document.querySelector(`[data-bs-${mediaType.toLowerCase()}="${mediaUrl}"]`);
             var username = currentMediaElement.getAttribute('data-bs-username');
             var timestamp = currentMediaElement.getAttribute('data-bs-timestamp');
-            var taskName = currentMediaElement.getAttribute('data-bs-taskname');
+            var taskName = currentMediaElement.getAttribute('data-bs-taskname') || "Task Not Started";
+            var taskComment = currentMediaElement.getAttribute('data-bs-comment');
 
-            var modalUsername = document.getElementById('modalUsername');
-            var modalTimestamp = document.getElementById('modalTimestamp');
-            var modalTaskName = document.getElementById('modalTaskName');
-
-            modalUsername.textContent = username;
-            modalTimestamp.textContent = timestamp;
-            modalTaskName.textContent = taskName;
+            document.getElementById('modalUsername').textContent = username;
+            document.getElementById('modalTimestamp').textContent = timestamp;
+            document.getElementById('modalTaskName').textContent = taskName && taskName.trim() !== "" ? taskName : "No Running Task";
+            document.getElementById('modalComment').textContent = taskComment && taskComment.trim() !== "" ? taskComment : "No comment available";
         }
+
+        function showMediaAtIndex(index) {
+            var newMediaUrl = allMedia[index];
+            var mediaType = document.querySelector(`[data-bs-img="${newMediaUrl}"]`) ? 'img' : 'video';
+            var modalImage = document.getElementById('modalImage');
+            var modalVideo = document.getElementById('modalVideo');
+
+            if (mediaType === 'img') {
+                modalImage.src = newMediaUrl;
+                modalImage.style.display = 'block';
+                modalVideo.style.display = 'none';
+            } else {
+                modalVideo.src = newMediaUrl;
+                modalVideo.style.display = 'block';
+                modalVideo.load();
+                modalImage.style.display = 'none';
+            }
+            updateModalDetails(newMediaUrl, mediaType);
+        }
+
+        function startAutoScroll() {
+            isAutoScrollEnabled = true;
+            autoScrollInterval = setInterval(function () {
+                currentIndex++;
+                if (currentIndex >= allMedia.length) {
+                    currentIndex = 0;
+                    loadNextPage();
+                } else {
+                    showMediaAtIndex(currentIndex);
+                }
+            }, 3000);
+
+            document.getElementById('pauseButton').style.display = 'inline-block';
+            document.getElementById('resumeButton').style.display = 'none';
+        }
+
+        function stopAutoScroll() {
+            isAutoScrollEnabled = false;
+            clearInterval(autoScrollInterval);
+
+            document.getElementById('pauseButton').style.display = 'none';
+            document.getElementById('resumeButton').style.display = 'inline-block';
+        }
+
+        function loadNextPage() {
+            const currentPage = parseInt(document.querySelector('.pagination .active a').getAttribute('data-page'));
+            const totalPages = @Model.TotalPages;
+            if (currentPage < totalPages) {
+                loadPage(currentPage + 1, true);
+            } else {
+                stopAutoScroll();
+            }
+        }
+
+        document.getElementById('autoScrollToggle').addEventListener('change', function () {
+            if (this.checked) {
+                startAutoScroll();
+            } else {
+                stopAutoScroll();
+            }
+        });
+
+        document.getElementById('pauseButton').addEventListener('click', function () {
+            stopAutoScroll();
+        });
+
+        document.getElementById('resumeButton').addEventListener('click', function () {
+            startAutoScroll();
+        });
 
         imageModal.addEventListener('show.bs.modal', function (event) {
             var button = event.relatedTarget;
@@ -147,29 +226,18 @@
             var mediaType = button.getAttribute('data-bs-img') ? 'img' : 'video';
             currentIndex = 0;
 
-            allMedia = Array.from(document.querySelectorAll(`[data-bs-${mediaType.toLowerCase()}]`)).map(media => media.getAttribute(`data-bs-${mediaType.toLowerCase()}`));
+            // Removed the sorting logic based on datetime here.
+            allMedia = Array.from(document.querySelectorAll(`[data-bs-${mediaType.toLowerCase()}]`))
+                .map(media => media.getAttribute(`data-bs-${mediaType.toLowerCase()}`));
 
-            var modalImage = imageModal.querySelector('#modalImage');
-            var modalVideo = imageModal.querySelector('#modalVideo');
-
-            if (mediaType === 'img') {
-                modalImage.src = mediaUrl;
-                modalImage.style.display = 'block';
-                modalVideo.style.display = 'none';
-            } else {
-                modalVideo.src = mediaUrl;
-                modalVideo.style.display = 'block';
-                modalVideo.load();
-                modalImage.style.display = 'none';
-            }
             currentIndex = allMedia.indexOf(mediaUrl);
-
-            updateModalDetails(mediaUrl, mediaType);
+            showMediaAtIndex(currentIndex);
         });
 
         imageModal.addEventListener('hidden.bs.modal', function () {
-            var modalImage = imageModal.querySelector('#modalImage');
-            var modalVideo = imageModal.querySelector('#modalVideo');
+            stopAutoScroll();
+            var modalImage = document.getElementById('modalImage');
+            var modalVideo = document.getElementById('modalVideo');
 
             modalImage.src = '';
             modalVideo.pause();
@@ -179,49 +247,19 @@
         document.getElementById('prevImage').addEventListener('click', function () {
             if (allMedia.length > 0) {
                 currentIndex = (currentIndex - 1 + allMedia.length) % allMedia.length;
-                var newMediaUrl = allMedia[currentIndex];
-                var mediaType = document.querySelector(`[data-bs-img="${newMediaUrl}"]`) ? 'img' : 'video';
-                var modalImage = document.getElementById('modalImage');
-                var modalVideo = document.getElementById('modalVideo');
-
-                if (mediaType === 'img') {
-                    modalImage.src = newMediaUrl;
-                    modalImage.style.display = 'block';
-                    modalVideo.style.display = 'none';
-                } else {
-                    modalVideo.src = newMediaUrl;
-                    modalVideo.style.display = 'block';
-                    modalVideo.load();
-                    modalImage.style.display = 'none';
-                }
-                updateModalDetails(newMediaUrl, mediaType);
+                showMediaAtIndex(currentIndex);
             }
         });
 
         document.getElementById('nextImage').addEventListener('click', function () {
             if (allMedia.length > 0) {
                 currentIndex = (currentIndex + 1) % allMedia.length;
-                var newMediaUrl = allMedia[currentIndex];
-                var mediaType = document.querySelector(`[data-bs-img="${newMediaUrl}"]`) ? 'img' : 'video';
-                var modalImage = document.getElementById('modalImage');
-                var modalVideo = document.getElementById('modalVideo');
-
-                if (mediaType === 'img') {
-                    modalImage.src = newMediaUrl;
-                    modalImage.style.display = 'block';
-                    modalVideo.style.display = 'none';
-                } else {
-                    modalVideo.src = newMediaUrl;
-                    modalVideo.style.display = 'block';
-                    modalVideo.load();
-                    modalImage.style.display = 'none';
-                }
-                updateModalDetails(newMediaUrl, mediaType);
+                showMediaAtIndex(currentIndex);
             }
         });
     }
 
-    function loadPage(page) {
+    function loadPage(page, keepAutoScroll = false) {
         const formData = new FormData(document.getElementById('filterForm'));
         formData.append('page', page);
         const queryString = new URLSearchParams(formData).toString();
@@ -236,6 +274,10 @@
                 document.getElementById('screenCaptureData').innerHTML = html;
                 attachPaginationEvents();
                 attachModalEvents();
+                if (isAutoScrollEnabled && keepAutoScroll) {
+                    document.querySelector('.pagination a[data-page]').classList.remove('active');
+                    document.querySelector(`.pagination a[data-page="${page}"]`).classList.add('active');
+                }
             })
             .catch(error => console.error('Error:', error));
     }
@@ -244,6 +286,26 @@
         event.preventDefault();
         loadPage(1);
     });
+
+    document.addEventListener('DOMContentLoaded', function () {
+        function getQueryParameter(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+
+        const username = getQueryParameter('username');
+
+        if (username) {
+            const usernameDropdown = document.getElementById('username');
+            for (let i = 0; i < usernameDropdown.options.length; i++) {
+                if (usernameDropdown.options[i].value === username) {
+                    usernameDropdown.selectedIndex = i;
+                    break;
+                }
+            }
+        }
+    });
+
 </script>
 
 <style>
@@ -278,7 +340,7 @@
     }
 
     #filterForm {
-        gap: 1rem; /* Adds space between the form elements */
+        gap: 1rem;
     }
 
         #filterForm .form-label {

@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using EyeMezzexz.Controllers;
 using MezzexEye.Services;
+using MezzexEye.Controllers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +18,8 @@ builder.Services.AddTransient<AccountApiController>();
 builder.Services.AddTransient<ApiService>();
 builder.Services.AddScoped<IApiService, ApiService>();
 builder.Services.AddTransient<TeamAssignmentApiController>();
+builder.Services.AddScoped<DataForViewController>();
+builder.Services.AddScoped<AccountController>();
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 

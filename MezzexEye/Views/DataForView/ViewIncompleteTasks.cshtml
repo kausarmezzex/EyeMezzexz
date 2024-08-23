@@ -1,0 +1,34 @@
+﻿@model EyeMezzexz.Models.IncompleteTasksViewModel
+
+@{
+    ViewData["Title"] = "Incomplete Tasks";
+}
+
+<p>Total Incomplete Tasks: @Model.TotalIncompleteTasks</p>
+
+@if (Model.IncompleteTasks.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>User ID</th>
+                <th>User Name</th>
+                <th>Staff In Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var task in Model.IncompleteTasks)
+            {
+                <tr>
+                    <td>@task.UserId</td>
+                    <td>@task.UserName</td>
+                    <td>@task.StaffInTime</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No incomplete tasks found.</p>
+}

@@ -5,13 +5,14 @@
     {
         <div class="col">
             <div class="card">
-                <img src="@item.ImageUrl" class="card-img-top img-thumbnail" alt="Screenshot" data-bs-toggle="modal" data-bs-target="#imageModal" data-bs-username="@item.Username" data-bs-img="@item.ImageUrl" data-bs-timestamp="@item.Timestamp" data-bs-systemname="@item.SystemName" data-bs-taskname="@item.TaskName" />
+                <img src="@item.ImageUrl" class="card-img-top img-thumbnail" alt="Screenshot" data-bs-toggle="modal" data-bs-target="#imageModal" data-bs-username="@item.Username" data-bs-img="@item.ImageUrl" data-bs-timestamp="@item.Timestamp" data-bs-systemname="@item.SystemName" data-bs-taskname="@(!string.IsNullOrWhiteSpace(item.TaskName) ? item.TaskName : "Task Not Started")" data-bs-comment="@(!string.IsNullOrWhiteSpace(item.Comment) ? item.Comment : "No Comment")"/>
                 <div class="card-body">
                     <h5 class="card-title">@item.Username</h5>
                     <p class="card-text">
                         <strong>Created Time:</strong> @item.Timestamp<br />
                         <strong>System Name:</strong> @item.SystemName<br />
-                        <strong>Task Name:</strong> @item.TaskName
+                        <strong>Task Name:</strong>@(!string.IsNullOrWhiteSpace(item.TaskName) ? item.TaskName : " No Running Task")  <br />
+                        <strong>Task Comment:</strong> @(!string.IsNullOrWhiteSpace(item.Comment) ? item.Comment : " No Comment")<br /> <!-- Display "No Comment" if Comment is empty -->
                     </p>
                 </div>
             </div>

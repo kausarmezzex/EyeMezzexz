@@ -5,7 +5,6 @@ using EyeMezzexz.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Rendering;
-
 namespace EyeMezzexz.Controllers
 {
     [ApiController]
@@ -56,13 +55,13 @@ namespace EyeMezzexz.Controllers
                 return BadRequest("Model is null");
             }
 
-            var taskTimer = await _context.TaskTimers
-                .Include(t => t.Task)
-                .FirstOrDefaultAsync(t => t.Id == model.TaskTimerId);
+            TaskTimer taskTimer = null;
 
-            if (taskTimer == null)
+            if (model.TaskTimerId.HasValue)
             {
-                return NotFound("TaskTimer not found");
+                taskTimer = await _context.TaskTimers
+                    .Include(t => t.Task)
+                    .FirstOrDefaultAsync(t => t.Id == model.TaskTimerId.Value);
             }
 
             var uploadedData = new UploadedData
@@ -71,15 +70,14 @@ namespace EyeMezzexz.Controllers
                 CreatedOn = _context.GetDatabaseServerTime(),
                 Username = model.Username,
                 SystemName = model.SystemName,
-                TaskName = taskTimer.Task.Name,
-                TaskTimerId = model.TaskTimerId,
-                VideoUrl = model.VideoUrl
+                TaskName = taskTimer?.Task?.Name, // Set to null if TaskTimer or Task is null
+                TaskTimerId = taskTimer?.Id // This will be null if TaskTimer is not found
             };
 
             _context.UploadedData.Add(uploadedData);
             await _context.SaveChangesAsync();
 
-            return Ok(new { Message = "Screen capture data uploaded successfully" });
+            return Ok("Screen capture data saved successfully.");
         }
 
         [HttpGet("getScreenCaptureData")]
@@ -87,20 +85,38 @@ namespace EyeMezzexz.Controllers
         {
             var timeDifference = GetTimeDifference(clientTimeZone);
 
+            // Fetch the data from the database without applying DateTime.Add in the query
             var data = await _context.UploadedData
                 .Select(d => new
                 {
                     d.ImageUrl,
-                    Timestamp = d.CreatedOn.Add(timeDifference),
+                    d.VideoUrl,
+                    d.CreatedOn,
                     d.Username,
                     d.Id,
                     d.SystemName,
                     d.TaskName,
-                    d.VideoUrl
+                    Comment = d.TaskTimer.TaskComment // Ensure this field is included
                 })
                 .ToListAsync();
 
-            return Ok(data);
+            // Apply the time difference and sort the data in memory in descending order
+            var sortedData = data
+                .Select(d => new ScreenCaptureDataViewModel
+                {
+                    ImageUrl = d.ImageUrl,
+                    VideoUrl = d.VideoUrl,  // Add this if you're handling video as well
+                    Timestamp = d.CreatedOn.Add(timeDifference),
+                    Username = d.Username,
+                    Id = d.Id,
+                    SystemName = d.SystemName,
+                    TaskName = d.TaskName,
+                    Comment = d.Comment
+                })
+                .OrderByDescending(d => d.Timestamp) // Sort by Timestamp in descending order
+                .ToList();
+
+            return Ok(sortedData);
         }
 
         [HttpPost("saveTaskTimer")]
@@ -155,6 +171,107 @@ namespace EyeMezzexz.Controllers
 
             return Ok(taskTimers);
         }
+
+        [HttpGet("getTaskTimerById")]
+        public async Task<IActionResult> GetTaskTimerById(int userId, string clientTimeZone)
+        {
+            var today = DateTime.Today;
+            var timeDifference = GetTimeDifference(clientTimeZone);
+
+            var taskTimers = await _context.TaskTimers
+                .Include(t => t.Task)
+                .Include(t => t.User)
+                .Where(t => t.UserId == userId && t.TaskStartTime.Date == today && t.TaskEndTime == null)
+                .OrderBy(t => t.TaskStartTime)
+                .Select(t => new TaskTimerResponse
+                {
+                    Id = t.Id,
+                    UserId = t.UserId,
+                    UserName = $"{t.User.FirstName} {t.User.LastName}",
+                    TaskId = t.TaskId,
+                    TaskName = t.Task.Name,
+                    TaskComment = t.TaskComment,
+                    TaskStartTime = t.TaskStartTime.Add(timeDifference),
+                    TaskEndTime = t.TaskEndTime.HasValue ? t.TaskEndTime.Value.Add(timeDifference) : (DateTime?)null
+                })
+                .ToListAsync();
+
+            return Ok(taskTimers);
+        }
+        [HttpGet("getAllUserRunningTasks")]
+        public async Task<IActionResult> GetAllUserRunningTasks(string clientTimeZone)
+        {
+            var today = DateTime.Today;
+            var timeDifference = GetTimeDifference(clientTimeZone);
+
+            var taskTimers = await _context.TaskTimers
+                .Include(t => t.Task)
+                .Include(t => t.User)
+                .Where(t => t.TaskStartTime.Date == today && t.TaskEndTime == null)
+                .OrderByDescending(t => t.UserId)
+                .ThenBy(t => t.TaskStartTime)
+                .Select(t => new TaskTimerResponse
+                {
+                    Id = t.Id,
+                    UserId = t.UserId,
+                    UserName = $"{t.User.FirstName} {t.User.LastName}",
+                    TaskId = t.TaskId,
+                    TaskName = t.Task.Name,
+                    TaskComment = t.TaskComment,
+                    TaskStartTime = t.TaskStartTime.Add(timeDifference),
+                    TaskEndTime = t.TaskEndTime.HasValue ? t.TaskEndTime.Value.Add(timeDifference) : (DateTime?)null
+                })
+                .ToListAsync();
+
+            var response = new TaskTimersResponse
+            {
+                TaskTimers = taskTimers,
+                TotalTasks = taskTimers.Count
+            };
+
+            return Ok(response);
+        }
+
+
+
+        [HttpGet("getIncompleteTasks")]
+        public async Task<IActionResult> GetIncompleteTasks(string clientTimeZone)
+        {
+            var today = DateTime.Today;
+            var timeDifference = GetTimeDifference(clientTimeZone);
+
+            // Query to find users who have checked in but haven't started any tasks
+            var incompleteTasks = await _context.StaffInOut
+                .GroupJoin(_context.TaskTimers,
+                    staff => staff.UserId,
+                    task => task.UserId,
+                    (staff, tasks) => new { staff, tasks })
+                .SelectMany(
+                    staffTasks => staffTasks.tasks.DefaultIfEmpty(),
+                    (staffTasks, task) => new { staffTasks.staff, task })
+                .Where(x => x.staff.StaffInTime.Date == today &&
+                            (x.task == null ||
+                            (x.task.TaskStartTime != null && x.task.TaskEndTime != null)))
+                .GroupBy(x => new { x.staff.UserId, x.staff.User.FirstName, x.staff.User.LastName, x.staff.StaffInTime })
+                .Select(g => new
+                {
+                    UserId = g.Key.UserId,
+                    UserName = $"{g.Key.FirstName} {g.Key.LastName}",
+                    StaffInTime = g.Key.StaffInTime.Add(timeDifference)
+                })
+                .ToListAsync();
+
+            if (!incompleteTasks.Any())
+            {
+                return NotFound("No users found who have checked in but haven't started any tasks for today.");
+            }
+
+            return Ok(incompleteTasks);
+        }
+
+
+
+
 
         [HttpPost("saveStaff")]
         public async Task<IActionResult> SaveStaff([FromBody] StaffInOut model)
@@ -302,6 +419,26 @@ namespace EyeMezzexz.Controllers
 
             return Ok(new { TaskTimeId = taskTimer.Id });
         }
+
+        [HttpGet("getTaskTimeIdByUser")]
+        public async Task<IActionResult> GetTaskTimeIdByUser(int userId)
+        {
+            var today = DateTime.Today;
+
+            var taskTimer = await _context.TaskTimers
+                .Where(t => t.UserId == userId && t.TaskEndTime == null && t.TaskStartTime.Date == today)
+                .Select(t => new { t.Id })
+                .FirstOrDefaultAsync();
+
+            if (taskTimer == null)
+            {
+                return Ok(new { TaskTimeId = -1 });
+            }
+
+            return Ok(new { TaskTimeId = taskTimer.Id });
+        }
+
+
 
         [HttpGet("getCountries")]
         public async Task<IActionResult> GetCountries()

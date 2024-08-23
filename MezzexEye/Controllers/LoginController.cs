@@ -38,6 +38,7 @@ namespace MezzexEye.Controllers
             }
             return View(model);
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Logout()
@@ -51,5 +52,6 @@ namespace MezzexEye.Controllers
         {
             return View();
         }
+
     }
 }

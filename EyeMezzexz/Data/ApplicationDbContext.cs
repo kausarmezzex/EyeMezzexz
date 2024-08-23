@@ -17,7 +17,7 @@ namespace EyeMezzexz.Data
         public DbSet<Country> Countries { get; set; }
         public DbSet<Computer> Computers { get; set; }
         public DbSet<Team> Teams { get; set; }
-        public DbSet<TeamAssignment> TeamAssignments { get; set; }
+        public DbSet<StaffAssignToTeam> StaffAssignToTeam { get; set; }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
         }
@@ -80,7 +80,7 @@ namespace EyeMezzexz.Data
            .WithMany(t => t.SubTasks)
            .HasForeignKey(t => t.ParentTaskId);
 
-
+            
         }
     }
 }

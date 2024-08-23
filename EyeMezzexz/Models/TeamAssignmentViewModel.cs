@@ -8,8 +8,8 @@ namespace EyeMezzexz.Models
         public int SelectedUserId { get; set; }
         public int SelectedCountryId { get; set; }
 
-        public List<SelectListItem> Teams { get; set; }
-        public List<SelectListItem> Users { get; set; }
-        public List<SelectListItem> Countries { get; set; }
+        public List<SelectListItem>? Teams { get; set; }
+        public List<SelectListItem>? Users { get; set; }
+        public List<SelectListItem>? Countries { get; set; }
     }
 }

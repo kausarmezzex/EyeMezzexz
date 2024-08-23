@@ -1,6 +1,6 @@
 ﻿namespace EyeMezzexz.Models
 {
-    public class TeamAssignment
+    public class StaffAssignToTeam
     {
         public int Id { get; set; }
         public int TeamId { get; set; }
