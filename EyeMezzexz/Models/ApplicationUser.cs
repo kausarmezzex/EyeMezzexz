@@ -15,7 +15,8 @@ namespace EyeMezzexz.Models
 
         // New properties
         public string? CountryName { get; set; }
-
+        public ICollection<TaskTimer> TaskTimers { get; set; }
+        public ICollection<StaffInOut> StaffInOuts { get; set; }
         public ICollection<UserPermission> UserPermissions { get; set; }
     }
 }

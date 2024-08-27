@@ -569,25 +569,15 @@ namespace EyeMezzexz.Controllers
             try
             {
                 // Fetch incomplete tasks using the ApiService
-                var incompleteTasks = await _apiService.GetIncompleteTasksAsync("Asia/Kolkata");
+                var userTasks = await _apiService.GetIncompleteTasksAsync("Asia/Kolkata");
 
-                // Count the total number of incomplete tasks
-                var totalIncompleteTasks = incompleteTasks.Count;
-
-                // Create a view model to pass to the view
-                var viewModel = new IncompleteTasksViewModel
-                {
-                    IncompleteTasks = incompleteTasks,
-                    TotalIncompleteTasks = totalIncompleteTasks
-                };
-
-                // Return the view with the view model
-                return View(viewModel);
+                // Return the view with the list of UserWithoutRunningTasksResponse
+                return View(userTasks);
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "An error occurred while retrieving incomplete tasks.");
-                return StatusCode(500, "Internal server error");
+                return StatusCode(500, "An error occurred while processing your request.");
             }
         }
 

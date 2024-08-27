@@ -1,28 +1,30 @@
-﻿@model EyeMezzexz.Models.IncompleteTasksViewModel
+﻿@model IEnumerable<EyeMezzexz.Models.UserWithoutRunningTasksResponse>
 
 @{
-    ViewData["Title"] = "Incomplete Tasks";
+    ViewData["Title"] = "Users Without Running Tasks";
 }
 
-<p>Total Incomplete Tasks: @Model.TotalIncompleteTasks</p>
-
-@if (Model.IncompleteTasks.Any())
+@if (Model != null && Model.Any())
 {
     <table class="table">
         <thead>
             <tr>
                 <th>User ID</th>
                 <th>User Name</th>
-                <th>Staff In Time</th>
+                <th>Completed Tasks Count</th>
+                <th>Last Task End Time</th>
+                <th>Last Staff In Time</th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var task in Model.IncompleteTasks)
+            @foreach (var user in Model)
             {
                 <tr>
-                    <td>@task.UserId</td>
-                    <td>@task.UserName</td>
-                    <td>@task.StaffInTime</td>
+                    <td>@user.UserId</td>
+                    <td>@user.UserName</td>
+                    <td>@user.CompletedTasksCount</td>
+                    <td>@(user.LastTaskEndTime?.ToString("g") ?? "N/A")</td>
+                    <td>@(user.LastStaffInTime?.ToString("g") ?? "N/A")</td>
                 </tr>
             }
         </tbody>
@@ -30,5 +32,5 @@
 }
 else
 {
-    <p>No incomplete tasks found.</p>
+    <p>No users found without running tasks today.</p>
 }

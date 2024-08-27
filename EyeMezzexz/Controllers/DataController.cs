@@ -232,16 +232,14 @@ namespace EyeMezzexz.Controllers
             return Ok(response);
         }
 
-
-
-        [HttpGet("getIncompleteTasks")]
-        public async Task<IActionResult> GetIncompleteTasks(string clientTimeZone)
+        [HttpGet("getUsersWithoutRunningTasks")]
+        public async Task<IActionResult> GetUsersWithoutRunningTasks(string clientTimeZone)
         {
             var today = DateTime.Today;
             var timeDifference = GetTimeDifference(clientTimeZone);
 
-            // Query to find users who have checked in but haven't started any tasks
-            var incompleteTasks = await _context.StaffInOut
+            // Query to find users who have checked in today and have no running tasks
+            var usersWithoutRunningTasks = await _context.StaffInOut
                 .GroupJoin(_context.TaskTimers,
                     staff => staff.UserId,
                     task => task.UserId,
@@ -249,28 +247,37 @@ namespace EyeMezzexz.Controllers
                 .SelectMany(
                     staffTasks => staffTasks.tasks.DefaultIfEmpty(),
                     (staffTasks, task) => new { staffTasks.staff, task })
-                .Where(x => x.staff.StaffInTime.Date == today &&
-                            (x.task == null ||
-                            (x.task.TaskStartTime != null && x.task.TaskEndTime != null)))
+                .Where(x => x.staff.StaffInTime.Date == today)
                 .GroupBy(x => new { x.staff.UserId, x.staff.User.FirstName, x.staff.User.LastName, x.staff.StaffInTime })
-                .Select(g => new
+                .Where(g => g.All(x => x.task == null || (x.task.TaskStartTime != null && x.task.TaskEndTime != null))) // Only users with no running tasks
+                .Select(g => new UserWithoutRunningTasksResponse
                 {
                     UserId = g.Key.UserId,
                     UserName = $"{g.Key.FirstName} {g.Key.LastName}",
-                    StaffInTime = g.Key.StaffInTime.Add(timeDifference)
+                    LastStaffInTime = g.Key.StaffInTime,
+                    CompletedTasksCount = g.Count(x => x.task != null && x.task.TaskEndTime.HasValue && x.task.TaskEndTime.Value.Date == today), // Count tasks completed today
+                    LastTaskEndTime = g.Where(x => x.task != null && x.task.TaskEndTime.HasValue && x.task.TaskEndTime.Value.Date == today)
+                                       .Max(x => (DateTime?)x.task.TaskEndTime)
                 })
                 .ToListAsync();
 
-            if (!incompleteTasks.Any())
+            // Adjust for time difference after materializing the data
+            var result = usersWithoutRunningTasks.Select(u => new UserWithoutRunningTasksResponse
             {
-                return NotFound("No users found who have checked in but haven't started any tasks for today.");
+                UserId = u.UserId,
+                UserName = u.UserName,
+                LastStaffInTime = u.LastStaffInTime?.Add(timeDifference),
+                CompletedTasksCount = u.CompletedTasksCount,
+                LastTaskEndTime = u.LastTaskEndTime?.Add(timeDifference)
+            }).ToList();
+
+            if (!result.Any())
+            {
+                return NotFound("No users found who have checked in today and have no running tasks.");
             }
 
-            return Ok(incompleteTasks);
+            return Ok(result);
         }
-
-
-
 
 
         [HttpPost("saveStaff")]

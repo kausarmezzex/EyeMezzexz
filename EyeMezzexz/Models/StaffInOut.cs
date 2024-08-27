@@ -1,4 +1,6 @@
-﻿namespace EyeMezzexz.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace EyeMezzexz.Models
 {
     public class StaffInOut
     {
@@ -12,6 +14,7 @@
         public DateTime? StaffOutTime { get; set; }
 
         // Foreign key property for the user associated with this entry
+        [ForeignKey("User")]
         public int UserId { get; set; }
 
         // Navigation property to the associated user

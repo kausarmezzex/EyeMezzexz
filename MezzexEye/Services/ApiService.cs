@@ -198,27 +198,30 @@ public class ApiService : IApiService
         return (new List<TaskTimerResponse>(), 0);
     }
 
-    public async Task<List<IncompleteTaskResponse>> GetIncompleteTasksAsync(string clientTimeZone = "Asia/Kolkata")
+    public async Task<List<UserWithoutRunningTasksResponse>> GetIncompleteTasksAsync(string clientTimeZone = "Asia/Kolkata")
     {
         // Call the GetIncompleteTasks method from the DataController
-        var result = await _dataController.GetIncompleteTasks(clientTimeZone);
+        var result = await _dataController.GetUsersWithoutRunningTasks(clientTimeZone);
 
-        // Convert the result to a JSON string
-        var value = (result as OkObjectResult)?.Value;
-        var jsonString = JsonConvert.SerializeObject(value);
-
-        // Deserialize the JSON string into a list of IncompleteTaskResponse
-        var data = JsonConvert.DeserializeObject<List<IncompleteTaskResponse>>(jsonString);
-
-        if (data != null)
+        if (result is OkObjectResult okResult)
         {
-            return data;
+            // Convert the result to a JSON string
+            var jsonString = JsonConvert.SerializeObject(okResult.Value);
+
+            // Deserialize the JSON string into a list of UserWithoutRunningTasksResponse
+            var data = JsonConvert.DeserializeObject<List<UserWithoutRunningTasksResponse>>(jsonString);
+
+            if (data != null)
+            {
+                return data;
+            }
         }
 
         // Log an error if the result is null or invalid
         _logger.LogError("Failed to retrieve incomplete tasks from API. Result value is null or invalid.");
-        return new List<IncompleteTaskResponse>();
+        return new List<UserWithoutRunningTasksResponse>();
     }
+
 
 
 
