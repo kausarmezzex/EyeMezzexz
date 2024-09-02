@@ -28,11 +28,10 @@ namespace EyeMezzexz.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> ViewScreenCaptureData(string username = null, DateTime? date = null, int page = 1, string mediaType = "Image")
+        public async Task<IActionResult> ViewScreenCaptureData(string username = null, DateTime? date = null, string taskName = null, int page = 1, string mediaType = "Image")
         {
             try
             {
-                int pageSize = 9; // Set pageSize to 9
                 var data = await _apiService.GetScreenCaptureDataAsync();
                 var usernames = await _apiService.GetAllUsernamesAsync();
 
@@ -47,28 +46,26 @@ namespace EyeMezzexz.Controllers
                 }
 
                 var user = await _apiService.GetUserByEmailAsync(email);
-
                 if (user == null)
                 {
                     _logger.LogError("User not found.");
                     return StatusCode(500, "Internal server error");
                 }
 
-                // Check the role of the logged-in user
+                // Filter data based on user roles
                 if (User.IsInRole("Administrator"))
                 {
                     _logger.LogInformation("User is an Administrator.");
-                    // No additional filtering needed, show all data and usernames
                 }
                 else if (User.IsInRole("Registered"))
                 {
                     _logger.LogInformation("User is a Registered user.");
-                    // Filter data to only show the logged-in user's data
                     var loggedInFullName = $"{user.FirstName} {user.LastName}";
                     data = data.Where(d => $"{d.Username}" == loggedInFullName).ToList();
                     usernames = usernames.Where(u => u == loggedInFullName).ToList();
                 }
 
+                // Apply filters
                 if (!string.IsNullOrEmpty(username))
                 {
                     data = data.Where(d => $"{d.Username}" == username).ToList();
@@ -79,7 +76,20 @@ namespace EyeMezzexz.Controllers
                 data = data.Where(d => d.Timestamp.Date == filterDate.Date).ToList();
                 _logger.LogInformation($"Filtered data by date: {filterDate.Date}");
 
-                // Filter by media type
+                if (taskName != null)
+                {
+                    if (taskName == "No Task")
+                    {
+                        data = data.Where(d => string.IsNullOrEmpty(d.TaskName)).ToList();
+                        _logger.LogInformation("Filtered data for records with no task name.");
+                    }
+                    else
+                    {
+                        data = data.Where(d => d.TaskName == taskName).ToList();
+                        _logger.LogInformation($"Filtered data by task name: {taskName}");
+                    }
+                }
+
                 if (mediaType == "Image")
                 {
                     data = data.Where(d => !string.IsNullOrEmpty(d.ImageUrl)).ToList();
@@ -89,19 +99,30 @@ namespace EyeMezzexz.Controllers
                     data = data.Where(d => !string.IsNullOrEmpty(d.VideoUrl)).ToList();
                 }
 
-                var totalItems = data.Count();
-                var paginatedData = data.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+                // Implement pagination with 12 items per page
+                int pageSize = 12; // Show 12 items per page
+                int totalRecords = data.Count();
+                int totalPages = (int)Math.Ceiling((double)totalRecords / pageSize);
+
+                data = data.Skip((page - 1) * pageSize).Take(pageSize).ToList(); // Take only the records for the current page
 
                 var viewModel = new PaginatedScreenCaptureDataViewModel
                 {
-                    ScreenCaptures = paginatedData,
+                    ScreenCaptures = data,
                     CurrentPage = page,
-                    TotalPages = (int)Math.Ceiling((double)totalItems / pageSize)
+                    TotalPages = totalPages // Set the total number of pages
                 };
 
+                var (taskTypes, _) = await _apiService.GetTasksAsync();
+                var taskNames = taskTypes.Select(t => t.Name).Distinct().ToList();
+                taskNames.Add("No Task"); // Add "No Task" option for filtering by null task names
+
                 ViewBag.Usernames = usernames;
+                ViewBag.TaskNames = taskNames;
                 ViewBag.MediaType = mediaType;
-                ViewBag.SelectedUsername = username; // Set the selected username
+                ViewBag.SelectedUsername = username;
+                ViewBag.SelectedTaskName = taskName;
+                ViewBag.SelectedDate = filterDate.ToString("yyyy-MM-dd");
 
                 if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
                 {
@@ -118,6 +139,8 @@ namespace EyeMezzexz.Controllers
                 return StatusCode(500, "Internal server error");
             }
         }
+
+
 
 
         [HttpGet]

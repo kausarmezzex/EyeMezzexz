@@ -100,7 +100,7 @@ namespace EyeMezzexz.Controllers
         public async Task<IActionResult> GetAllUsernames()
         {
             var users = await _context.Users.Select(u => new { u.FirstName, u.LastName }).ToListAsync();
-
+             
             var usernames = users.Select(u => $"{u.FirstName} {u.LastName}").ToList();
 
             return Ok(usernames);

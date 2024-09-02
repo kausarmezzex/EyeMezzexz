@@ -5,6 +5,8 @@ using EyeMezzexz.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Linq;
+
 namespace EyeMezzexz.Controllers
 {
     [ApiController]
@@ -20,33 +22,45 @@ namespace EyeMezzexz.Controllers
             _userManager = userManager;
         }
 
-        private static TimeSpan GetTimeDifference(string clientTimeZone)
+        private static readonly Dictionary<string, TimeSpan> _timeDifferenceCache = new();
+
+        private TimeSpan GetTimeDifference(string clientTimeZone)
         {
+            if (_timeDifferenceCache.TryGetValue(clientTimeZone, out var cachedDifference))
+            {
+                return cachedDifference;
+            }
+
             TimeZoneInfo ukTimeZone = TimeZoneInfo.FindSystemTimeZoneById("GMT Standard Time");
+
+            TimeSpan timeDifference;
 
             if (clientTimeZone == "GMT Standard Time")
             {
-                return TimeSpan.Zero;
+                timeDifference = TimeSpan.Zero;
             }
-
-            if (clientTimeZone == "Asia/Kolkata")
+            else if (clientTimeZone == "Asia/Kolkata")
             {
                 DateTime now = DateTime.UtcNow;
                 bool isUKSummerTime = now.Month >= 3 && now.Month <= 10;
-                return isUKSummerTime ? TimeSpan.FromHours(4.5) : TimeSpan.FromHours(5.5);
+                timeDifference = isUKSummerTime ? TimeSpan.FromHours(4.5) : TimeSpan.FromHours(5.5);
+            }
+            else
+            {
+                try
+                {
+                    TimeZoneInfo clientZone = TimeZoneInfo.FindSystemTimeZoneById(clientTimeZone);
+                    timeDifference = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, clientZone) - TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, ukTimeZone);
+                }
+                catch (TimeZoneNotFoundException)
+                {
+                    timeDifference = TimeSpan.Zero;
+                }
             }
 
-            try
-            {
-                TimeZoneInfo clientZone = TimeZoneInfo.FindSystemTimeZoneById(clientTimeZone);
-                return TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, clientZone) - TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, ukTimeZone);
-            }
-            catch (TimeZoneNotFoundException)
-            {
-                return TimeSpan.Zero;
-            }
+            _timeDifferenceCache[clientTimeZone] = timeDifference;
+            return timeDifference;
         }
-
         [HttpPost("saveScreenCaptureData")]
         public async Task<IActionResult> SaveScreenCaptureData([FromBody] UploadRequest model)
         {
@@ -55,14 +69,12 @@ namespace EyeMezzexz.Controllers
                 return BadRequest("Model is null");
             }
 
-            TaskTimer taskTimer = null;
-
-            if (model.TaskTimerId.HasValue)
-            {
-                taskTimer = await _context.TaskTimers
-                    .Include(t => t.Task)
-                    .FirstOrDefaultAsync(t => t.Id == model.TaskTimerId.Value);
-            }
+            var taskTimer = model.TaskTimerId.HasValue
+                ? await _context.TaskTimers.AsNoTracking()
+                    .Where(t => t.Id == model.TaskTimerId.Value)
+                    .Include(t => t.Task) // Include the Task to get the Name
+                    .FirstOrDefaultAsync()
+                : null;
 
             var uploadedData = new UploadedData
             {
@@ -70,8 +82,8 @@ namespace EyeMezzexz.Controllers
                 CreatedOn = _context.GetDatabaseServerTime(),
                 Username = model.Username,
                 SystemName = model.SystemName,
-                TaskName = taskTimer?.Task?.Name, // Set to null if TaskTimer or Task is null
-                TaskTimerId = taskTimer?.Id // This will be null if TaskTimer is not found
+                TaskName = taskTimer?.Task?.Name, // Safe access using null-conditional operator
+                TaskTimerId = taskTimer?.Id
             };
 
             _context.UploadedData.Add(uploadedData);
@@ -80,13 +92,14 @@ namespace EyeMezzexz.Controllers
             return Ok("Screen capture data saved successfully.");
         }
 
+
         [HttpGet("getScreenCaptureData")]
         public async Task<IActionResult> GetScreenCaptureData(string clientTimeZone)
         {
             var timeDifference = GetTimeDifference(clientTimeZone);
 
-            // Fetch the data from the database without applying DateTime.Add in the query
             var data = await _context.UploadedData
+                .AsNoTracking()
                 .Select(d => new
                 {
                     d.ImageUrl,
@@ -96,16 +109,15 @@ namespace EyeMezzexz.Controllers
                     d.Id,
                     d.SystemName,
                     d.TaskName,
-                    Comment = d.TaskTimer.TaskComment // Ensure this field is included
+                    Comment = d.TaskTimer.TaskComment
                 })
                 .ToListAsync();
 
-            // Apply the time difference and sort the data in memory in descending order
             var sortedData = data
                 .Select(d => new ScreenCaptureDataViewModel
                 {
                     ImageUrl = d.ImageUrl,
-                    VideoUrl = d.VideoUrl,  // Add this if you're handling video as well
+                    VideoUrl = d.VideoUrl,
                     Timestamp = d.CreatedOn.Add(timeDifference),
                     Username = d.Username,
                     Id = d.Id,
@@ -113,7 +125,7 @@ namespace EyeMezzexz.Controllers
                     TaskName = d.TaskName,
                     Comment = d.Comment
                 })
-                .OrderByDescending(d => d.Timestamp) // Sort by Timestamp in descending order
+                .OrderByDescending(d => d.Timestamp)
                 .ToList();
 
             return Ok(sortedData);
@@ -150,12 +162,9 @@ namespace EyeMezzexz.Controllers
             var today = DateTime.Today;
             var timeDifference = GetTimeDifference(clientTimeZone);
 
-            var taskTimers = await _context.TaskTimers
-                .Include(t => t.Task)
-                .Include(t => t.User)
-                .Where(t => t.TaskStartTime.Date == today && t.TaskEndTime == null)
-                .OrderByDescending(t => t.UserId == userId)
-                .ThenBy(t => t.TaskStartTime)
+            var taskTimers = await _context.TaskTimers.AsNoTracking()
+                .Where(t => t.UserId == userId && t.TaskStartTime.Date == today && t.TaskEndTime == null)
+                .OrderBy(t => t.TaskStartTime)
                 .Select(t => new TaskTimerResponse
                 {
                     Id = t.Id,
@@ -178,9 +187,7 @@ namespace EyeMezzexz.Controllers
             var today = DateTime.Today;
             var timeDifference = GetTimeDifference(clientTimeZone);
 
-            var taskTimers = await _context.TaskTimers
-                .Include(t => t.Task)
-                .Include(t => t.User)
+            var taskTimers = await _context.TaskTimers.AsNoTracking()
                 .Where(t => t.UserId == userId && t.TaskStartTime.Date == today && t.TaskEndTime == null)
                 .OrderBy(t => t.TaskStartTime)
                 .Select(t => new TaskTimerResponse
@@ -198,15 +205,14 @@ namespace EyeMezzexz.Controllers
 
             return Ok(taskTimers);
         }
+
         [HttpGet("getAllUserRunningTasks")]
         public async Task<IActionResult> GetAllUserRunningTasks(string clientTimeZone)
         {
             var today = DateTime.Today;
             var timeDifference = GetTimeDifference(clientTimeZone);
 
-            var taskTimers = await _context.TaskTimers
-                .Include(t => t.Task)
-                .Include(t => t.User)
+            var taskTimers = await _context.TaskTimers.AsNoTracking()
                 .Where(t => t.TaskStartTime.Date == today && t.TaskEndTime == null)
                 .OrderByDescending(t => t.UserId)
                 .ThenBy(t => t.TaskStartTime)
@@ -238,7 +244,6 @@ namespace EyeMezzexz.Controllers
             var today = DateTime.Today;
             var timeDifference = GetTimeDifference(clientTimeZone);
 
-            // Query to find users who have checked in today and have no running tasks
             var usersWithoutRunningTasks = await _context.StaffInOut
                 .GroupJoin(_context.TaskTimers,
                     staff => staff.UserId,
@@ -249,19 +254,18 @@ namespace EyeMezzexz.Controllers
                     (staffTasks, task) => new { staffTasks.staff, task })
                 .Where(x => x.staff.StaffInTime.Date == today)
                 .GroupBy(x => new { x.staff.UserId, x.staff.User.FirstName, x.staff.User.LastName, x.staff.StaffInTime })
-                .Where(g => g.All(x => x.task == null || (x.task.TaskStartTime != null && x.task.TaskEndTime != null))) // Only users with no running tasks
+                .Where(g => g.All(x => x.task == null || (x.task.TaskStartTime != null && x.task.TaskEndTime != null)))
                 .Select(g => new UserWithoutRunningTasksResponse
                 {
                     UserId = g.Key.UserId,
                     UserName = $"{g.Key.FirstName} {g.Key.LastName}",
                     LastStaffInTime = g.Key.StaffInTime,
-                    CompletedTasksCount = g.Count(x => x.task != null && x.task.TaskEndTime.HasValue && x.task.TaskEndTime.Value.Date == today), // Count tasks completed today
+                    CompletedTasksCount = g.Count(x => x.task != null && x.task.TaskEndTime.HasValue && x.task.TaskEndTime.Value.Date == today),
                     LastTaskEndTime = g.Where(x => x.task != null && x.task.TaskEndTime.HasValue && x.task.TaskEndTime.Value.Date == today)
                                        .Max(x => (DateTime?)x.task.TaskEndTime)
                 })
                 .ToListAsync();
 
-            // Adjust for time difference after materializing the data
             var result = usersWithoutRunningTasks.Select(u => new UserWithoutRunningTasksResponse
             {
                 UserId = u.UserId,
@@ -278,7 +282,6 @@ namespace EyeMezzexz.Controllers
 
             return Ok(result);
         }
-
 
         [HttpPost("saveStaff")]
         public async Task<IActionResult> SaveStaff([FromBody] StaffInOut model)
@@ -344,7 +347,7 @@ namespace EyeMezzexz.Controllers
         {
             var timeDifference = GetTimeDifference(clientTimeZone);
 
-            var staff = await _context.StaffInOut
+            var staff = await _context.StaffInOut.AsNoTracking()
                 .Select(s => new
                 {
                     s.Id,
@@ -362,7 +365,7 @@ namespace EyeMezzexz.Controllers
             var today = DateTime.Today;
             var timeDifference = GetTimeDifference(clientTimeZone);
 
-            var staffInOut = await _context.StaffInOut
+            var staffInOut = await _context.StaffInOut.AsNoTracking()
                 .Where(s => s.UserId == userId && s.StaffInTime.Date == today && s.StaffOutTime == null)
                 .OrderByDescending(s => s.StaffInTime)
                 .FirstOrDefaultAsync();
@@ -414,7 +417,7 @@ namespace EyeMezzexz.Controllers
         [HttpGet("getTaskTimeId")]
         public async Task<IActionResult> GetTaskTimeId(int taskId, string clientTimeZone)
         {
-            var taskTimer = await _context.TaskTimers
+            var taskTimer = await _context.TaskTimers.AsNoTracking()
                 .Where(t => t.Id == taskId && t.TaskEndTime == null)
                 .Select(t => new { t.Id })
                 .FirstOrDefaultAsync();
@@ -432,7 +435,7 @@ namespace EyeMezzexz.Controllers
         {
             var today = DateTime.Today;
 
-            var taskTimer = await _context.TaskTimers
+            var taskTimer = await _context.TaskTimers.AsNoTracking()
                 .Where(t => t.UserId == userId && t.TaskEndTime == null && t.TaskStartTime.Date == today)
                 .Select(t => new { t.Id })
                 .FirstOrDefaultAsync();
@@ -445,19 +448,17 @@ namespace EyeMezzexz.Controllers
             return Ok(new { TaskTimeId = taskTimer.Id });
         }
 
-
-
         [HttpGet("getCountries")]
         public async Task<IActionResult> GetCountries()
         {
-            var countries = await _context.Countries.ToListAsync();
+            var countries = await _context.Countries.AsNoTracking().ToListAsync();
             return Ok(countries);
         }
 
         [HttpGet("getComputers")]
         public async Task<IActionResult> GetComputers()
         {
-            var computers = await _context.Computers.ToListAsync();
+            var computers = await _context.Computers.AsNoTracking().ToListAsync();
             return Ok(computers);
         }
 
@@ -475,16 +476,8 @@ namespace EyeMezzexz.Controllers
                 return BadRequest(ModelState);
             }
 
-            // Check for duplicate task
-            bool isDuplicateTask;
-            if (model.ParentTaskId.HasValue)
-            {
-                isDuplicateTask = await _context.TaskNames.AnyAsync(t => t.Name == model.Name && t.ParentTaskId == model.ParentTaskId);
-            }
-            else
-            {
-                isDuplicateTask = await _context.TaskNames.AnyAsync(t => t.Name == model.Name && t.ParentTaskId == null);
-            }
+            var isDuplicateTask = await _context.TaskNames.AsNoTracking().AnyAsync(t =>
+                t.Name == model.Name && t.ParentTaskId == model.ParentTaskId);
 
             if (isDuplicateTask)
             {
@@ -523,7 +516,6 @@ namespace EyeMezzexz.Controllers
             }
         }
 
-
         [HttpPut("updateTask")]
         public async Task<IActionResult> UpdateTask([FromBody] TaskNames model)
         {
@@ -544,7 +536,7 @@ namespace EyeMezzexz.Controllers
             existingTask.CountryId = model.CountryId;
             existingTask.TaskModifiedBy = model.TaskModifiedBy;
             existingTask.ComputerRequired = model.ComputerRequired;
-            existingTask.IsDeleted = model.IsDeleted; // Handle IsDeleted field
+            existingTask.IsDeleted = model.IsDeleted;
 
             if (model.ParentTaskId.HasValue)
             {
@@ -569,7 +561,6 @@ namespace EyeMezzexz.Controllers
             return Ok(new { Message = "Task updated successfully", TaskId = existingTask.Id });
         }
 
-
         private List<SelectListItem> BuildTaskSelectList(IEnumerable<TaskNames> tasks, int? parentId = null, string prefix = "")
         {
             var taskSelectList = new List<SelectListItem>();
@@ -589,13 +580,14 @@ namespace EyeMezzexz.Controllers
 
             return taskSelectList;
         }
+
         [HttpGet("getTasks")]
         public async Task<IActionResult> GetTasks(int? countryId = null, int page = 1, int pageSize = 10, string search = "")
         {
-            var query = _context.TaskNames
+            var query = _context.TaskNames.AsNoTracking()
                 .Include(t => t.Country)
                 .Include(t => t.SubTasks)
-                .Where(t => !t.IsDeleted.HasValue || !t.IsDeleted.Value)  // Exclude deleted tasks
+                .Where(t => !t.IsDeleted.HasValue || !t.IsDeleted.Value)
                 .Where(t => !countryId.HasValue || t.CountryId == countryId)
                 .Where(t => string.IsNullOrEmpty(search) || t.Name.Contains(search))
                 .AsQueryable();
@@ -613,7 +605,7 @@ namespace EyeMezzexz.Controllers
                     t.TaskCreatedOn,
                     Country = t.Country != null ? new { t.Country.Id, t.Country.Name } : null,
                     SubTasks = t.SubTasks
-                                .Where(st => !st.IsDeleted.HasValue || !st.IsDeleted.Value)  // Exclude deleted subtasks
+                                .Where(st => !st.IsDeleted.HasValue || !st.IsDeleted.Value)
                                 .Select(st => new
                                 {
                                     st.Id,
@@ -629,19 +621,18 @@ namespace EyeMezzexz.Controllers
             return Ok(new { tasks, totalTasks });
         }
 
-
         [HttpGet("getTasksList")]
         public async Task<IActionResult> GetTasksList()
         {
-            var tasks = await _context.TaskNames
-                .Where(t => !t.IsDeleted.HasValue || !t.IsDeleted.Value)  // Exclude deleted tasks
+            var tasks = await _context.TaskNames.AsNoTracking()
+                .Where(t => !t.IsDeleted.HasValue || !t.IsDeleted.Value)
                 .Select(t => new TaskNames
                 {
                     Id = t.Id,
                     Name = t.Name,
                     ComputerRequired = t.ComputerRequired,
                     Country = t.Country,
-                    SubTasks = t.SubTasks.Where(st => !st.IsDeleted.HasValue || !st.IsDeleted.Value).ToList(),  // Exclude deleted subtasks
+                    SubTasks = t.SubTasks.Where(st => !st.IsDeleted.HasValue || !st.IsDeleted.Value).ToList(),
                     CountryId = t.CountryId,
                     TaskCreatedBy = t.TaskCreatedBy,
                     TaskCreatedOn = t.TaskCreatedOn,
@@ -654,10 +645,9 @@ namespace EyeMezzexz.Controllers
         [HttpGet("getTasksListWithCountry")]
         public async Task<IActionResult> GetTasksListWithCountry(string country = null)
         {
-            var tasksQuery = _context.TaskNames
-                .Where(t => !t.IsDeleted.HasValue || !t.IsDeleted.Value);  // Exclude deleted tasks
+            var tasksQuery = _context.TaskNames.AsNoTracking()
+                .Where(t => !t.IsDeleted.HasValue || !t.IsDeleted.Value);
 
-            // If a country is provided, filter the tasks by the given country
             if (!string.IsNullOrEmpty(country))
             {
                 tasksQuery = tasksQuery.Where(t => t.Country.Name == country);
@@ -670,26 +660,23 @@ namespace EyeMezzexz.Controllers
                     Name = t.Name,
                     ComputerRequired = t.ComputerRequired,
                     Country = t.Country,
-                    SubTasks = t.SubTasks.Where(st => !st.IsDeleted.HasValue || !st.IsDeleted.Value).ToList(),  // Exclude deleted subtasks
+                    SubTasks = t.SubTasks.Where(st => !st.IsDeleted.HasValue || !st.IsDeleted.Value).ToList(),
                     CountryId = t.CountryId,
                     TaskCreatedBy = t.TaskCreatedBy,
                     TaskCreatedOn = t.TaskCreatedOn,
                 })
                 .ToListAsync();
 
-            // Fetch the default tasks from the database
-            var defaultTasks = await _context.TaskNames
+            var defaultTasks = await _context.TaskNames.AsNoTracking()
                 .Where(t => (t.Name == "Break" || t.Name == "Lunch" || t.Name == "Other")
                             && (!t.IsDeleted.HasValue || !t.IsDeleted.Value))
                 .ToListAsync();
 
-            // Remove default tasks from the list if they already exist
             var taskNames = tasks.Select(t => t.Name).ToHashSet();
             var filteredDefaultTasks = defaultTasks
                 .Where(t => !taskNames.Contains(t.Name))
                 .ToList();
 
-            // Add the filtered default tasks to the list
             tasks.AddRange(filteredDefaultTasks);
 
             return Ok(tasks);
@@ -703,9 +690,7 @@ namespace EyeMezzexz.Controllers
                 var today = DateTime.Today;
                 var timeDifference = GetTimeDifference(clientTimeZone);
 
-                var completedTaskTimers = await _context.TaskTimers
-                    .Include(t => t.Task)
-                    .Include(t => t.User)
+                var completedTaskTimers = await _context.TaskTimers.AsNoTracking()
                     .Where(t => t.UserId == userId && t.TaskStartTime.Date == today && t.TaskEndTime != null)
                     .Select(t => new TaskTimerResponse
                     {
@@ -736,7 +721,6 @@ namespace EyeMezzexz.Controllers
             }
             catch (Exception ex)
             {
-                // Log the exception as needed
                 return StatusCode(StatusCodes.Status500InternalServerError, $"An error occurred while retrieving completed tasks: {ex.Message}");
             }
         }
@@ -749,8 +733,9 @@ namespace EyeMezzexz.Controllers
                 return BadRequest("Model is null");
             }
 
-            // Check if a team with the same name already exists
-            bool isDuplicateTeam = await _context.Teams.AnyAsync(t => t.Name == model.Name && !t.IsDeleted);
+            var isDuplicateTeam = await _context.Teams.AsNoTracking()
+                .AnyAsync(t => t.Name == model.Name && !t.IsDeleted);
+
             if (isDuplicateTeam)
             {
                 ModelState.AddModelError("Name", "A team with the same name already exists.");
@@ -765,12 +750,13 @@ namespace EyeMezzexz.Controllers
 
             return Ok(new { Message = "Team created successfully", TeamId = model.Id });
         }
+
         [HttpGet("getTeams")]
         public async Task<IActionResult> GetTeams()
         {
-            var teams = await _context.Teams
+            var teams = await _context.Teams.AsNoTracking()
                 .Where(t => !t.IsDeleted)
-                .Include(t => t.Country)  // Include the Country data
+                .Include(t => t.Country)
                 .Select(t => new TeamViewModel
                 {
                     Id = t.Id,
@@ -785,6 +771,7 @@ namespace EyeMezzexz.Controllers
 
             return Ok(teams);
         }
+
         [HttpPost("editTeam/{id}")]
         public async Task<IActionResult> EditTeam(int id, [FromBody] TeamViewModel model)
         {
@@ -799,11 +786,10 @@ namespace EyeMezzexz.Controllers
                 return NotFound("Team not found.");
             }
 
-            // Update team properties
             team.Name = model.Name;
             team.CountryId = model.CountryId;
             team.ModifyBy = model.ModifyBy;
-            team.ModifyOn = DateTime.UtcNow; // Assuming user identity is available
+            team.ModifyOn = DateTime.UtcNow;
 
             try
             {
@@ -816,19 +802,19 @@ namespace EyeMezzexz.Controllers
 
             return Ok(new { Message = "Team updated successfully" });
         }
+
         [HttpGet("getTeam/{id}")]
         public async Task<IActionResult> GetTeam(int id)
         {
-            var team = await _context.Teams
-                .Include(t => t.Country)  // Include the related Country data
-                .FirstOrDefaultAsync(t => t.Id == id && !t.IsDeleted);  // Ensure the team is not deleted
+            var team = await _context.Teams.AsNoTracking()
+                .Include(t => t.Country)
+                .FirstOrDefaultAsync(t => t.Id == id && !t.IsDeleted);
 
             if (team == null)
             {
                 return NotFound("Team not found.");
             }
 
-            // Map the team entity to TeamViewModel
             var teamViewModel = new TeamViewModel
             {
                 Id = team.Id,
@@ -843,10 +829,11 @@ namespace EyeMezzexz.Controllers
 
             return Ok(teamViewModel);
         }
+
         [HttpGet("getTeamsByCountryName")]
         public async Task<IActionResult> GetTeamsByCountry(string countryName)
         {
-            var teams = await _context.Teams
+            var teams = await _context.Teams.AsNoTracking()
                 .Where(t => t.Country.Name == countryName)
                 .Select(t => new TeamViewModel
                 {
@@ -861,7 +848,7 @@ namespace EyeMezzexz.Controllers
         [HttpGet("getUsersByCountryName")]
         public async Task<IActionResult> GetUsersByCountryName(string countryName)
         {
-            var users = await _context.Users
+            var users = await _context.Users.AsNoTracking()
                 .Where(u => u.CountryName == countryName)
                 .Select(u => new ApplicationUser
                 {
@@ -873,10 +860,9 @@ namespace EyeMezzexz.Controllers
 
             return Ok(users);
         }
-
-
     }
 }
+
 
 
 public class UpdateTaskTimerRequest

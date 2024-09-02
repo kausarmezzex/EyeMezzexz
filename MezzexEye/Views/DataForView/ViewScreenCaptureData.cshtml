@@ -3,6 +3,7 @@
 @{
     ViewData["Title"] = "Screen Capture Data";
     var today = DateTime.Today.ToString("yyyy-MM-dd");
+    var selectedDate = ViewBag.SelectedDate as string ?? today; // Use the selected date or today's date if none is selected.
     var isAdministrator = User.IsInRole("Administrator");
 }
 
@@ -39,7 +40,25 @@
 
         <div class="me-2 mt-3">
             <label for="date" class="form-label me-2">Date:</label>
-            <input type="date" id="date" name="date" class="form-control" value="@today">
+            <input type="date" id="date" name="date" class="form-control" value="@selectedDate">
+        </div>
+
+        <div class="me-2 mt-3">
+            <label for="taskName" class="form-label me-2">Task Name:</label>
+            <select id="taskName" name="taskName" class="form-select">
+                <option value="">All Tasks</option>
+                @foreach (var task in ViewBag.TaskNames as List<string>)
+                {
+                    @if (ViewBag.SelectedTaskName == task)
+                    {
+                        <option value="@task" selected>@task</option>
+                    }
+                    else
+                    {
+                        <option value="@task">@task</option>
+                    }
+                }
+            </select>
         </div>
 
         <div class="me-2 mt-3" style="display: none;">
@@ -97,7 +116,6 @@
     </div>
 </div>
 
-
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         attachPaginationEvents();
@@ -137,6 +155,8 @@
         var currentIndex = 0;
         var autoScrollInterval = null;
         var isAutoScrollEnabled = false;
+        var currentPage = 1; // Initialize the current page
+        var totalPages = @Model.TotalPages;
 
         function updateModalDetails(mediaUrl, mediaType) {
             var currentMediaElement = document.querySelector(`[data-bs-${mediaType.toLowerCase()}="${mediaUrl}"]`);
@@ -175,12 +195,17 @@
             autoScrollInterval = setInterval(function () {
                 currentIndex++;
                 if (currentIndex >= allMedia.length) {
-                    currentIndex = 0;
-                    loadNextPage();
+                    if (currentPage < totalPages) {
+                        currentIndex = 0;
+                        loadPage(currentPage + 1, true); // Load next page if needed
+                    } else {
+                        stopAutoScroll();
+                        document.getElementById('resumeButton').style.display = 'inline-block';
+                    }
                 } else {
                     showMediaAtIndex(currentIndex);
                 }
-            }, 3000);
+            }, 2000); // Auto-scroll every 2 seconds
 
             document.getElementById('pauseButton').style.display = 'inline-block';
             document.getElementById('resumeButton').style.display = 'none';
@@ -194,16 +219,6 @@
             document.getElementById('resumeButton').style.display = 'inline-block';
         }
 
-        function loadNextPage() {
-            const currentPage = parseInt(document.querySelector('.pagination .active a').getAttribute('data-page'));
-            const totalPages = @Model.TotalPages;
-            if (currentPage < totalPages) {
-                loadPage(currentPage + 1, true);
-            } else {
-                stopAutoScroll();
-            }
-        }
-
         document.getElementById('autoScrollToggle').addEventListener('change', function () {
             if (this.checked) {
                 startAutoScroll();
@@ -212,59 +227,53 @@
             }
         });
 
-        document.getElementById('pauseButton').addEventListener('click', function () {
-            stopAutoScroll();
-        });
-
-        document.getElementById('resumeButton').addEventListener('click', function () {
-            startAutoScroll();
-        });
+        document.getElementById('pauseButton').addEventListener('click', stopAutoScroll);
+        document.getElementById('resumeButton').addEventListener('click', startAutoScroll);
 
         imageModal.addEventListener('show.bs.modal', function (event) {
+            allMedia = Array.from(document.querySelectorAll('[data-bs-img], [data-bs-video]'))
+                .map(el => el.getAttribute(`data-bs-${el.hasAttribute('data-bs-img') ? 'img' : 'video'}`));
             var button = event.relatedTarget;
-            var mediaUrl = button.getAttribute('data-bs-img') || button.getAttribute('data-bs-video');
-            var mediaType = button.getAttribute('data-bs-img') ? 'img' : 'video';
-            currentIndex = 0;
-
-            // Removed the sorting logic based on datetime here.
-            allMedia = Array.from(document.querySelectorAll(`[data-bs-${mediaType.toLowerCase()}]`))
-                .map(media => media.getAttribute(`data-bs-${mediaType.toLowerCase()}`));
-
-            currentIndex = allMedia.indexOf(mediaUrl);
+            currentIndex = allMedia.indexOf(button.getAttribute(`data-bs-${button.hasAttribute('data-bs-img') ? 'img' : 'video'}`));
             showMediaAtIndex(currentIndex);
         });
 
-        imageModal.addEventListener('hidden.bs.modal', function () {
-            stopAutoScroll();
-            var modalImage = document.getElementById('modalImage');
-            var modalVideo = document.getElementById('modalVideo');
-
-            modalImage.src = '';
-            modalVideo.pause();
-            modalVideo.src = '';
-        });
-
-        document.getElementById('prevImage').addEventListener('click', function () {
-            if (allMedia.length > 0) {
-                currentIndex = (currentIndex - 1 + allMedia.length) % allMedia.length;
+        document.getElementById('nextImage').addEventListener('click', function () {
+            currentIndex++;
+            if (currentIndex >= allMedia.length) {
+                if (currentPage < totalPages) {
+                    currentIndex = 0;
+                    loadPage(currentPage + 1, true); // Load next page if needed
+                } else {
+                    currentIndex = 0;
+                    showMediaAtIndex(currentIndex);
+                }
+            } else {
                 showMediaAtIndex(currentIndex);
             }
         });
 
-        document.getElementById('nextImage').addEventListener('click', function () {
-            if (allMedia.length > 0) {
-                currentIndex = (currentIndex + 1) % allMedia.length;
+        document.getElementById('prevImage').addEventListener('click', function () {
+            currentIndex--;
+            if (currentIndex < 0) {
+                if (currentPage > 1) {
+                    currentPage--;
+                    loadPage(currentPage, true); // Load previous page if needed
+                } else {
+                    currentIndex = allMedia.length - 1;
+                    showMediaAtIndex(currentIndex);
+                }
+            } else {
                 showMediaAtIndex(currentIndex);
             }
         });
     }
 
-    function loadPage(page, keepAutoScroll = false) {
-        const formData = new FormData(document.getElementById('filterForm'));
-        formData.append('page', page);
-        const queryString = new URLSearchParams(formData).toString();
+    function loadPage(page, isAutoScroll = false) {
+        const url = new URL(window.location.href);
+        url.searchParams.set('page', page);
 
-        fetch(`/DataForView/ViewScreenCaptureData?${queryString}`, {
+        fetch(url, {
             headers: {
                 'X-Requested-With': 'XMLHttpRequest'
             }
@@ -272,41 +281,25 @@
             .then(response => response.text())
             .then(html => {
                 document.getElementById('screenCaptureData').innerHTML = html;
-                attachPaginationEvents();
-                attachModalEvents();
-                if (isAutoScrollEnabled && keepAutoScroll) {
-                    document.querySelector('.pagination a[data-page]').classList.remove('active');
-                    document.querySelector(`.pagination a[data-page="${page}"]`).classList.add('active');
+                attachPaginationEvents(); // Reattach events to the new pagination
+                attachModalEvents(); // Reattach events to new media elements
+
+                currentPage = page; // Update current page
+
+                if (isAutoScroll && isAutoScrollEnabled) {
+                    allMedia = Array.from(document.querySelectorAll('[data-bs-img], [data-bs-video]'))
+                        .map(el => el.getAttribute(`data-bs-${el.hasAttribute('data-bs-img') ? 'img' : 'video'}`));
+                    if (currentIndex < allMedia.length) {
+                        showMediaAtIndex(currentIndex);
+                    } else {
+                        stopAutoScroll();
+                    }
                 }
             })
-            .catch(error => console.error('Error:', error));
+            .catch(error => console.error('Error loading page:', error));
     }
-
-    document.getElementById('filterForm').addEventListener('submit', function (event) {
-        event.preventDefault();
-        loadPage(1);
-    });
-
-    document.addEventListener('DOMContentLoaded', function () {
-        function getQueryParameter(name) {
-            const urlParams = new URLSearchParams(window.location.search);
-            return urlParams.get(name);
-        }
-
-        const username = getQueryParameter('username');
-
-        if (username) {
-            const usernameDropdown = document.getElementById('username');
-            for (let i = 0; i < usernameDropdown.options.length; i++) {
-                if (usernameDropdown.options[i].value === username) {
-                    usernameDropdown.selectedIndex = i;
-                    break;
-                }
-            }
-        }
-    });
-
 </script>
+
 
 <style>
     .modal-lg {

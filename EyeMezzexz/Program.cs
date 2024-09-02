@@ -6,6 +6,7 @@ using EyeMezzexz.Services;
 using MezzexEye.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 using ServiceReference1;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,6 +17,8 @@ builder.Configuration
     .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
     .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true)
     .AddEnvironmentVariables();
+var screenshotPath = @"C:\ScreenShot";
+
 
 // Add services to the container.
 builder.Services.AddControllers();
@@ -59,7 +62,11 @@ builder.Services.AddCors(options =>
 });
 
 var app = builder.Build();
-
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(screenshotPath),
+    RequestPath = "/images"
+});
 // Seed the database
 using (var scope = app.Services.CreateScope())
 {
