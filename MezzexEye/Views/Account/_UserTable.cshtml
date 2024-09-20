@@ -1,0 +1,37 @@
+﻿@model IEnumerable<MezzexEye.ViewModel.UserViewModel>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th><a href="#" class="sort" data-sort-by="username">Username</a></th>
+            <th><a href="#" class="sort" data-sort-by="email">Email</a></th>
+            <th><a href="#" class="sort" data-sort-by="firstname">First Name</a></th>
+            <th><a href="#" class="sort" data-sort-by="lastname">Last Name</a></th>
+            <th>Gender</th>
+            <th>Active</th>
+            <th>Country</th>
+            <th>Phone Number</th>
+            <th>Roles</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@user.UserName</td>
+                <td>@user.Email</td>
+                <td>@user.FirstName</td>
+                <td>@user.LastName</td>
+                <td>@user.Gender</td>
+                <td>@user.Active</td>
+                <td>@user.CountryName</td>
+                <td>@user.Phone</td>
+                <td>@string.Join(", ", user.Roles)</td>
+                <td>
+                    <a asp-action="EditUser" asp-route-id="@user.Id" class="btn btn-primary">Edit</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

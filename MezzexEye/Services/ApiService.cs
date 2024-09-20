@@ -27,17 +27,35 @@ public class ApiService : IApiService
     {
         var result = await _dataController.GetScreenCaptureData(clientTimeZone);
         var value = (result as OkObjectResult)?.Value;
+
+        if (value == null)
+        {
+            _logger.LogError("Failed to retrieve data from API. Result value is null or invalid.");
+            return new List<ScreenCaptureDataViewModel>();
+        }
+
+        // Serialize and deserialize the result to ensure proper casting
         var jsonString = JsonConvert.SerializeObject(value);
         var data = JsonConvert.DeserializeObject<List<ScreenCaptureDataViewModel>>(jsonString);
 
         if (data != null)
         {
+            // Check if the ImageUrl contains the full URL (starts with http or https)
+            foreach (var item in data)
+            {
+                if (!item.ImageUrl.StartsWith("http", StringComparison.OrdinalIgnoreCase))
+                {
+                    // Log if the URL is malformed
+                    _logger.LogError($"Image URL {item.ImageUrl} is not a valid full URL.");
+                }
+            }
             return data;
         }
 
-        _logger.LogError("Failed to retrieve data from API. Result value is null or invalid.");
+        _logger.LogError("Failed to deserialize data from API.");
         return new List<ScreenCaptureDataViewModel>();
     }
+
 
     public async Task SaveScreenCaptureDataAsync(UploadRequest model)
     {
@@ -263,6 +281,30 @@ public class ApiService : IApiService
         var data = JsonConvert.DeserializeObject<bool>(jsonString);
 
         return data;
+    }
+
+    public async Task<List<UserWithoutLoginResponse>> GetUsersWithoutLoginAsync(string clientTimeZone = "Asia/Kolkata")
+    {
+        // Call the GetUsersWithoutLogin method from the DataController
+        var result = await _dataController.GetUsersWithoutLogin(clientTimeZone);
+
+        if (result is OkObjectResult okResult)
+        {
+            // Convert the result to a JSON string
+            var jsonString = JsonConvert.SerializeObject(okResult.Value);
+
+            // Deserialize the JSON string into a list of UserWithoutLoginResponse
+            var data = JsonConvert.DeserializeObject<List<UserWithoutLoginResponse>>(jsonString);
+
+            if (data != null)
+            {
+                return data;
+            }
+        }
+
+        // Log an error if the result is null or invalid
+        _logger.LogError("Failed to retrieve users without login from API. Result value is null or invalid.");
+        return new List<UserWithoutLoginResponse>();
     }
 
     public class ApiResponse

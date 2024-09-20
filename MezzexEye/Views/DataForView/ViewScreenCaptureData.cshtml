@@ -3,7 +3,7 @@
 @{
     ViewData["Title"] = "Screen Capture Data";
     var today = DateTime.Today.ToString("yyyy-MM-dd");
-    var selectedDate = ViewBag.SelectedDate as string ?? today; // Use the selected date or today's date if none is selected.
+    var selectedDate = ViewBag.SelectedDate as string ?? today;
     var isAdministrator = User.IsInRole("Administrator");
 }
 
@@ -19,7 +19,14 @@
                     <option value="">All</option>
                     @foreach (var user in ViewBag.Usernames as List<string>)
                     {
-                        <option value="@user">@user</option>
+                        @if (ViewBag.SelectedUsername == user)
+                        {
+                            <option value="@user" selected>@user</option>
+                        }
+                        else
+                        {
+                            <option value="@user">@user</option>
+                        }
                     }
                 </select>
             </div>
@@ -31,7 +38,14 @@
                 <select id="username" name="username" class="form-select">
                     @foreach (var user in ViewBag.Usernames as List<string>)
                     {
-                        <option value="@user">@user</option>
+                        @if (ViewBag.SelectedUsername == user)
+                        {
+                            <option value="@user" selected>@user</option>
+                        }
+                        else
+                        {
+                            <option value="@user">@user</option>
+                        }
                     }
                 </select>
             </div>
@@ -74,17 +88,22 @@
     </form>
 </div>
 
+
+
 <div id="screenCaptureData">
     @await Html.PartialAsync("_ScreenCaptureData", Model)
 </div>
 
+<!-- Image and Video Modal -->
 <!-- Image and Video Modal -->
 <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
             <div class="modal-header d-flex justify-content-between align-items-center">
                 <div class="d-flex align-items-center">
-                    <h5 class="modal-title me-3" id="imageModalLabel">Media</h5>
+                    <h5 class="modal-title" id="imageModalLabel">Page <span id="modalPageNumber"></span>&nbsp; </h5>
+
+
                     <div id="modalDetails" class="d-flex">
                         <p class="me-3"><strong>User:</strong> <span id="modalUsername"></span></p>
                         <p class="me-3"><strong>Created Time:</strong> <span id="modalTimestamp"></span></p>
@@ -116,110 +135,134 @@
     </div>
 </div>
 
+
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        attachPaginationEvents();
-        attachModalEvents();
-    });
-
-    function attachPaginationEvents() {
-        document.querySelectorAll('.pagination a[data-page]').forEach(link => {
-            link.addEventListener('click', function (event) {
-                event.preventDefault();
-                const page = this.getAttribute('data-page');
-                loadPage(page);
-            });
-        });
-
-        document.getElementById('prevPage').addEventListener('click', function (event) {
-            event.preventDefault();
-            const currentPage = parseInt(document.querySelector('.pagination .active a').getAttribute('data-page'));
-            if (currentPage > 1) {
-                loadPage(currentPage - 1);
-            }
-        });
-
-        document.getElementById('nextPage').addEventListener('click', function (event) {
-            event.preventDefault();
-            const currentPage = parseInt(document.querySelector('.pagination .active a').getAttribute('data-page'));
-            const totalPages = @Model.TotalPages;
-            if (currentPage < totalPages) {
-                loadPage(currentPage + 1);
-            }
-        });
-    }
-
-    function attachModalEvents() {
-        var imageModal = document.getElementById('imageModal');
         var allMedia = [];
         var currentIndex = 0;
+        var currentPage = @Model.CurrentPage; // Keep track of the current page number
+        var totalPages = @Model.TotalPages; // Total pages available for pagination
         var autoScrollInterval = null;
         var isAutoScrollEnabled = false;
-        var currentPage = 1; // Initialize the current page
-        var totalPages = @Model.TotalPages;
 
-        function updateModalDetails(mediaUrl, mediaType) {
-            var currentMediaElement = document.querySelector(`[data-bs-${mediaType.toLowerCase()}="${mediaUrl}"]`);
-            var username = currentMediaElement.getAttribute('data-bs-username');
-            var timestamp = currentMediaElement.getAttribute('data-bs-timestamp');
-            var taskName = currentMediaElement.getAttribute('data-bs-taskname') || "Task Not Started";
-            var taskComment = currentMediaElement.getAttribute('data-bs-comment');
+        // Modal elements
+        var modalImage = document.getElementById('modalImage');
+        var modalVideo = document.getElementById('modalVideo');
+        var imageModal = document.getElementById('imageModal');
+        var pauseButton = document.getElementById('pauseButton');
+        var resumeButton = document.getElementById('resumeButton');
+        var autoScrollToggle = document.getElementById('autoScrollToggle');
+        var pageNumberElement = document.getElementById('modalPageNumber');
 
-            document.getElementById('modalUsername').textContent = username;
-            document.getElementById('modalTimestamp').textContent = timestamp;
-            document.getElementById('modalTaskName').textContent = taskName && taskName.trim() !== "" ? taskName : "No Running Task";
-            document.getElementById('modalComment').textContent = taskComment && taskComment.trim() !== "" ? taskComment : "No comment available";
-        }
-
+        // Show the selected media (image or video) in the modal
         function showMediaAtIndex(index) {
-            var newMediaUrl = allMedia[index];
-            var mediaType = document.querySelector(`[data-bs-img="${newMediaUrl}"]`) ? 'img' : 'video';
-            var modalImage = document.getElementById('modalImage');
-            var modalVideo = document.getElementById('modalVideo');
+            if (index >= allMedia.length) {
+                // Check if we are at the last media item and there are more pages to load
+                if (currentPage < totalPages) {
+                    currentPage++;
+                    loadNextPageImages(function () {
+                        currentIndex = 0; // Reset index to 0 after loading next page
+                        showMediaAtIndex(currentIndex); // Continue showing the next media
+                    });
+                    return;
+                } else {
+                    currentIndex = 0; // Loop back to the first image if no more pages
+                }
+            }
+
+            var media = allMedia[index];
+            var mediaType = media.type;
+            var mediaUrl = media.url;
 
             if (mediaType === 'img') {
-                modalImage.src = newMediaUrl;
+                modalImage.src = mediaUrl;
                 modalImage.style.display = 'block';
                 modalVideo.style.display = 'none';
             } else {
-                modalVideo.src = newMediaUrl;
+                modalVideo.src = mediaUrl;
                 modalVideo.style.display = 'block';
                 modalVideo.load();
                 modalImage.style.display = 'none';
             }
-            updateModalDetails(newMediaUrl, mediaType);
+
+            updateModalDetails(media);
+            pageNumberElement.textContent = currentPage; // Update the modal's page number
         }
 
+        // Function to update modal details (user, timestamp, taskname, comment)
+        function updateModalDetails(media) {
+            document.getElementById('modalUsername').textContent = media.username || "Unknown User";
+            document.getElementById('modalTimestamp').textContent = media.timestamp || "Unknown Time";
+            document.getElementById('modalTaskName').textContent = media.taskname || "No Running Task";
+            document.getElementById('modalComment').textContent = media.comment || "No Comment";
+        }
+
+        // Updated auto-scroll logic
         function startAutoScroll() {
             isAutoScrollEnabled = true;
             autoScrollInterval = setInterval(function () {
                 currentIndex++;
                 if (currentIndex >= allMedia.length) {
+                    // If we've reached the end of the media, check if there's a next page
                     if (currentPage < totalPages) {
-                        currentIndex = 0;
-                        loadPage(currentPage + 1, true); // Load next page if needed
+                        currentPage++;
+                        loadNextPageImages(function () {
+                            currentIndex = 0; // Reset index after loading next page
+                            showMediaAtIndex(currentIndex);
+                        });
                     } else {
-                        stopAutoScroll();
-                        document.getElementById('resumeButton').style.display = 'inline-block';
+                        currentIndex = 0; // Loop back to the first media if no more pages
+                        showMediaAtIndex(currentIndex);
                     }
                 } else {
                     showMediaAtIndex(currentIndex);
                 }
-            }, 2000); // Auto-scroll every 2 seconds
+            }, 2000); // Scroll every 2 seconds
 
-            document.getElementById('pauseButton').style.display = 'inline-block';
-            document.getElementById('resumeButton').style.display = 'none';
+            pauseButton.style.display = 'inline-block';
+            resumeButton.style.display = 'none';
         }
 
         function stopAutoScroll() {
             isAutoScrollEnabled = false;
             clearInterval(autoScrollInterval);
 
-            document.getElementById('pauseButton').style.display = 'none';
-            document.getElementById('resumeButton').style.display = 'inline-block';
+            pauseButton.style.display = 'none';
+            resumeButton.style.display = 'inline-block';
         }
 
-        document.getElementById('autoScrollToggle').addEventListener('change', function () {
+        // Event listener for when the modal is shown
+        imageModal.addEventListener('show.bs.modal', function (event) {
+            allMedia = Array.from(document.querySelectorAll('[data-bs-img], [data-bs-video]')).map(el => ({
+                url: el.getAttribute(`data-bs-${el.hasAttribute('data-bs-img') ? 'img' : 'video'}`),
+                type: el.hasAttribute('data-bs-img') ? 'img' : 'video',
+                username: el.getAttribute('data-bs-username'),
+                timestamp: el.getAttribute('data-bs-timestamp'),
+                taskname: el.getAttribute('data-bs-taskname'),
+                comment: el.getAttribute('data-bs-comment')
+            }));
+
+            var button = event.relatedTarget; // The button that triggered the modal
+            currentIndex = allMedia.findIndex(media => media.url === button.getAttribute(`data-bs-${button.hasAttribute('data-bs-img') ? 'img' : 'video'}`));
+            showMediaAtIndex(currentIndex);
+        });
+
+        // Next and Previous buttons for media navigation
+        document.getElementById('nextImage').addEventListener('click', function () {
+            currentIndex++;
+            showMediaAtIndex(currentIndex);
+        });
+
+        document.getElementById('prevImage').addEventListener('click', function () {
+            currentIndex--;
+            if (currentIndex < 0) {
+                currentIndex = allMedia.length - 1;
+            }
+            showMediaAtIndex(currentIndex);
+        });
+
+        // Auto-scroll toggle
+        autoScrollToggle.addEventListener('change', function () {
             if (this.checked) {
                 startAutoScroll();
             } else {
@@ -227,79 +270,105 @@
             }
         });
 
-        document.getElementById('pauseButton').addEventListener('click', stopAutoScroll);
-        document.getElementById('resumeButton').addEventListener('click', startAutoScroll);
+        // Pause and Resume buttons
+        pauseButton.addEventListener('click', stopAutoScroll);
+        resumeButton.addEventListener('click', startAutoScroll);
 
-        imageModal.addEventListener('show.bs.modal', function (event) {
-            allMedia = Array.from(document.querySelectorAll('[data-bs-img], [data-bs-video]'))
-                .map(el => el.getAttribute(`data-bs-${el.hasAttribute('data-bs-img') ? 'img' : 'video'}`));
-            var button = event.relatedTarget;
-            currentIndex = allMedia.indexOf(button.getAttribute(`data-bs-${button.hasAttribute('data-bs-img') ? 'img' : 'video'}`));
-            showMediaAtIndex(currentIndex);
-        });
+        // Load the next page of images dynamically
+        function loadNextPageImages(callback) {
+            const url = new URL(window.location.href);
+            url.searchParams.set('page', currentPage);
 
-        document.getElementById('nextImage').addEventListener('click', function () {
-            currentIndex++;
-            if (currentIndex >= allMedia.length) {
-                if (currentPage < totalPages) {
-                    currentIndex = 0;
-                    loadPage(currentPage + 1, true); // Load next page if needed
-                } else {
-                    currentIndex = 0;
-                    showMediaAtIndex(currentIndex);
-                }
-            } else {
-                showMediaAtIndex(currentIndex);
-            }
-        });
-
-        document.getElementById('prevImage').addEventListener('click', function () {
-            currentIndex--;
-            if (currentIndex < 0) {
-                if (currentPage > 1) {
-                    currentPage--;
-                    loadPage(currentPage, true); // Load previous page if needed
-                } else {
-                    currentIndex = allMedia.length - 1;
-                    showMediaAtIndex(currentIndex);
-                }
-            } else {
-                showMediaAtIndex(currentIndex);
-            }
-        });
-    }
-
-    function loadPage(page, isAutoScroll = false) {
-        const url = new URL(window.location.href);
-        url.searchParams.set('page', page);
-
-        fetch(url, {
-            headers: {
-                'X-Requested-With': 'XMLHttpRequest'
-            }
-        })
-            .then(response => response.text())
-            .then(html => {
-                document.getElementById('screenCaptureData').innerHTML = html;
-                attachPaginationEvents(); // Reattach events to the new pagination
-                attachModalEvents(); // Reattach events to new media elements
-
-                currentPage = page; // Update current page
-
-                if (isAutoScroll && isAutoScrollEnabled) {
-                    allMedia = Array.from(document.querySelectorAll('[data-bs-img], [data-bs-video]'))
-                        .map(el => el.getAttribute(`data-bs-${el.hasAttribute('data-bs-img') ? 'img' : 'video'}`));
-                    if (currentIndex < allMedia.length) {
-                        showMediaAtIndex(currentIndex);
-                    } else {
-                        stopAutoScroll();
-                    }
+            fetch(url, {
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
                 }
             })
-            .catch(error => console.error('Error loading page:', error));
-    }
-</script>
+                .then(response => response.text())
+                .then(html => {
+                    var parser = new DOMParser();
+                    var doc = parser.parseFromString(html, 'text/html');
+                    var newMediaElements = doc.querySelectorAll('[data-bs-img], [data-bs-video]');
 
+                    newMediaElements.forEach(el => {
+                        allMedia.push({
+                            url: el.getAttribute(`data-bs-${el.hasAttribute('data-bs-img') ? 'img' : 'video'}`),
+                            type: el.hasAttribute('data-bs-img') ? 'img' : 'video',
+                            username: el.getAttribute('data-bs-username'),
+                            timestamp: el.getAttribute('data-bs-timestamp'),
+                            taskname: el.getAttribute('data-bs-taskname'),
+                            comment: el.getAttribute('data-bs-comment')
+                        });
+                    });
+
+                    if (typeof callback === "function") {
+                        callback();
+                    }
+                })
+                .catch(error => console.error('Error loading next page images:', error));
+        }
+
+        // Attach pagination events (for handling next/previous page navigation)
+        function attachPaginationEvents() {
+            document.querySelectorAll('.pagination a[data-page]').forEach(link => {
+                link.addEventListener('click', function (event) {
+                    event.preventDefault();
+                    const page = this.getAttribute('data-page');
+                    loadPage(page);
+                });
+            });
+
+            document.getElementById('prevPage').addEventListener('click', function (event) {
+                event.preventDefault();
+                const currentPage = parseInt(document.querySelector('.pagination .active a').getAttribute('data-page'));
+                if (currentPage > 1) {
+                    loadPage(currentPage - 1);
+                }
+            });
+
+            document.getElementById('nextPage').addEventListener('click', function (event) {
+                event.preventDefault();
+                const currentPage = parseInt(document.querySelector('.pagination .active a').getAttribute('data-page'));
+                if (currentPage < totalPages) {
+                    loadPage(currentPage + 1);
+                }
+            });
+        }
+
+        // Load a specific page and update the media content
+        function loadPage(page, isAutoScroll = false) {
+            const url = new URL(window.location.href);
+            url.searchParams.set('page', page);
+
+            fetch(url, {
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            })
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById('screenCaptureData').innerHTML = html;
+                    attachPaginationEvents();
+                    attachModalEvents();
+
+                    currentPage = page;
+
+                    if (isAutoScroll && isAutoScrollEnabled) {
+                        allMedia = Array.from(document.querySelectorAll('[data-bs-img], [data-bs-video]'))
+                            .map(el => el.getAttribute(`data-bs-${el.hasAttribute('data-bs-img') ? 'img' : 'video'}`));
+                        if (currentIndex < allMedia.length) {
+                            showMediaAtIndex(currentIndex);
+                        } else {
+                            stopAutoScroll();
+                        }
+                    }
+                })
+                .catch(error => console.error('Error loading page:', error));
+        }
+    });
+
+
+</script>
 
 <style>
     .modal-lg {

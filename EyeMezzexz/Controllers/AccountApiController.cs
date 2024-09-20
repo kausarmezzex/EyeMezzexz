@@ -21,9 +21,8 @@ namespace EyeMezzexz.Controllers
             _webServiceClient = webServiceClient;
             _userService = userService;
             _context = context;
+
         }
-
-
 
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginRequest1 loginRequest)
@@ -39,7 +38,6 @@ namespace EyeMezzexz.Controllers
                 return NotFound(new { message = "Login details not found." });
             }
 
-
             var loginDetails = JsonSerializer.Deserialize<List<LoginDetailResult>>(response);
             if (loginDetails == null || !loginDetails.Any())
             {
@@ -52,12 +50,12 @@ namespace EyeMezzexz.Controllers
 
             // Check if the country name is "UK" and replace it with "United Kingdom"
             var country = firstLoginDetail.CountryName == "UK" ? "United Kingdom" : firstLoginDetail.CountryName;
-
             var phoneNumber = firstLoginDetail.Phone;
 
             var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == loginRequest.Email);
             if (user == null)
             {
+                // User does not exist, so create and register a new user
                 var registerViewModel = new RegisterViewModel
                 {
                     Email = loginRequest.Email,
@@ -69,6 +67,7 @@ namespace EyeMezzexz.Controllers
                     Role = "Registered",
                     CountryName = country, // Save the adjusted country name
                     Phone = phoneNumber,
+                    SystemName = loginRequest.SystemName  // Save the system name during registration
                 };
 
                 var result = await _userService.RegisterUser(registerViewModel);
@@ -81,6 +80,7 @@ namespace EyeMezzexz.Controllers
             }
             else
             {
+                // Check if the user is already logged in today
                 var today = DateTime.UtcNow.Date;
                 if (user.LastLoginTime.HasValue && user.LastLoginTime.Value.Date == today && (!user.LastLogoutTime.HasValue || user.LastLoginTime > user.LastLogoutTime))
                 {
@@ -88,12 +88,16 @@ namespace EyeMezzexz.Controllers
                 }
             }
 
+            // Update the user's login time and system name each time they log in
             user.LastLoginTime = DateTime.UtcNow;
+            user.SystemName = loginRequest.SystemName;  // Update the system name during login
             _context.Users.Update(user);
             await _context.SaveChangesAsync();
 
             return Ok(new { message = "Login successful", userId = user.Id, username = $"{user.FirstName} {user.LastName}", country = user.CountryName });
         }
+
+
 
 
         [HttpGet("getAllUsernames")]
@@ -153,7 +157,9 @@ namespace EyeMezzexz.Controllers
     {
         public string Email { get; set; }
         public string Password { get; set; }
+        public string SystemName { get; set; }  // New Property for system name
     }
+
 
     public class LoginDetailResult
     {

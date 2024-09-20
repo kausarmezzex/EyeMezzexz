@@ -80,7 +80,11 @@ namespace EyeMezzexz.Data
            .WithMany(t => t.SubTasks)
            .HasForeignKey(t => t.ParentTaskId);
 
-            
+         modelBuilder.Entity<StaffInOut>()
+        .HasOne(s => s.User)
+        .WithMany(u => u.StaffInOuts)
+        .HasForeignKey(s => s.UserId)
+        .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

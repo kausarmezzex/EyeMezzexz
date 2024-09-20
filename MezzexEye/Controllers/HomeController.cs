@@ -24,18 +24,34 @@ namespace MezzexEye.Controllers
 
         public async Task<IActionResult> Index()
         {
+            // Get the total running tasks
             var totalRunningTasks = await _dataForViewController.GetTotalRunningTasks();
+
+            // Get the total users
             var totalUsers = await _accountController.GetTotalUsers();
+
+            // Get the incomplete tasks
             var incompleteTasks = await _apiService.GetIncompleteTasksAsync("Asia/Kolkata");
 
-            // Count the total number of incomplete tasks
+            // Get the total number of incomplete tasks
             var totalIncompleteTasks = incompleteTasks.Count;
 
+            // Get the users who haven't logged in today (the new method)
+            var usersWithoutLogin = await _apiService.GetUsersWithoutLoginAsync("Asia/Kolkata");
+
+            // Count the total number of users without login today
+            var totalUsersWithoutLogin = usersWithoutLogin.Count;
+
+            // Set the data to ViewBag to pass it to the view
             ViewBag.TotalRunningTasks = totalRunningTasks;
             ViewBag.TotalUsers = totalUsers;
             ViewBag.UsersNotStartTask = totalIncompleteTasks;
+            ViewBag.UsersWithoutLogin = totalUsersWithoutLogin;
+
+            // Render the view
             return View();
         }
+
 
 
         public IActionResult Privacy()

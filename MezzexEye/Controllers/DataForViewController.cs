@@ -106,16 +106,29 @@ namespace EyeMezzexz.Controllers
 
                 data = data.Skip((page - 1) * pageSize).Take(pageSize).ToList(); // Take only the records for the current page
 
+                // Calculate page numbers to display (limit visible pages)
+                int maxVisiblePages = 5; // Show 5 pages around the current page
+                int startPage = Math.Max(1, page - (maxVisiblePages / 2));
+                int endPage = Math.Min(totalPages, startPage + maxVisiblePages - 1);
+
+                if (endPage - startPage + 1 < maxVisiblePages)
+                {
+                    startPage = Math.Max(1, endPage - maxVisiblePages + 1);
+                }
+
+                var pageNumbers = Enumerable.Range(startPage, endPage - startPage + 1).ToList();
+
                 var viewModel = new PaginatedScreenCaptureDataViewModel
                 {
                     ScreenCaptures = data,
                     CurrentPage = page,
-                    TotalPages = totalPages // Set the total number of pages
+                    TotalPages = totalPages,
+                    PageNumbers = pageNumbers
                 };
 
-                var (taskTypes, _) = await _apiService.GetTasksAsync();
+                var taskTypes= await _apiService.GetTasksListAsync();
                 var taskNames = taskTypes.Select(t => t.Name).Distinct().ToList();
-                taskNames.Add("No Task"); // Add "No Task" option for filtering by null task names
+                taskNames.Add("No Task");
 
                 ViewBag.Usernames = usernames;
                 ViewBag.TaskNames = taskNames;
@@ -140,9 +153,6 @@ namespace EyeMezzexz.Controllers
             }
         }
 
-
-
-
         [HttpGet]
         public async Task<IActionResult> TaskManagement()
         {
@@ -166,7 +176,7 @@ namespace EyeMezzexz.Controllers
                     return View("NotClockedIn"); // Return a view indicating the user needs to clock in first
                 }
 
-                var (taskTypes, _) = await _apiService.GetTasksAsync();
+                var taskTypes = await _apiService.GetTasksListAsync();
                 var activeTasks = await _apiService.GetTaskTimersAsync(user.Id);
                 var completedTasks = await _apiService.GetUserCompletedTasksAsync(user.Id);
 
@@ -600,6 +610,24 @@ namespace EyeMezzexz.Controllers
             catch (Exception ex)
             {
                 _logger.LogError(ex, "An error occurred while retrieving incomplete tasks.");
+                return StatusCode(500, "An error occurred while processing your request.");
+            }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> UsersWithoutLogin()
+        {
+            try
+            {
+                // Call the API service to get users who haven't logged in today
+                var usersWithoutLogin = await _apiService.GetUsersWithoutLoginAsync("Asia/Kolkata");
+
+                // Return the view with the list of users
+                return View(usersWithoutLogin);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "An error occurred while retrieving users without login.");
                 return StatusCode(500, "An error occurred while processing your request.");
             }
         }

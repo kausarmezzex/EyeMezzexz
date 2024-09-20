@@ -17,8 +17,6 @@ builder.Configuration
     .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
     .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true)
     .AddEnvironmentVariables();
-var screenshotPath = @"C:\ScreenShot";
-
 
 // Add services to the container.
 builder.Services.AddControllers();
@@ -38,9 +36,10 @@ builder.Services.AddDefaultIdentity<ApplicationUser>()
 // Register custom services
 builder.Services.AddTransient<WebServiceClient>(); // Register WebServiceClient
 builder.Services.AddTransient<UserService>(); // Register UserService
-builder.Services.AddTransient<DataController>();
-builder.Services.AddTransient<AccountApiController>();
-builder.Services.AddTransient<TeamAssignmentApiController>();
+builder.Services.AddScoped<DataController>(); // Register DataController as Scoped
+builder.Services.AddScoped<AccountApiController>(); // Register AccountApiController as Scoped
+builder.Services.AddScoped<TeamAssignmentApiController>(); // Register TeamAssignmentApiController as Scoped
+
 // Add session services
 builder.Services.AddSession(options =>
 {
@@ -61,12 +60,19 @@ builder.Services.AddCors(options =>
         });
 });
 
+// Register IConfiguration as a singleton service
+builder.Services.AddSingleton<IConfiguration>(builder.Configuration);
+var configuration = builder.Configuration;
+
+var baseUrl = configuration["EnvironmentSettings:BaseUrl"];
+var uploadFolder = configuration["EnvironmentSettings:UploadFolder"];
+var uploadPhysicalFolder = configuration["EnvironmentSettings:UploadPhysicalFolder"];
+
 var app = builder.Build();
-app.UseStaticFiles(new StaticFileOptions
-{
-    FileProvider = new PhysicalFileProvider(screenshotPath),
-    RequestPath = "/images"
-});
+
+// Serve static files
+app.UseStaticFiles();
+
 // Seed the database
 using (var scope = app.Services.CreateScope())
 {
@@ -76,7 +82,6 @@ using (var scope = app.Services.CreateScope())
 
     try
     {
-
         var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
         var roleManager = services.GetRequiredService<RoleManager<ApplicationRole>>();
 
@@ -113,4 +118,3 @@ app.UseAuthorization();
 app.UseSession();
 app.MapControllers();
 app.Run();
-

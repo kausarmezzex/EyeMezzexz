@@ -1,38 +1,64 @@
-﻿@using MezzexEye.ViewModel 
+﻿@model IEnumerable<MezzexEye.ViewModel.UserViewModel>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>UserName</th>
-            <th>Email</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Gender</th>
-            <th>Active</th>
-            <th>Country</th>
-            <th>Phone Number</th>
-            <th>Roles</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var user in Model)
-        {
-            <tr>
-                <td>@user.UserName</td>
-                <td>@user.Email</td>
-                <td>@user.FirstName</td>
-                <td>@user.LastName</td>
-                <td>@user.Gender</td>
-                <td>@user.Active</td>
-                <td>@user.CountryName</td>
-                <td>@user.Phone</td>
-               
-                <td>@string.Join(", ", user.Roles)</td>
-                <td>
-                    <a asp-action="EditUser" asp-route-id="@user.Id" class="btn btn-primary">Edit</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+<h2>All Users</h2>
+
+<!-- Universal Search Form -->
+<form id="searchForm" class="row mb-3">
+    <div class="col-md-10">
+        <input type="text" name="searchValue" id="searchValue" class="form-control" placeholder="Search by name, email, phone, or country" />
+    </div>
+    <div class="col-md-2">
+        <button type="button" id="searchButton" class="btn btn-primary btn-block">Search</button>
+    </div>
+</form>
+
+<!-- Export to Excel Button -->
+<div class="row mb-3">
+    <div class="col-md-12 text-right">
+        <a href="@Url.Action("ExportToExcel", "Account")" class="btn btn-success">Export to Excel</a>
+    </div>
+</div>
+
+<!-- User Table -->
+<div id="userTable">
+    @await Html.PartialAsync("_UserTable", Model)
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            // Function to fetch and update the user table using AJAX
+            function fetchUsers(searchValue, sortBy) {
+                $.ajax({
+                    url: '@Url.Action("AllUsers", "Account")',
+                    type: 'GET',
+                    data: {
+                        searchValue: searchValue,
+                        sortBy: sortBy
+                    },
+                    success: function (result) {
+                        $('#userTable').html(result);
+                    },
+                    error: function (xhr, status, error) {
+                        console.log("Status: " + status);
+                        console.log("Error: " + error);
+                        console.log("Response: " + xhr.responseText);
+                        alert('Error loading data: ' + error);
+                    }
+                });
+            }
+
+            // Search button click event
+            $('#searchButton').click(function () {
+                var searchValue = $('#searchValue').val();
+                fetchUsers(searchValue, null);  // Trigger AJAX fetch with search parameters
+            });
+
+            // Sorting click event
+            $(document).on('click', '.sort', function () {
+                var sortBy = $(this).data('sort-by');
+                fetchUsers(null, sortBy);  // Trigger AJAX fetch with sort parameter
+            });
+        });
+    </script>
+}

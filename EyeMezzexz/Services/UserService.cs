@@ -77,5 +77,7 @@ namespace MezzexEye.Services
         [Required]
         [Phone]
         public string Phone { get; set; }
+        [Required]
+        public string SystemName { get; set; }  // New Property for system name
     }
 }

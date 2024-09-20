@@ -8,5 +8,6 @@ namespace MezzexEye.Models
         public int CurrentPage { get; set; }
         public int TotalPages { get; set; }
         public string MediaType { get; set; } // Add MediaType property
+        public List<int> PageNumbers { get; set; }
     }
 }

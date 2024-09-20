@@ -6,9 +6,10 @@ using Microsoft.AspNetCore.Identity;
 using EyeMezzexz.Controllers;
 using MezzexEye.Services;
 using MezzexEye.Controllers;
+using OfficeOpenXml;
 
 var builder = WebApplication.CreateBuilder(args);
-
+ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
 // Add logging
 builder.Logging.AddConsole();
 builder.Services.AddTransient<WebServiceClient>(); // Register WebServiceClient

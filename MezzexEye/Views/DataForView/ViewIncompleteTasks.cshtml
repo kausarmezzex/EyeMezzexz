@@ -24,7 +24,7 @@
                     <td>@user.UserName</td>
                     <td>@user.CompletedTasksCount</td>
                     <td>@(user.LastTaskEndTime?.ToString("g") ?? "N/A")</td>
-                    <td>@(user.LastStaffInTime?.ToString("g") ?? "N/A")</td>
+                    <td>@(user.LastStaffInTime?.ToString("g") ?? "Not Staff In")</td>
                 </tr>
             }
         </tbody>

@@ -1,16 +1,34 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using EyeMezzexz.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.IO;
 using System.Threading.Tasks;
 
-namespace YourNamespace.Controllers
+namespace EyeMezzexz.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class UploadDataController : ControllerBase
     {
-        private readonly string screenshotPath = @"C:\ScreenShot";
+        private readonly string _uploadPhysicalFolder;
+        private readonly string _uploadFolder;
+        private readonly string _baseUrl;
+        private static readonly SemaphoreSlim _semaphoreSlim = new SemaphoreSlim(1, 1);
+
+        public UploadDataController(IConfiguration configuration)
+        {
+            _uploadPhysicalFolder = configuration["EnvironmentSettings:UploadPhysicalFolder"];
+            _uploadFolder = configuration["EnvironmentSettings:UploadFolder"];
+            _baseUrl = configuration["EnvironmentSettings:BaseUrl"];
+
+            // Ensure _uploadPhysicalFolder is a valid path
+            if (string.IsNullOrEmpty(_uploadPhysicalFolder) || _uploadPhysicalFolder.IndexOfAny(Path.GetInvalidPathChars()) >= 0)
+            {
+                throw new ArgumentException("Invalid upload physical folder path.");
+            }
+        }
 
         [HttpPost("upload-Images")]
         public async Task<IActionResult> UploadImages(IFormFile file)
@@ -20,34 +38,51 @@ namespace YourNamespace.Controllers
                 return BadRequest("File not provided.");
             }
 
-            var originalFileName = Path.GetFileName(file.FileName);
-            var fileExtension = Path.GetExtension(originalFileName);
-            var uniqueFileName = Path.GetFileNameWithoutExtension(originalFileName) +
-                                 DateTime.Now.ToString("_ddMMyyhhmmss") + fileExtension;
-            var destinationFilePath = Path.Combine(screenshotPath, uniqueFileName);
+            // Create a unique file name with timestamp and GUID
+            var fileExtension = Path.GetExtension(file.FileName);
+            var uniqueFileName = $"{Path.GetFileNameWithoutExtension(file.FileName)}_{DateTime.Now:yyyyMMddHHmmssfff}_{Guid.NewGuid()}{fileExtension}";
 
+            // Construct the physical path to save the file
+            var physicalFilePath = Path.Combine(_uploadPhysicalFolder, uniqueFileName);
+
+            // Ensure the directory exists
+            if (!Directory.Exists(_uploadPhysicalFolder))
+            {
+                Directory.CreateDirectory(_uploadPhysicalFolder);
+            }
+
+            // Use SemaphoreSlim for asynchronous synchronization
+            await _semaphoreSlim.WaitAsync(); // Wait asynchronously
             try
             {
-                // Save the file to C:\ScreenShot
-                using (var stream = new FileStream(destinationFilePath, FileMode.Create))
+                // Save the file to the physical path
+                using (var stream = new FileStream(physicalFilePath, FileMode.Create))
                 {
                     await file.CopyToAsync(stream);
                 }
 
-                // Construct the URL to access the file
-                var fileUrl = $"{Request.Scheme}://{Request.Host}/images/{uniqueFileName}";
-                return Ok(new UploadResponse { FileName = uniqueFileName, FileUrl = fileUrl });
+                // Construct the URL to access the file using _baseUrl and _uploadFolder
+                var fileAccessUrl = uniqueFileName;
+
+                // Return the URL as the response
+                return Ok(new UploadResponse { FileName = fileAccessUrl });
             }
             catch (Exception ex)
             {
+                // Log the exception (Optional: Use a logging framework here)
                 return StatusCode(500, $"Internal server error: {ex.Message}");
             }
+            finally
+            {
+                // Always release the semaphore to avoid deadlocks
+                _semaphoreSlim.Release();
+            }
         }
+    }
 
-        public class UploadResponse
-        {
-            public string FileName { get; set; }
-            public string FileUrl { get; set; }
-        }
+    // Define the UploadResponse class
+    public class UploadResponse
+    {
+        public string FileName { get; set; }  // File access URL
     }
 }

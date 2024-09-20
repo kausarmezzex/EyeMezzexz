@@ -1,0 +1,33 @@
+﻿@model List<EyeMezzexz.Models.UserWithoutLoginResponse>
+
+@{
+    ViewData["Title"] = "Users Without Login Today";
+}
+
+@if (Model != null && Model.Any())
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>User Name</th>
+                <th>Last Login Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < Model.Count; i++)
+            {
+                var user = Model[i];
+                <tr>
+                    <td>@(i + 1)</td>
+                    <td>@user.UserName</td>
+                    <td>@(user.LastLoginTime?.ToString("g") ?? "Never")</td> <!-- "g" format for concise date/time -->
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No users found who haven't logged in today.</p>
+}
