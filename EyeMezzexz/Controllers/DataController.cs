@@ -149,7 +149,8 @@ namespace EyeMezzexz.Controllers
                 TaskStartTime = _context.GetDatabaseServerTime(),
                 TaskEndTime = model.TaskEndTime,
                 TimeDifference = GetTimeDifference(model.ClientTimeZone),
-                ClientTimeZone = model.ClientTimeZone
+                ClientTimeZone = model.ClientTimeZone,
+                ActualAddress = model.ActualAddress
             };
 
             _context.TaskTimers.Add(taskTimer);
@@ -179,7 +180,8 @@ namespace EyeMezzexz.Controllers
                     TaskName = t.Task.Name,
                     TaskComment = t.TaskComment,
                     TaskStartTime = t.TaskStartTime.Add(timeDifference),
-                    TaskEndTime = t.TaskEndTime.HasValue ? t.TaskEndTime.Value.Add(timeDifference) : (DateTime?)null
+                    TaskEndTime = t.TaskEndTime.HasValue ? t.TaskEndTime.Value.Add(timeDifference) : (DateTime?)null,
+                    TimeDifference = t.TimeDifference
                 })
                 .ToListAsync();
 
@@ -193,7 +195,7 @@ namespace EyeMezzexz.Controllers
             var timeDifference = GetTimeDifference(clientTimeZone);
 
             var taskTimers = await _context.TaskTimers
-                .Include(t => t.Task)
+                .Include(t => t.Task)   
                 .Include(t => t.User)
                 .Where(t => t.UserId == userId && t.TaskStartTime.Date == today && t.TaskEndTime == null)
                 .OrderBy(t => t.TaskStartTime)
@@ -206,7 +208,8 @@ namespace EyeMezzexz.Controllers
                     TaskName = t.Task.Name,
                     TaskComment = t.TaskComment,
                     TaskStartTime = t.TaskStartTime.Add(timeDifference),
-                    TaskEndTime = t.TaskEndTime.HasValue ? t.TaskEndTime.Value.Add(timeDifference) : (DateTime?)null
+                    TaskEndTime = t.TaskEndTime.HasValue ? t.TaskEndTime.Value.Add(timeDifference) : (DateTime?)null,
+                    TimeDifference = t.TimeDifference
                 })
                 .ToListAsync();
 
@@ -330,28 +333,28 @@ namespace EyeMezzexz.Controllers
         }
 
 
-        [HttpPost("saveStaff")]
-        public async Task<IActionResult> SaveStaff([FromBody] StaffInOut model)
-        {
-            if (model == null)
+            [HttpPost("saveStaff")]
+            public async Task<IActionResult> SaveStaff([FromBody] StaffInOut model)
             {
-                return BadRequest("Model is null");
+                if (model == null)
+                {
+                    return BadRequest("Model is null");
+                }
+
+                var user = await _context.Users.FindAsync(model.UserId);
+                if (user == null)
+                {
+                    return NotFound("User not found");
+                }
+
+                model.StaffInTime = _context.GetDatabaseServerTime();
+                model.TimeDifference = GetTimeDifference(model.ClientTimeZone);
+
+                _context.StaffInOut.Add(model);
+                await _context.SaveChangesAsync();
+
+                return Ok(new { message = "Staff data saved successfully", StaffId = model.Id });
             }
-
-            var user = await _context.Users.FindAsync(model.UserId);
-            if (user == null)
-            {
-                return NotFound("User not found");
-            }
-
-            model.StaffInTime = _context.GetDatabaseServerTime();
-            model.TimeDifference = GetTimeDifference(model.ClientTimeZone);
-
-            _context.StaffInOut.Add(model);
-            await _context.SaveChangesAsync();
-
-            return Ok(new { message = "Staff data saved successfully", StaffId = model.Id });
-        }
 
         [HttpPost("updateStaff")]
         public async Task<IActionResult> UpdateStaff([FromBody] StaffInOut model)
@@ -461,6 +464,39 @@ namespace EyeMezzexz.Controllers
             return Ok(new { Message = "Task timer updated successfully", TaskTimeId = taskTimer.Id });
         }
 
+        [HttpPost("updateTaskAddress")]
+        public async Task<IActionResult> UpdateTaskAddress([FromBody] UpdateTaskAddressRequest model)
+        {
+            if (model == null)
+            {
+                return BadRequest("Model is null");
+            }
+
+            // Find the task timer by ID
+            var taskTimer = await _context.TaskTimers.FindAsync(model.TaskTimeId);
+            if (taskTimer == null)
+            {
+                return NotFound("TaskTimer not found");
+            }
+
+            // Update the actual address
+            taskTimer.ActualAddress = model.ActualAddress;
+
+            try
+            {
+                // Save the changes to the database
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateException ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"An error occurred while updating the task address: {ex.Message}");
+            }
+
+            // Return a success message
+            return Ok(new { Message = "Task address updated successfully", TaskTimeId = taskTimer.Id });
+        }
+
+
         [HttpGet("getTaskTimeId")]
         public async Task<IActionResult> GetTaskTimeId(int taskId, string clientTimeZone)
         {
@@ -494,8 +530,6 @@ namespace EyeMezzexz.Controllers
 
             return Ok(new { TaskTimeId = taskTimer.Id });
         }
-
-
 
         [HttpGet("getCountries")]
         public async Task<IActionResult> GetCountries()
@@ -766,7 +800,8 @@ namespace EyeMezzexz.Controllers
                         TaskName = t.Task.Name,
                         TaskComment = t.TaskComment,
                         TaskStartTime = t.TaskStartTime,
-                        TaskEndTime = t.TaskEndTime
+                        TaskEndTime = t.TaskEndTime,
+                        TimeDifference = t.TimeDifference
                     })
                     .ToListAsync();
 
@@ -779,7 +814,9 @@ namespace EyeMezzexz.Controllers
                     TaskName = t.TaskName,
                     TaskComment = t.TaskComment,
                     TaskStartTime = t.TaskStartTime.Add(timeDifference),
-                    TaskEndTime = t.TaskEndTime.HasValue ? t.TaskEndTime.Value.Add(timeDifference) : (DateTime?)null
+                    TaskEndTime = t.TaskEndTime.HasValue ? t.TaskEndTime.Value.Add(timeDifference) : (DateTime?)null,
+                    TimeDifference = t.TimeDifference
+
                 }).ToList();
 
                 return Ok(adjustedCompletedTaskTimers);
@@ -932,8 +969,15 @@ namespace EyeMezzexz.Controllers
 public class UpdateTaskTimerRequest
 {
     public int Id { get; set; }
-    public DateTime TaskEndTime { get; set; }
+    public DateTime? TaskEndTime { get; set; }
     public string? ClientTimeZone { get; set; }
+
+}
+
+public class UpdateTaskAddressRequest
+{
+    public int TaskTimeId { get; set; }
+    public string ActualAddress { get; set; }
 }
 
 public class TaskTimerResponse
@@ -946,6 +990,8 @@ public class TaskTimerResponse
     public string TaskComment { get; set; }
     public DateTime TaskStartTime { get; set; }
     public DateTime? TaskEndTime { get; set; }
+    public TimeSpan? TimeDifference { get; set; }
+   
 }
 public class TaskTimerUploadRequest
 {
@@ -955,6 +1001,7 @@ public class TaskTimerUploadRequest
     public DateTime TaskStartTime { get; set; }
     public DateTime? TaskEndTime { get; set; }
     public string? ClientTimeZone { get; set; }
+    public string? ActualAddress { get; set; } // Navigation property
 }
 
 public class UploadRequest

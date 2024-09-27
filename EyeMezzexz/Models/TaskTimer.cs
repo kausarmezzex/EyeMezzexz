@@ -13,5 +13,6 @@
         public TaskNames? Task { get; set; }
         public string? ClientTimeZone { get; set; } // Navigation property
         public TimeSpan? TimeDifference { get; set; }
+        public string? ActualAddress { get; set; } // Navigation property
     }
 }

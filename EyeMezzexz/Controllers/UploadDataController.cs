@@ -40,7 +40,7 @@ namespace EyeMezzexz.Controllers
 
             // Create a unique file name with timestamp and GUID
             var fileExtension = Path.GetExtension(file.FileName);
-            var uniqueFileName = $"{Path.GetFileNameWithoutExtension(file.FileName)}_{DateTime.Now:yyyyMMddHHmmssfff}_{Guid.NewGuid()}{fileExtension}";
+            var uniqueFileName = $"{Path.GetFileNameWithoutExtension(file.FileName)}{fileExtension}";
 
             // Construct the physical path to save the file
             var physicalFilePath = Path.Combine(_uploadPhysicalFolder, uniqueFileName);
