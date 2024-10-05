@@ -9,6 +9,6 @@
         public bool? ComputerRequired { get; set; } // Add ComputerRequired to TaskModelRequest
         public string? TaskCreatedBy { get; set; }
         public string? TaskModifiedBy { get; set; }
-
+        public int? TargetQuantity { get; set; }
     }
 }

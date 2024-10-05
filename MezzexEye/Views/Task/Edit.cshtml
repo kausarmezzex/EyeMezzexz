@@ -2,7 +2,7 @@
 
 @{
     ViewData["Title"] = "Edit Task";
-    var isUk = Model.CountryId == 1; // Assuming '1' is the ID for the United Kingdom
+    var isUs = Model.CountryId == 2; // Assuming '2' is the ID for the United States
 }
 
 <h2>Edit Task</h2>
@@ -28,17 +28,22 @@
         </select>
     </div>
 
-    @if (isUk)
-    {
-        <div class="mb-3">
-            <div class="form-check">
-                <input type="checkbox" class="form-check-input" id="ComputerRequired" name="ComputerRequired"
-                       value="true" @(Model.ComputerRequired ?? false ? "checked" : "") />
-                <input type="hidden" name="ComputerRequired" value="false" />
-                <label asp-for="ComputerRequired" class="form-check-label">Computer Required</label>
-            </div>
+    <!-- ComputerRequired section (only shown if the country is United States) -->
+    <div class="mb-3" id="computerRequiredGroup" style="display: none;">
+        <div class="form-check">
+            <!-- Convert nullable boolean to non-nullable for checkbox -->
+            <input type="checkbox" class="form-check-input" id="ComputerRequired" name="ComputerRequired" style="display: @(Model.ComputerRequired.HasValue && Model.ComputerRequired.Value ? "block" : "none")"
+                   value="true" @(Model.ComputerRequired.HasValue && Model.ComputerRequired.Value ? "checked" : "") />
+            <input type="hidden" name="ComputerRequired" value="false" />
+            <label asp-for="ComputerRequired" class="form-check-label">Computer Required</label>
         </div>
-    }
+    </div>
+
+
+    <div class="mb-3" id="targetQuantityGroup" style="display: none;">
+        <label asp-for="TargetQuantity" class="form-label">Target Quantity</label>
+        <input asp-for="TargetQuantity" class="form-control" id="TargetQuantity" type="number" min="1" />
+    </div>
 
     <div class="mb-3">
         <div class="form-check">
@@ -51,7 +56,7 @@
 
     <div class="mb-3">
         <label asp-for="CountryId" class="form-label">Country</label>
-        <select asp-for="CountryId" class="form-select" id="country-select">
+        <select asp-for="CountryId" class="form-select" id="countrySelect">
             @foreach (var country in (IEnumerable<SelectListItem>)ViewBag.Countries)
             {
                 <option value="@country.Value" selected="@(country.Selected ? "selected" : null)">@country.Text</option>
@@ -91,16 +96,30 @@
     <partial name="_ValidationScriptsPartial" />
 
     <script>
-        // JavaScript to toggle between displaying the country name and the dropdown list
-        document.getElementById('country-display').onclick = function () {
-            document.getElementById('country-display').style.display = 'none';
-            document.getElementById('country-select').style.display = 'block';
-        };
+        document.getElementById("countrySelect").addEventListener("change", function () {
+            var selectedCountry = this.options[this.selectedIndex].text;
+            var computerRequiredGroup = document.getElementById("computerRequiredGroup");
+            if (selectedCountry === "United Kingdom") {
+                computerRequiredGroup.style.display = "block";
+            } else {
+                computerRequiredGroup.style.display = "none";
+                document.getElementById("ComputerRequired").checked = false;
+                document.getElementById("targetQuantityGroup").style.display = "none";
+            }
+        });
 
-        // Update the hidden input with the selected country name
-        document.getElementById('country-select').onchange = function () {
-            var selectedOption = this.options[this.selectedIndex];
-            document.getElementById('CountryName').value = selectedOption.text;
-        };
+        // Show "Target Quantity" based on "Computer Required" checkbox
+        document.getElementById("ComputerRequired").addEventListener("change", function () {
+            var targetQuantityGroup = document.getElementById("targetQuantityGroup");
+
+            if (this.checked) {
+                targetQuantityGroup.style.display = "block";
+            } else {
+                targetQuantityGroup.style.display = "none";
+            }
+        });
+
+        // Trigger the change event on page load to handle pre-selected value
+        document.getElementById("countrySelect").dispatchEvent(new Event('change'));
     </script>
 }

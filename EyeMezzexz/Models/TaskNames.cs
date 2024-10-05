@@ -26,5 +26,9 @@ namespace EyeMezzexz.Models
         // Additional property for UK-based tasks
         public bool? ComputerRequired { get; set; } // Nullable to allow non-UK tasks to ignore it
         public bool? IsDeleted { get; set; } // Flag to indicate if the record is deleted
+
+        // New field for Target Quantity
+        public int? TargetQuantity { get; set; } // Nullable to allow some tasks to ignore it
     }
 }
+ 

@@ -37,8 +37,9 @@
                     <th>Name</th>
                     <th>Country</th>
                     <th>Computer Required</th>
-                    <th>Created ON</th>
+                    <th>Created On</th>
                     <th>Created By</th>
+                    <th>Target Quantity</th> <!-- Added this column for TargetQuantity -->
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -57,10 +58,14 @@
                         </td>
                         <td>@item.Country?.Name ?? "N/A"</td>
                         <td>@(item.ComputerRequired.HasValue && item.ComputerRequired.Value ? "Yes" : "No")</td>
+                        <td>@(item.TaskCreatedOn?.ToString("yyyy-MM-dd") ?? "N/A")</td>
+                        <td>@item.TaskCreatedBy ?? "N/A"</td>
+                        <td>@(item.TargetQuantity.HasValue ? item.TargetQuantity.ToString() : "N/A")</td> <!-- Display TargetQuantity here -->
                         <td>
                             <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-secondary">Edit</a>
                         </td>
                     </tr>
+
                     @if (item.SubTasks.Any())
                     {
                         @foreach (var subTask in item.SubTasks)
@@ -69,6 +74,9 @@
                                 <td class="pl-4">&#8627; @subTask.Name</td>
                                 <td>@subTask.Country?.Name ?? "N/A"</td>
                                 <td>@(subTask.ComputerRequired.HasValue && subTask.ComputerRequired.Value ? "Yes" : "No")</td>
+                                <td>@(subTask.TaskCreatedOn?.ToString("yyyy-MM-dd") ?? "N/A")</td>
+                                <td>@subTask.TaskCreatedBy ?? "N/A"</td>
+                                <td>@(subTask.TargetQuantity.HasValue ? subTask.TargetQuantity.ToString() : "N/A")</td> <!-- Display TargetQuantity for subtasks -->
                                 <td>
                                     <a asp-action="Edit" asp-route-id="@subTask.Id" class="btn btn-secondary">Edit</a>
                                 </td>
@@ -115,28 +123,30 @@
             tasks.forEach(function (task) {
                 let createdOn = task.taskCreatedOn ? new Date(task.taskCreatedOn).toLocaleDateString() : 'N/A';
                 let row = `<tr data-country-id="${task.countryId}" data-task-id="${task.id}">
-                                            <td>
-                                                ${task.name}
-                                                ${task.subTasks.length > 0 ? `<button class="btn btn-link toggle-button" type="button" data-task-id="${task.id}"><i class="fas fa-plus"></i></button>` : ''}
-                                            </td>
-                                            <td>${task.country ? task.country.name : 'N/A'}</td>
-                                            <td>${task.computerRequired !== null ? (task.computerRequired ? 'Yes' : 'No') : 'N/A'}</td>
-                                            <td>${createdOn}</td>
-                                            <td>${task.taskCreatedBy ?? 'N/A'}</td>
-                                            <td><a href="/Task/Edit/${task.id}" class="btn btn-secondary">Edit</a></td>
-                                        </tr>`;
+                                                    <td>
+                                                        ${task.name}
+                                                        ${task.subTasks.length > 0 ? `<button class="btn btn-link toggle-button" type="button" data-task-id="${task.id}"><i class="fas fa-plus"></i></button>` : ''}
+                                                    </td>
+                                                    <td>${task.country ? task.country.name : 'N/A'}</td>
+                                                    <td>${task.computerRequired !== null ? (task.computerRequired ? 'Yes' : 'No') : 'N/A'}</td>
+                                                    <td>${createdOn}</td>
+                                                    <td>${task.taskCreatedBy ?? 'N/A'}</td>
+                                                    <td>${task.targetQuantity !== null ? task.targetQuantity : 'N/A'}</td> <!-- Show TargetQuantity -->
+                                                    <td><a href="/Task/Edit/${task.id}" class="btn btn-secondary">Edit</a></td>
+                                                </tr>`;
 
                 if (task.subTasks && task.subTasks.length > 0) {
                     task.subTasks.forEach(function (subTask) {
                         let subCreatedOn = subTask.taskCreatedOn ? new Date(subTask.taskCreatedOn).toLocaleDateString() : 'N/A';
                         row += `<tr class="sub-task collapse" data-parent-task-id="${task.id}">
-                                                    <td class="pl-4">&#8627; ${subTask.name}</td>
-                                                    <td>${subTask.country ? subTask.country.name : 'N/A'}</td>
-                                                    <td>${subTask.computerRequired !== null ? (subTask.computerRequired ? 'Yes' : 'No') : 'N/A'}</td>
-                                                    <td>${subCreatedOn}</td>
-                                                    <td>${subTask.taskCreatedBy ?? 'N/A'}</td>
-                                                    <td><a href="/Task/Edit/${subTask.id}" class="btn btn-secondary">Edit</a></td>
-                                                </tr>`;
+                                                            <td class="pl-4">&#8627; ${subTask.name}</td>
+                                                            <td>${subTask.country ? subTask.country.name : 'N/A'}</td>
+                                                            <td>${subTask.computerRequired !== null ? (subTask.computerRequired ? 'Yes' : 'No') : 'N/A'}</td>
+                                                            <td>${subCreatedOn}</td>
+                                                            <td>${subTask.taskCreatedBy ?? 'N/A'}</td>
+                                                            <td>${subTask.targetQuantity !== null ? subTask.targetQuantity : 'N/A'}</td> <!-- Show TargetQuantity for subtasks -->
+                                                            <td><a href="/Task/Edit/${subTask.id}" class="btn btn-secondary">Edit</a></td>
+                                                        </tr>`;
                     });
                 }
 

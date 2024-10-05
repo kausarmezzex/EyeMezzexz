@@ -119,6 +119,30 @@ namespace EyeMezzexz.Controllers
 
             return Ok(users);
         }
+        [HttpGet("getSystemNameByEmail")]
+        public async Task<IActionResult> GetSystemNameByEmail(string email)
+        {
+            if (string.IsNullOrEmpty(email))
+            {
+                return BadRequest(new { message = "Email cannot be empty." });
+            }
+
+            // Find the user by email
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
+
+            if (user == null)
+            {
+                return NotFound(new { message = "User not found." });
+            }
+
+            // Return the system name if it exists, otherwise indicate it's not set
+            return Ok(new
+            {
+                email = user.Email,
+                systemName = user.SystemName ?? "System name not set."
+            });
+        }
+
 
         [HttpGet("getUserByEmail")]
         public async Task<ApplicationUser> GetUserByEmailAsync(string email)
@@ -145,8 +169,44 @@ namespace EyeMezzexz.Controllers
             _context.Users.Update(user);
             await _context.SaveChangesAsync();
 
-            return Ok(new { message = "Logout successful", userId = user.Id });
+            return Ok(new { message = "Logout successful", userId = user.Id }); 
         }
+        [HttpPost("checkLoginStatus")]
+        public async Task<IActionResult> CheckLoginStatus([FromBody] LoginRequest1 loginRequest)
+        {
+            if (loginRequest == null || string.IsNullOrEmpty(loginRequest.Email) || string.IsNullOrEmpty(loginRequest.SystemName))
+            {
+                return BadRequest(new { message = "Invalid request." });
+            }
+
+            // Find the user by email
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == loginRequest.Email);
+            if (user == null)
+            {
+                return NotFound(new { message = "User not found." });
+            }
+
+            // Check if the user is already logged in today
+            var today = DateTime.UtcNow.Date;
+            if (user.LastLoginTime.HasValue && user.LastLoginTime.Value.Date == today && (!user.LastLogoutTime.HasValue || user.LastLoginTime > user.LastLogoutTime))
+            {
+                // User is already logged in, now check if they are logged in from a different system
+                if (user.SystemName != loginRequest.SystemName)
+                {
+                    // If logged in from a different system, send the system name and instruct redirection
+                    return Ok(new { isLoggedInOnAnotherDevice = true, systemName = user.SystemName });
+                }
+                else
+                {
+                    // User is logged in from the same system
+                    return Ok(new { isLoggedInOnAnotherDevice = false, message = "User is already logged in on this system." });
+                }
+            }
+
+            // User is not logged in today, so allow login
+            return Ok(new { isLoggedInOnAnotherDevice = false, message = "User can log in." });
+        }
+
 
     }
     public class LogoutRequest

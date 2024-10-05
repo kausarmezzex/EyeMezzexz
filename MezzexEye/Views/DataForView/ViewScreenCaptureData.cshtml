@@ -189,13 +189,14 @@
             pageNumberElement.textContent = currentPage; // Update the modal's page number
         }
 
-        // Function to update modal details (user, timestamp, taskname, comment)
         function updateModalDetails(media) {
             document.getElementById('modalUsername').textContent = media.username || "Unknown User";
             document.getElementById('modalTimestamp').textContent = media.timestamp || "Unknown Time";
             document.getElementById('modalTaskName').textContent = media.taskname || "No Running Task";
             document.getElementById('modalComment').textContent = media.comment || "No Comment";
+            document.getElementById('modalAddress').textContent = media.address || "Address Not Found";  // This will work after correction
         }
+
 
         // Updated auto-scroll logic
         function startAutoScroll() {
@@ -239,7 +240,8 @@
                 username: el.getAttribute('data-bs-username'),
                 timestamp: el.getAttribute('data-bs-timestamp'),
                 taskname: el.getAttribute('data-bs-taskname'),
-                comment: el.getAttribute('data-bs-comment')
+                comment: el.getAttribute('data-bs-comment'),
+                address : el.getAttribute('data-bs-address')
             }));
 
             var button = event.relatedTarget; // The button that triggered the modal

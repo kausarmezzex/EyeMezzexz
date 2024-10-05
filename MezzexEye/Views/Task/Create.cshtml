@@ -46,7 +46,10 @@
             <label class="form-check-label" for="ComputerRequired">Computer Required</label>
         </div>
     </div>
-
+    <div class="mb-3" id="targetQuantityGroup" style="display: none;">
+        <label asp-for="TargetQuantity" class="form-label">Target Quantity</label>
+        <input asp-for="TargetQuantity" class="form-control" id="TargetQuantity" type="number" min="1" />
+    </div>
     <div class="mb-3">
         <input type="submit" value="Create" class="btn btn-primary" />
     </div>
@@ -82,6 +85,19 @@
                 computerRequiredGroup.style.display = "block";
             } else {
                 computerRequiredGroup.style.display = "none";
+                document.getElementById("ComputerRequired").checked = false;
+                document.getElementById("targetQuantityGroup").style.display = "none";
+            }
+        });
+
+        // Show "Target Quantity" based on "Computer Required" checkbox
+        document.getElementById("ComputerRequired").addEventListener("change", function () {
+            var targetQuantityGroup = document.getElementById("targetQuantityGroup");
+
+            if (this.checked) {
+                targetQuantityGroup.style.display = "block";
+            } else {
+                targetQuantityGroup.style.display = "none";
             }
         });
 

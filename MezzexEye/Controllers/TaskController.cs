@@ -138,7 +138,6 @@ namespace MezzexEye.Controllers
         }
 
 
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(TaskNames model)
@@ -150,7 +149,7 @@ namespace MezzexEye.Controllers
             {
                 try
                 {
-                    // Call directly from DataController
+                    // Call directly from DataController to update the task, including TargetQuantity and ComputerRequired
                     await _dataController.UpdateTask(model);
                     return RedirectToAction(nameof(Index));
                 }
@@ -174,6 +173,7 @@ namespace MezzexEye.Controllers
 
             return View(model);
         }
+
 
         private List<SelectListItem> BuildTaskSelectList(IEnumerable<TaskNames> tasks, int? parentId = null, string prefix = "")
         {

@@ -12,5 +12,6 @@
         public string? SystemName { get; set; }
         public string? TaskName { get; set; }
         public string? Comment { get; set; } // Add this line if it's not already present
+        public string? ActualAddress { get; set; }
     }
 }

@@ -21,8 +21,8 @@
                          data-bs-username="@item.Username"
                          data-bs-img="@item.ImageUrl"
                          data-bs-timestamp="@item.Timestamp"
-                         data-bs-taskname="@item.TaskName ?? 'Task Not Started'"
-                         data-bs-comment="@item.Comment ?? 'No Comment'"
+                         data-bs-taskname="@(!string.IsNullOrWhiteSpace(item.TaskName) ? item.TaskName : "Task Not Started" )"
+                         data-bs-comment="@(!string.IsNullOrWhiteSpace(item.Comment) ? item.Comment : "No Comment" )" 
                          data-page="@Model.CurrentPage" />
                     <div class="card-body">
                         <h5 class="card-title">@item.Username</h5>
@@ -31,6 +31,7 @@
                             <strong>System Name:</strong> @item.SystemName<br />
                             <strong>Task Name:</strong>@(!string.IsNullOrWhiteSpace(item.TaskName) ? item.TaskName : " No Running Task")  <br />
                             <strong>Task Comment:</strong> @(!string.IsNullOrWhiteSpace(item.Comment) ? item.Comment : " No Comment")<br />
+                            <strong>Address:</strong> @(!string.IsNullOrWhiteSpace(item.ActualAddress) ? item.ActualAddress : " Address Not Found")<br />
                         </p>
                     </div>
                 </div>

@@ -39,6 +39,7 @@ builder.Services.AddTransient<UserService>(); // Register UserService
 builder.Services.AddScoped<DataController>(); // Register DataController as Scoped
 builder.Services.AddScoped<AccountApiController>(); // Register AccountApiController as Scoped
 builder.Services.AddScoped<TeamAssignmentApiController>(); // Register TeamAssignmentApiController as Scoped
+builder.Services.AddScoped<TaskAssignmentController>();
 
 // Add session services
 builder.Services.AddSession(options =>
