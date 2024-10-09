@@ -11,5 +11,6 @@
         public DateTime? ModifyOn { get; set; } // Timestamp when the record was last modified
         public string? ModifyBy { get; set; } // User who last modified the record
         public bool IsDeleted { get; set; } // Flag to indicate if the record is deleted
+        public int? TargetQuantity { get; set; } // Nullable to allow some tasks to ignore it
     }
 }

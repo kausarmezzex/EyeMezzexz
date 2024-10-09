@@ -15,12 +15,14 @@ builder.Logging.AddConsole();
 builder.Services.AddTransient<WebServiceClient>(); // Register WebServiceClient
 builder.Services.AddTransient<UserService>(); // Register UserService
 builder.Services.AddTransient<DataController>();
+builder.Services.AddScoped<TaskAssignmentController>();
 builder.Services.AddTransient<AccountApiController>();
 builder.Services.AddTransient<ApiService>();
 builder.Services.AddScoped<IApiService, ApiService>();
 builder.Services.AddTransient<TeamAssignmentApiController>();
 builder.Services.AddScoped<DataForViewController>();
 builder.Services.AddScoped<AccountController>();
+builder.Services.AddScoped<TaskManagementController>();
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
@@ -99,5 +101,6 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
 
 app.Run();

@@ -14,13 +14,15 @@ public class ApiService : IApiService
     private readonly AccountApiController _accountApiController;
     private readonly TeamAssignmentApiController _teamAssignmentApiController;
     private readonly ILogger<ApiService> _logger;
-
-    public ApiService(DataController dataController, AccountApiController accountApiController, TeamAssignmentApiController teamAssignmentApiController, ILogger<ApiService> logger)
+    private readonly TaskAssignmentController _taskAssignmentController; // Add this line
+    public ApiService(DataController dataController, AccountApiController accountApiController, TeamAssignmentApiController teamAssignmentApiController, ILogger<ApiService> logger, TaskAssignmentController taskAssignmentController)
     {
         _dataController = dataController;
         _accountApiController = accountApiController;
         _teamAssignmentApiController = teamAssignmentApiController;
+        _taskAssignmentController = taskAssignmentController; // Assign it here
         _logger = logger;
+        _taskAssignmentController = taskAssignmentController;
     }
 
     public async Task<List<ScreenCaptureDataViewModel>> GetScreenCaptureDataAsync(string clientTimeZone = "Asia/Kolkata")
@@ -55,7 +57,38 @@ public class ApiService : IApiService
         _logger.LogError("Failed to deserialize data from API.");
         return new List<ScreenCaptureDataViewModel>();
     }
+    public async Task AssignTasksToUserAsync(int userId, List<TaskAssignmentRequest> taskAssignments, List<int> computerIds, string country)
+    {
+        var controllerTaskAssignments = taskAssignments.Select(ta => new TaskAssignmentRequest
+        {
+            TaskId = ta.TaskId,
+            AssignedDuration = ta.AssignedDuration,
+            TargetQuantity = ta.TargetQuantity
+        }).ToList();
 
+        // Ensure the dependent method (e.g., AssignTasksToUser) can handle List<int> for computer IDs as well.
+        var result = await _taskAssignmentController.AssignTasksToUser(userId, controllerTaskAssignments, computerIds, country);
+
+        if (result is OkObjectResult)
+        {
+            _logger.LogInformation("Tasks successfully assigned.");
+        }
+        else
+        {
+            _logger.LogError("Failed to assign tasks.");
+        }
+    }
+
+
+    public async Task<List<TaskAssignmentResponse>> GetAssignedTasksAsync(int userId)
+    {
+        var result = await _taskAssignmentController.GetAssignedTasks(userId);
+        var value = (result as OkObjectResult)?.Value;
+        var jsonString = JsonConvert.SerializeObject(value);
+        var data = JsonConvert.DeserializeObject<List<TaskAssignmentResponse>>(jsonString);
+
+        return data ?? new List<TaskAssignmentResponse>();
+    }
 
     public async Task SaveScreenCaptureDataAsync(UploadRequest model)
     {
@@ -174,6 +207,7 @@ public class ApiService : IApiService
 
         return data ?? new List<string>();
     }
+
 
     public async Task<ApplicationUser> GetUserByEmailAsync(string email)
     {
@@ -307,10 +341,52 @@ public class ApiService : IApiService
         return new List<UserWithoutLoginResponse>();
     }
 
+    public async Task<int> AddComputerAsync(Computer model)
+    {
+        var result = await _dataController.AddComputer(model);
+        var value = (result as OkObjectResult)?.Value;
+
+        if (value == null)
+        {
+            _logger.LogError("Failed to add computer. Result value is null or invalid.");
+            return 0;
+        }
+
+        // Assuming the response has the newly added ComputerId
+        var jsonString = JsonConvert.SerializeObject(value);
+        var response = JsonConvert.DeserializeObject<dynamic>(jsonString); // Deserializing dynamic response
+        return response?.ComputerId ?? 0; // Return the ComputerId or 0 if it fails
+    }
+
+    public async Task<bool> EditComputerAsync(int id, Computer model)
+    {
+        var result = await _dataController.EditComputer(id, model);
+
+        if (result is OkObjectResult)
+        {
+            _logger.LogInformation("Computer successfully updated.");
+            return true;
+        }
+
+        _logger.LogError("Failed to edit computer.");
+        return false;
+    }
+    public async Task<List<Computer>> GetAllComputersAsync()
+    {
+        var result = await _dataController.GetAllComputers();
+        var value = (result as OkObjectResult)?.Value;
+        var jsonString = JsonConvert.SerializeObject(value);
+        var data = JsonConvert.DeserializeObject<List<Computer>>(jsonString);
+
+        return data ?? new List<Computer>();
+    }
+
+
     public class ApiResponse
     {
         public List<TaskNames> Tasks { get; set; }
         public int TotalTasks { get; set; }
     }
+   
 }
 

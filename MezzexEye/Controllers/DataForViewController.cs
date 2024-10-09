@@ -640,5 +640,113 @@ namespace EyeMezzexz.Controllers
         }
 
 
+        [HttpGet]
+        public IActionResult AddComputer()
+        {
+            return View(new Computer()); // Return a blank form
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddComputer(Computer model)
+        {
+            var email = User.Identity.Name;
+            var user = await _apiService.GetUserByEmailAsync(email);
+            model.CreatedBy = user.Email;
+            if (ModelState.IsValid)
+            {
+                try
+
+                {
+                    
+                    var computerId = await _apiService.AddComputerAsync(model);
+
+                    if (computerId > 0)
+                    {
+                        _logger.LogInformation($"Computer added successfully with ID: {computerId}");
+                        return RedirectToAction("ComputerList"); // Redirect to a list of computers or success page
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "Failed to add computer. Please try again.");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError(ex, "An error occurred while adding the computer.");
+                    ModelState.AddModelError("", "An error occurred while adding the computer.");
+                }
+            }
+
+            return View(model); // Return the same view with validation errors
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> EditComputer(int id)
+        {
+            var computers = await _apiService.GetComputersAsync();
+            var computer = computers.FirstOrDefault(c => c.Id == id);
+
+            if (computer == null)
+            {
+                return NotFound("Computer not found.");
+            }
+
+            return View(computer); // Pass the computer data to the view for editing
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditComputer(int id, Computer model)
+        {
+            var email = User.Identity.Name;
+            var user = await _apiService.GetUserByEmailAsync(email);
+            model.ModifyBy = user.Email;
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var success = await _apiService.EditComputerAsync(id, model);
+
+                    if (success)
+                    {
+                        _logger.LogInformation($"Computer with ID {id} updated successfully.");
+                        return RedirectToAction("ComputerList"); // Redirect to a list of computers or success page
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "Failed to update computer. Please try again.");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError(ex, "An error occurred while updating the computer.");
+                    ModelState.AddModelError("", "An error occurred while updating the computer.");
+                }
+            }
+
+            return View(model); // Return the same view with validation errors
+        }
+        [HttpGet]
+        public async Task<IActionResult> ComputerList()
+        {
+            try
+            {
+                var computers = await _apiService.GetAllComputersAsync();
+
+                if (computers == null || !computers.Any())
+                {
+                    _logger.LogInformation("No computers found.");
+                    return View(new List<Computer>());
+                }
+
+                return View(computers); // Pass the list of computers to the view
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "An error occurred while retrieving the computers.");
+                return StatusCode(500, "Internal server error");
+            }
+        }
+
+
     }
 }

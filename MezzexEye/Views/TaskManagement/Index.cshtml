@@ -1,0 +1,251 @@
+﻿@model EyeMezzexz.Models.UserTaskAssignmentViewModel
+
+<h2>Task Assignment</h2>
+
+<!-- User Search and Country Dropdown -->
+<div class="row mb-3">
+    <div class="col-md-6">
+        <input type="text" class="form-control" id="userSearch" placeholder="Search user..." aria-label="Search user">
+    </div>
+    <div class="col-md-6">
+        <select class="form-select" id="countrySelect">
+            <option value="India">India</option>
+            <option value="UK">UK</option>
+        </select>
+    </div>
+</div>
+
+<form asp-action="AssignTasks" method="post" id="taskAssignmentForm">
+    @Html.AntiForgeryToken()
+
+    <table class="table table-hover table-striped">
+        <thead>
+            <tr>
+                <th>User</th>
+                <th>Task Assignment</th>
+                <th class="uk-only">Select Computer</th> <!-- New column for UK only -->
+                <th>Assigned Tasks</th>
+            </tr>
+        </thead>
+        <tbody id="userTableBody">
+            @for (int i = 0; i < Model.Users.Count; i++)
+            {
+                <tr class="user-row">
+                    <td>
+                        <!-- Displaying user's FirstName and LastName -->
+                        @Model.Users[i].FirstName @Model.Users[i].LastName
+                        <input type="hidden" name="UserTaskAssignments[@i].UserId" value="@Model.Users[i].Id" />
+                    </td>
+                    <td>
+                        <!-- Multi-select Dropdown with Search for Tasks -->
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="taskDropdownButton-@i" data-bs-toggle="dropdown" aria-expanded="false">
+                                Select Tasks
+                            </button>
+
+                            <div class="dropdown-menu p-2" aria-labelledby="taskDropdownButton-@i" style="max-height: 300px; overflow-y: auto;">
+                                <input type="text" class="form-control mb-2 task-search" id="taskSearch-@i" placeholder="Search tasks..." aria-label="Search tasks">
+
+                                <!-- Dropdown list with checkboxes -->
+                                <ul class="list-unstyled task-list">
+                                    @foreach (var task in Model.AvailableTasks)
+                                    {
+                                        <li>
+                                            <label class="dropdown-item">
+                                                <input type="checkbox" class="task-checkbox" data-user-index="@i" value="@task.Id" />
+                                                @task.Name
+                                            </label>
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                        <small class="text-muted mt-2" id="task-count-@i">0 tasks assigned</small>
+                    </td>
+
+                    <!-- New Select Computer Column for UK -->
+                    <td class="uk-only">
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="computerDropdownButton-@i" data-bs-toggle="dropdown" aria-expanded="false">
+                                Select Computers
+                            </button>
+
+                            <span class="selected-computers me-2" style="flex-grow: 1; font-size: 12px; margin-left: 10px;"></span>
+
+                            <div class="dropdown-menu p-2" aria-labelledby="computerDropdownButton-@i" style="max-height: 300px; overflow-y: auto;">
+                                <!-- Dynamic Computer Dropdown list populated from Model.Computers -->
+                                <ul class="list-unstyled computer-list">
+                                    @foreach (var computer in Model.Computers)
+                                    {
+                                        <li>
+                                            <label class="dropdown-item">
+                                                <input type="checkbox" class="computer-checkbox" data-user-index="@i" value="@computer.Id" />
+                                                @computer.Name
+                                            </label>
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Selected Computers Display for UK users -->
+                        <div class="col-md-12" id="computerSelectionDisplay-@i" style="display:none;">
+                            <div id="selectedComputersList-@i"></div>
+                        </div>
+                    </td>
+
+                    <td>
+                        <div class="selected-tasks">
+                            <ul id="task-list-@i" class="list-group"></ul> <!-- Task list will be displayed here -->
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <button type="submit" class="btn btn-success">Assign Tasks</button>
+</form>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const updateTaskCount = (userIndex) => {
+            const taskList = document.getElementById(`task-list-${userIndex}`);
+            const taskCount = document.getElementById(`task-count-${userIndex}`);
+            taskCount.textContent = `${taskList.children.length} tasks assigned`;
+        };
+
+        const createTaskItem = (taskId, taskName, userIndex) => {
+            const listItem = document.createElement('li');
+            listItem.className = 'list-group-item';
+            listItem.innerHTML = `
+                        <div class="d-flex justify-content-between align-items-center" style="height: 20px;">
+                            <span class="task-name" style="flex-grow: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${taskName}</span>
+                            <div class="d-flex align-items-center ms-2">
+                                <input type="hidden" name="UserTaskAssignments[${userIndex}].TaskAssignments[].TaskId" value="${taskId}" />
+                                <input type="number" name="UserTaskAssignments[${userIndex}].TaskAssignments[].AssignedDuration"
+                                       class="form-control form-control-sm me-2" min="1" style="width: 100px; font-size: 12px;" placeholder="Time (hrs)" />
+                                <input type="number" name="UserTaskAssignments[${userIndex}].TaskAssignments[].TargetQuantity"
+                                       class="form-control form-control-sm me-2" style="width: 100px; font-size: 12px;" placeholder="Quantity" />
+                                <button type="button" class="btn btn-danger btn-sm remove-task-btn" style="padding: 2px 8px; font-size: 12px;">Remove</button>
+                            </div>
+                        </div>
+                    `;
+            return listItem;
+        };
+
+        // User Search Logic
+        const userSearch = document.getElementById('userSearch');
+        userSearch.addEventListener('input', function () {
+            const searchValue = this.value.toLowerCase();
+            document.querySelectorAll('.user-row').forEach(row => {
+                const userName = row.querySelector('td').textContent.toLowerCase();
+                row.style.display = userName.includes(searchValue) ? '' : 'none';
+            });
+        });
+
+        // Country Selection Logic
+        const countrySelect = document.getElementById('countrySelect');
+        const updateTableForCountry = () => {
+            const isUK = countrySelect.value === 'UK';
+            document.querySelectorAll('.uk-only').forEach(col => {
+                col.style.display = isUK ? 'table-cell' : 'none';
+            });
+        };
+        countrySelect.addEventListener('change', updateTableForCountry);
+        updateTableForCountry(); // Initialize based on selected country
+
+        // Task Assignment Logic
+        document.querySelectorAll('.task-checkbox').forEach(checkbox => {
+            checkbox.addEventListener('change', function () {
+                const userIndex = checkbox.getAttribute('data-user-index');
+                const taskList = document.getElementById(`task-list-${userIndex}`);
+                const taskId = checkbox.value;
+                const taskName = checkbox.parentElement.textContent.trim();
+
+                if (checkbox.checked) {
+                    if (!taskList.querySelector(`input[value="${taskId}"]`)) {
+                        const listItem = createTaskItem(taskId, taskName, userIndex);
+                        taskList.appendChild(listItem);
+                        updateTaskCount(userIndex);
+
+                        listItem.querySelector('.remove-task-btn').addEventListener('click', () => {
+                            taskList.removeChild(listItem);
+                            updateTaskCount(userIndex);
+                        });
+                    } else {
+                        alert(`Task "${taskName}" is already added.`);
+                    }
+                } else {
+                    const taskToRemove = taskList.querySelector(`input[value="${taskId}"]`);
+                    if (taskToRemove) {
+                        taskList.removeChild(taskToRemove.closest('li'));
+                        updateTaskCount(userIndex);
+                    }
+                }
+            });
+        });
+
+        // Update Computer Selection Logic
+        document.querySelectorAll('.computer-list input[type="checkbox"]').forEach(checkbox => {
+            checkbox.addEventListener('change', function () {
+                const userIndex = this.closest('tr').querySelector('.task-checkbox').getAttribute('data-user-index');
+                const selectedComputers = [];
+
+                // Gather all selected computers for the user
+                const checkboxes = document.querySelectorAll(`#computerDropdownButton-${userIndex} ~ .dropdown-menu input[type="checkbox"]`);
+                checkboxes.forEach(computerCheckbox => {
+                    if (computerCheckbox.checked) {
+                        selectedComputers.push(computerCheckbox.closest('label').textContent.trim());
+                    }
+                });
+
+                // Update the display of selected computers in the new section
+                const computerSelectionDisplay = document.getElementById(`computerSelectionDisplay-${userIndex}`);
+                const selectedComputersList = document.getElementById(`selectedComputersList-${userIndex}`);
+
+                // Clear the existing list before adding new selections
+                selectedComputersList.innerHTML = '';
+
+                // If there are selected computers, show the list, otherwise hide it
+                if (selectedComputers.length) {
+                    computerSelectionDisplay.style.display = 'block';
+
+                    selectedComputers.forEach((computer, index) => {
+                        // Create a new <div> for each computer
+                        const computerItem = document.createElement('div');
+
+                        // For the first two computers, display on the same line
+                        if (index < 2) {
+                            computerItem.textContent = computer;
+                            computerItem.style.display = 'inline-block'; // Display side by side for the first two
+                            computerItem.style.marginRight = '10px'; // Small space between items
+                        } else {
+                            // For the third and subsequent computers, move to the next line
+                            computerItem.textContent = computer;
+                            computerItem.style.display = 'block'; // Display on a new line
+                        }
+
+                        selectedComputersList.appendChild(computerItem); // Add to the display section
+                    });
+                } else {
+                    computerSelectionDisplay.style.display = 'none';
+                    selectedComputersList.textContent = '';
+                }
+
+            });
+        });
+
+        // Ensure only users with tasks assigned are submitted
+        document.getElementById('taskAssignmentForm').addEventListener('submit', function (event) {
+            document.querySelectorAll('.user-row').forEach(row => {
+                const taskList = row.querySelector('.list-group');
+                if (taskList.children.length === 0) {
+                    // Disable hidden input for users with no tasks
+                    row.querySelector('input[name^="UserTaskAssignments"]').disabled = true;
+                }
+            });
+        });
+
+    });
+</script>

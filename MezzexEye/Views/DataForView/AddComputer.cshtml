@@ -1,0 +1,25 @@
+﻿@model EyeMezzexz.Models.Computer
+
+@{
+    ViewBag.Title = "Add Computer";
+}
+
+
+<form asp-action="AddComputer" method="post">
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="TargetQuantity"></label>
+        <input asp-for="TargetQuantity" class="form-control" />
+        <span asp-validation-for="TargetQuantity" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Add Computer</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

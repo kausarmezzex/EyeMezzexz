@@ -1,0 +1,30 @@
+﻿@model EyeMezzexz.Models.Computer
+
+@{
+    ViewBag.Title = "Edit Computer";
+}
+
+<h2>Edit Computer</h2>
+
+<form asp-action="EditComputer" method="post">
+    <input type="hidden" asp-for="Id" />
+
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="TargetQuantity"></label>
+        <input asp-for="TargetQuantity" class="form-control" />
+        <span asp-validation-for="TargetQuantity" class="text-danger"></span>
+    </div>
+
+
+    <button type="submit" class="btn btn-primary">Update Computer</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

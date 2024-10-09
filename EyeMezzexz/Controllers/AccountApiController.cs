@@ -23,7 +23,6 @@ namespace EyeMezzexz.Controllers
             _context = context;
 
         }
-
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginRequest1 loginRequest)
         {
@@ -86,6 +85,13 @@ namespace EyeMezzexz.Controllers
                 {
                     return BadRequest(new { message = "User already logged in on another device today." });
                 }
+
+                // If user's country or phone number is missing, update with the current values
+                if (string.IsNullOrEmpty(user.CountryName) || string.IsNullOrEmpty(user.PhoneNumber))
+                {
+                    user.CountryName = string.IsNullOrEmpty(user.CountryName) ? country : user.CountryName;
+                    user.PhoneNumber = string.IsNullOrEmpty(user.PhoneNumber) ? phoneNumber : user.PhoneNumber;
+                }
             }
 
             // Update the user's login time and system name each time they log in
@@ -97,6 +103,32 @@ namespace EyeMezzexz.Controllers
             return Ok(new { message = "Login successful", userId = user.Id, username = $"{user.FirstName} {user.LastName}", country = user.CountryName });
         }
 
+
+        [HttpPost("checkLogoutStatus")]
+        public async Task<IActionResult> CheckLogoutStatus([FromBody] LogoutRequest logoutRequest)
+        {
+            if (logoutRequest == null || string.IsNullOrEmpty(logoutRequest.Email))
+            {
+                return BadRequest(new { message = "Invalid request. Email is required." });
+            }
+
+            // Find the user by email
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == logoutRequest.Email);
+            if (user == null)
+            {
+                return NotFound(new { message = "User not found." });
+            }
+
+            // Check if the user is logged out by comparing LastLoginTime and LastLogoutTime
+            if (user.LastLogoutTime.HasValue && user.LastLoginTime.HasValue && user.LastLogoutTime > user.LastLoginTime)
+            {
+                // User has logged out after logging in
+                return Ok(new { isLoggedOut = true, message = "User is logged out." });
+            }
+
+            // If LastLogoutTime is null or earlier than LastLoginTime, the user is still logged in
+            return Ok(new { isLoggedOut = false, message = "User is still logged in." });
+        }
 
 
 
@@ -132,16 +164,18 @@ namespace EyeMezzexz.Controllers
 
             if (user == null)
             {
+                // User not found, return appropriate message
                 return NotFound(new { message = "User not found." });
             }
 
-            // Return the system name if it exists, otherwise indicate it's not set
+            // Return the system name (null if it's not set)
             return Ok(new
             {
                 email = user.Email,
-                systemName = user.SystemName ?? "System name not set."
+                systemName = user.SystemName // This will be null if not set
             });
         }
+
 
 
         [HttpGet("getUserByEmail")]
@@ -172,7 +206,7 @@ namespace EyeMezzexz.Controllers
             return Ok(new { message = "Logout successful", userId = user.Id }); 
         }
         [HttpPost("checkLoginStatus")]
-        public async Task<IActionResult> CheckLoginStatus([FromBody] LoginRequest1 loginRequest)
+        public async Task<IActionResult> CheckLoginStatus([FromBody] LoginRequest2 loginRequest)
         {
             if (loginRequest == null || string.IsNullOrEmpty(loginRequest.Email) || string.IsNullOrEmpty(loginRequest.SystemName))
             {
@@ -207,7 +241,6 @@ namespace EyeMezzexz.Controllers
             return Ok(new { isLoggedInOnAnotherDevice = false, message = "User can log in." });
         }
 
-
     }
     public class LogoutRequest
     {
@@ -217,6 +250,12 @@ namespace EyeMezzexz.Controllers
     {
         public string Email { get; set; }
         public string Password { get; set; }
+        public string SystemName { get; set; }  // New Property for system name
+    }
+
+    public class LoginRequest2
+    {
+        public string Email { get; set; }
         public string SystemName { get; set; }  // New Property for system name
     }
 

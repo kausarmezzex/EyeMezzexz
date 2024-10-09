@@ -1012,9 +1012,80 @@
                 return Ok(users);
             }
 
+        [HttpPost("addComputer")]
+        public async Task<IActionResult> AddComputer([FromBody] Computer model)
+        {
+            if (model == null)
+            {
+                return BadRequest("Invalid data.");
+            }
 
+            // Set the created timestamp and user
+            model.CreatedOn = DateTime.UtcNow;
+
+            // Add the new computer record
+            _context.Computers.Add(model);
+
+            try
+            {
+                // Save the changes to the database
+                await _context.SaveChangesAsync();
+                return Ok(new { Message = "Computer added successfully", ComputerId = model.Id });
+            }
+            catch (Exception ex)
+            {
+                // Handle any errors that occur during database save operation
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
         }
+        [HttpPut("editComputer/{id}")]
+        public async Task<IActionResult> EditComputer(int id, [FromBody] Computer model)
+        {
+            if (model == null || id != model.Id)
+            {
+                return BadRequest("Invalid data.");
+            }
+
+            // Find the existing computer record by ID
+            var existingComputer = await _context.Computers.FindAsync(id);
+            if (existingComputer == null)
+            {
+                return NotFound("Computer not found.");
+            }
+
+            // Update the fields
+            existingComputer.Name = model.Name;
+            existingComputer.ModifyOn = DateTime.UtcNow;
+            existingComputer.IsDeleted = model.IsDeleted;
+            existingComputer.TargetQuantity = model.TargetQuantity; // Ensure TargetQuantity is updated
+            try
+            {
+                // Save the updated record to the database
+                await _context.SaveChangesAsync();
+                return Ok(new { Message = "Computer updated successfully" });
+            }
+            catch (Exception ex)
+            {
+                // Handle any errors during update
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
+
+        [HttpGet("getAllComputers")]
+        public async Task<IActionResult> GetAllComputers()
+        {
+            var computers = await _context.Computers.ToListAsync();
+
+            if (computers == null || !computers.Any())
+            {
+                return NotFound("No computers found.");
+            }
+
+            return Ok(computers);
+        }
+
     }
+}
 
 
     public class UpdateTaskTimerRequest

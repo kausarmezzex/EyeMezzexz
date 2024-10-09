@@ -3,6 +3,9 @@ using EyeMezzexz.Data;
 using EyeMezzexz.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace EyeMezzexz.Controllers
 {
@@ -20,10 +23,15 @@ namespace EyeMezzexz.Controllers
         }
 
         // POST: api/TaskAssignment/AssignTasksToUser
+        // Assign multiple tasks with specified duration, target quantity, multiple computers, and country
         [HttpPost("assignTasksToUser")]
-        public async Task<IActionResult> AssignTasksToUser(int userId, [FromBody] List<int> taskIds)
+        public async Task<IActionResult> AssignTasksToUser(
+    int userId,
+    [FromBody] List<TaskAssignmentRequest> taskAssignments,
+    [FromQuery] List<int> computerIds,
+    [FromQuery] string country)
         {
-            if (taskIds == null || taskIds.Count == 0)
+            if (taskAssignments == null || !taskAssignments.Any())
             {
                 return BadRequest("No tasks provided.");
             }
@@ -34,66 +42,82 @@ namespace EyeMezzexz.Controllers
                 return NotFound("User not found.");
             }
 
-            var today = DateTime.Today;
-            var existingTasks = await _context.TaskTimers
-                .Where(t => t.UserId == userId && t.TaskStartTime.Date == today && t.TaskEndTime == null)
-                .Select(t => t.TaskId)
+            var computers = await _context.Computers
+                .Where(c => computerIds.Contains(c.Id))
                 .ToListAsync();
 
-            var newTasks = taskIds.Except(existingTasks).ToList();
-
-            if (!newTasks.Any())
+            if (computers.Count != computerIds.Count)
             {
-                return BadRequest("All tasks are already assigned to the user for today.");
+                var missingIds = computerIds.Except(computers.Select(c => c.Id)).ToList();
+                return NotFound($"Computers with IDs {string.Join(", ", missingIds)} not found.");
             }
 
-            foreach (var taskId in newTasks)
+            foreach (var computer in computers)
             {
-                var task = await _context.TaskNames.FindAsync(taskId);
-                if (task == null)
+                foreach (var taskAssignment in taskAssignments)
                 {
-                    return NotFound($"Task with ID {taskId} not found.");
+                    var task = await _context.TaskNames.FindAsync(taskAssignment.TaskId);
+                    if (task == null)
+                    {
+                        return NotFound($"Task with ID {taskAssignment.TaskId} not found.");
+                    }
+
+                    var newTaskAssignment = new TaskAssignment
+                    {
+                        UserId = userId,
+                        TaskId = taskAssignment.TaskId,
+                        AssignedDuration = taskAssignment.AssignedDuration,
+                        TargetQuantity = taskAssignment.TargetQuantity,
+                        AssignedDate = DateTime.UtcNow,
+                        ComputerId = computer.Id,
+                        Country = country
+                    };
+
+                    _context.TaskAssignments.Add(newTaskAssignment);
                 }
-
-                var taskTimer = new TaskTimer
-                {
-                    UserId = userId,
-                    TaskId = taskId,
-                    TaskStartTime = DateTime.UtcNow, // Adjust for time zones as necessary
-                    TimeDifference = TimeSpan.Zero // Can modify based on user's timezone
-                };
-
-                _context.TaskTimers.Add(taskTimer);
             }
 
             await _context.SaveChangesAsync();
-            return Ok(new { Message = "Tasks successfully assigned to the user." });
+            return Ok(new { Message = "Tasks successfully assigned to the specified computers with duration, target quantity, and country." });
         }
 
         // GET: api/TaskAssignment/GetAssignedTasks
+        // Retrieve tasks assigned to the user for today
         [HttpGet("getAssignedTasks")]
         public async Task<IActionResult> GetAssignedTasks(int userId)
         {
             var today = DateTime.Today;
 
-            var tasks = await _context.TaskTimers
+            var tasks = await _context.TaskAssignments
                 .Include(t => t.Task)
-                .Where(t => t.UserId == userId && t.TaskStartTime.Date == today)
+                .Include(t => t.Computer) // Include computer information
+                .Where(t => t.UserId == userId && t.AssignedDate.Date == today)
                 .Select(t => new
                 {
                     TaskId = t.TaskId,
                     TaskName = t.Task.Name,
-                    StartTime = t.TaskStartTime,
-                    EndTime = t.TaskEndTime
+                    AssignedDuration = t.AssignedDuration, // Show the duration assigned to the task
+                    TargetQuantity = t.TargetQuantity, // Show the target quantity
+                    ComputerName = t.Computer.Name, // Include computer name
+                    Country = t.Country // Include country
                 })
                 .ToListAsync();
 
             if (!tasks.Any())
             {
-                return NotFound("No tasks found for the user today.");
+                return NotFound("No tasks assigned to the user today.");
             }
 
             return Ok(tasks);
+        }
+
+        // GET: api/TaskAssignment/GetActiveTasks
+        // Retrieve only tasks that are currently in progress (tracked by TaskTimer elsewhere)
+        [HttpGet("getActiveTasks")]
+        public async Task<IActionResult> GetActiveTasks(int userId)
+        {
+            // Placeholder implementation if active tasks are tracked separately, as by TaskTimer.
+            return BadRequest("Active tasks are tracked using a different mechanism (TaskTimer).");
         }
     }
 }

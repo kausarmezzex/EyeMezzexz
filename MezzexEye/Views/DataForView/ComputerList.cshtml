@@ -1,0 +1,35 @@
+﻿@model List<EyeMezzexz.Models.Computer>
+
+@{
+    ViewBag.Title = "Computer List";
+}
+
+<h2>Computers</h2>
+
+<a href="@Url.Action("AddComputer")" class="btn btn-primary">Add New Computer</a>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Target Quantity</th>
+            <th>Created By</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var computer in Model)
+        {
+            <tr>
+                <td>@computer.Id</td>
+                <td>@computer.Name</td>
+                <td>@computer.TargetQuantity</td> <!-- Add this line -->
+                <td>@computer.CreatedBy</td>
+                <td>
+                    <a href="@Url.Action("EditComputer", new { id = computer.Id })" class="btn btn-warning">Edit</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

@@ -37,7 +37,10 @@
     <link rel="stylesheet" href="~/Admin/plugins/daterangepicker/daterangepicker.css">
     <!-- summernote -->
     <link rel="stylesheet" href="~/Admin/plugins/summernote/summernote-bs4.min.css">
+
     <!-- jQuery UI -->
+    <!-- CoreUI JS for enabling multi-select with search -->
+  
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     @RenderSection("Styles", required: false)
     <style>
@@ -273,6 +276,30 @@
                                     </li>
                                 </ul>
                             </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <i class="nav-icon fas fa-tasks"></i>
+                                    <p>
+                                        Computer
+                                        <i class="right fas fa-angle-left"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview">
+
+                                    <li class="nav-item">
+                                        <a asp-controller="DataForView" asp-action="ComputerList" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>All Computers</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a asp-controller="DataForView" asp-action="AddComputer" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Add Computer</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
                            
                         }
                     </ul>
@@ -325,6 +352,10 @@
     </div>
     <!-- ./wrapper -->
     <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- jQuery UI for sortable functionality -->
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
     <script src="~/Admin/plugins/jquery/jquery.min.js"></script>
     <!-- jQuery UI 1.11.4 -->
     <script src="~/Admin/plugins/jquery-ui/jquery-ui.min.js"></script>
@@ -372,7 +403,6 @@
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     <script src="~/Admin/dist/js/pages/dashboard.js"></script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
