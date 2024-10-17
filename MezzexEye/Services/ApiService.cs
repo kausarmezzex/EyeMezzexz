@@ -5,6 +5,7 @@ using EyeMezzexz.Models;
 using MezzexEye.Models;
 using MezzexEye.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 
@@ -57,38 +58,43 @@ public class ApiService : IApiService
         _logger.LogError("Failed to deserialize data from API.");
         return new List<ScreenCaptureDataViewModel>();
     }
-    public async Task AssignTasksToUserAsync(int userId, List<TaskAssignmentRequest> taskAssignments, List<int> computerIds, string country)
+    public async Task AssignTasksToUserAsync(int userId, List<TaskAssignmentRequest> taskAssignments, string country)
     {
-        var controllerTaskAssignments = taskAssignments.Select(ta => new TaskAssignmentRequest
-        {
-            TaskId = ta.TaskId,
-            AssignedDuration = ta.AssignedDuration,
-            TargetQuantity = ta.TargetQuantity
-        }).ToList();
+        // Log data for debugging
+        _logger.LogInformation("Assigning tasks for user {UserId} with tasks: {@TaskAssignments}, country: {Country}", userId, taskAssignments, country);
 
-        // Ensure the dependent method (e.g., AssignTasksToUser) can handle List<int> for computer IDs as well.
-        var result = await _taskAssignmentController.AssignTasksToUser(userId, controllerTaskAssignments, computerIds, country);
-
-        if (result is OkObjectResult)
+        try
         {
-            _logger.LogInformation("Tasks successfully assigned.");
+            // Call the API to assign tasks
+            await _taskAssignmentController.AssignTasksToUser(userId, taskAssignments, country);
         }
-        else
+        catch (SqlException ex)
         {
-            _logger.LogError("Failed to assign tasks.");
+            // Log detailed SQL error
+            _logger.LogError("SQL Exception occurred: {Message}", ex.Message);
+            throw; // Re-throw to handle it further up the stack
         }
     }
 
 
-    public async Task<List<TaskAssignmentResponse>> GetAssignedTasksAsync(int userId)
+    public async Task<List<TaskAssignmentResponse>> GetAssignedTasksAsync(DateTime? assignedDate)
     {
-        var result = await _taskAssignmentController.GetAssignedTasks(userId);
+        // Call the GetAllUserAssignedTasks method to fetch tasks for all users
+        var result = await _taskAssignmentController.GetAllUserAssignedTasks(assignedDate);
+
+        // Check if the result is a valid OkObjectResult
         var value = (result as OkObjectResult)?.Value;
+
+        // Convert the result to JSON string for deserialization
         var jsonString = JsonConvert.SerializeObject(value);
+
+        // Deserialize the JSON string to a List of TaskAssignmentResponse objects
         var data = JsonConvert.DeserializeObject<List<TaskAssignmentResponse>>(jsonString);
 
+        // Return the data or an empty list if no data is found
         return data ?? new List<TaskAssignmentResponse>();
     }
+
 
     public async Task SaveScreenCaptureDataAsync(UploadRequest model)
     {
@@ -379,6 +385,23 @@ public class ApiService : IApiService
         var data = JsonConvert.DeserializeObject<List<Computer>>(jsonString);
 
         return data ?? new List<Computer>();
+    }
+    public async Task<List<object>> GetAllUsersWithAssignedTasksAsync(DateTime? assignedDate)
+    {
+        // Call the TaskAssignmentController method
+        var result = await _taskAssignmentController.GetAllUsersWithAssignedTasks(assignedDate);
+
+        // Check if the result is a valid OkObjectResult
+        var value = (result as OkObjectResult)?.Value;
+
+        // Convert the result to JSON string for deserialization
+        var jsonString = JsonConvert.SerializeObject(value);
+
+        // Deserialize the JSON string to a List of objects
+        var data = JsonConvert.DeserializeObject<List<object>>(jsonString);
+
+        // Return the data or an empty list if no data is found
+        return data ?? new List<object>();
     }
 
 

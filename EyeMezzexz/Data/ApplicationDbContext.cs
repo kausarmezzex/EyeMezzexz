@@ -18,7 +18,8 @@ namespace EyeMezzexz.Data
         public DbSet<Computer> Computers { get; set; }
         public DbSet<Team> Teams { get; set; }
         public DbSet<StaffAssignToTeam> StaffAssignToTeam { get; set; }
-        public DbSet<TaskAssignment> TaskAssignments { get; set; }  
+        public DbSet<TaskAssignment> TaskAssignments { get; set; }
+        public DbSet<TaskAssignmentComputer> TaskAssignmentComputers { get; set; }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
         }
@@ -27,6 +28,18 @@ namespace EyeMezzexz.Data
         {
             base.OnModelCreating(modelBuilder); // This should call the base method to ensure Identity configuration is done
 
+            modelBuilder.Entity<TaskAssignmentComputer>()
+                .HasKey(tac => tac.Id);
+
+            modelBuilder.Entity<TaskAssignmentComputer>()
+                .HasOne(tac => tac.TaskAssignment)
+                .WithMany(ta => ta.TaskAssignmentComputers)
+                .HasForeignKey(tac => tac.TaskAssignmentId);
+
+            modelBuilder.Entity<TaskAssignmentComputer>()
+                .HasOne(tac => tac.Computer)
+                .WithMany()
+                .HasForeignKey(tac => tac.ComputerId);
             // Configure RolePermission relationships
             modelBuilder.Entity<RolePermission>()
                 .HasKey(rp => new { rp.RoleId, rp.PermissionId });

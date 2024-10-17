@@ -4,7 +4,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.Processing;
+using SixLabors.ImageSharp.Formats.Jpeg;
+using SixLabors.ImageSharp.PixelFormats;
 
 namespace EyeMezzexz.Controllers
 {
@@ -55,21 +60,32 @@ namespace EyeMezzexz.Controllers
             await _semaphoreSlim.WaitAsync(); // Wait asynchronously
             try
             {
-                // Save the file to the physical path
-                using (var stream = new FileStream(physicalFilePath, FileMode.Create))
+                // Compress and save the image before uploading
+                using (var image = Image.Load<Rgba32>(file.OpenReadStream())) // Load image from stream
                 {
-                    await file.CopyToAsync(stream);
+                    // Optional: Resize the image to a maximum of 1024x768
+                    image.Mutate(x => x.Resize(new ResizeOptions
+                    {
+                        Size = new Size(1024, 768),
+                        Mode = ResizeMode.Max
+                    }));
+
+                    // Set JPEG quality (compression) to 75%
+                    var encoder = new JpegEncoder { Quality = 50 };
+
+                    // Save the compressed image to the file path
+                    await image.SaveAsync(physicalFilePath, encoder);
                 }
 
-                // Construct the URL to access the file using _baseUrl and _uploadFolder
+                // Construct the URL to access the file
                 var fileAccessUrl = uniqueFileName;
 
-                // Return the URL as the response
+                // Return the file access URL as the response
                 return Ok(new UploadResponse { FileName = fileAccessUrl });
             }
             catch (Exception ex)
             {
-                // Log the exception (Optional: Use a logging framework here)
+                // Log the exception and return a 500 status code
                 return StatusCode(500, $"Internal server error: {ex.Message}");
             }
             finally

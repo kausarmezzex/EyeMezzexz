@@ -4,6 +4,7 @@ using EyeMezzexz.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EyeMezzexz.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241014065552_Add UserComputerAssignment delete1")]
+    partial class AddUserComputerAssignmentdelete1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -323,6 +326,9 @@ namespace EyeMezzexz.Migrations
                     b.Property<TimeSpan?>("AssignedDuration")
                         .HasColumnType("time");
 
+                    b.Property<int?>("ComputerId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Country")
                         .HasColumnType("nvarchar(max)");
 
@@ -337,34 +343,13 @@ namespace EyeMezzexz.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ComputerId");
+
                     b.HasIndex("TaskId");
 
                     b.HasIndex("UserId");
 
                     b.ToTable("TaskAssignments");
-                });
-
-            modelBuilder.Entity("EyeMezzexz.Models.TaskAssignmentComputer", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("ComputerId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TaskAssignmentId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ComputerId");
-
-                    b.HasIndex("TaskAssignmentId");
-
-                    b.ToTable("TaskAssignmentComputers");
                 });
 
             modelBuilder.Entity("EyeMezzexz.Models.TaskNames", b =>
@@ -717,6 +702,10 @@ namespace EyeMezzexz.Migrations
 
             modelBuilder.Entity("EyeMezzexz.Models.TaskAssignment", b =>
                 {
+                    b.HasOne("EyeMezzexz.Models.Computer", "Computer")
+                        .WithMany()
+                        .HasForeignKey("ComputerId");
+
                     b.HasOne("EyeMezzexz.Models.TaskNames", "Task")
                         .WithMany()
                         .HasForeignKey("TaskId")
@@ -729,28 +718,11 @@ namespace EyeMezzexz.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.Navigation("Computer");
+
                     b.Navigation("Task");
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("EyeMezzexz.Models.TaskAssignmentComputer", b =>
-                {
-                    b.HasOne("EyeMezzexz.Models.Computer", "Computer")
-                        .WithMany()
-                        .HasForeignKey("ComputerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("EyeMezzexz.Models.TaskAssignment", "TaskAssignment")
-                        .WithMany("TaskAssignmentComputers")
-                        .HasForeignKey("TaskAssignmentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Computer");
-
-                    b.Navigation("TaskAssignment");
                 });
 
             modelBuilder.Entity("EyeMezzexz.Models.TaskNames", b =>
@@ -895,11 +867,6 @@ namespace EyeMezzexz.Migrations
                     b.Navigation("RolePermissions");
 
                     b.Navigation("UserPermissions");
-                });
-
-            modelBuilder.Entity("EyeMezzexz.Models.TaskAssignment", b =>
-                {
-                    b.Navigation("TaskAssignmentComputers");
                 });
 
             modelBuilder.Entity("EyeMezzexz.Models.TaskNames", b =>

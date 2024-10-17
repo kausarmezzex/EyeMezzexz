@@ -1,0 +1,91 @@
+﻿@model List<EyeMezzexz.Models.TaskAssignmentResponse>
+
+<h2 class="text-center mt-2 mb-4">All User Task Assignments</h2>
+
+<form method="get" asp-action="ViewAllUserTaskAssignments" class="form-inline justify-content-center mb-4">
+    <div class="form-row align-items-center">
+        <div class="col-auto">
+            <input type="text" class="form-control mb-2" id="userSearch" placeholder="Search user..." aria-label="Search user">
+        </div>
+        <div class="col-auto">
+            <div class="form-group mb-2">
+                <label for="assignedDate" class="sr-only">Assigned Date:</label>
+                <input type="date" name="assignedDate" class="form-control" value="@ViewData["AssignedDate"]" />
+            </div>
+        </div>
+        <div class="col-auto">
+            <button type="submit" class="btn btn-primary mb-2">Search</button>
+        </div>
+    </div>
+</form>
+
+
+
+@if (Model == null || !Model.Any())
+{
+    <p>No task assignments found.</p>
+}
+else
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>User</th>
+                <th>Tasks</th>
+                <th>Computers</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var userTask in Model)
+            {
+                <tr class="user-row">
+                    <td>@userTask.UserName</td>
+                    <td>
+                        <ul>
+                            @foreach (var task in userTask.Tasks)
+                            {
+                                <li>
+                                    <strong>@task.TaskName</strong> -
+                                    <span class="badge badge-primary">Duration: @task.AssignedDuration</span>
+                                    <span class="badge bg-warning">Target: @task.TargetQuantity</span>
+                                    <span class="badge bg-success">Country: @task.Country</span>
+                                    <span class="badge badge-dark">Assigned Date: @task.AssignedDate.ToString("yyyy-MM-dd")</span>
+                                </li>
+                            }
+                        </ul>
+                    </td>
+                    <td>
+                        @if (userTask.Computers.Any())
+                        {
+                            <ul>
+                                @foreach (var computer in userTask.Computers)
+                                {
+                                    <li>
+                                        <span class="badge bg-primary">@computer</span> <!-- Apply badge to each computer name -->
+                                    </li>
+                                }
+                            </ul>
+                        }
+                        else
+                        {
+                            <span>No computers assigned</span>
+                        }
+                    </td>
+
+
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+<script>
+    // User Search Logic
+    const userSearch = document.getElementById('userSearch');
+    userSearch.addEventListener('input', function () {
+        const searchValue = this.value.toLowerCase();
+        document.querySelectorAll('.user-row').forEach(row => {
+            const userName = row.querySelector('td').textContent.toLowerCase();
+            row.style.display = userName.includes(searchValue) ? '' : 'none';
+        });
+    });
+</script>

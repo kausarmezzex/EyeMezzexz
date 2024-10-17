@@ -25,8 +25,9 @@ builder.Services.AddSwaggerGen();
 
 // Configure DbContext with SQL Server database
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("E-CommDConnectionString")));
-
+    options.UseSqlServer(builder.Configuration.GetConnectionString("E-CommDConnectionString"))
+           .EnableSensitiveDataLogging() // Enable this to log the generated SQL
+           .LogTo(Console.WriteLine)); // Log SQL queries to the console
 // Configure Identity with default identity and roles
 builder.Services.AddDefaultIdentity<ApplicationUser>()
     .AddRoles<ApplicationRole>()

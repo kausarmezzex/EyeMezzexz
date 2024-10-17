@@ -2,6 +2,7 @@
 using EyeMezzexz.Models;
 using EyeMezzexz.Services;
 using MezzexEye.Services;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json;
@@ -15,12 +16,17 @@ namespace EyeMezzexz.Controllers
         private readonly WebServiceClient _webServiceClient;
         private readonly UserService _userService;
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
 
-        public AccountApiController(WebServiceClient webServiceClient, UserService userService, ApplicationDbContext context)
+        public AccountApiController(WebServiceClient webServiceClient, UserService userService, ApplicationDbContext context, UserManager<ApplicationUser> userManager,
+        SignInManager<ApplicationUser> signInManager)
         {
             _webServiceClient = webServiceClient;
             _userService = userService;
             _context = context;
+            _userManager = userManager;
+            _signInManager = signInManager;
 
         }
         [HttpPost("login")]
@@ -31,7 +37,36 @@ namespace EyeMezzexz.Controllers
                 return BadRequest(new { message = "Invalid login request." });
             }
 
+            // Step 1: Check if the user exists locally using UserManager
+            var user = await _userManager.FindByEmailAsync(loginRequest.Email);
+
+            if (user != null)
+            {
+                // Step 2: Verify the password using ASP.NET Core Identity
+                var isPasswordValid = await _userManager.CheckPasswordAsync(user, loginRequest.Password);
+                if (isPasswordValid)
+                {
+                    // Step 3: Check if the user is already logged in today
+                    var today = DateTime.UtcNow.Date;
+                    if (user.LastLoginTime.HasValue && user.LastLoginTime.Value.Date == today &&
+                       (!user.LastLogoutTime.HasValue || user.LastLoginTime > user.LastLogoutTime))
+                    {
+                        return BadRequest(new { message = "User already logged in on another device today." });
+                    }
+
+                    // Update user's login time and system name
+                    user.LastLoginTime = DateTime.UtcNow;
+                    user.SystemName = loginRequest.SystemName;
+                    _context.Users.Update(user);
+                    await _context.SaveChangesAsync();
+
+                    return Ok(new { message = "Login successful", userId = user.Id, username = $"{user.FirstName} {user.LastName}", country = user.CountryName });
+                }
+            }
+
+            // Step 4: If the user doesn't exist or the password doesn't match, call the external API for login details
             var response = await Task.Run(() => _webServiceClient.GetLoginDetail(loginRequest.Email, loginRequest.Password));
+
             if (string.IsNullOrEmpty(response))
             {
                 return NotFound(new { message = "Login details not found." });
@@ -47,14 +82,13 @@ namespace EyeMezzexz.Controllers
             var firstName = firstLoginDetail.FirstName;
             var lastName = firstLoginDetail.LastName;
 
-            // Check if the country name is "UK" and replace it with "United Kingdom"
+            // Adjust country name if needed
             var country = firstLoginDetail.CountryName == "UK" ? "United Kingdom" : firstLoginDetail.CountryName;
             var phoneNumber = firstLoginDetail.Phone;
 
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == loginRequest.Email);
+            // Step 5: Register the user if they don't exist locally
             if (user == null)
             {
-                // User does not exist, so create and register a new user
                 var registerViewModel = new RegisterViewModel
                 {
                     Email = loginRequest.Email,
@@ -64,9 +98,9 @@ namespace EyeMezzexz.Controllers
                     Gender = "Male",
                     Active = true,
                     Role = "Registered",
-                    CountryName = country, // Save the adjusted country name
+                    CountryName = country,
                     Phone = phoneNumber,
-                    SystemName = loginRequest.SystemName  // Save the system name during registration
+                    SystemName = loginRequest.SystemName
                 };
 
                 var result = await _userService.RegisterUser(registerViewModel);
@@ -75,18 +109,11 @@ namespace EyeMezzexz.Controllers
                     return BadRequest(new { message = "User registration failed." });
                 }
 
-                user = await _context.Users.FirstOrDefaultAsync(u => u.Email == loginRequest.Email);
+                user = await _userManager.FindByEmailAsync(loginRequest.Email);
             }
             else
             {
-                // Check if the user is already logged in today
-                var today = DateTime.UtcNow.Date;
-                if (user.LastLoginTime.HasValue && user.LastLoginTime.Value.Date == today && (!user.LastLogoutTime.HasValue || user.LastLoginTime > user.LastLogoutTime))
-                {
-                    return BadRequest(new { message = "User already logged in on another device today." });
-                }
-
-                // If user's country or phone number is missing, update with the current values
+                // Step 6: Update user's details if necessary
                 if (string.IsNullOrEmpty(user.CountryName) || string.IsNullOrEmpty(user.PhoneNumber))
                 {
                     user.CountryName = string.IsNullOrEmpty(user.CountryName) ? country : user.CountryName;
@@ -94,16 +121,14 @@ namespace EyeMezzexz.Controllers
                 }
             }
 
-            // Update the user's login time and system name each time they log in
+            // Step 7: Update login details
             user.LastLoginTime = DateTime.UtcNow;
-            user.SystemName = loginRequest.SystemName;  // Update the system name during login
+            user.SystemName = loginRequest.SystemName;
             _context.Users.Update(user);
             await _context.SaveChangesAsync();
 
             return Ok(new { message = "Login successful", userId = user.Id, username = $"{user.FirstName} {user.LastName}", country = user.CountryName });
         }
-
-
         [HttpPost("checkLogoutStatus")]
         public async Task<IActionResult> CheckLogoutStatus([FromBody] LogoutRequest logoutRequest)
         {
