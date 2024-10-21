@@ -23,7 +23,7 @@ namespace EyeMezzexz.Controllers
             _userManager = userManager;
         }
         [HttpPost("assignTasksToUser")]
-        public async Task<IActionResult> AssignTasksToUser(int userId,[FromBody] List<TaskAssignmentRequest> taskAssignments,[FromQuery] string country)
+        public async Task<IActionResult> AssignTasksToUser(int userId, [FromBody] List<TaskAssignmentRequest> taskAssignments, [FromQuery] string country)
         {
             // Validate task assignments
             if (taskAssignments == null || !taskAssignments.Any())
@@ -38,10 +38,37 @@ namespace EyeMezzexz.Controllers
                 return NotFound("User not found.");
             }
 
-            var taskAssignmentsToSave = new List<TaskAssignment>();
-
+            // Loop through each task assignment
             foreach (var taskAssignment in taskAssignments)
             {
+                // Use the assigned date from the taskAssignment object
+                var assignedDate = DateTime.UtcNow; // Ensure it's in Date format
+
+                // Remove existing task assignments for the user on the same assigned date
+                var existingTaskAssignments = await _context.TaskAssignments
+                    .Where(ta => ta.UserId == userId && ta.AssignedDate.Date == assignedDate)
+                    .ToListAsync();
+
+                if (existingTaskAssignments.Any())
+                {
+                    // Remove the existing task assignments
+                    _context.TaskAssignments.RemoveRange(existingTaskAssignments);
+
+                    // Only check and remove related TaskAssignmentComputer entries if the country is "UK"
+                    if (taskAssignment.Country == "UK")
+                    {
+                        // Get the task assignment IDs
+                        var existingTaskAssignmentIds = existingTaskAssignments.Select(ta => ta.Id).ToList();
+
+                        // Remove associated TaskAssignmentComputer records
+                        var existingTaskAssignmentComputers = await _context.TaskAssignmentComputers
+                            .Where(tac => existingTaskAssignmentIds.Contains(tac.TaskAssignmentId))
+                            .ToListAsync();
+
+                        _context.TaskAssignmentComputers.RemoveRange(existingTaskAssignmentComputers);
+                    }
+                }
+
                 // Validate if the task exists
                 var task = await _context.TaskNames.FindAsync(taskAssignment.TaskId);
                 if (task == null)
@@ -49,31 +76,18 @@ namespace EyeMezzexz.Controllers
                     return NotFound($"Task with ID {taskAssignment.TaskId} not found.");
                 }
 
-                // Check for existing task assignment on the same day
-                var existingTaskAssignment = await _context.TaskAssignments
-                    .Where(ta => ta.UserId == userId
-                        && ta.TaskId == taskAssignment.TaskId
-                        && ta.AssignedDate.Date == DateTime.UtcNow.Date) // Ensure date match
-                    .FirstOrDefaultAsync();
-
-                if (existingTaskAssignment != null)
-                {
-                    return Conflict($"Task ID {taskAssignment.TaskId} is already assigned to user on {DateTime.UtcNow.Date.ToShortDateString()}.");
-                }
-
-                // Create a new TaskAssignment entry
+                // Create a new TaskAssignment entry with the assigned date from taskAssignment
                 var newTaskAssignment = new TaskAssignment
                 {
                     UserId = userId,
                     TaskId = taskAssignment.TaskId,
                     AssignedDuration = taskAssignment.AssignedDuration,
                     TargetQuantity = taskAssignment.TargetQuantity,
-                    AssignedDate = DateTime.UtcNow,
+                    AssignedDate = assignedDate, // Use taskAssignment.AssignedDate
                     Country = taskAssignment.Country
                 };
 
-                // Add the task assignment to the list for saving
-                taskAssignmentsToSave.Add(newTaskAssignment);
+                _context.TaskAssignments.Add(newTaskAssignment);
 
                 // Handle the computer mappings if the task is for the "UK"
                 if (taskAssignment.Country == "UK")
@@ -99,7 +113,6 @@ namespace EyeMezzexz.Controllers
                             ComputerId = computerId
                         };
 
-                        // Add to the context for saving
                         _context.TaskAssignmentComputers.Add(taskAssignmentComputer);
                     }
                 }
@@ -107,9 +120,6 @@ namespace EyeMezzexz.Controllers
 
             try
             {
-                // Add the task assignments to the context
-                _context.TaskAssignments.AddRange(taskAssignmentsToSave);
-
                 // Save changes to the database
                 await _context.SaveChangesAsync();
             }
@@ -118,7 +128,40 @@ namespace EyeMezzexz.Controllers
                 return StatusCode(500, $"A database error occurred: {ex.Message}");
             }
 
-            return Ok(new { Message = "Tasks successfully assigned with the specified computers and details." });
+            return Ok(new { Message = "Tasks successfully reassigned with the specified computers and details." });
+        }
+
+        // GET: api/TaskAssignment/getAssignedTasks
+        // Retrieve tasks assigned to the user for today
+        [HttpGet("getAssignedTasks")]
+        public async Task<IActionResult> GetAssignedTasks(int userId)
+        {
+            var today = DateTime.UtcNow.Date;
+
+            var tasks = await _context.TaskAssignments
+                .Include(t => t.Task)
+                .Include(t => t.TaskAssignmentComputers) // Include related computer mappings
+                .ThenInclude(tac => tac.Computer) // Include computer details
+                .Where(t => t.UserId == userId && t.AssignedDate.Date == today)
+                .Select(t => new
+                {
+                    TaskId = t.TaskId,
+                    TaskName = t.Task.Name,
+                    AssignedDuration = t.AssignedDuration,
+                    TargetQuantity = t.TargetQuantity,
+                    Computers = t.TaskAssignmentComputers
+                                 .Select(tac => tac.Computer.Name)
+                                 .ToList(), // Retrieve a list of computer names
+                    Country = t.Country
+                })
+                .ToListAsync();
+
+            if (!tasks.Any())
+            {
+                return NotFound("No tasks assigned to the user today.");
+            }
+
+            return Ok(tasks);
         }
 
 
@@ -201,39 +244,6 @@ namespace EyeMezzexz.Controllers
         }
 
 
-
-        // GET: api/TaskAssignment/getAssignedTasks
-        // Retrieve tasks assigned to the user for today
-        [HttpGet("getAssignedTasks")]
-        public async Task<IActionResult> GetAssignedTasks(int userId)
-        {
-            var today = DateTime.UtcNow.Date;
-
-            var tasks = await _context.TaskAssignments
-                .Include(t => t.Task)
-                .Include(t => t.TaskAssignmentComputers) // Include related computer mappings
-                .ThenInclude(tac => tac.Computer) // Include computer details
-                .Where(t => t.UserId == userId && t.AssignedDate.Date == today)
-                .Select(t => new
-                {
-                    TaskId = t.TaskId,
-                    TaskName = t.Task.Name,
-                    AssignedDuration = t.AssignedDuration,
-                    TargetQuantity = t.TargetQuantity,
-                    Computers = t.TaskAssignmentComputers
-                                 .Select(tac => tac.Computer.Name)
-                                 .ToList(), // Retrieve a list of computer names
-                    Country = t.Country
-                })
-                .ToListAsync();
-
-            if (!tasks.Any())
-            {
-                return NotFound("No tasks assigned to the user today.");
-            }
-
-            return Ok(tasks);
-        }
         [HttpGet("getAllUserAssignedTasks")]
         public async Task<IActionResult> GetAllUserAssignedTasks(DateTime? assignedDate)
         {
@@ -284,5 +294,4 @@ namespace EyeMezzexz.Controllers
         }
 
     }
-
 }

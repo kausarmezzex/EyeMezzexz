@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Microsoft.Data.SqlClient;
+using MezzexEye.ViewModel;
 
 namespace MezzexEye.Controllers
 {
@@ -23,29 +24,79 @@ namespace MezzexEye.Controllers
             _logger = logger;
         }
 
-        // GET: Show all users, tasks, and computers for assignment
         [HttpGet]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string country = "India", DateTime? date = null)
         {
-            // Fetch all users without searching or sorting
-            var users = await _userManager.Users.ToListAsync();
+            // Get users filtered by country
+            var users = await _userManager.Users
+                                          .Where(u => u.CountryName == country)
+                                          .ToListAsync();
 
-            // Fetch tasks from the API
+            // Get tasks and computers
             var tasks = await _apiService.GetTasksListAsync();
-
-            // Fetch computers from the API
             var computers = await _apiService.GetAllComputersAsync();
 
-            // Create the view model with the user, task, and computer information
+            // Fetch user-task assignments filtered by date (if provided)
+            var userAssignments = await _apiService.GetAssignedTasksAsync(date);
+
+            // Map TaskAssignmentResponse to UserTaskAssignment
+            var mappedAssignments = userAssignments.Select(u => new UserTaskAssignment
+            {
+                UserId = u.UserId,
+                TaskAssignments = u.Tasks.Select(t => new TaskAssignmentViewModel
+                {
+                    TaskId = t.TaskId,
+                    AssignedDuration = t.AssignedDuration,
+                    AssignedDurationHours = t.AssignedDuration.Hours,
+                    TargetQuantity = t.TargetQuantity,
+                    Country = t.Country,
+                    ComputerIds = computers
+                        .Where(c => u.Computers.Contains(c.Name))
+                        .Select(c => c.Id)
+                        .ToList()
+                }).ToList()
+            }).ToList();
+
+            // Prepare the final model with users and their assignments
             var model = new UserTaskAssignmentViewModel
             {
-                Users = users,  // Use the ApplicationUser objects directly
+                Users = users,
                 AvailableTasks = tasks,
-                Computers = computers // Add computers list
+                Computers = computers,
+                CurrentCountry = country,
+                SelectedDate = date, // Pass the selected date to the view
+                UserTaskAssignments = mappedAssignments
             };
 
-            return View(model); // Pass the model to the view
+            return View(model);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAllUsersWithTasks(DateTime? assignedDate)
+        {
+            try
+            {
+                // Call the API service to get all users with assigned tasks
+                var usersWithTasks = await _apiService.GetAllUsersWithAssignedTasksAsync(assignedDate);
+
+                // Log the result
+                _logger.LogInformation("Retrieved {UserCount} users with task assignments on {Date}.", usersWithTasks.Count, assignedDate?.ToString("yyyy-MM-dd"));
+
+                // Pass the assignedDate to the view for persistence in the search field
+                ViewData["AssignedDate"] = assignedDate?.ToString("yyyy-MM-dd");
+
+                // Return the result to the view
+                return View(usersWithTasks); // Ensure usersWithTasks is of type List<UserTaskViewModel>
+            }
+            catch (Exception ex)
+            {
+                // Log any errors
+                _logger.LogError("Error retrieving users with task assignments: {Message}", ex.Message);
+                return StatusCode(500, "An error occurred while retrieving user task assignments.");
+            }
+        }
+
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AssignTasks(UserTaskAssignmentViewModel model)

@@ -4,6 +4,7 @@ using EyeMezzexz.Controllers; // Assuming this is the namespace of your API cont
 using EyeMezzexz.Models;
 using MezzexEye.Models;
 using MezzexEye.Services;
+using MezzexEye.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Logging;
@@ -386,7 +387,7 @@ public class ApiService : IApiService
 
         return data ?? new List<Computer>();
     }
-    public async Task<List<object>> GetAllUsersWithAssignedTasksAsync(DateTime? assignedDate)
+    public async Task<List<UserTaskViewModel>> GetAllUsersWithAssignedTasksAsync(DateTime? assignedDate)
     {
         // Call the TaskAssignmentController method
         var result = await _taskAssignmentController.GetAllUsersWithAssignedTasks(assignedDate);
@@ -397,11 +398,11 @@ public class ApiService : IApiService
         // Convert the result to JSON string for deserialization
         var jsonString = JsonConvert.SerializeObject(value);
 
-        // Deserialize the JSON string to a List of objects
-        var data = JsonConvert.DeserializeObject<List<object>>(jsonString);
+        // Deserialize the JSON string to a List of UserTaskViewModel objects
+        var data = JsonConvert.DeserializeObject<List<UserTaskViewModel>>(jsonString);
 
         // Return the data or an empty list if no data is found
-        return data ?? new List<object>();
+        return data ?? new List<UserTaskViewModel>();
     }
 
 
