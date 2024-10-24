@@ -23,74 +23,73 @@ namespace EyeMezzexz.Controllers
             _userManager = userManager;
         }
         [HttpPost("assignTasksToUser")]
-        public async Task<IActionResult> AssignTasksToUser(int userId, [FromBody] List<TaskAssignmentRequest> taskAssignments, [FromQuery] string country)
+        public async Task<IActionResult> AssignTasksToUser(int userId, [FromBody] List<TaskAssignmentRequest> taskAssignments, [FromQuery] string country, [FromQuery] DateTime? selectedDate)
         {
-            // Validate task assignments
             if (taskAssignments == null || !taskAssignments.Any())
             {
                 return BadRequest("No tasks provided.");
             }
 
-            // Validate user
             var user = await _userManager.FindByIdAsync(userId.ToString());
             if (user == null)
             {
                 return NotFound("User not found.");
             }
 
-            // Loop through each task assignment
+            // Ensure selectedDate is set
+            if (selectedDate == null)
+            {
+                return BadRequest("Selected date must be provided.");
+            }
+
+            // Remove any existing tasks for the user on the selected date
+            var existingTaskAssignments = await _context.TaskAssignments
+                .Where(ta => ta.UserId == userId && ta.AssignedDate.Date == selectedDate.Value.Date)
+                .ToListAsync();
+
+            if (existingTaskAssignments.Any())
+            {
+                // Remove the existing task assignments
+                _context.TaskAssignments.RemoveRange(existingTaskAssignments);
+
+                // Only remove related TaskAssignmentComputer entries if the country is "UK"
+                if (country == "United Kingdom")
+                {
+                    var existingTaskAssignmentIds = existingTaskAssignments.Select(ta => ta.Id).ToList();
+
+                    // Remove associated TaskAssignmentComputer records
+                    var existingTaskAssignmentComputers = await _context.TaskAssignmentComputers
+                        .Where(tac => existingTaskAssignmentIds.Contains(tac.TaskAssignmentId))
+                        .ToListAsync();
+
+                    _context.TaskAssignmentComputers.RemoveRange(existingTaskAssignmentComputers);
+                }
+            }
+
+            // Add the new task assignments
             foreach (var taskAssignment in taskAssignments)
             {
-                // Use the assigned date from the taskAssignment object
-                var assignedDate = DateTime.UtcNow; // Ensure it's in Date format
-
-                // Remove existing task assignments for the user on the same assigned date
-                var existingTaskAssignments = await _context.TaskAssignments
-                    .Where(ta => ta.UserId == userId && ta.AssignedDate.Date == assignedDate)
-                    .ToListAsync();
-
-                if (existingTaskAssignments.Any())
-                {
-                    // Remove the existing task assignments
-                    _context.TaskAssignments.RemoveRange(existingTaskAssignments);
-
-                    // Only check and remove related TaskAssignmentComputer entries if the country is "UK"
-                    if (taskAssignment.Country == "UK")
-                    {
-                        // Get the task assignment IDs
-                        var existingTaskAssignmentIds = existingTaskAssignments.Select(ta => ta.Id).ToList();
-
-                        // Remove associated TaskAssignmentComputer records
-                        var existingTaskAssignmentComputers = await _context.TaskAssignmentComputers
-                            .Where(tac => existingTaskAssignmentIds.Contains(tac.TaskAssignmentId))
-                            .ToListAsync();
-
-                        _context.TaskAssignmentComputers.RemoveRange(existingTaskAssignmentComputers);
-                    }
-                }
-
-                // Validate if the task exists
                 var task = await _context.TaskNames.FindAsync(taskAssignment.TaskId);
                 if (task == null)
                 {
                     return NotFound($"Task with ID {taskAssignment.TaskId} not found.");
                 }
 
-                // Create a new TaskAssignment entry with the assigned date from taskAssignment
+                // Create the new TaskAssignment entry
                 var newTaskAssignment = new TaskAssignment
                 {
                     UserId = userId,
                     TaskId = taskAssignment.TaskId,
                     AssignedDuration = taskAssignment.AssignedDuration,
                     TargetQuantity = taskAssignment.TargetQuantity,
-                    AssignedDate = assignedDate, // Use taskAssignment.AssignedDate
+                    AssignedDate = selectedDate.Value,  // Use the provided selected date
                     Country = taskAssignment.Country
                 };
 
                 _context.TaskAssignments.Add(newTaskAssignment);
 
-                // Handle the computer mappings if the task is for the "UK"
-                if (taskAssignment.Country == "UK")
+                // If the task is for the UK, handle the computer mappings
+                if (taskAssignment.Country == "United Kingdom")
                 {
                     if (!taskAssignment.ComputerIds.Any())
                     {
@@ -99,14 +98,12 @@ namespace EyeMezzexz.Controllers
 
                     foreach (var computerId in taskAssignment.ComputerIds)
                     {
-                        // Validate if the computer exists
                         var computer = await _context.Computers.FindAsync(computerId);
                         if (computer == null)
                         {
                             return NotFound($"Computer with ID {computerId} not found.");
                         }
 
-                        // Create a new TaskAssignmentComputer entry
                         var taskAssignmentComputer = new TaskAssignmentComputer
                         {
                             TaskAssignment = newTaskAssignment,
@@ -118,9 +115,9 @@ namespace EyeMezzexz.Controllers
                 }
             }
 
+            // Save changes to the database
             try
             {
-                // Save changes to the database
                 await _context.SaveChangesAsync();
             }
             catch (Exception ex)
@@ -244,6 +241,7 @@ namespace EyeMezzexz.Controllers
         }
 
 
+
         [HttpGet("getAllUserAssignedTasks")]
         public async Task<IActionResult> GetAllUserAssignedTasks(DateTime? assignedDate)
         {
@@ -293,5 +291,56 @@ namespace EyeMezzexz.Controllers
             return Ok(tasks);
         }
 
-    }
+		// GET: api/TaskAssignment/getTasksForUserWithCountry
+		[HttpGet("getTasksForUserWithCountry")]
+		public async Task<IActionResult> GetTasksForUserWithCountry(int userId, string country)
+		{
+			var today = DateTime.UtcNow.Date;
+
+			var user = await _userManager.FindByIdAsync(userId.ToString());
+			if (user == null)
+			{
+				return NotFound("User not found.");
+			}
+
+			var query = _context.TaskAssignments
+				.Include(t => t.Task)
+				.Where(t => t.UserId == userId && t.AssignedDate.Date == today)
+				.AsQueryable();
+
+			// Filter based on country
+			if (country == "United Kingdom")
+			{
+				query = query.Include(t => t.TaskAssignmentComputers)
+							 .ThenInclude(tac => tac.Computer); // Include computer details for UK
+			}
+
+			var tasks = await query.Select(t => new TaskDetail
+			{
+				TaskId = t.TaskId,
+				TaskName = t.Task.Name,
+				AssignedDuration = t.AssignedDuration ?? TimeSpan.Zero,
+				TargetQuantity = t.TargetQuantity ?? 0,
+				AssignedDate = t.AssignedDate,
+				Country = t.Country,
+				Computers = country == "United Kingdom" ? t.TaskAssignmentComputers.Select(tac => tac.Computer.Name).ToList() : null
+			}).ToListAsync();
+
+			if (!tasks.Any())
+			{
+				return NotFound("No tasks assigned to the user today.");
+			}
+
+			var response = new TaskAssignmentResponse
+			{
+				UserId = userId,
+				UserName = $"{user.FirstName} {user.LastName}",
+				Tasks = tasks,
+				Computers = tasks.SelectMany(t => t.Computers ?? new List<string>()).Distinct().ToList() // Only include if UK
+			};
+
+			return Ok(response);
+		}
+
+	}
 }

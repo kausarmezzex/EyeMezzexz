@@ -27,19 +27,22 @@ namespace MezzexEye.Controllers
         [HttpGet]
         public async Task<IActionResult> Index(string country = "India", DateTime? date = null)
         {
-            // Get users filtered by country
+            // If no date is provided, use the current date
+            date ??= DateTime.Now.Date;
+
+            // Query users by country
             var users = await _userManager.Users
                                           .Where(u => u.CountryName == country)
                                           .ToListAsync();
 
-            // Get tasks and computers
+            // Fetch tasks and computers
             var tasks = await _apiService.GetTasksListAsync();
             var computers = await _apiService.GetAllComputersAsync();
 
-            // Fetch user-task assignments filtered by date (if provided)
+            // Fetch user-task assignments filtered by date
             var userAssignments = await _apiService.GetAssignedTasksAsync(date);
 
-            // Map TaskAssignmentResponse to UserTaskAssignment
+            // Map user assignments to view model
             var mappedAssignments = userAssignments.Select(u => new UserTaskAssignment
             {
                 UserId = u.UserId,
@@ -57,19 +60,20 @@ namespace MezzexEye.Controllers
                 }).ToList()
             }).ToList();
 
-            // Prepare the final model with users and their assignments
+            // Create the view model
             var model = new UserTaskAssignmentViewModel
             {
                 Users = users,
                 AvailableTasks = tasks,
                 Computers = computers,
                 CurrentCountry = country,
-                SelectedDate = date, // Pass the selected date to the view
+                SelectedDate = date,
                 UserTaskAssignments = mappedAssignments
             };
 
             return View(model);
         }
+
 
         [HttpGet]
         public async Task<IActionResult> GetAllUsersWithTasks(DateTime? assignedDate)
@@ -146,10 +150,11 @@ namespace MezzexEye.Controllers
                 try
                 {
                     await _apiService.AssignTasksToUserAsync(
-                        userTaskAssignment.UserId,
-                        taskAssignments,
-                        userCountry
-                    );
+            userTaskAssignment.UserId,
+            taskAssignments,
+            userCountry,
+            model.SelectedDate // Pass the selected date here
+        );
                 }
                 catch (SqlException ex)
                 {

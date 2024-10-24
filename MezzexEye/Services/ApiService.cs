@@ -59,15 +59,15 @@ public class ApiService : IApiService
         _logger.LogError("Failed to deserialize data from API.");
         return new List<ScreenCaptureDataViewModel>();
     }
-    public async Task AssignTasksToUserAsync(int userId, List<TaskAssignmentRequest> taskAssignments, string country)
+    public async Task AssignTasksToUserAsync(int userId, List<TaskAssignmentRequest> taskAssignments, string country, DateTime? selectedDate)
     {
         // Log data for debugging
-        _logger.LogInformation("Assigning tasks for user {UserId} with tasks: {@TaskAssignments}, country: {Country}", userId, taskAssignments, country);
+        _logger.LogInformation("Assigning tasks for user {UserId} with tasks: {@TaskAssignments}, country: {Country}, date: {SelectedDate}", userId, taskAssignments, country, selectedDate);
 
         try
         {
-            // Call the API to assign tasks
-            await _taskAssignmentController.AssignTasksToUser(userId, taskAssignments, country);
+            // Call the API to assign tasks, passing selectedDate
+            await _taskAssignmentController.AssignTasksToUser(userId, taskAssignments, country, selectedDate);
         }
         catch (SqlException ex)
         {
@@ -76,6 +76,7 @@ public class ApiService : IApiService
             throw; // Re-throw to handle it further up the stack
         }
     }
+
 
 
     public async Task<List<TaskAssignmentResponse>> GetAssignedTasksAsync(DateTime? assignedDate)
