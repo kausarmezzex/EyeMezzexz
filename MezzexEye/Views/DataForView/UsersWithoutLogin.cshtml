@@ -6,12 +6,19 @@
 
 @if (Model != null && Model.Any())
 {
-    <table class="table table-striped">
+    <!-- Search Box -->
+    <div class="mb-3">
+        <input type="text" id="searchBox" class="form-control" placeholder="Search users...">
+    </div>
+
+    <button id="exportButton" class="btn btn-secondary mb-3">Export to Excel</button>
+
+    <table class="table table-striped" id="userTable">
         <thead>
             <tr>
-                <th>#</th>
-                <th>User Name</th>
-                <th>Last Login Time</th>
+                <th onclick="sortTable(0)">#</th>
+                <th onclick="sortTable(1)">User Name</th>
+                <th onclick="sortTable(2)">Last Login Time</th>
             </tr>
         </thead>
         <tbody>
@@ -21,7 +28,7 @@
                 <tr>
                     <td>@(i + 1)</td>
                     <td>@user.UserName</td>
-                    <td>@(user.LastLoginTime?.ToString("g") ?? "Never")</td> <!-- "g" format for concise date/time -->
+                    <td>@(user.LastLoginTime?.ToString("g") ?? "Never")</td>
                 </tr>
             }
         </tbody>
@@ -31,3 +38,53 @@ else
 {
     <p>No users found who haven't logged in today.</p>
 }
+
+<script>
+    // Search functionality
+    document.getElementById('searchBox').addEventListener('keyup', function() {
+        var filter = this.value.toUpperCase();
+        var rows = document.querySelector("#userTable tbody").rows;
+
+        for (var i = 0; i < rows.length; i++) {
+            var cells = rows[i].cells;
+            var match = false;
+            for (var j = 1; j < cells.length; j++) { // Exclude index column
+                if (cells[j].textContent.toUpperCase().indexOf(filter) > -1) {
+                    match = true;
+                    break;
+                }
+            }
+            rows[i].style.display = match ? "" : "none";
+        }
+    });
+
+    // Sorting functionality
+    function sortTable(n) {
+        var table = document.getElementById("userTable");
+        var rows = Array.from(table.rows).slice(1); // Exclude header row
+        var asc = table.rows[0].cells[n].classList.toggle('asc');
+
+        rows.sort(function (rowA, rowB) {
+            var cellA = rowA.cells[n].textContent.trim();
+            var cellB = rowB.cells[n].textContent.trim();
+
+            if (!isNaN(Date.parse(cellA)) && !isNaN(Date.parse(cellB))) {
+                return asc ? Date.parse(cellA) - Date.parse(cellB) : Date.parse(cellB) - Date.parse(cellA);
+            }
+
+            return asc ? cellA.localeCompare(cellB) : cellB.localeCompare(cellA);
+        });
+
+        rows.forEach(row => table.appendChild(row));
+    }
+
+    // Export to Excel functionality
+    document.getElementById('exportButton').addEventListener('click', function() {
+        let table = document.getElementById('userTable');
+        let wb = XLSX.utils.table_to_book(table);
+        XLSX.writeFile(wb, 'UsersWithoutLoginToday.xlsx');
+    });
+</script>
+
+<!-- Include the SheetJS library for exporting to Excel -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>

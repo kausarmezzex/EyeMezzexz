@@ -1,13 +1,14 @@
-﻿    using Microsoft.AspNetCore.Http;
-    using Microsoft.AspNetCore.Mvc;
-    using EyeMezzexz.Data;
-    using EyeMezzexz.Models;
-    using Microsoft.EntityFrameworkCore;
-    using Microsoft.AspNetCore.Identity;
-    using Microsoft.AspNetCore.Mvc.Rendering;
-    namespace EyeMezzexz.Controllers
-    {
-        [ApiController]
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using EyeMezzexz.Data;
+using EyeMezzexz.Models;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using EyeMezzexz.Models;
+namespace EyeMezzexz.Controllers
+{
+    [ApiController]
         [Route("api/[controller]")]
         public class DataController : ControllerBase
         {

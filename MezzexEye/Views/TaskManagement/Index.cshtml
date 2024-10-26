@@ -51,6 +51,20 @@
         font-size: 14px; /* Adjust as needed */
     }
 
+
+    h2 {
+        font-size: 1.25rem;
+    }
+
+    .table th, .table td {
+        font-size: 0.875rem;
+    }
+
+    .form-inline {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
 </style>
 <link rel="stylesheet" href="~/css/loader.css">
 <form asp-action="AssignTasks" method="post" id="taskAssignmentForm">
@@ -111,9 +125,9 @@
                                             <input type="checkbox"
                                                    class="computer-checkbox"
                                                    data-user-index="@i"
-                                                   name="UserTaskAssignments[@i].TaskAssignments[0].ComputerIds[]"
+                                                   name="UserTaskAssignments[@i].SelectedComputers[]"
                                                    value="@computer.Id"
-                                            @(userAssignment?.TaskAssignments.Any(ua => ua.ComputerIds.Contains(computer.Id)) == true ? "checked" : "") />
+                                            @(userAssignment?.TaskAssignments.SelectMany(t => t.ComputerIds).Contains(computer.Id) ?? false ? "checked" : "") />
                                             @computer.Name
                                         </label>
                                     }
@@ -131,10 +145,10 @@
                                         if (computer != null)
                                         {
                                             <div class="row mb-1">
-                                                <!-- Remove unnecessary empty div and apply col-6 directly -->
-                                                @* <div class="col-6">
-                                                    <span class="badge bg-primary p-2">@computer.Name</span>
-                                                </div> *@
+                                                 <!-- Remove unnecessary empty div and apply col-6 directly -->
+                                                 @* <div class="col-6">
+                                                     <span class="badge bg-primary p-2">@computer.Name</span>
+                                                 </div> *@
                                             </div>
                                         }
                                     }
@@ -194,7 +208,7 @@
                                                            class="form-control form-control-sm me-2" style="width:100px" min="1" placeholder="Time (hrs)" value="@task.AssignedDurationHours" />
 
                                                     <!-- Label for Quantity -->
-                                                    <label for="quantityInput-@i-@j" class="me-2" style="font-weight: normal; font-size: 14px;">Quantity:</label>
+                                                    <label for="quantityInput-@i-@j" class="me-2" style="font-weight: normal; font-size: 14px;">Qty:</label>
                                                     <input id="quantityInput-@i-@j" type="number" name="UserTaskAssignments[@i].TaskAssignments[@j].TargetQuantity"
                                                            class="form-control form-control-sm me-2" style="width:100px" placeholder="Quantity" value="@task.TargetQuantity" />
 
@@ -226,12 +240,12 @@
         // Function to dynamically update the selected computers display
         const updateSelectedComputers = (userIndex) => {
             const computerCheckboxes = document.querySelectorAll(`.computer-checkbox[data-user-index="${userIndex}"]`);
-            selectedComputersByUser[userIndex] = [];
+            selectedComputers[userIndex] = [];
 
             // Collect all checked computers
             computerCheckboxes.forEach(checkbox => {
                 if (checkbox.checked) {
-                    selectedComputersByUser[userIndex].push({
+                    selectedComputers[userIndex].push({
                         id: checkbox.value,
                         name: checkbox.parentElement.textContent.trim()
                     });
@@ -240,28 +254,38 @@
 
             const computerSelectionDisplay = document.getElementById(`computerSelectionDisplay-${userIndex}`);
             const selectedComputersList = document.getElementById(`selectedComputersList-${userIndex}`);
-            selectedComputersList.innerHTML = ''; // Clear previous selections
+
+            // Clear only dynamically added selections
+            selectedComputersList.querySelectorAll('.dynamic-computer').forEach(el => el.remove());
 
             // Display or hide the selected computers section
-            if (selectedComputersByUser[userIndex].length > 0) {
+            if (selectedComputers[userIndex].length > 0) {
                 computerSelectionDisplay.style.display = 'block';
                 let rowDiv = null;
 
-                // Render each selected computer
-                selectedComputersByUser[userIndex].forEach((computer, index) => {
+                // Render each selected computer, 2 per line
+                selectedComputers[userIndex].forEach((computer, index) => {
+                    // Create a new row div every 2 computers
                     if (index % 2 === 0) {
                         rowDiv = document.createElement('div');
-                        rowDiv.classList.add('computer-row');
+                        rowDiv.classList.add('row'); // Ensure row uses flexbox
                         selectedComputersList.appendChild(rowDiv);
                     }
 
+                    // Create the computer div and add it to the row
                     const computerDiv = document.createElement('div');
-                    computerDiv.className = 'd-inline-block w-auto me-1';
+                    computerDiv.className = 'dynamic-computer';                // Take equal space in the row
+                    computerDiv.style.margin = '0';               // Remove any margin
+                    computerDiv.style.padding = '5px';            // Small padding for inside the box
+                    computerDiv.style.boxSizing = 'border-box';   // Ensure padding is included in the width
                     computerDiv.textContent = computer.name;
                     rowDiv.appendChild(computerDiv);
                 });
             } else {
-                computerSelectionDisplay.style.display = 'none';
+                // Hide section if no dynamic selections
+                if (selectedComputersList.children.length === 0) {
+                    computerSelectionDisplay.style.display = 'none';
+                }
             }
         };
         // Clear previously added hidden inputs to prevent duplication
@@ -449,30 +473,42 @@
         const createTaskItem = (taskId, taskName, userIndex, taskIndex, computers) => {
             const listItem = document.createElement('li');
             listItem.className = 'list-group-item';
-            listItem.innerHTML = `
-                   <div class="d-flex justify-content-between align-items-center p-1">
-            <span class="task-name">${taskName}</span>
-            <div class="d-flex align-items-center">
-                <input type="hidden" name="UserTaskAssignments[${userIndex}].TaskAssignments[${taskIndex}].TaskId" value="${taskId}" />
-                <input type="hidden" name="UserTaskAssignments[${userIndex}].TaskAssignments[${taskIndex}].Country" value="${document.getElementById('countrySelect').value}" />
-                
-                <!-- Label for Time (hrs) -->
-                    <label for="timeInput-${userIndex}-${taskIndex}" class="me-2"  style="font-weight: normal; font-size: 14px;">Time (hrs):</label>
-                <input id="timeInput-${userIndex}-${taskIndex}" type="number" name="UserTaskAssignments[${userIndex}].TaskAssignments[${taskIndex}].AssignedDurationHours"
-                       class="form-control form-control-sm me-2 mr-1" min="1" style="width: 100px;" placeholder="Time (hrs)" />
-                    ${computers.map(computer => `<input type="hidden" name="UserTaskAssignments[${userIndex}].TaskAssignments[${taskIndex}].ComputerIds[]" value="${computer.id}" />`).join('')}
-                <!-- Label for Quantity -->
-                    <label for="quantityInput-${userIndex}-${taskIndex}" class="me-2"  style="font-weight: normal; font-size: 14px;">Quantity:</label>
-                <input id="quantityInput-${userIndex}-${taskIndex}" type="number" name="UserTaskAssignments[${userIndex}].TaskAssignments[${taskIndex}].TargetQuantity"
-                       class="form-control form-control-sm me-2 mr-1" style="width: 100px;" placeholder="Quantity" />
 
-                <button type="button" class="btn btn-danger btn-sm remove-task-btn">Remove</button>
+            // Generate hidden inputs for task and computers
+            let hiddenInputs = `
+            <input type="hidden" name="UserTaskAssignments[${userIndex}].TaskAssignments[${taskIndex}].TaskId" value="${taskId}" />
+            <input type="hidden" name="UserTaskAssignments[${userIndex}].TaskAssignments[${taskIndex}].Country" value="${document.getElementById('countrySelect').value}" />
+        `;
+
+            // Add unique hidden inputs for computers
+            computers.forEach(computer => {
+                const existingInput = listItem.querySelector(`input[value="${computer.id}"]`);
+                if (!existingInput) {
+                    hiddenInputs += `<input type="hidden" name="UserTaskAssignments[${userIndex}].TaskAssignments[${taskIndex}].ComputerIds[]" value="${computer.id}" />`;
+                }
+            });
+
+            // Build the inner HTML
+            listItem.innerHTML = `
+            <div class="d-flex justify-content-between align-items-center p-1">
+                <span class="task-name">${taskName}</span>
+                <div class="d-flex align-items-center">
+                    ${hiddenInputs}
+                        <label for="timeInput-${userIndex}-${taskIndex}" class="me-2" style="font-weight: normal; font-size: 14px;">Time (hrs):</label>
+                    <input id="timeInput-${userIndex}-${taskIndex}" type="number" name="UserTaskAssignments[${userIndex}].TaskAssignments[${taskIndex}].AssignedDurationHours"
+                           class="form-control form-control-sm me-2" min="1" placeholder="Time (hrs)" style="width: 100px;" />
+                        <label for="quantityInput-${userIndex}-${taskIndex}" class="me-2" style="font-weight: normal; font-size: 14px;">Qty:</label>
+                    <input id="quantityInput-${userIndex}-${taskIndex}" type="number" name="UserTaskAssignments[${userIndex}].TaskAssignments[${taskIndex}].TargetQuantity"
+                           class="form-control form-control-sm me-2" placeholder="Quantity" style="width: 100px;" />
+                    <button type="button" class="btn btn-danger btn-sm remove-task-btn">Remove</button>
+                </div>
             </div>
-        </div>`;
+        `;
+
             return listItem;
         };
 
-        // Handle dynamically adding tasks when a checkbox is clicked inside the dropdown
+        // Function to add or update the task list for the user
         document.querySelectorAll('.task-checkbox').forEach(checkbox => {
             checkbox.addEventListener('change', function () {
                 const userIndex = checkbox.getAttribute('data-user-index');
@@ -480,17 +516,17 @@
                 const taskId = checkbox.value;
                 const taskName = checkbox.parentElement.textContent.trim();
 
-                let taskIndex = taskList.children.length;
+                const taskIndex = taskList.children.length;
 
+                // If the task is selected
                 if (checkbox.checked) {
-                    // If the task is not already added, create a new task item
                     if (!taskList.querySelector(`input[value="${taskId}"]`)) {
                         const listItem = createTaskItem(taskId, taskName, userIndex, taskIndex, selectedComputers[userIndex] || []);
                         taskList.appendChild(listItem);
                         updateTaskCount(userIndex);
                     }
                 } else {
-                    // Remove the task if it gets unchecked
+                    // Remove the task if unchecked
                     const taskToRemove = taskList.querySelector(`input[value="${taskId}"]`);
                     if (taskToRemove) {
                         taskToRemove.closest('li').remove();

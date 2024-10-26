@@ -1,0 +1,141 @@
+﻿@model IEnumerable<EyeMezzexz.Models.Shift>
+@{
+    ViewData["Title"] = "Manage Shift";
+}
+
+<!-- Custom CSS for Decreased Text Size -->
+<style>
+    h2 {
+        font-size: 1.25rem;
+    }
+
+    .table th, .table td {
+        font-size: 0.875rem;
+    }
+
+    .form-inline {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+</style>
+
+<!-- Create New Shift Button with Modal Trigger -->
+<button class="btn btn-primary mt-2 mb-4" data-bs-toggle="modal" data-bs-target="#createShiftModal">
+    Create New Shift
+</button>
+
+<!-- Shift Table -->
+<table class="table">
+    <thead>
+        <tr>
+            <th>Shift Name</th>
+            <th>From Time</th>
+            <th>To Time</th>
+            <th>Created By</th>
+            <th>Created On</th>
+            <th>Modified By</th>
+            <th>Modified On</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var shift in Model)
+        {
+            <tr>
+                <td>@shift.ShiftName</td>
+                <td>@shift.FromTime</td>
+                <td>@shift.ToTime</td>
+                <td>@shift.CreatedBy</td>
+                <td>@shift.CreatedOn.ToString("yyyy-MM-dd HH:mm")</td>
+                <td>@shift.ModifiedBy</td>
+                <td>@shift.ModifiedOn?.ToString("yyyy-MM-dd HH:mm")</td>
+                <td>
+                    <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#editShiftModal"
+                       data-id="@shift.ShiftId" class="edit-shift-link">Edit</a> |
+                    <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#deleteShiftModal"
+                       data-id="@shift.ShiftId" class="delete-shift-link">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<!-- Create Shift Modal -->
+<div class="modal fade" id="createShiftModal" tabindex="-1" aria-labelledby="createShiftModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="createShiftModalLabel">Create Shift</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Content will be loaded here -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Edit Shift Modal -->
+<div class="modal fade" id="editShiftModal" tabindex="-1" aria-labelledby="editShiftModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editShiftModalLabel">Edit Shift</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Content will be loaded here -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Delete Shift Modal -->
+<div class="modal fade" id="deleteShiftModal" tabindex="-1" aria-labelledby="deleteShiftModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteShiftModalLabel">Delete Shift</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Content will be loaded here -->
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Load Create Shift form in modal
+        document.getElementById('createShiftModal').addEventListener('show.bs.modal', function () {
+            const modalBody = this.querySelector('.modal-body');
+            fetch('@Url.Action("Create")')
+                .then(response => response.text())
+                .then(html => modalBody.innerHTML = html);
+        });
+
+        // Load Edit Shift form in modal
+        document.querySelectorAll('.edit-shift-link').forEach(link => {
+            link.addEventListener('click', function () {
+                const shiftId = this.getAttribute('data-id');
+                const modalBody = document.querySelector('#editShiftModal .modal-body');
+                fetch(`/ManageShift/Edit/${shiftId}`)
+                    .then(response => response.text())
+                    .then(html => modalBody.innerHTML = html);
+            });
+        });
+
+        // Load Delete Shift confirmation in modal
+        document.querySelectorAll('.delete-shift-link').forEach(link => {
+            link.addEventListener('click', function () {
+                const shiftId = this.getAttribute('data-id');
+                const modalBody = document.querySelector('#deleteShiftModal .modal-body');
+                fetch(`/ManageShift/Delete/${shiftId}`)
+                    .then(response => response.text())
+                    .then(html => modalBody.innerHTML = html);
+            });
+        });
+    </script>
+}

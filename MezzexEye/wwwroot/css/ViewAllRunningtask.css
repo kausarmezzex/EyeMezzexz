@@ -1,0 +1,49 @@
+﻿/* Compact Stat Box Styling */
+.stat-box {
+    width: 48%;
+    max-width: 180px; /* Reduced max width for compact display */
+    padding: 0.75rem; /* Reduced padding */
+    border-radius: 0.4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-color: #ffffff; /* White background for cleaner look */
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+    .stat-box:hover {
+        transform: scale(1.03); /* Slightly smaller scale on hover */
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15); /* Softer shadow */
+    }
+
+.stat-value {
+    font-size: 1.3rem; /* Adjusted font size for compact view */
+    font-weight: bold;
+    color: #ffffff; /* Darker color for better contrast */
+}
+
+small {
+    font-size: 0.85rem;
+    color: #ffffff; /* Softer color for labels */
+}
+
+/* Additional Hover Effects */
+.table-hover tbody tr:hover {
+    background-color: #f2f4f6; /* Light hover color */
+}
+
+/* Button Styling */
+#exportButton i {
+    font-size: 0.9rem; /* Slightly smaller icon in button */
+}
+
+/* Responsive Styling */
+@media (max-width: 768px) {
+    .stat-box {
+        width: 100%;
+        max-width: 100%;
+        margin-bottom: 1rem; /* Space between boxes when stacked */
+    }
+}

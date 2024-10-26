@@ -92,7 +92,6 @@ namespace MezzexEye.Controllers
                 searchValue = searchValue.ToLower(); // Optional: make search case-insensitive
 
                 users = users.Where(u =>
-                    u.UserName.ToLower().Contains(searchValue) ||        // Search by username
                     u.Email.ToLower().Contains(searchValue) ||           // Search by email
                     u.FirstName.ToLower().Contains(searchValue) ||       // Search by first name
                     u.LastName.ToLower().Contains(searchValue) ||        // Search by last name
@@ -120,7 +119,6 @@ namespace MezzexEye.Controllers
                 userViewModels.Add(new UserViewModel
                 {
                     Id = user.Id,
-                    UserName = user.UserName,
                     Email = user.Email,
                     FirstName = user.FirstName,
                     LastName = user.LastName,
@@ -215,6 +213,41 @@ namespace MezzexEye.Controllers
             return View(model);
         }
 
+        [HttpGet]
+        public IActionResult ChangePassword()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> ChangePassword(ChangePasswordViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            // Find the user by email
+            var user = await _userManager.FindByEmailAsync(model.Email);
+            if (user == null)
+            {
+                ModelState.AddModelError(string.Empty, "User not found.");
+                return View(model);
+            }
+
+            // Change the user's password
+            var result = await _userManager.ChangePasswordAsync(user, model.OldPassword, model.NewPassword);
+
+            if (result.Succeeded)
+            {
+                TempData["SuccessMessage"] = "Password changed successfully.";
+                return RedirectToAction("AllUsers");
+            }
+
+            // Add errors to the ModelState to display in the view
+            AddErrors(result);
+            return View(model);
+        }
+
         public async Task<int> GetTotalUsers()
         {
             var users = _userManager.Users.ToList();
@@ -235,7 +268,6 @@ namespace MezzexEye.Controllers
                 userViewModels.Add(new UserViewModel
                 {
                     Id = user.Id,
-                    UserName = user.UserName,
                     Email = user.Email,
                     FirstName = user.FirstName,
                     LastName = user.LastName,
@@ -251,7 +283,6 @@ namespace MezzexEye.Controllers
             var worksheet = package.Workbook.Worksheets.Add("Users");
 
             // Add Headers
-            worksheet.Cells[1, 1].Value = "Username";
             worksheet.Cells[1, 2].Value = "Email";
             worksheet.Cells[1, 3].Value = "First Name";
             worksheet.Cells[1, 4].Value = "Last Name";
@@ -265,7 +296,6 @@ namespace MezzexEye.Controllers
             for (int i = 0; i < userViewModels.Count; i++)
             {
                 var user = userViewModels[i];
-                worksheet.Cells[i + 2, 1].Value = user.UserName;
                 worksheet.Cells[i + 2, 2].Value = user.Email;
                 worksheet.Cells[i + 2, 3].Value = user.FirstName;
                 worksheet.Cells[i + 2, 4].Value = user.LastName;
@@ -283,9 +313,5 @@ namespace MezzexEye.Controllers
             string excelName = $"Users-{DateTime.Now:yyyyMMddHHmmss}.xlsx";
             return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", excelName);
         }
-
-
-
-
     }
 }

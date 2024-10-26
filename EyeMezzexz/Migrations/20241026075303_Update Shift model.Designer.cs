@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EyeMezzexz.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241005092423_Add new class taskassign")]
-    partial class Addnewclasstaskassign
+    [Migration("20241026075303_Update Shift model")]
+    partial class UpdateShiftmodel
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -177,6 +177,9 @@ namespace EyeMezzexz.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("TargetQuantity")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.ToTable("Computers");
@@ -246,6 +249,45 @@ namespace EyeMezzexz.Migrations
                     b.HasIndex("PermissionId");
 
                     b.ToTable("RolePermissions");
+                });
+
+            modelBuilder.Entity("EyeMezzexz.Models.Shift", b =>
+                {
+                    b.Property<int>("ShiftId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ShiftId"));
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<TimeSpan>("FromTime")
+                        .HasColumnType("time");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ShiftName")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<TimeSpan>("ToTime")
+                        .HasColumnType("time");
+
+                    b.HasKey("ShiftId");
+
+                    b.ToTable("Shifts");
                 });
 
             modelBuilder.Entity("EyeMezzexz.Models.StaffAssignToTeam", b =>
@@ -320,8 +362,14 @@ namespace EyeMezzexz.Migrations
                     b.Property<DateTime>("AssignedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<TimeSpan>("AssignedDuration")
+                    b.Property<TimeSpan?>("AssignedDuration")
                         .HasColumnType("time");
+
+                    b.Property<string>("Country")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("TargetQuantity")
+                        .HasColumnType("int");
 
                     b.Property<int>("TaskId")
                         .HasColumnType("int");
@@ -336,6 +384,29 @@ namespace EyeMezzexz.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("TaskAssignments");
+                });
+
+            modelBuilder.Entity("EyeMezzexz.Models.TaskAssignmentComputer", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ComputerId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TaskAssignmentId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ComputerId");
+
+                    b.HasIndex("TaskAssignmentId");
+
+                    b.ToTable("TaskAssignmentComputers");
                 });
 
             modelBuilder.Entity("EyeMezzexz.Models.TaskNames", b =>
@@ -705,6 +776,25 @@ namespace EyeMezzexz.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("EyeMezzexz.Models.TaskAssignmentComputer", b =>
+                {
+                    b.HasOne("EyeMezzexz.Models.Computer", "Computer")
+                        .WithMany()
+                        .HasForeignKey("ComputerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("EyeMezzexz.Models.TaskAssignment", "TaskAssignment")
+                        .WithMany("TaskAssignmentComputers")
+                        .HasForeignKey("TaskAssignmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Computer");
+
+                    b.Navigation("TaskAssignment");
+                });
+
             modelBuilder.Entity("EyeMezzexz.Models.TaskNames", b =>
                 {
                     b.HasOne("EyeMezzexz.Models.Country", "Country")
@@ -847,6 +937,11 @@ namespace EyeMezzexz.Migrations
                     b.Navigation("RolePermissions");
 
                     b.Navigation("UserPermissions");
+                });
+
+            modelBuilder.Entity("EyeMezzexz.Models.TaskAssignment", b =>
+                {
+                    b.Navigation("TaskAssignmentComputers");
                 });
 
             modelBuilder.Entity("EyeMezzexz.Models.TaskNames", b =>

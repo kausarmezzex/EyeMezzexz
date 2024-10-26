@@ -1,20 +1,30 @@
 ﻿@model IEnumerable<EyeMezzexz.Models.TaskNames>
 
 @{
-    ViewData["Title"] = "Tasks";
+    ViewData["Title"] = "All Tasks";
     int totalTasks = ViewBag.TotalTasks;
     int pageSize = ViewBag.PageSize;
     int currentPage = ViewBag.CurrentPage;
 }
+<style>
+    h2 {
+        font-size: 1.25rem;
+    }
 
+    .table th, .table td {
+        font-size: 0.875rem;
+    }
+
+    .form-inline {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+</style>
 <div class="container">
 
-    <p>
-        <a asp-action="Create" class="btn btn-primary">Create New Task</a>
-    </p>
-
     <div class="row mb-3">
-        <div class="col-md-6 mb-3">
+        <div class="col-md-4 mb-3">
             <label for="countrySelect" class="mb-2">Filter by Country</label>
             <select class="form-control" id="countrySelect" name="countrySelect">
                 <option value="">[All]</option>
@@ -24,11 +34,15 @@
                 }
             </select>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-4 mb-3">
             <label for="searchBox" class="mb-2">Search</label>
             <input type="text" class="form-control" id="searchBox" placeholder="Search tasks">
         </div>
+        <div class="col-md-4 text-right">
+            <a asp-action="Create" class="btn btn-primary mt-4">Create New Task</a>
+        </div>
     </div>
+
 
     <div class="table-responsive">
         <table class="table">

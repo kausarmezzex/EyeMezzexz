@@ -248,6 +248,45 @@ namespace EyeMezzexz.Migrations
                     b.ToTable("RolePermissions");
                 });
 
+            modelBuilder.Entity("EyeMezzexz.Models.Shift", b =>
+                {
+                    b.Property<int>("ShiftId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ShiftId"));
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<TimeSpan>("FromTime")
+                        .HasColumnType("time");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ShiftName")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<TimeSpan>("ToTime")
+                        .HasColumnType("time");
+
+                    b.HasKey("ShiftId");
+
+                    b.ToTable("Shifts");
+                });
+
             modelBuilder.Entity("EyeMezzexz.Models.StaffAssignToTeam", b =>
                 {
                     b.Property<int>("Id")

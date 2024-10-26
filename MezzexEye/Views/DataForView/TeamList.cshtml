@@ -1,16 +1,28 @@
 ﻿@model List<EyeMezzexz.Models.TeamViewModel>
+@{
+    ViewBag.Title = "All Team List";
+}
 
-<h2>Team List</h2>
+<!-- Create Team Button -->
+<div class="mb-3">
+    <a asp-controller="DataForView" asp-action="CreateTeam" class="btn btn-success">Create Team</a>
+    <button id="exportButton" class="btn btn-secondary">Export to Excel</button>
+</div>
 
-<table class="table">
+<!-- Search Box -->
+<div class="mb-3">
+    <input type="text" id="searchBox" class="form-control" placeholder="Search teams...">
+</div>
+
+<table class="table" id="teamTable">
     <thead>
         <tr>
-            <th>Team Name</th>
-            <th>Country</th>
-            <th>Created On</th>
-            <th>Created By</th>
-            <th>Modified By</th>
-            <th>Actions</th>  <!-- New column for actions -->
+            <th onclick="sortTable(0)">Team Name</th>
+            <th onclick="sortTable(1)">Country</th>
+            <th onclick="sortTable(2)">Created On</th>
+            <th onclick="sortTable(3)">Created By</th>
+            <th onclick="sortTable(4)">Modified By</th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -30,3 +42,53 @@
         }
     </tbody>
 </table>
+
+<script>
+    // Search functionality
+    document.getElementById('searchBox').addEventListener('keyup', function() {
+        var filter = this.value.toUpperCase();
+        var rows = document.querySelector("#teamTable tbody").rows;
+
+        for (var i = 0; i < rows.length; i++) {
+            var cells = rows[i].cells;
+            var match = false;
+            for (var j = 0; j < cells.length - 1; j++) {  // Exclude actions column
+                if (cells[j].textContent.toUpperCase().indexOf(filter) > -1) {
+                    match = true;
+                    break;
+                }
+            }
+            rows[i].style.display = match ? "" : "none";
+        }
+    });
+
+    // Sorting functionality
+    function sortTable(n) {
+        var table = document.getElementById("teamTable");
+        var rows = Array.from(table.rows).slice(1); // Exclude header row
+        var asc = table.rows[0].cells[n].classList.toggle('asc');
+
+        rows.sort(function (rowA, rowB) {
+            var cellA = rowA.cells[n].textContent.trim();
+            var cellB = rowB.cells[n].textContent.trim();
+
+            if (!isNaN(Date.parse(cellA)) && !isNaN(Date.parse(cellB))) {
+                return asc ? Date.parse(cellA) - Date.parse(cellB) : Date.parse(cellB) - Date.parse(cellA);
+            }
+
+            return asc ? cellA.localeCompare(cellB) : cellB.localeCompare(cellA);
+        });
+
+        rows.forEach(row => table.appendChild(row));
+    }
+
+    // Export to Excel functionality
+    document.getElementById('exportButton').addEventListener('click', function() {
+        let table = document.getElementById('teamTable');
+        let wb = XLSX.utils.table_to_book(table);
+        XLSX.writeFile(wb, 'Teams.xlsx');
+    });
+</script>
+
+<!-- Include the SheetJS library for exporting to Excel -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>

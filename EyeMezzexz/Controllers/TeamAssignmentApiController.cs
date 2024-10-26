@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using EyeMezzexz.Models;
 using EyeMezzexz.Data;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using EyeMezzexz.Models;
 
 namespace EyeMezzexz.Controllers
 {

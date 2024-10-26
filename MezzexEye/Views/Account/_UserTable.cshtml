@@ -1,12 +1,42 @@
 ﻿@model IEnumerable<MezzexEye.ViewModel.UserViewModel>
 
+<style>
+    /* Table styling */
+    table.table {
+        font-size: 0.8rem; /* Smaller font for the table */
+        word-break: break-word; /* Allow content to break if too long */
+    }
+
+    /* Smaller Action Button */
+    .btn-group .btn {
+        padding: 0.2rem 0.4rem;
+        font-size: 0.7rem; /* Make button text smaller */
+        max-width: 7rem; /* Limit button width */
+        white-space: nowrap;
+    }
+
+    .btn-group .dropdown-menu {
+        min-width: auto; /* Automatically fits to content width */
+        white-space: nowrap; /* Prevents text wrapping */
+    }
+
+        /* Dropdown item adjustments for a compact look */
+        .btn-group .dropdown-menu .dropdown-item {
+            font-size: 0.75rem; /* Smaller font */
+            padding: 0.2rem 0.4rem; /* Compact padding */
+        }
+
+    /* Fix for lingering modal backdrop */
+    .modal-backdrop {
+        z-index: -1 !important; /* Ensure it doesn’t linger */
+    }
+</style>
+
 <table class="table table-striped">
     <thead>
         <tr>
-            <th><a href="#" class="sort" data-sort-by="username">Username</a></th>
-            <th><a href="#" class="sort" data-sort-by="email">Email</a></th>
-            <th><a href="#" class="sort" data-sort-by="firstname">First Name</a></th>
-            <th><a href="#" class="sort" data-sort-by="lastname">Last Name</a></th>
+            <th><a href="#" class="sort small-text" data-sort-by="email">Email</a></th>
+            <th><a href="#" class="sort small-text" data-sort-by="firstname">First Name</a></th>
             <th>Gender</th>
             <th>Active</th>
             <th>Country</th>
@@ -19,19 +49,85 @@
         @foreach (var user in Model)
         {
             <tr>
-                <td>@user.UserName</td>
                 <td>@user.Email</td>
                 <td>@user.FirstName</td>
-                <td>@user.LastName</td>
                 <td>@user.Gender</td>
                 <td>@user.Active</td>
                 <td>@user.CountryName</td>
                 <td>@user.Phone</td>
                 <td>@string.Join(", ", user.Roles)</td>
                 <td>
-                    <a asp-action="EditUser" asp-route-id="@user.Id" class="btn btn-primary">Edit</a>
+                    <div class="actions-wrapper">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Actions
+                            </button>
+                            <div class="dropdown-menu">
+                                <!-- Ensure route-id is correct and matches controller requirements -->
+                                <a asp-action="EditUser" asp-route-id="@user.Id" class="dropdown-item small-text">Edit Profile</a>
+                                <!-- Updated "Change Password" link with data-email attribute -->
+                                <a href="javascript:void(0);" onclick="openModal('@user.Email')"
+                                   class="dropdown-item small-text" data-toggle="modal" data-target="#changePasswordModal">
+                                    Change Password
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                 </td>
             </tr>
         }
     </tbody>
 </table>
+
+<!-- Change Password Modal -->
+<div class="modal fade" id="changePasswordModal" tabindex="-1" role="dialog" aria-labelledby="changePasswordModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <input type="hidden" id="hiddenEmail" value="" />
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="changePasswordModalLabel">Change Password</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form asp-action="ChangePassword" method="post">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="Email">Email</label>
+                        <input type="email" name="Email" id="modalEmail" class="form-control" readonly />
+                    </div>
+                    <div class="form-group">
+                        <label for="OldPassword">Old Password</label>
+                        <input type="password" name="OldPassword" class="form-control" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="NewPassword">New Password</label>
+                        <input type="password" name="NewPassword" class="form-control" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="ConfirmPassword">Confirm Password</label>
+                        <input type="password" name="ConfirmPassword" class="form-control" required />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Change Password</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    function openModal(email) {
+        $('#changePasswordModal').modal('show'); // Show the modal
+        $('#modalEmail').val(email); // Set the email
+        $('#modalEmail').focus(); // Focus on email input
+    }
+
+    // Remove lingering backdrop when modal closes
+    $('#changePasswordModal').on('hidden.bs.modal', function () {
+        $('.modal-backdrop').remove(); // Remove any remaining backdrop
+    });
+</script>

@@ -15,6 +15,7 @@ builder.Logging.AddConsole();
 builder.Services.AddTransient<WebServiceClient>(); // Register WebServiceClient
 builder.Services.AddTransient<UserService>(); // Register UserService
 builder.Services.AddTransient<DataController>();
+builder.Services.AddTransient<ShiftController>();
 builder.Services.AddScoped<TaskAssignmentController>();
 builder.Services.AddTransient<AccountApiController>();
 builder.Services.AddTransient<ApiService>();
@@ -23,6 +24,7 @@ builder.Services.AddTransient<TeamAssignmentApiController>();
 builder.Services.AddScoped<DataForViewController>();
 builder.Services.AddScoped<AccountController>();
 builder.Services.AddScoped<TaskManagementController>();
+builder.Services.AddScoped<IShiftApiService, ShiftApiService>();
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 

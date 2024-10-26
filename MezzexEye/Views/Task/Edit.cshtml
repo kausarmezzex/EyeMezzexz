@@ -5,7 +5,21 @@
     var isUs = Model.CountryId == 2; // Assuming '2' is the ID for the United States
 }
 
-<h2>Edit Task</h2>
+<style>
+    h2 {
+        font-size: 1.25rem;
+    }
+
+    .table th, .table td {
+        font-size: 0.875rem;
+    }
+
+    .form-inline {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+</style>
 
 <form asp-action="Edit" method="post" class="needs-validation" novalidate>
 

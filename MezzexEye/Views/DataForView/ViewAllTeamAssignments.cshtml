@@ -4,15 +4,26 @@
     ViewData["Title"] = "All Team Assignments";
 }
 
+<!-- Add Staff To Team Button -->
+<div class="mb-3">
+    <a asp-controller="DataForView" asp-action="AssignUserToTeam" class="btn btn-success">Add Staff To Team</a>
+    <button id="exportButton" class="btn btn-secondary">Export to Excel</button>
+</div>
+
+<!-- Search Box -->
+<div class="mb-3">
+    <input type="text" id="searchBox" class="form-control" placeholder="Search assignments...">
+</div>
+
 @if (Model != null && Model.Any())
 {
-    <table class="table table-striped table-bordered">
+    <table class="table table-striped table-bordered" id="assignmentTable">
         <thead>
             <tr>
-                <th>Team Name</th>
-                <th>User Name</th>
-                <th>Country Name</th>
-                <th>Assigned On</th>
+                <th onclick="sortTable(0)">Team Name</th>
+                <th onclick="sortTable(1)">User Name</th>
+                <th onclick="sortTable(2)">Country Name</th>
+                <th onclick="sortTable(3)">Assigned On</th>
             </tr>
         </thead>
         <tbody>
@@ -32,3 +43,53 @@ else
 {
     <p>No team assignments found.</p>
 }
+
+<script>
+    // Search functionality
+    document.getElementById('searchBox').addEventListener('keyup', function() {
+        var filter = this.value.toUpperCase();
+        var rows = document.querySelector("#assignmentTable tbody").rows;
+
+        for (var i = 0; i < rows.length; i++) {
+            var cells = rows[i].cells;
+            var match = false;
+            for (var j = 0; j < cells.length; j++) {
+                if (cells[j].textContent.toUpperCase().indexOf(filter) > -1) {
+                    match = true;
+                    break;
+                }
+            }
+            rows[i].style.display = match ? "" : "none";
+        }
+    });
+
+    // Sorting functionality
+    function sortTable(n) {
+        var table = document.getElementById("assignmentTable");
+        var rows = Array.from(table.rows).slice(1); // Exclude header row
+        var asc = table.rows[0].cells[n].classList.toggle('asc');
+
+        rows.sort(function (rowA, rowB) {
+            var cellA = rowA.cells[n].textContent.trim();
+            var cellB = rowB.cells[n].textContent.trim();
+
+            if (!isNaN(Date.parse(cellA)) && !isNaN(Date.parse(cellB))) {
+                return asc ? Date.parse(cellA) - Date.parse(cellB) : Date.parse(cellB) - Date.parse(cellA);
+            }
+
+            return asc ? cellA.localeCompare(cellB) : cellB.localeCompare(cellA);
+        });
+
+        rows.forEach(row => table.appendChild(row));
+    }
+
+    // Export to Excel functionality
+    document.getElementById('exportButton').addEventListener('click', function() {
+        let table = document.getElementById('assignmentTable');
+        let wb = XLSX.utils.table_to_book(table);
+        XLSX.writeFile(wb, 'TeamAssignments.xlsx');
+    });
+</script>
+
+<!-- Include the SheetJS library for exporting to Excel -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>

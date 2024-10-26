@@ -1,6 +1,9 @@
 ﻿@model IEnumerable<MezzexEye.ViewModel.UserViewModel>
 
-<h2>All Users</h2>
+@{
+    ViewBag.Title = "All Users";
+}
+
 
 <!-- Universal Search Form -->
 <form id="searchForm" class="row mb-3">
@@ -14,15 +17,21 @@
 
 <!-- Export to Excel Button -->
 <div class="row mb-3">
-    <div class="col-md-12 text-right">
+    <div class="col-md-6 text-left">
         <a href="@Url.Action("ExportToExcel", "Account")" class="btn btn-success">Export to Excel</a>
     </div>
+    <div class="col-md-6 text-right">
+        <a href="@Url.Action("Register", "Account")" class="btn btn-success">Add User</a>
+    </div>
 </div>
+
+
 
 <!-- User Table -->
 <div id="userTable">
     @await Html.PartialAsync("_UserTable", Model)
 </div>
+
 
 @section Scripts {
     <script>

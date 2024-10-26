@@ -5,31 +5,35 @@
 namespace EyeMezzexz.Migrations
 {
     /// <inheritdoc />
-    public partial class Add : Migration
+    public partial class UpdateShiftmodel : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AlterColumn<string>(
-                name: "CountryName",
-                table: "AspNetUsers",
-                type: "nvarchar(max)",
+                name: "ModifiedBy",
+                table: "Shifts",
+                type: "nvarchar(100)",
+                maxLength: 100,
                 nullable: true,
                 oldClrType: typeof(string),
-                oldType: "nvarchar(max)");
+                oldType: "nvarchar(100)",
+                oldMaxLength: 100);
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AlterColumn<string>(
-                name: "CountryName",
-                table: "AspNetUsers",
-                type: "nvarchar(max)",
+                name: "ModifiedBy",
+                table: "Shifts",
+                type: "nvarchar(100)",
+                maxLength: 100,
                 nullable: false,
                 defaultValue: "",
                 oldClrType: typeof(string),
-                oldType: "nvarchar(max)",
+                oldType: "nvarchar(100)",
+                oldMaxLength: 100,
                 oldNullable: true);
         }
     }

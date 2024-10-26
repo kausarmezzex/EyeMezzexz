@@ -13,19 +13,19 @@
         public List<string> Computers { get; set; } = new List<string>();
     }
 
-	public class TaskDetail
-	{
-		// Task Information
-		public int TaskId { get; set; }
-		public string TaskName { get; set; }
+    public class TaskDetail
+    {
+        // Task Information
+        public int TaskId { get; set; }
+        public string TaskName { get; set; }
 
-		// Task Assignment Details
-		public TimeSpan AssignedDuration { get; set; } // Duration represented as TimeSpan
-		public int TargetQuantity { get; set; }
-		public DateTime AssignedDate { get; set; } // When the task was assigned
-		public string Country { get; set; } // Country associated with the task
+        // Task Assignment Details
+        public TimeSpan AssignedDuration { get; set; } // Duration represented as TimeSpan
+        public int TargetQuantity { get; set; }
+        public DateTime AssignedDate { get; set; } // When the task was assigned
+        public string Country { get; set; } // Country associated with the task
 
-		// List of assigned computer names (only for UK)
-		public List<string>? Computers { get; set; } = new List<string>();
-	}
+        // List of assigned computer names (only for UK)
+        public List<string>? Computers { get; set; } = new List<string>();
+    }
 }

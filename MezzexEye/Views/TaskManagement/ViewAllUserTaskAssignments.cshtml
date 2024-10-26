@@ -1,6 +1,23 @@
 ﻿@model List<EyeMezzexz.Models.TaskAssignmentResponse>
+@{
+    ViewData["Title"] = "All User Task Assignment";
+}
 
-<h2 class="text-center mt-2 mb-4">All User Task Assignments</h2>
+<style>
+    h2 {
+        font-size: 1.25rem;
+    }
+
+    .table th, .table td {
+        font-size: 0.875rem;
+    }
+
+    .form-inline {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+</style>
 
 <form method="get" asp-action="ViewAllUserTaskAssignments" class="form-inline justify-content-center mb-4">
     <div class="form-row align-items-center">

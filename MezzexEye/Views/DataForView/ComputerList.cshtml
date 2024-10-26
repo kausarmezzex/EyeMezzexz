@@ -4,16 +4,20 @@
     ViewBag.Title = "Computer List";
 }
 
-<h2>Computers</h2>
+<a href="@Url.Action("AddComputer")" class="btn btn-primary mt-2 mb-4">Add New Computer</a>
 
-<a href="@Url.Action("AddComputer")" class="btn btn-primary">Add New Computer</a>
-<table class="table table-bordered">
+<!-- Search Box -->
+<div class="mb-3">
+    <input type="text" id="searchBox" class="form-control" placeholder="Search computers...">
+</div>
+
+<table class="table table-bordered" id="computerTable">
     <thead>
         <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Target Quantity</th>
-            <th>Created By</th>
+            <th onclick="sortTable(0)">ID <i class="sort-icon fas"></i></th>
+            <th onclick="sortTable(1)">Name <i class="sort-icon fas"></i></th>
+            <th onclick="sortTable(2)">Target Quantity <i class="sort-icon fas"></i></th>
+            <th onclick="sortTable(3)">Created By <i class="sort-icon fas"></i></th>
             <th>Actions</th>
         </tr>
     </thead>
@@ -23,7 +27,7 @@
             <tr>
                 <td>@computer.Id</td>
                 <td>@computer.Name</td>
-                <td>@computer.TargetQuantity</td> <!-- Add this line -->
+                <td>@computer.TargetQuantity</td>
                 <td>@computer.CreatedBy</td>
                 <td>
                     <a href="@Url.Action("EditComputer", new { id = computer.Id })" class="btn btn-warning">Edit</a>
@@ -32,4 +36,52 @@
         }
     </tbody>
 </table>
+
+<script>
+    // Search functionality
+    document.getElementById('searchBox').addEventListener('keyup', function () {
+        var filter = this.value.toUpperCase();
+        var rows = document.querySelector("#computerTable tbody").rows;
+
+        for (var i = 0; i < rows.length; i++) {
+            var cells = rows[i].cells;
+            var match = false;
+            for (var j = 0; j < cells.length - 1; j++) { // Exclude actions column
+                if (cells[j].textContent.toUpperCase().indexOf(filter) > -1) {
+                    match = true;
+                    break;
+                }
+            }
+            rows[i].style.display = match ? "" : "none";
+        }
+    });
+
+    // Sorting functionality with icons
+    function sortTable(n) {
+        var table = document.getElementById("computerTable");
+        var rows = Array.from(table.rows).slice(1); // Exclude header row
+        var asc = table.rows[0].cells[n].classList.toggle('asc');
+
+        // Reset all icons
+        document.querySelectorAll('.sort-icon').forEach(icon => icon.className = 'sort-icon fas fa-sort');
+
+        // Set current icon
+        const currentIcon = table.rows[0].cells[n].querySelector('.sort-icon');
+        currentIcon.classList.toggle('fa-sort-up', asc);
+        currentIcon.classList.toggle('fa-sort-down', !asc);
+
+        rows.sort(function (rowA, rowB) {
+            var cellA = rowA.cells[n].textContent.trim();
+            var cellB = rowB.cells[n].textContent.trim();
+
+            if (!isNaN(cellA) && !isNaN(cellB)) {
+                return asc ? cellA - cellB : cellB - cellA;
+            }
+
+            return asc ? cellA.localeCompare(cellB) : cellB.localeCompare(cellA);
+        });
+
+        rows.forEach(row => table.appendChild(row));
+    }
+</script>
 

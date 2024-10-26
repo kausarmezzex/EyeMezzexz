@@ -19,6 +19,7 @@ namespace EyeMezzexz.Data
         public DbSet<Team> Teams { get; set; }
         public DbSet<StaffAssignToTeam> StaffAssignToTeam { get; set; }
         public DbSet<TaskAssignment> TaskAssignments { get; set; }
+        public DbSet<Shift> Shifts { get; set; }
         public DbSet<TaskAssignmentComputer> TaskAssignmentComputers { get; set; }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
