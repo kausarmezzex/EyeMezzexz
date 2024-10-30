@@ -46,17 +46,33 @@ namespace MezzexEye.Services
             return null;
         }
 
-        // Add a new shift
-        public async Task<bool> AddShiftAsync(Shift shift)
+        // Fetch shifts by country ID
+        public async Task<List<Shift>> GetShiftsByCountryAsync(int countryId)
         {
+            var result = await _shiftController.GetShiftsByCountry(countryId);
+
+            if (result.Result is OkObjectResult okResult && okResult.Value is IEnumerable<Shift> shifts)
+            {
+                return new List<Shift>(shifts);
+            }
+
+            _logger.LogError($"Failed to retrieve shifts for country ID {countryId}.");
+            return new List<Shift>();
+        }
+
+        // Add a new shift with country ID
+        public async Task<bool> AddShiftAsync(Shift shift, int countryId)
+        {
+            shift.CountryId = countryId; // Assign the country ID to the shift
+
             var result = await _shiftController.AddShift(shift);
             if (result.Result is CreatedAtActionResult)
             {
-                _logger.LogInformation("Shift successfully created.");
+                _logger.LogInformation("Shift successfully created for country ID {countryId}.", countryId);
                 return true;
             }
 
-            _logger.LogError("Failed to create shift.");
+            _logger.LogError("Failed to create shift for country ID {countryId}.", countryId);
             return false;
         }
 

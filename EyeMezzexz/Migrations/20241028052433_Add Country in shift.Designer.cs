@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EyeMezzexz.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241026075303_Update Shift model")]
-    partial class UpdateShiftmodel
+    [Migration("20241028052433_Add Country in shift")]
+    partial class AddCountryinshift
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -259,6 +259,9 @@ namespace EyeMezzexz.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ShiftId"));
 
+                    b.Property<int>("CountryId")
+                        .HasColumnType("int");
+
                     b.Property<string>("CreatedBy")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -286,6 +289,8 @@ namespace EyeMezzexz.Migrations
                         .HasColumnType("time");
 
                     b.HasKey("ShiftId");
+
+                    b.HasIndex("CountryId");
 
                     b.ToTable("Shifts");
                 });
@@ -717,6 +722,17 @@ namespace EyeMezzexz.Migrations
                     b.Navigation("Permission");
 
                     b.Navigation("Role");
+                });
+
+            modelBuilder.Entity("EyeMezzexz.Models.Shift", b =>
+                {
+                    b.HasOne("EyeMezzexz.Models.Country", "Country")
+                        .WithMany()
+                        .HasForeignKey("CountryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Country");
                 });
 
             modelBuilder.Entity("EyeMezzexz.Models.StaffAssignToTeam", b =>

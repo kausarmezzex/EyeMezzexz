@@ -24,7 +24,19 @@ namespace EyeMezzexz.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Shift>>> GetShifts()
         {
-            return Ok(await _context.Shifts.ToListAsync());
+            return Ok(await _context.Shifts.Include(s => s.Country).ToListAsync());
+        }
+
+        // GET: api/Shift/ByCountry/{countryId}
+        [HttpGet("ByCountry/{countryId}")]
+        public async Task<ActionResult<IEnumerable<Shift>>> GetShiftsByCountry(int countryId)
+        {
+            var shifts = await _context.Shifts
+                .Where(s => s.CountryId == countryId)
+                .Include(s => s.Country)
+                .ToListAsync();
+
+            return Ok(shifts);
         }
 
         // POST: api/Shift
@@ -33,6 +45,11 @@ namespace EyeMezzexz.Controllers
         {
             if (shift == null)
                 return BadRequest("Invalid shift data.");
+
+            // Validate that the country exists
+            var country = await _context.Countries.FindAsync(shift.CountryId);
+            if (country == null)
+                return BadRequest("Invalid country ID.");
 
             shift.CreatedOn = DateTime.Now;
             _context.Shifts.Add(shift);
@@ -45,7 +62,7 @@ namespace EyeMezzexz.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Shift>> GetShiftById(int id)
         {
-            var shift = await _context.Shifts.FindAsync(id);
+            var shift = await _context.Shifts.Include(s => s.Country).FirstOrDefaultAsync(s => s.ShiftId == id);
             if (shift == null)
                 return NotFound();
 
@@ -60,10 +77,19 @@ namespace EyeMezzexz.Controllers
             if (shift == null)
                 return NotFound();
 
+            // Validate the country ID, if provided
+            if (updatedShift.CountryId != shift.CountryId)
+            {
+                var country = await _context.Countries.FindAsync(updatedShift.CountryId);
+                if (country == null)
+                    return BadRequest("Invalid country ID.");
+                shift.CountryId = updatedShift.CountryId;
+            }
+
             shift.ShiftName = updatedShift.ShiftName;
             shift.FromTime = updatedShift.FromTime;
             shift.ToTime = updatedShift.ToTime;
-            shift.ModifiedBy = updatedShift.ModifiedBy; // Set ModifiedBy as needed
+            shift.ModifiedBy = updatedShift.ModifiedBy;
             shift.ModifiedOn = DateTime.Now;
 
             _context.Shifts.Update(shift);

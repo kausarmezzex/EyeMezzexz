@@ -1,6 +1,7 @@
 ﻿@model IEnumerable<EyeMezzexz.Models.Shift>
 @{
     ViewData["Title"] = "Manage Shift";
+    var countries = ViewData["Countries"] as List<EyeMezzexz.Models.Country>;
 }
 
 <!-- Custom CSS for Decreased Text Size -->
@@ -20,18 +21,32 @@
     }
 </style>
 
-<!-- Create New Shift Button with Modal Trigger -->
-<button class="btn btn-primary mt-2 mb-4" data-bs-toggle="modal" data-bs-target="#createShiftModal">
-    Create New Shift
-</button>
+<!-- Filter and Create Shift Button in One Row -->
+<div class="form-inline justify-content-between mb-3">
+    <div>
+        <label for="countryFilter" class="form-label">Filter by Country:</label>
+        <select id="countryFilter" name="countryId" class="form-control ms-2">
+            <option value="">Select Country</option>
+            @foreach (var country in countries)
+            {
+                <option value="@country.Id">@country.Name</option>
+            }
+        </select>
+    </div>
 
+    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createShiftModal">
+        Create New Shift
+    </button>
+</div>
 <!-- Shift Table -->
-<table class="table">
+<!-- Shift Table -->
+<table class="table" id="shiftTable">
     <thead>
         <tr>
             <th>Shift Name</th>
             <th>From Time</th>
             <th>To Time</th>
+            <th>Country</th>
             <th>Created By</th>
             <th>Created On</th>
             <th>Modified By</th>
@@ -46,6 +61,7 @@
                 <td>@shift.ShiftName</td>
                 <td>@shift.FromTime</td>
                 <td>@shift.ToTime</td>
+                <td>@shift.Country?.Name</td>
                 <td>@shift.CreatedBy</td>
                 <td>@shift.CreatedOn.ToString("yyyy-MM-dd HH:mm")</td>
                 <td>@shift.ModifiedBy</td>
@@ -61,7 +77,8 @@
     </tbody>
 </table>
 
-<!-- Create Shift Modal -->
+<!-- Modals for Create, Edit, and Delete Actions -->
+@* Create Shift Modal *@
 <div class="modal fade" id="createShiftModal" tabindex="-1" aria-labelledby="createShiftModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -69,14 +86,12 @@
                 <h5 class="modal-title" id="createShiftModalLabel">Create Shift</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
-                <!-- Content will be loaded here -->
-            </div>
+            <div class="modal-body"></div>
         </div>
     </div>
 </div>
 
-<!-- Edit Shift Modal -->
+@* Edit Shift Modal *@
 <div class="modal fade" id="editShiftModal" tabindex="-1" aria-labelledby="editShiftModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -84,14 +99,12 @@
                 <h5 class="modal-title" id="editShiftModalLabel">Edit Shift</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
-                <!-- Content will be loaded here -->
-            </div>
+            <div class="modal-body"></div>
         </div>
     </div>
 </div>
 
-<!-- Delete Shift Modal -->
+@* Delete Shift Modal *@
 <div class="modal fade" id="deleteShiftModal" tabindex="-1" aria-labelledby="deleteShiftModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -99,43 +112,85 @@
                 <h5 class="modal-title" id="deleteShiftModalLabel">Delete Shift</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
-                <!-- Content will be loaded here -->
-            </div>
+            <div class="modal-body"></div>
         </div>
     </div>
 </div>
 
 @section Scripts {
     <script>
+        // Load shifts dynamically based on selected country
+        document.getElementById('countryFilter').addEventListener('change', loadShiftsByCountry);
+
+        function loadShiftsByCountry() {
+            const countryId = document.getElementById('countryFilter').value;
+
+            fetch(`/ManageShift/GetShiftsByCountry?countryId=${countryId}`)
+                .then(response => response.json())
+                .then(data => {
+                    const tbody = document.querySelector("#shiftTable tbody");
+                    tbody.innerHTML = ''; // Clear existing rows
+
+                    data.forEach(shift => {
+                        const row = `
+                                    <tr>
+                                        <td>${shift.shiftName}</td>
+                                        <td>${shift.fromTime}</td>
+                                        <td>${shift.toTime}</td>
+                                        <td>${shift.country?.name || ''}</td>
+                                        <td>${shift.createdBy}</td>
+                                        <td>${new Date(shift.createdOn).toLocaleString()}</td>
+                                        <td>${shift.modifiedBy || ''}</td>
+                                        <td>${shift.modifiedOn ? new Date(shift.modifiedOn).toLocaleString() : ''}</td>
+                                        <td>
+                                            <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#editShiftModal"
+                                               data-id="${shift.shiftId}" class="edit-shift-link">Edit</a> |
+                                            <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#deleteShiftModal"
+                                               data-id="${shift.shiftId}" class="delete-shift-link">Delete</a>
+                                        </td>
+                                    </tr>`;
+                        tbody.insertAdjacentHTML('beforeend', row);
+                    });
+                })
+                .catch(error => console.error('Error loading shifts:', error));
+        }
+
+        // Use event delegation for dynamic row actions (edit/delete)
+        document.addEventListener('click', function (event) {
+            if (event.target.classList.contains('edit-shift-link')) {
+                const shiftId = event.target.getAttribute('data-id');
+                loadShiftForEdit(shiftId);
+            } else if (event.target.classList.contains('delete-shift-link')) {
+                const shiftId = event.target.getAttribute('data-id');
+                loadShiftForDelete(shiftId);
+            }
+        });
+
         // Load Create Shift form in modal
         document.getElementById('createShiftModal').addEventListener('show.bs.modal', function () {
             const modalBody = this.querySelector('.modal-body');
             fetch('@Url.Action("Create")')
                 .then(response => response.text())
-                .then(html => modalBody.innerHTML = html);
+                .then(html => modalBody.innerHTML = html)
+                .catch(error => console.error('Error loading create shift form:', error));
         });
 
         // Load Edit Shift form in modal
-        document.querySelectorAll('.edit-shift-link').forEach(link => {
-            link.addEventListener('click', function () {
-                const shiftId = this.getAttribute('data-id');
-                const modalBody = document.querySelector('#editShiftModal .modal-body');
-                fetch(`/ManageShift/Edit/${shiftId}`)
-                    .then(response => response.text())
-                    .then(html => modalBody.innerHTML = html);
-            });
-        });
+        function loadShiftForEdit(shiftId) {
+            const modalBody = document.querySelector('#editShiftModal .modal-body');
+            fetch(`/ManageShift/Edit/${shiftId}`)
+                .then(response => response.text())
+                .then(html => modalBody.innerHTML = html)
+                .catch(error => console.error('Error loading edit shift form:', error));
+        }
 
         // Load Delete Shift confirmation in modal
-        document.querySelectorAll('.delete-shift-link').forEach(link => {
-            link.addEventListener('click', function () {
-                const shiftId = this.getAttribute('data-id');
-                const modalBody = document.querySelector('#deleteShiftModal .modal-body');
-                fetch(`/ManageShift/Delete/${shiftId}`)
-                    .then(response => response.text())
-                    .then(html => modalBody.innerHTML = html);
-            });
-        });
+        function loadShiftForDelete(shiftId) {
+            const modalBody = document.querySelector('#deleteShiftModal .modal-body');
+            fetch(`/ManageShift/Delete/${shiftId}`)
+                .then(response => response.text())
+                .then(html => modalBody.innerHTML = html)
+                .catch(error => console.error('Error loading delete confirmation:', error));
+        }
     </script>
 }

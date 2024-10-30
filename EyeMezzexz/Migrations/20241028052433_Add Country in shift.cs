@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace EyeMezzexz.Migrations
 {
     /// <inheritdoc />
-    public partial class AddShiftTable : Migration
+    public partial class AddCountryinshift : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -106,25 +106,6 @@ namespace EyeMezzexz.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_PermissionsName", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Shifts",
-                columns: table => new
-                {
-                    ShiftId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ShiftName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    FromTime = table.Column<TimeSpan>(type: "time", nullable: false),
-                    ToTime = table.Column<TimeSpan>(type: "time", nullable: false),
-                    CreatedBy = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ModifiedBy = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Shifts", x => x.ShiftId);
                 });
 
             migrationBuilder.CreateTable(
@@ -252,6 +233,32 @@ namespace EyeMezzexz.Migrations
                         name: "FK_StaffInOut_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Shifts",
+                columns: table => new
+                {
+                    ShiftId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ShiftName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    FromTime = table.Column<TimeSpan>(type: "time", nullable: false),
+                    ToTime = table.Column<TimeSpan>(type: "time", nullable: false),
+                    CreatedBy = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ModifiedBy = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    CountryId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Shifts", x => x.ShiftId);
+                    table.ForeignKey(
+                        name: "FK_Shifts_Countries_CountryId",
+                        column: x => x.CountryId,
+                        principalTable: "Countries",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -560,6 +567,11 @@ namespace EyeMezzexz.Migrations
                 name: "IX_RolePermissions_PermissionId",
                 table: "RolePermissions",
                 column: "PermissionId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Shifts_CountryId",
+                table: "Shifts",
+                column: "CountryId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_StaffAssignToTeam_CountryId",

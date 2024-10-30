@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EyeMezzexz.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241026072633_Add Shift Table")]
-    partial class AddShiftTable
+    [Migration("20241030062010_Add Shift Assignment")]
+    partial class AddShiftAssignment
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -259,6 +259,9 @@ namespace EyeMezzexz.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ShiftId"));
 
+                    b.Property<int>("CountryId")
+                        .HasColumnType("int");
+
                     b.Property<string>("CreatedBy")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -271,7 +274,6 @@ namespace EyeMezzexz.Migrations
                         .HasColumnType("time");
 
                     b.Property<string>("ModifiedBy")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
@@ -288,7 +290,50 @@ namespace EyeMezzexz.Migrations
 
                     b.HasKey("ShiftId");
 
+                    b.HasIndex("CountryId");
+
                     b.ToTable("Shifts");
+                });
+
+            modelBuilder.Entity("EyeMezzexz.Models.ShiftAssignment", b =>
+                {
+                    b.Property<int>("AssignmentId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AssignmentId"));
+
+                    b.Property<DateTime>("AssignedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("ShiftId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("AssignmentId");
+
+                    b.HasIndex("ShiftId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("ShiftAssignments");
                 });
 
             modelBuilder.Entity("EyeMezzexz.Models.StaffAssignToTeam", b =>
@@ -718,6 +763,36 @@ namespace EyeMezzexz.Migrations
                     b.Navigation("Permission");
 
                     b.Navigation("Role");
+                });
+
+            modelBuilder.Entity("EyeMezzexz.Models.Shift", b =>
+                {
+                    b.HasOne("EyeMezzexz.Models.Country", "Country")
+                        .WithMany()
+                        .HasForeignKey("CountryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Country");
+                });
+
+            modelBuilder.Entity("EyeMezzexz.Models.ShiftAssignment", b =>
+                {
+                    b.HasOne("EyeMezzexz.Models.Shift", "Shift")
+                        .WithMany()
+                        .HasForeignKey("ShiftId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("EyeMezzexz.Models.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Shift");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("EyeMezzexz.Models.StaffAssignToTeam", b =>

@@ -21,6 +21,7 @@ namespace EyeMezzexz.Data
         public DbSet<TaskAssignment> TaskAssignments { get; set; }
         public DbSet<Shift> Shifts { get; set; }
         public DbSet<TaskAssignmentComputer> TaskAssignmentComputers { get; set; }
+        public DbSet<ShiftAssignment> ShiftAssignments { get; set; }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
         }

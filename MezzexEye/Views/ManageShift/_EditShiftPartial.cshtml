@@ -1,4 +1,7 @@
 ﻿@model EyeMezzexz.Models.Shift
+@{
+    var countries = ViewData["Countries"] as List<EyeMezzexz.Models.Country>;
+}
 
 <form asp-action="Edit" method="post">
     <input type="hidden" asp-for="ShiftId" />
@@ -13,6 +16,23 @@
     <div class="form-group">
         <label asp-for="ToTime"></label>
         <input asp-for="ToTime" type="time" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label for="countryId">Country</label>
+        <select id="countryId" name="countryId" class="form-control">
+            @foreach (var country in countries)
+            {
+                @if (country.Id == Model.CountryId)
+                {
+                    <option value="@country.Id" selected="selected">@country.Name</option>
+                }
+                else
+                {
+                    <option value="@country.Id">@country.Name</option>
+                }
+            }
+        </select>
+
     </div>
     <button type="submit" class="btn btn-primary">Save Changes</button>
 </form>

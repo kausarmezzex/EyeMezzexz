@@ -28,5 +28,9 @@ namespace EyeMezzexz.Models
         public string? ModifiedBy { get; set; }
 
         public DateTime? ModifiedOn { get; set; }
+
+        // Foreign key and navigation property for Country
+        public int CountryId { get; set; } // Foreign key
+        public Country Country { get; set; } // Navigation property
     }
 }

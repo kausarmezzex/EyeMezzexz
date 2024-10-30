@@ -1,0 +1,149 @@
+﻿@model MezzexEye.ViewModel.ShiftAssignmentViewModel
+
+<style>
+    h2 {
+        font-size: 1.25rem;
+    }
+
+    .table th, .table td {
+        font-size: 0.875rem;
+    }
+
+    .form-inline {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+</style>
+
+<div class="container mt-5">
+    <h3 class="text-center mb-4">Search Shift Assignments</h3>
+
+    <form id="shiftForm">
+        <div class="row mb-4">
+            <div class="col-md-3">
+                <label for="staffName" class="form-label">Staff Name</label>
+                <select id="staffName" class="form-select">
+                    <option selected>Select</option>
+                    @foreach (var user in Model.Users)
+                    {
+                        <option value="@user.Id">@user.UserName</option>
+                    }
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label for="week" class="form-label">Week</label>
+                <input type="text" class="form-control"
+                       value="@($"Current Week (Week {Model.StartOfWeek:MM/dd} - {Model.StartOfWeek.AddDays(6):MM/dd})")" readonly />
+            </div>
+            <div class="col-md-3">
+                <label for="shift" class="form-label">Shift</label>
+                <select id="shift" class="form-select">
+                    <option selected>Select Shift</option>
+                    @foreach (var shift in Model.Shifts)
+                    {
+                        <option value="@shift.ShiftId">@shift.ShiftName</option>
+                    }
+                </select>
+            </div>
+            <div class="col-md-3 d-flex align-items-end">
+                <button type="button" class="btn btn-primary me-2" onclick="searchShiftAssignments()">Search</button>
+                <button type="button" class="btn btn-success" onclick="saveShiftAssignments()">Save Record</button>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-bordered text-center">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        @foreach (var day in Model.AvailableHoursPerDay)
+                        {
+                            <th>@day.Key.ToString("dddd (d MMM)") <br /> (@day.Value) Avl Hours</th>
+                        }
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var user in Model.Users)
+                    {
+                        <tr>
+                            <td data-user-id="@user.Id">@user.UserName</td>
+                            @foreach (var day in Model.AvailableHoursPerDay)
+                            {
+                                <td>
+                                    <select class="form-select mb-2">
+                                        <option value="" selected>-- Select Shift --</option>
+                                        @foreach (var shift in Model.Shifts)
+                                        {
+                                            var shiftId = shift.ShiftId;
+                                            var shiftName = shift.ShiftName;
+                                            <option value="@shiftId">@shiftName</option>
+                                        }
+                                    </select>
+
+                                    <input type="checkbox" 
+                                           @(Model.ExistingAssignments.Any(a => a.UserId == user.Id &&
+                                                                               a.DayIndex == Model.AvailableHoursPerDay.Keys.ToList().IndexOf(day.Key))
+                                             ? "checked" : "") />
+                                </td>
+                            }
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        function saveShiftAssignments() {
+            const assignments = [];
+
+            $('tbody tr').each(function () {
+                const userId = $(this).find('td:first-child').data('user-id');
+
+                $(this).find('td').each(function (index) {
+                    const selectElement = $(this).find('select');
+                    const checkboxElement = $(this).find('input[type="checkbox"]');
+
+                    if (selectElement.val() || checkboxElement.is(':checked')) {
+                        assignments.push({
+                            UserId: userId,
+                            ShiftId: selectElement.val(),
+                            DayIndex: index,
+                            IsAssigned: checkboxElement.is(':checked')
+                        });
+                    }
+                });
+            });
+
+            if (assignments.length === 0) {
+                alert('No shifts assigned to save.');
+                return;
+            }
+
+            $.ajax({
+                url: '/ManageShiftAssignment/SaveShiftAssignments',
+                method: 'POST',
+                data: JSON.stringify(assignments),
+                contentType: 'application/json',
+                success: function () {
+                    alert('Shift assignments saved successfully.');
+                },
+                error: function () {
+                    alert('Error saving shift assignments.');
+                }
+            });
+        }
+
+        $('#shiftForm').on('submit', function (e) {
+            e.preventDefault();
+        });
+
+        function searchShiftAssignments() {
+            alert('Search triggered!');
+        }
+    </script>
+}
